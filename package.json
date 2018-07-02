@@ -1,0 +1,40 @@
+{
+  "name": "plutus",
+  "version": "1.0.0",
+  "description": "This is a personal budget management app",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"", 
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisjones0517/plutus.git"
+  },
+  "author": "Chris Jones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisjones0517/plutus/issues"
+  },
+  "homepage": "https://github.com/chrisjones0517/plutus#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "moment": "^2.22.2",
+    "plaid": "^2.6.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.0",
+    "nodemon": "^1.17.5"
+  }
+}
