@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Money Trees</title>
+</head>
+
+<body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    
+
+        <button id="link-btn">Link Account</button>
+    
+
+    <div id="app">
+        <div className="box">
+            <button id="get-accounts-btn">Get Accounts</button>
+            <div id="get-accounts-data"></div>
+        </div>
+
+        <div className="box">
+            <button id="get-item-btn">Get Item</button>
+            <div id="get-item-data"></div>
+        </div>
+
+        <div className="box">
+            <button id="get-transactions-btn">Get Transactions</button>
+            <div id="get-transactions-data"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+    <script>
+        (function ($) {
+            var handler = Plaid.create({
+                apiVersion: 'v2',
+                clientName: 'Plaid Walkthrough Demo',
+                env: 'sandbox',
+                product: ['transactions'],
+                key: '1003414dd94e494923e6996d85b5b8',
+                onSuccess: function (public_token) {
+                    $.post('/get_access_token', {
+                        public_token: public_token
+                    }, function () {
+                        $('#container').fadeOut('fast', function () {
+                            $('#intro').hide();
+                            $('#app, #steps').fadeIn('slow');
+                        });
+                    });
+                },
+            });
+
+            $('#link-btn').on('click', function (e) {
+                handler.open();
+            });
+
+            $('#get-accounts-btn').on('click', function (e) {
+                $.get('/accounts', function (data) {
+                    $('#get-accounts-data').slideUp(function () {
+                        var html = '';
+                        data.accounts.forEach(function (account, idx) {
+                            html += '<div class="inner">';
+                            html += '<strong>' + account.name +
+                                ' $' + (account.balances.available != null ? account.balances.available : account.balances.current) + '</strong><br>';
+                            html += account.subtype + ' ' + account.mask;
+                            html += '</div>';
+                        });
+
+                        $(this).html(html).slideDown();
+                    });
+                });
+            });
+
+            $('#get-item-btn').on('click', function (e) {
+                $.post('/item', function (data) {
+                    $('#get-item-data').slideUp(function () {
+                        if (data.error)
+                            $(this).html('<p>' + data.error + '</p>').slideDown();
+                        else {
+                            var html = '<div class="inner">';
+                            html += '<p>Here\'s some basic information about your Item:</p>';
+                            html += '<p>Institution name:' + data.institution.name + '</p>';
+                            html += '<p>Billed products: ' + data.item.billed_products.join(', ') + '</p>';
+                            html += '<p>Available products: ' + data.item.available_products.join(', ') + '</p>';
+                            html += '</div>';
+
+                            $(this).html(html).slideDown();
+                        }
+                    });
+                });
+            });
+
+            $('#get-transactions-btn').on('click', function (e) {
+                $.post('/transactions', function (data) {
+                    if (data.error != null) {
+                        // Format the error
+                        var errorHtml = '<div class="inner"><p>' +
+                            '<strong>' + data.error.error_code + ':</strong> ' +
+                            data.error.error_message + '</p></div>';
+
+                        if (data.error.error_code === 'PRODUCT_NOT_READY') {
+                            // Add additional context for `PRODUCT_NOT_READY` errors
+                            errorHtml += '<div class="inner"><p>The PRODUCT_NOT_READY ' +
+                                'error is returned when a request to retrieve Transaction data ' +
+                                'is made before Plaid finishes the <a href="https://plaid.com/' +
+                                'docs/quickstart/#transaction-data-with-webhooks">initial ' +
+                                'transaction pull.</a></p></div>';
+                        }
+                        // Render the error
+                        $('#get-transactions-data').slideUp(function () {
+                            $(this).slideUp(function () {
+                                $(this).html(errorHtml).slideDown();
+                            });
+                        });
+                    } else {
+                        $('#get-transactions-data').slideUp(function () {
+                            var html = '';
+                            data.transactions.forEach(function (txn, idx) {
+                                html += '<div class="inner">';
+                                html += '<strong>' + txn.name + '</strong><br>';
+                                html += '$' + txn.amount;
+                                html += '<br><em>' + txn.date + '</em>';
+                                html += '</div>';
+                            });
+
+                            $(this).slideUp(function () {
+                                $(this).html(html).slideDown();
+                            });
+                        });
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
+</body>
+
+</html>
