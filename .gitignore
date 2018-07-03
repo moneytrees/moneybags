@@ -118,6 +118,7 @@ Temporary Items
 !.vscode/extensions.json
 
 package-lock.json
+yarn.lock
 app/config/config.json
 **/node_modules
 **/.DS_Store
