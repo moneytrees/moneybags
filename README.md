@@ -8,4 +8,4 @@ This is a just a basic file structure for development purposes. The self-signed 
 
 # About Merges
 
-Be warned, the structure is not final and may change. There is a merge and deployment process to be followed in order for Continous Integration and QA/Testing to work. Please talk to your SMs and DMs before merging
+This project is currently under development and the structure may change. If you are a contributor or looking to be one, please refer to the documentation found at [CONTRIBUTING.md](https://github.com/moneytrees/moneybags/blob/develop/CONTRIBUTING.md).

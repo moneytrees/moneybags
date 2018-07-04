@@ -1,6 +1,9 @@
 #### Merging and Deployment Process:
  
- [![CircleCI](https://circleci.com/blog/media/cropped%20-restart-from-fail.png)]
+ There is a merge and deployment process to be followed in order for Continous Integration and QA/Testing to work. Please talk to your SMs and DMs before merging. The below is an illustration of what a branch-filtering process looks like; the actual branches we use are _develop_->_uat_->_master_. Merged features passing tests located in the _develop_ branch is automatically deployed to the development server. Merged features passing tests located in the _uat_ branch are automatically deployed to an User Acceptance Testing server. Features passing tests on both branches and merged to the _master_ branch are automatically deployed to the Demo server.
+ If you are still unclear about the process after reading the following sections, please talk to the project's SMs and DMs before merging.
+ 
+ ![CircleCI](https://circleci.com/blog/media/cropped%20-restart-from-fail.png)
 
 ### Process:
 
