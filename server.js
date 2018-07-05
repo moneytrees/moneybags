@@ -6,6 +6,7 @@ const plaid = require('plaid');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const ejs = require('ejs');
+var SwaggerExpress = require('swagger-express-mw');
 require('dotenv').config();
 
 const app = express();
@@ -131,6 +132,24 @@ app.post('/transactions', function (req, res, next) {
         // console.log(transactionsResponse);
         res.json(transactionsResponse);
     });
+});
+
+var config = {
+    appRoot: __dirname // required config
+};
+
+SwaggerExpress.create(config, function(err, swaggerExpress) {
+    if (err) { throw err; }
+
+    // install middleware
+    swaggerExpress.register(app);
+
+    var port = process.env.PORT || 10010;
+    app.listen(port);
+
+    if (swaggerExpress.runner.swagger.paths['/swagger']) {
+        console.log('TBA');
+    }
 });
 
 const port = process.env.PORT || 3001;
