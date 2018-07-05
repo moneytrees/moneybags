@@ -1,6 +1,6 @@
-var should = require('should');
-var request = require('supertest');
-var server = require('../../../app');
+const should = require('should');
+const request = require('supertest');
+const server = require('../../../server');
 
 describe('controllers', function() {
 
