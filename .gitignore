@@ -122,3 +122,9 @@ yarn.lock
 app/config/config.json
 **/node_modules
 **/.DS_Store
+
+# IDE files
+.idea
+
+# Runtime configuration for swagger app
+config/runtime.yaml

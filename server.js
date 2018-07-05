@@ -6,6 +6,7 @@ const plaid = require('plaid');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const ejs = require('ejs');
+var SwaggerExpress = require('swagger-express-mw');
 require('dotenv').config();
 
 const app = express();
@@ -33,7 +34,7 @@ app.use(bodyParser.json());
 app.use(express.static('client/build'));
 // app.set('view engine', 'ejs');
 
-app.get('/home', function (req, res, next) {
+app.get('/', function (req, res, next) {
     res.json({
         PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
         PLAID_ENV: process.env.PLAID_ENV
@@ -128,15 +129,28 @@ app.post('/transactions', function (req, res, next) {
         // transactionsResponse.transactions.forEach((item, index) => {
         //     console.log(item.category);
         // });
-        console.log(transactionsResponse);
+        // console.log(transactionsResponse);
         res.json(transactionsResponse);
     });
 });
 
-// app.get('/test', (req, res) => {
-//     console.log('test route ran');
-//     res.json('Hello world');
-// });
+var config = {
+    appRoot: __dirname // required config
+};
+
+SwaggerExpress.create(config, function(err, swaggerExpress) {
+    if (err) { throw err; }
+
+    // install middleware
+    swaggerExpress.register(app);
+
+    var port = process.env.PORT || 10010;
+    app.listen(port);
+
+    if (swaggerExpress.runner.swagger.paths['/swagger']) {
+        console.log('TBA');
+    }
+});
 
 const port = process.env.PORT || 3001;
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { homeRoute } from '../actions/accountActions';
 import {
     Collapse,
     Navbar,
@@ -21,16 +20,16 @@ export default class AppNavbar extends Component {
             <div>
                 <Navbar color="dark" dark expand="sm" className="mb-5">
                     <Container>
-                        <NavbarBrand onClick={homeRoute()} href="/">MoneyTree
+                        <NavbarBrand href="/">MoneyTree
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink id="link-btn" href="/">Link Account</NavLink>
-                                    <NavLink href="/">Get Accounts</NavLink>
-                                    <NavLink href="/">Get Item</NavLink>
-                                    <NavLink href="/">Get Transactions</NavLink>
+                                    <NavLink id="link-btn" href="#">Link Account</NavLink>
+                                    <NavLink id="get-accounts-btn" href="#">Get Accounts</NavLink>
+                                    <NavLink id="get-item-btn" href="#">Get Item</NavLink>
+                                    <NavLink id="get-transactions-btn" href="#">Get Transactions</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
