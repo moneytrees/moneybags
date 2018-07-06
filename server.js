@@ -114,7 +114,7 @@ app.post('/transactions', function (req, res, next) {
     // Pull transactions for the Item for the last 30 days
     var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
     var endDate = moment().format('YYYY-MM-DD');
-    client.getTransactions(ACCESS_TOKEN, startDate, endDate, {
+    client.getTransactions('access-sandbox-0d846dc1-a49f-4758-9644-6c40b4bc90ab', startDate, endDate, {
         count: 250,
         offset: 0,
     }, function (error, transactionsResponse) {
