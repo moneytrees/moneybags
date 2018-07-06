@@ -6,35 +6,41 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"", 
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "swagger project test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrisjones0517/plutus.git"
+    "url": "https://github.com/moneytrees/moneybags.git"
   },
   "author": "Chris Jones",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chrisjones0517/plutus/issues"
+    "url": "https://github.com/moneytrees/moneybags/issues"
   },
-  "homepage": "https://github.com/chrisjones0517/plutus#readme",
+  "homepage": "https://github.com/moneytrees/moneybags#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
+    "lodash": "^4.17.10",
     "moment": "^2.22.2",
-    "plaid": "^2.6.2"
+    "mongoose": "^5.2.1",
+    "plaid": "^2.6.2",
+    "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
   }
 }
