@@ -14,31 +14,18 @@ const app = express();
 //------------ MIDDLEWARE -------------
 app.use(
   express.urlencoded({
-    extended: false
+    extended: true
   })
 );
 app.use(express.json());
 app.use(express.static("client/build"));
 
-const express = require('express');
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const PlaidController = require('./api/controllers/plaidController');
-const SwaggerExpress = require('swagger-express-mw');
-global.__plaidClient = false;
-require('dotenv').config();
-
-const app = express();
 
 const httpsOptions = {
     key: fs.readFileSync('./security/cert.key'),
     cert: fs.readFileSync('./security/cert.pem')
 };
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-app.use(express.static('client/build'));
 
 
 //----------- ROUTING ---------------------
@@ -117,9 +104,9 @@ app.post('/api/transactions', function (request, response, next) {
 //   console.log(`Secure server listening on PORT: ${PORT}`);
 // });
 
-const server = https.createServer(httpsOptions, app).listen(port, () => {
-    console.log(`Secure server listening on port ${port}`);
-});
+// const server = https.createServer(httpsOptions, app).listen(port, () => {
+//     console.log(`Secure server listening on port ${port}`);
+// });
 
 module.exports = app;
 
