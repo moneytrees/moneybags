@@ -5,9 +5,9 @@ $(document).ready(function() {
             clientName: 'Plaid Walkthrough Demo',
             env: 'sandbox',
             product: ['transactions'],
-            key: '1003414dd94e494923e6996d85b5b8',
+            key: 'ed76b143b07519a9822c2451a8a3df',
             onSuccess: function (public_token) {
-                $.post('/get_access_token', {
+                $.post('/api/get_access_token', {
                     public_token: public_token
                 }, function () {
                     $('#container').fadeOut('fast', function () {
@@ -23,7 +23,7 @@ $(document).ready(function() {
         });
 
         $('#get-accounts-btn').on('click', function (e) {
-            $.get('/accounts', function (data) {
+            $.get('/api/accounts', function (data) {
                 $('#get-accounts-data').slideUp(function () {
                     var html = '';
                     data.accounts.forEach(function (account, idx) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
         });
 
         $('#get-item-btn').on('click', function (e) {
-            $.post('/item', function (data) {
+            $.post('/api/item', function (data) {
                 $('#get-item-data').slideUp(function () {
                     if (data.error)
                         $(this).html('<p>' + data.error + '</p>').slideDown();
@@ -59,7 +59,7 @@ $(document).ready(function() {
         });
 
         $('#get-transactions-btn').on('click', function (e) {
-            $.post('/transactions', function (data) {
+            $.post('/api/transactions', function (data) {
                 if (data.error != null) {
                     // Format the error
                     var errorHtml = '<div class="inner"><p>' +
