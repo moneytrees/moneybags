@@ -11,7 +11,7 @@
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "test": "swagger project test"
+    "test": "mocha ./test --recursive"
   },
   "repository": {
     "type": "git",

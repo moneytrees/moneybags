@@ -21,9 +21,7 @@ let ACCESS_TOKEN = null;
 let PUBLIC_TOKEN = null;
 let ITEM_ID = null;
 
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('client/build'));
 // app.set('view engine', 'ejs');
@@ -36,13 +34,11 @@ app.get('/', function (req, res, next) {
 });
 
 app.post('/get_access_token', function (request, response, next) {
-    console.log(request.body);
     global.__plaidClient = new PlaidController(request.body);
     __plaidClient.getAccessToken().then(link => response.json(link));
 });
 
 app.post('/api/get_access_token', function (request, response, next) {
-    console.log(request.body);
     global.__plaidClient = new PlaidController(request.body);
     __plaidClient.getAccessToken().then(link => response.json(link));
 });
@@ -120,26 +116,10 @@ app.post('/item', function (request, response, next) {
     });
 });*/
 
-var config = {
-    appRoot: __dirname // required config
-};
-
-SwaggerExpress.create(config, function(err, swaggerExpress) {
-    if (err) { throw err; }
-
-    // install middleware
-    swaggerExpress.register(app);
-
-    let swagport = process.env.SWAGGER_PORT || 10010;
-    app.listen(swagport);
-
-    if (swaggerExpress.runner.swagger.paths['/api/swagger']) {
-        console.log('Swagger ready and running');
-    }
-});
-
 const port = process.env.PORT || 3001;
 
 const server = https.createServer(httpsOptions, app).listen(port, () => {
     console.log(`Secure server listening on port ${port}`);
 });
+
+module.exports = app;

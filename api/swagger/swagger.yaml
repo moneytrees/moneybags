@@ -19,6 +19,7 @@ produces:
   - application/json
   
 paths:
+  x-swagger-router-controller: plaidController
   /get_access_token:
     post:
       description: Get the access token for a bank item with the appropriate access tokens and item_id from either Plaid LINK or app database
@@ -30,7 +31,7 @@ paths:
         schema: 
           $ref: '#/definitions/Plaid'
       responses:
-        '201':
+        '200':
           description: Token obtained
           schema:
             $ref: '#/definitions/Plaid'
@@ -45,5 +46,3 @@ definitions:
       item_id:
         type: string
         description: Another identifier for the linked item.
-
-  
