@@ -21,6 +21,19 @@ app.use(bodyParser.json());
 app.use(express.static('client/build'));
 // app.set('view engine', 'ejs');
 
+// adding mongoose
+// getting-started.js
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/testingDB');
+var db = mongoose.connection;
+db.on("connected", function() {
+    console.log("connected to db");
+});
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
 app.get('/', function (req, res, next) {
     res.json({
         PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
