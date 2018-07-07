@@ -6,7 +6,7 @@ const keys = require("../../config/keys");
 const passport = require("passport");
 
 //-------------- MODELS -------------------
-const User = require("../../models/user");
+const User = require("../../db/models/user");
 
 //------------- VALIDATION ----------------
 const validateRegisterInput = require("../validation/register");
