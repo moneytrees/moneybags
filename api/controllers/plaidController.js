@@ -12,7 +12,17 @@ class PlaidController {
             plaid.environments[process.env.PLAID_ENV]
         );
         this.public_token = metadata.public_token;
+        this.access_token = metadata.access_token;
     }
+
+    set accessToken(token) {
+        this.access_token = token;
+    }
+
+    get accessToken() {
+        return this.access_token;
+    }
+
     async getAccessToken() {
         //Only used for rotating access tokens and public tokens, DB should be checked for this data first
         const data = await this.client.exchangePublicToken(this.public_token)
@@ -26,6 +36,7 @@ class PlaidController {
         const data = typeof access_token === 'undefined' || access_token ?
             await this.getAccessToken()
                 .then( authdata => {
+                    this.accessToken = authdata.access_token;
                     return this.client.getAuth(authdata.access_token)
                         .then( response => response )
                         .catch((err) => err);
@@ -42,7 +53,8 @@ class PlaidController {
         const data = typeof access_token === 'undefined' || access_token ?
             await this.getAccessToken()
                 .then( authdata => {
-                    return this.client.getItem(authdata.access_token)
+                    this.accessToken = authdata.access_token;
+                    return this.client.getItem(this.accessToken)
                         .then( itemResponse => {
                             console.log('item info');
                             console.log(itemResponse);
