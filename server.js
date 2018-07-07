@@ -6,8 +6,10 @@ const plaid = require('plaid');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const ejs = require('ejs');
+const db = require('./db/models');
 var SwaggerExpress = require('swagger-express-mw');
 require('dotenv').config();
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -157,3 +159,6 @@ const port = process.env.PORT || 3001;
 const server = https.createServer(httpsOptions, app).listen(port, () => {
     console.log(`Secure server listening on port ${port}`);
 });
+
+//add connection to mongodb
+//var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/guccigang"
