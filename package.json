@@ -40,9 +40,9 @@
     "mongoose": "^5.2.1",
     "passport": "^0.4.0",
     "plaid": "^2.6.2",
+    "proxy-agent": "^3.0.0",
     "swagger-express-mw": "^0.1.0",
-    "validator": "^10.4.0",
-    "proxy-agent": "^3.0.0"
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "babel-jest": "^23.2.0",
