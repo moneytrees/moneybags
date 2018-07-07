@@ -126,11 +126,10 @@ app.post('/transactions', function (req, res, next) {
             });
         }
         console.log('pulled ' + transactionsResponse.transactions.length + ' transactions');
-        // transactionsResponse.transactions.forEach((item, index) => {
-        //     console.log(item.category);
-        // });
-        // console.log(transactionsResponse);
-        res.json(transactionsResponse);
+        transactionsResponse.transactions.forEach((item, index) => {
+            console.log(item.category);
+        });
+        res.json(transactionsResponse.transactions);
     });
 });
 
