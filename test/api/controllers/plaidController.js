@@ -16,7 +16,7 @@ describe('controllers', function() {
         request(server)
           .post('/api/get_access_token')
           .set('Accept', 'application/json')
-          .send({ public_token: __plaidClient.public_token })
+          .send({ public_token: __plaidClient.publicToken})
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res) {

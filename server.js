@@ -33,48 +33,26 @@ app.get('/', function (req, res, next) {
     });    
 });
 
-app.post('/get_access_token', function (request, response, next) {
-    global.__plaidClient = new PlaidController(request.body);
-    __plaidClient.getAccessToken().then(link => response.json(link));
-});
-
 app.post('/api/get_access_token', function (request, response, next) {
-    global.__plaidClient = new PlaidController(request.body);
+    global.__plaidClient = new PlaidController();
+    __plaidClient.publicToken = request.body.public_token;
     __plaidClient.getAccessToken().then(link => response.json(link));
 });
 
-app.get('/accounts', function (request, response, next) {
+app.get('/api/accounts', function (request, response, next) {
     // Retrieve high-level account information and account and routing numbers
     // for each account associated with the Item.
     __plaidClient.getAccountInfo(__plaidClient.accessToken).then(accountinfo => response.json(accountinfo));
 });
 
-app.post('/item', function (request, response, next) {
+app.post('/api/item', function (request, response, next) {
     __plaidClient.getItem(__plaidClient.accessToken).then(itemInfo => response.json(itemInfo));
 });
 
-/*app.post('/transactions', function (req, res, next) {
-    // Pull transactions for the Item for the last 30 days
-    var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
-    var endDate = moment().format('YYYY-MM-DD');
-    client.getTransactions(ACCESS_TOKEN, startDate, endDate, {
-        count: 250,
-        offset: 0,
-    }, function (error, transactionsResponse) {
-        if (error != null) {
-            console.log(JSON.stringify(error));
-            return res.json({
-                error: error
-            });
-        }
-        console.log('pulled ' + transactionsResponse.transactions.length + ' transactions');
-        // transactionsResponse.transactions.forEach((item, index) => {
-        //     console.log(item.category);
-        // });
-        // console.log(transactionsResponse);
-        res.json(transactionsResponse);
-    });
-});*/
+app.post('/api/transactions', function (req, res, next) {
+    __plaidClient.transactionDaysAgo(30);
+    __plaidClient.getTransactions().then(transactions => response.json(transactions));
+});
 
 const port = process.env.PORT || 3001;
 

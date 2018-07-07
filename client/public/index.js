@@ -7,7 +7,7 @@ $(document).ready(function() {
             product: ['transactions'],
             key: 'ed76b143b07519a9822c2451a8a3df',
             onSuccess: function (public_token) {
-                $.post('/get_access_token', {
+                $.post('/api/get_access_token', {
                     public_token: public_token
                 }, function () {
                     $('#container').fadeOut('fast', function () {
@@ -23,7 +23,7 @@ $(document).ready(function() {
         });
 
         $('#get-accounts-btn').on('click', function (e) {
-            $.get('/accounts', function (data) {
+            $.get('/api/accounts', function (data) {
                 $('#get-accounts-data').slideUp(function () {
                     var html = '';
                     data.accounts.forEach(function (account, idx) {
