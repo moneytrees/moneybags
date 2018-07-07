@@ -40,7 +40,7 @@ $(document).ready(function() {
         });
 
         $('#get-item-btn').on('click', function (e) {
-            $.post('/item', function (data) {
+            $.post('/api/item', function (data) {
                 $('#get-item-data').slideUp(function () {
                     if (data.error)
                         $(this).html('<p>' + data.error + '</p>').slideDown();
@@ -59,7 +59,7 @@ $(document).ready(function() {
         });
 
         $('#get-transactions-btn').on('click', function (e) {
-            $.post('/transactions', function (data) {
+            $.post('/api/transactions', function (data) {
                 if (data.error != null) {
                     // Format the error
                     var errorHtml = '<div class="inner"><p>' +

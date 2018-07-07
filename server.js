@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const PlaidController = require('./api/controllers/plaidController');
 const bodyParser = require('body-parser');
-const moment = require('moment');
 const ejs = require('ejs');
 const SwaggerExpress = require('swagger-express-mw');
 global.__plaidClient = false;
@@ -16,10 +15,6 @@ const httpsOptions = {
     key: fs.readFileSync('./security/cert.key'),
     cert: fs.readFileSync('./security/cert.pem')
 };
-
-let ACCESS_TOKEN = null;
-let PUBLIC_TOKEN = null;
-let ITEM_ID = null;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -49,8 +44,8 @@ app.post('/api/item', function (request, response, next) {
     __plaidClient.getItem(__plaidClient.accessToken).then(itemInfo => response.json(itemInfo));
 });
 
-app.post('/api/transactions', function (req, res, next) {
-    __plaidClient.transactionDaysAgo(30);
+app.post('/api/transactions', function (request, response, next) {
+    __plaidClient.transactionDaysAgo = 30;
     __plaidClient.getTransactions().then(transactions => response.json(transactions));
 });
 

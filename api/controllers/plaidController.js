@@ -1,4 +1,5 @@
 const plaid = require('plaid');
+const moment = require('moment');
 require('dotenv').config();
 
 class PlaidController {
@@ -91,14 +92,18 @@ class PlaidController {
     }
 
     async getTransactions() {
-        __plaidClient.getTransactions(this.accessToken, {min, max} = this.transactionRange, { count: 250, offset: 0} )
+        const options = { count: 250, offset: 0 };
+        const data = await this.client.getTransactions(this.accessToken, this.transactionRange.start, this.transactionRange.end, options)
             .then(response => {
+                console.log(response);
                 response.transactions.forEach( item => {
                     console.log(item.category);
                 });
                 return response;
             })
             .catch((err) => err);
+
+        return data;
     }
 }
 
