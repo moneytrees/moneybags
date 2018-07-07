@@ -4,7 +4,7 @@ const inst = new mongoose.Schema({
     
     INST:
         [
-            [Array]
+            [Object]
         ],
 
     required: true
