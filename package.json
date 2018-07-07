@@ -27,6 +27,7 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
     "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
