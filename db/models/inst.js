@@ -1,8 +1,12 @@
-const inst = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const Inst = new mongoose.Schema({
     
     type: String,
     
-    INST:
+    inst:
         [
             {id: String,
              name: String   
@@ -12,3 +16,5 @@ const inst = new mongoose.Schema({
     required: true
 
 });
+
+module.exports = Inst;
