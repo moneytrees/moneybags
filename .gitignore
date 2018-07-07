@@ -128,3 +128,7 @@ app/config/config.json
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+# **/swagger/swagger.yaml
+.swagger-codegen-ignore
+.swagger-codegen
+test.html

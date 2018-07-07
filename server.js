@@ -1,3 +1,4 @@
+
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
@@ -19,8 +20,30 @@ app.use(
 app.use(express.json());
 app.use(express.static("client/build"));
 
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const PlaidController = require('./api/controllers/plaidController');
+const SwaggerExpress = require('swagger-express-mw');
+global.__plaidClient = false;
+require('dotenv').config();
+
+const app = express();
+
+const httpsOptions = {
+    key: fs.readFileSync('./security/cert.key'),
+    cert: fs.readFileSync('./security/cert.pem')
+};
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.static('client/build'));
+
+
 //----------- ROUTING ---------------------
 const users = require("./routes/api/users");
+
 
 app.get("/", (req, res) => res.send("THE APP IS ONLINE MUTHUFUCKAAAA"));
 app.use("/api/users", users);
@@ -62,11 +85,41 @@ const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => console.log(`SERVER LISTENING ON ${PORT}`));
 
+app.post('/api/get_access_token', function (request, response, next) {
+    global.__plaidClient = new PlaidController();
+    __plaidClient.publicToken = request.body.public_token;
+    __plaidClient.getAccessToken().then(link => response.json(link));
+});
+
+app.get('/api/accounts', function (request, response, next) {
+    // Retrieve high-level account information and account and routing numbers
+    // for each account associated with the Item.
+    __plaidClient.getAccountInfo(__plaidClient.accessToken).then(accountinfo => response.json(accountinfo));
+});
+
+app.post('/api/item', function (request, response, next) {
+    __plaidClient.getItem(__plaidClient.accessToken).then(itemInfo => response.json(itemInfo));
+});
+
+app.post('/api/transactions', function (request, response, next) {
+    __plaidClient.transactionDaysAgo = 30;
+    __plaidClient.getTransactions().then(transactions => response.json(transactions));
+});
+
+
 // const httpsOptions = {
 //   key: fs.readFileSync("./security/cert.key"),
 //   cert: fs.readFileSync("./security/cert.crt")
 // };
 
+
 // const server = https.createServer(httpsOptions, app).listen(PORT, () => {
 //   console.log(`Secure server listening on PORT: ${PORT}`);
 // });
+
+const server = https.createServer(httpsOptions, app).listen(port, () => {
+    console.log(`Secure server listening on port ${port}`);
+});
+
+module.exports = app;
+
