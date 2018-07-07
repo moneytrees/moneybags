@@ -19,11 +19,10 @@ app.use(
 app.use(express.json());
 app.use(express.static("client/build"));
 
-
-// const httpsOptions = {
-//     key: fs.readFileSync('./security/cert.key'),
-//     cert: fs.readFileSync('./security/cert.pem')
-// };
+const httpsOptions = {
+     key: fs.readFileSync('./security/cert.key'),
+     cert: fs.readFileSync('./security/cert.pem')
+};
 
 
 
