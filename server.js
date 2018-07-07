@@ -2,11 +2,12 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const plaid = require('plaid');
+const PlaidController = require('./api/controllers/plaidController');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const ejs = require('ejs');
-var SwaggerExpress = require('swagger-express-mw');
+const SwaggerExpress = require('swagger-express-mw');
+global.__plaidClient = false;
 require('dotenv').config();
 
 const app = express();
@@ -19,13 +20,6 @@ const httpsOptions = {
 let ACCESS_TOKEN = null;
 let PUBLIC_TOKEN = null;
 let ITEM_ID = null;
-
-const client = new plaid.Client(
-    process.env.PLAID_CLIENT_ID,
-    process.env.PLAID_SECRET,
-    process.env.PLAID_PUBLIC_KEY,
-    plaid.environments[process.env.PLAID_ENV]
-);
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -42,25 +36,17 @@ app.get('/', function (req, res, next) {
 });
 
 app.post('/get_access_token', function (request, response, next) {
-    PUBLIC_TOKEN = request.body.public_token;
-    client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
-        if (error != null) {
-            var msg = 'Could not exchange public_token!';
-            console.log(msg + '\n' + JSON.stringify(error));
-            return response.json({
-                error: msg
-            });
-        }
-        ACCESS_TOKEN = tokenResponse.access_token;
-        ITEM_ID = tokenResponse.item_id;
-        console.log('Access Token: ' + ACCESS_TOKEN);
-        console.log('Item ID: ' + ITEM_ID);
-        response.json({
-            'error': false
-        });
-    });
+    console.log(request.body);
+    global.__plaidClient = new PlaidController(request.body);
+    __plaidClient.getAccessToken().then(link => response.json(link));
 });
 
+app.post('/api/get_access_token', function (request, response, next) {
+    console.log(request.body);
+    global.__plaidClient = new PlaidController(request.body);
+    __plaidClient.getAccessToken().then(link => response.json(link));
+});
+/*
 app.get('/accounts', function (request, response, next) {
     // Retrieve high-level account information and account and routing numbers
     // for each account associated with the Item.
@@ -109,9 +95,9 @@ app.post('/item', function (request, response, next) {
             }
         });
     });
-});
+});*/
 
-app.post('/transactions', function (req, res, next) {
+/*app.post('/transactions', function (req, res, next) {
     // Pull transactions for the Item for the last 30 days
     var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
     var endDate = moment().format('YYYY-MM-DD');
@@ -132,7 +118,7 @@ app.post('/transactions', function (req, res, next) {
         // console.log(transactionsResponse);
         res.json(transactionsResponse);
     });
-});
+});*/
 
 var config = {
     appRoot: __dirname // required config
@@ -144,11 +130,11 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
     // install middleware
     swaggerExpress.register(app);
 
-    var port = process.env.PORT || 10010;
-    app.listen(port);
+    let swagport = process.env.SWAGGER_PORT || 10010;
+    app.listen(swagport);
 
-    if (swaggerExpress.runner.swagger.paths['/swagger']) {
-        console.log('TBA');
+    if (swaggerExpress.runner.swagger.paths['/api/swagger']) {
+        console.log('Swagger ready and running');
     }
 });
 

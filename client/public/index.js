@@ -5,7 +5,7 @@ $(document).ready(function() {
             clientName: 'Plaid Walkthrough Demo',
             env: 'sandbox',
             product: ['transactions'],
-            key: '1003414dd94e494923e6996d85b5b8',
+            key: 'ed76b143b07519a9822c2451a8a3df',
             onSuccess: function (public_token) {
                 $.post('/get_access_token', {
                     public_token: public_token

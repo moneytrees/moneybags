@@ -1,7 +1,7 @@
 {
-  "name": "plutus",
+  "name": "moneytree",
   "version": "1.0.0",
-  "description": "This is a personal budget management app",
+  "description": "This is a financial forecasting app",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -27,6 +27,7 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
     "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
@@ -35,6 +36,7 @@
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
     "plaid": "^2.6.2",
+    "proxy-agent": "^3.0.0",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
