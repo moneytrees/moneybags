@@ -1,4 +1,5 @@
 
+
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
@@ -28,49 +29,12 @@ app.use(express.static("client/build"));
 
 
 
-//----------- ROUTING ---------------------
-const users = require("./routes/api/users");
-
-
-app.get("/", (req, res) => res.send("THE APP IS ONLINE MUTHUFUCKAAAA"));
-app.use("/api/users", users);
-
-//----------- SWAGGER ---------------------
-var config = {
-  appRoot: __dirname // required config
-};
-
-SwaggerExpress.create(config, function(err, swaggerExpress) {
-  if (err) {
-    throw err;
-  }
-
-  // install middleware
-  swaggerExpress.register(app);
-
-  var port = process.env.PORT || 10010;
-  app.listen(port);
-
-  if (swaggerExpress.runner.swagger.paths["/swagger"]) {
-    console.log(`Swagger listening on port: ${port}`);
-  }
+app.get('/', function (req, res, next) {
+    res.json({
+        PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
+        PLAID_ENV: process.env.PLAID_ENV
+    });    
 });
-
-//------------ DATABASE -----------------------
-const db = require("./config/keys").mongoURI;
-
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log("🦔 MongoDB Connected 🦔"))
-  .catch(err => console.log(err));
-
-//---------- SERVER LISTENING // HTTPS --------------
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => console.log(`SERVER LISTENING ON ${PORT}`));
 
 app.post('/api/get_access_token', function (request, response, next) {
     global.__plaidClient = new PlaidController();
@@ -93,20 +57,12 @@ app.post('/api/transactions', function (request, response, next) {
     __plaidClient.getTransactions().then(transactions => response.json(transactions));
 });
 
+const PORT = process.env.PORT || 3001;
 
-// const httpsOptions = {
-//   key: fs.readFileSync("./security/cert.key"),
-//   cert: fs.readFileSync("./security/cert.crt")
-// };
-
-
-// const server = https.createServer(httpsOptions, app).listen(PORT, () => {
-//   console.log(`Secure server listening on PORT: ${PORT}`);
-// });
+app.listen(PORT, () => {console.log(`SERVER LISTENING ON PORT: ${PORT}`)});
 
 // const server = https.createServer(httpsOptions, app).listen(port, () => {
 //     console.log(`Secure server listening on port ${port}`);
 // });
 
 module.exports = app;
-
