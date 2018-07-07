@@ -1,4 +1,8 @@
-const achieve = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const Achieve = new Schema({
     achievement_list:[
        {
         id: Number,
@@ -9,3 +13,7 @@ const achieve = new mongoose.Schema({
     }
     ]
 });
+
+
+
+module.exports = Achieve;
