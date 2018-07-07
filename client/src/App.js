@@ -4,6 +4,8 @@ import Walkthrough from './components/Walkthrough';
 import AppNavbar from './components/AppNavbar';
 import DataBody from './components/DataBody';
 
+
+
 class App extends Component {
     render() {
         return (
@@ -11,6 +13,7 @@ class App extends Component {
                 <AppNavbar />
                 <Walkthrough />
                 <DataBody />
+                
             </div>
         );
     }
