@@ -1,23 +1,33 @@
-const express = require('express');
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const PlaidController = require('./api/controllers/plaidController');
-const bodyParser = require('body-parser');
-global.__plaidClient = false;
-require('dotenv').config();
+
+
+const express = require("express");
+const https = require("https");
+const fs = require("fs");
+const path = require("path");
+const plaid = require("plaid");
+const moment = require("moment");
+var SwaggerExpress = require("swagger-express-mw");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 const app = express();
 
-const httpsOptions = {
-    key: fs.readFileSync('./security/cert.key'),
-    cert: fs.readFileSync('./security/cert.pem')
-};
+//------------ MIDDLEWARE -------------
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
+app.use(express.json());
+app.use(express.static("client/build"));
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(express.static('client/build'));
-// app.set('view engine', 'ejs');
+
+// const httpsOptions = {
+//     key: fs.readFileSync('./security/cert.key'),
+//     cert: fs.readFileSync('./security/cert.pem')
+// };
+
+
 
 app.get('/', function (req, res, next) {
     res.json({
@@ -47,10 +57,12 @@ app.post('/api/transactions', function (request, response, next) {
     __plaidClient.getTransactions().then(transactions => response.json(transactions));
 });
 
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
-const server = https.createServer(httpsOptions, app).listen(port, () => {
-    console.log(`Secure server listening on port ${port}`);
-});
+app.listen(PORT, () => {console.log(`SERVER LISTENING ON PORT: ${PORT}`)});
+
+// const server = https.createServer(httpsOptions, app).listen(port, () => {
+//     console.log(`Secure server listening on port ${port}`);
+// });
 
 module.exports = app;
