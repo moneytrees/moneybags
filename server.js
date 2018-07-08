@@ -2,18 +2,13 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
+const app = express();
+
 const PlaidController = require('./api/controllers/plaidController');
 //const SwaggerExpress = require('swagger-express-mw');
 global.__plaidClient = false;
 require('dotenv').config();
-
-const app = express();
-
-const httpsOptions = {
-    key: fs.readFileSync('./security/cert.key'),
-    cert: fs.readFileSync('./security/cert.pem')
-};
-
 
 //------------ MIDDLEWARE -------------
 app.use(
