@@ -27,7 +27,7 @@ class Registration extends Component {
         event.preventDefault();
 
         //request to server to add a new email/password
-        axios.post("/user/", {
+        axios.post("/register/", {
             email: this.state.email,
             password: this.state.password
         })
