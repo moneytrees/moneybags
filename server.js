@@ -129,6 +129,7 @@ app.post('/transactions', function (req, res, next) {
         transactionsResponse.transactions.forEach((item, index) => {
             console.log(item.category);
         });
+        console.log(transactionsResponse);
         res.json(transactionsResponse.transactions);
     });
 });

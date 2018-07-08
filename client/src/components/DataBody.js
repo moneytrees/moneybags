@@ -56,12 +56,20 @@ export default class DataBody extends Component {
             return a.amount - b.amount;
         });
 
-        let data = [];
-        
-        for (let i = 0; i < expenses.length; i++) {
-            data.push({angle: expenses[i].amount});
+        let total = 0;
+        let misc = 0;
+        for (let i = expenses.length - 1; i >= 0; i--) {
+            total += expenses[i].amount;
+            if ((expenses[i].amount / total) < 0.05) {
+                misc += expenses[i].amount;
+                expenses.splice(i, 1);
+            }
         }
-        
+        let data = [];
+        for (let i = 0; i < expenses.length; i++) {
+            data.push({angle: expenses[i].amount, label: expenses[i].category});
+        }
+        data.push({angle: misc, label: 'Misc'});
         return (
             <div>
                 <div id="get-accounts-data"></div>
@@ -69,6 +77,7 @@ export default class DataBody extends Component {
                 <div id="get-transactions-data">
                 <RadialChart
                     data={data[0].angle === '' ? data = [{angle: 1}] : data}
+                    showLabels={true}
                     width={300}
                     height={300} />
                 </div>
