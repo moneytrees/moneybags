@@ -2,11 +2,9 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const plaid = require('plaid');
-const bodyParser = require('body-parser');
-const moment = require('moment');
-const ejs = require('ejs');
-var SwaggerExpress = require('swagger-express-mw');
+const PlaidController = require('./api/controllers/plaidController');
+//const SwaggerExpress = require('swagger-express-mw');
+global.__plaidClient = false;
 require('dotenv').config();
 
 const app = express();
@@ -16,144 +14,72 @@ const httpsOptions = {
     cert: fs.readFileSync('./security/cert.pem')
 };
 
-let ACCESS_TOKEN = null;
-let PUBLIC_TOKEN = null;
-let ITEM_ID = null;
 
-const client = new plaid.Client(
-    process.env.PLAID_CLIENT_ID,
-    process.env.PLAID_SECRET,
-    process.env.PLAID_PUBLIC_KEY,
-    plaid.environments[process.env.PLAID_ENV]
+//------------ MIDDLEWARE -------------
+app.use(
+  express.urlencoded({extended: true})
 );
 
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-app.use(bodyParser.json());
-app.use(express.static('client/build'));
-// app.set('view engine', 'ejs');
+app.use(express.json());
+app.use(express.static("client/build"));
 
-app.get('/', function (req, res, next) {
-    res.json({
-        PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
-        PLAID_ENV: process.env.PLAID_ENV
-    });    
-});
-
-app.post('/get_access_token', function (request, response, next) {
-    PUBLIC_TOKEN = request.body.public_token;
-    client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
-        if (error != null) {
-            var msg = 'Could not exchange public_token!';
-            console.log(msg + '\n' + JSON.stringify(error));
-            return response.json({
-                error: msg
-            });
-        }
-        ACCESS_TOKEN = tokenResponse.access_token;
-        ITEM_ID = tokenResponse.item_id;
-        console.log('Access Token: ' + ACCESS_TOKEN);
-        console.log('Item ID: ' + ITEM_ID);
-        response.json({
-            'error': false
-        });
-    });
-});
-
-app.get('/accounts', function (request, response, next) {
-    // Retrieve high-level account information and account and routing numbers
-    // for each account associated with the Item.
-    client.getAuth(ACCESS_TOKEN, function (error, authResponse) {
-        if (error != null) {
-            var msg = 'Unable to pull accounts from the Plaid API.';
-            console.log(msg + '\n' + JSON.stringify(error));
-            return response.json({
-                error: msg
-            });
-        }
-
-        console.log(authResponse.accounts);
-        response.json({
-            error: false,
-            accounts: authResponse.accounts,
-            numbers: authResponse.numbers,
-        });
-    });
-});
-
-app.post('/item', function (request, response, next) {
-    // Pull the Item - this includes information about available products,
-    // billed products, webhook information, and more.
-    client.getItem(ACCESS_TOKEN, function (error, itemResponse) {
-        if (error != null) {
-            console.log(JSON.stringify(error));
-            return response.json({
-                error: error
-            });
-        }
-
-        // Also pull information about the institution
-        client.getInstitutionById(itemResponse.item.institution_id, function (err, instRes) {
-            if (err != null) {
-                var msg = 'Unable to pull institution information from the Plaid API.';
-                console.log(msg + '\n' + JSON.stringify(error));
-                return response.json({
-                    error: msg
-                });
-            } else {
-                response.json({
-                    item: itemResponse.item,
-                    institution: instRes.institution,
-                });
-            }
-        });
-    });
-});
-
-app.post('/transactions', function (req, res, next) {
-    // Pull transactions for the Item for the last 30 days
-    var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
-    var endDate = moment().format('YYYY-MM-DD');
-    client.getTransactions(ACCESS_TOKEN, startDate, endDate, {
-        count: 250,
-        offset: 0,
-    }, function (error, transactionsResponse) {
-        if (error != null) {
-            console.log(JSON.stringify(error));
-            return res.json({
-                error: error
-            });
-        }
-        console.log('pulled ' + transactionsResponse.transactions.length + ' transactions');
-        // transactionsResponse.transactions.forEach((item, index) => {
-        //     console.log(item.category);
-        // });
-        // console.log(transactionsResponse);
-        res.json(transactionsResponse);
-    });
-});
-
-var config = {
-    appRoot: __dirname // required config
+const httpsOptions = {
+     key: fs.readFileSync('./security/cert.key'),
+     cert: fs.readFileSync('./security/cert.pem')
 };
 
-SwaggerExpress.create(config, function(err, swaggerExpress) {
-    if (err) { throw err; }
+//----------- ROUTING ---------------------
+const users = require("./routes/api/users");
 
-    // install middleware
-    swaggerExpress.register(app);
+app.get("/", (req, res) => res.send("THE APP IS ONLINE MUTHUFUCKAAAA"));
+app.use("/api/users", users);
 
-    var port = process.env.PORT || 10010;
-    app.listen(port);
+//------------ DATABASE -----------------------
+const db = require("./config/keys").mongoURI;
 
-    if (swaggerExpress.runner.swagger.paths['/swagger']) {
-        console.log('TBA');
-    }
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
+app.post("/api/get_access_token", function(request, response, next) {
+  global.__plaidClient = new PlaidController();
+  __plaidClient.publicToken = request.body.public_token;
+  __plaidClient.getAccessToken().then(link => response.json(link));
 });
 
-const port = process.env.PORT || 3001;
-
-const server = https.createServer(httpsOptions, app).listen(port, () => {
-    console.log(`Secure server listening on port ${port}`);
+app.get("/api/accounts", function(request, response, next) {
+  // Retrieve high-level account information and account and routing numbers
+  // for each account associated with the Item.
+  __plaidClient
+    .getAccountInfo(__plaidClient.accessToken)
+    .then(accountinfo => response.json(accountinfo));
 });
+
+app.post("/api/item", function(request, response, next) {
+  __plaidClient
+    .getItem(__plaidClient.accessToken)
+    .then(itemInfo => response.json(itemInfo));
+});
+
+app.post("/api/transactions", function(request, response, next) {
+  __plaidClient.transactionDaysAgo = 30;
+  __plaidClient
+    .getTransactions()
+    .then(transactions => response.json(transactions));
+});
+
+
+const PORT = process.env.PORT || 3001;
+
+//app.listen(PORT, () => {console.log(`SERVER LISTENING ON PORT: ${PORT}`)});
+
+const server = https.createServer(httpsOptions, app).listen(PORT, () => {
+    console.log(`Secure server listening on port ${PORT}`);
+});
+
+module.exports = app;
+

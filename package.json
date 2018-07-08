@@ -1,7 +1,7 @@
 {
-  "name": "plutus",
+  "name": "moneytree",
   "version": "1.0.0",
-  "description": "This is a personal budget management app",
+  "description": "This is a financial forecasting app",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -10,8 +10,10 @@
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "test": "swagger project test"
+    "build-dev": "ng build --target=development --environment=dev",
+    "build-qa": "ng build --target=uat --environment=qa",
+    "build-prod": "ng build --prod",
+    "test": "mocha ./test --recursive"
   },
   "repository": {
     "type": "git",
@@ -25,21 +27,34 @@
   "homepage": "https://github.com/moneytrees/moneybags#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
     "dotenv": "^6.0.0",
-    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
+    "passport": "^0.4.0",
     "plaid": "^2.6.2",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.1.0",
+    "validator": "^10.4.0",
+    "proxy-agent": "^3.0.0"
   },
   "devDependencies": {
+    "babel-jest": "^23.2.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.6.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.3.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
+    "react-test-renderer": "^16.4.1",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
   }
