@@ -41,6 +41,7 @@ export default class LineGraph extends Component {
             regressionSet.push([xPointCoord, yPointCoord]);
         }
         dataSet.reverse().push({x: timePeriodInDays, y: sampleBalance});
+        regressionSet.push([timePeriodInDays, sampleBalance]);
         console.log(dataSet);
         console.log(yPointCoord);
         console.log(xPointCoord);
