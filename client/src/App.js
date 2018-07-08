@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Walkthrough from './components/Walkthrough';
 import AppNavbar from './components/AppNavbar';
-import DataBody from './components/DataBody';
+import PieGraph from './components/PieGraph';
+import LineGraph from './components/LineGraph';
 
 class App extends Component {
     render() {
@@ -10,7 +11,8 @@ class App extends Component {
             <div className="App">
                 <AppNavbar />
                 <Walkthrough />
-                <DataBody />
+                <PieGraph />
+                <LineGraph />
             </div>
         );
     }

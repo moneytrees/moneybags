@@ -10,7 +10,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-vis": "^1.10.1",
-    "reactstrap": "^6.2.0"
+    "reactstrap": "^6.2.0",
+    "regression": "^2.0.1"
   },
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",
