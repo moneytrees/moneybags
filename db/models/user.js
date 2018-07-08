@@ -14,7 +14,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  achievments: [],
+  achievements: [],
   institutions: [],
   date: {
     type: Date,
