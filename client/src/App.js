@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Walkthrough from "./components/Walkthrough";
 import AppNavbar from "./components/AppNavbar";
-import DataBody from "./components/DataBody";
+import PieGraph from "./components/PieGraph";
+import LineGraph from "./components/LineGraph";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import dashboard from './Pages/dashboard';
 import NavTabs from './components/NavTabs';
@@ -21,7 +22,8 @@ return (
 <Router>
 <div>
 <NavTabs/>
-<Route path="/" component={DataBody} />
+<Route path="/" component={PieGraph} />
+<Route path="/" component={LineGraph} />
 <Route exact path="/" component={AppNavbar} />
 <Route exact path="/" component={Walkthrough} />
 <Route exact path="/dashboard" component={dashboard} />
