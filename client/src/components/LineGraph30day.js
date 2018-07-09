@@ -10,12 +10,12 @@ import {
     LineSeries
 } from 'react-vis';
 import regression from 'regression';
-
-export default class LineGraph extends Component {
-    state = {};
+console.log(XYPlot);
+export default class LineGraph30day extends Component {
 
     render() {
-        let sampleBalance = 1085;
+        
+        let sampleBalance = 2085;
         let sampleTransactions = [
             {amount: 17, date: '2018-06-10'},
             {amount: 57, date: '2018-06-12'},
@@ -29,19 +29,19 @@ export default class LineGraph extends Component {
             {amount: 6, date: '2018-07-01'},
             {amount: 1250, date: '2018-07-05'}
         ];
-        let timePeriodInDays = 30;
+        
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
         let yPointCoord = sampleBalance;
         for (let i = sampleTransactions.length - 1; i >= 0; i--) {
-            xPointCoord = timePeriodInDays - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
+            xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
             yPointCoord += sampleTransactions[i].amount;
             dataSet.push({x: xPointCoord, y: yPointCoord});
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({x: timePeriodInDays, y: sampleBalance});
-        regressionSet.push([timePeriodInDays, sampleBalance]);
+        dataSet.reverse().push({x: 30, y: sampleBalance});
+        regressionSet.push([30, sampleBalance]);
         console.log(dataSet);
         console.log(yPointCoord);
         console.log(xPointCoord);
@@ -50,7 +50,8 @@ export default class LineGraph extends Component {
         // const regLineData = [{x: 0, y: result.equation[0] + result.equation[1]},
         //                      {x: timePeriodInDays, y: timePeriodInDays * result.equation[0] + result.equation[1]}];
         const regLineData = [{x: 0, y: result.equation[0] + result.equation[1]},
-                             {x: 30, y: 30 * result.equation[0] + result.equation[1]}];                     
+                             {x: 30, y: 30 * result.equation[0] + result.equation[1]}]; 
+
         return (
             <div className="line-graph">
                 <XYPlot
@@ -75,13 +76,6 @@ export default class LineGraph extends Component {
                         data={regLineData}
                         strokeDasharray="7, 3"
                     />
-                    <LineSeries
-                        data={[
-                            { x: 1, y: 0 },
-                            { x: 2, y: 0 },
-                            { x: 3, y: 0 },
-                            { x: 4, y: 0 }
-                        ]} />
                 </XYPlot>
             </div>
         )
