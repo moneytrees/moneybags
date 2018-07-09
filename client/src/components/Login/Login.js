@@ -9,7 +9,8 @@ class Login extends Component {
       name: "",
       email: "",
       password: "",
-      loggedIn: false
+      loggedIn: false,
+      fireRedirect: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,13 +43,6 @@ class Login extends Component {
         } else {
           console.log("Email or Password incorrect, please try again.");
         }
-      })
-      .then(() => {
-        this.state.loggedIn ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Redirect to="/login" />
-        );
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
