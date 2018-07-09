@@ -2,7 +2,7 @@ version: 2
 jobs:
     # The build job
     build:
-        working_directory: ~/project
+        working_directory: ~/project3
         docker:
             - image: circleci/node:6.10-browsers
         steps:
@@ -32,16 +32,16 @@ jobs:
                 command: npm run test
             # Build project with different configuration based on
             # the current branch
-            - run:
-                name: Building
-                command: |
-                    if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-                        npm run build-dev
-                    elif [ "${CIRCLE_BRANCH}" == "uat" ]; then
-                        npm run build-qa
-                    else
-                        npm run build-prod
-                    fi
+            #- run:
+            #    name: Building
+            #    command: |
+            #        if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+            #            npm run build-dev
+            #        elif [ "${CIRCLE_BRANCH}" == "uat" ]; then
+            #            npm run build-qa
+            #        else
+            #            npm run build-prod
+            #        fi
             # Cache the dist folder for the deploy job
             - save_cache:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
