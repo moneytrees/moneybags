@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import dashboard from "./Pages/dashboard";
 import NavTabs from "./components/NavTabs";
 import accountInfoForTesting from "./Pages/accountInfoForTesting";
+import UserLogin from "./Pages/userlogin";
 // import Baseline from './components/UserDashboard/Baseline';
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
           {/* <Route path="/" component={LineGraph} />   CashFlow component*/}
           <Route exact path="/" component={AppNavbar} />
           <Route exact path="/" component={Walkthrough} />
+          <Route exact path="/login" component={UserLogin} />
           <Route exact path="/dashboard" component={dashboard} />
           <Route exact path="/" component={accountInfoForTesting} />
 
