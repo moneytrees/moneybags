@@ -16,18 +16,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("client/build"));
 
-const httpsOptions = {
-  key: fs.readFileSync("./security/cert.key"),
-  cert: fs.readFileSync("./security/cert.pem")
-};
-
-//----------- ROUTING ---------------------
-const users = require("./routes/api/users");
-
-app.get("/", (req, res) => res.send("THE APP IS ONLINE"));
-app.use("/api/users", users);
-
-
 //----------- ROUTING ---------------------
 walker.getRoutes({ dir: './api/routes', app: app, express: express});
 const BPORT = process.env.BPORT || 3001;
