@@ -5,10 +5,8 @@ import CashFlow from "../components/UserDashboard/CashFlow";
 import FinancialOverview from "../components/UserDashboard/FinancialOverview";
 import TotalSpending from "../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../components/UserDashboard/TransactionDetail";
-import PieGraph from "../components/PieGraph";
-import LineGraph from "../components/LineGraph";
-
-class Dashboard extends Component {
+import "./dashboard.css";
+class dashboard extends Component {
   render() {
     return (
       <div>
@@ -20,15 +18,39 @@ class Dashboard extends Component {
         </div>
 
         <Baseline />
-        <CashFlow />
-        <PieGraph />
-        <LineGraph />
+        <div className="col-12">
+          <div className="container">
+            <div className="CashFlow">
+              <h1> CashFlow </h1>
+              <div className="row">
+                <div className="col-6">
+                  <CashFlow />
+                </div>
+                <div className="col-6 text-center">
+                  we can add some text here
+                </div>
+              </div>
+            </div>
+
+            <div className="TotalSpending">
+              <h1> TotalSpending </h1>
+              <div className="row">
+                <div className="col-6">
+                  <TotalSpending />
+                </div>
+                <div className="col-6 text-center">
+                  we can add some text here
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <FinancialOverview />
-        <TotalSpending />
+
         <TransactionDetail />
       </div>
     );
   }
 }
 
-export default Dashboard;
+export default dashboard;
