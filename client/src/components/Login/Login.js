@@ -19,8 +19,7 @@ class Login extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
-      fireRedirect: true
+      [event.target.name]: event.target.value
     });
   }
 
@@ -38,10 +37,16 @@ class Login extends Component {
         if (!response.data.errmsg) {
           this.setState({
             //redirect to dashboard page
-            loggedIn: true
+            loggedIn: true,
+            fireRedirect: true
           });
         } else {
           console.log("Email or Password incorrect, please try again.");
+          this.setState({
+            //redirect to dashboard page
+            loggedIn: false,
+            fireRedirect: true
+          });
         }
       })
       .catch(errors => {

@@ -9,6 +9,7 @@ import dashboard from "./Pages/dashboard";
 import NavTabs from "./components/NavTabs";
 import accountInfoForTesting from "./Pages/accountInfoForTesting";
 import UserLogin from "./Pages/userlogin";
+import UserRegister from "./Pages/userRegister";
 // import Baseline from './components/UserDashboard/Baseline';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path="/" component={AppNavbar} />
           <Route exact path="/" component={Walkthrough} />
           <Route exact path="/login" component={UserLogin} />
+          <Route exact path="/register" component={UserRegister} />
           <Route exact path="/dashboard" component={dashboard} />
           <Route exact path="/" component={accountInfoForTesting} />
 

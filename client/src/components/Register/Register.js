@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-class Registration extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      password2: "",
+      success: false,
+      fireRedirect: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,23 +31,25 @@ class Registration extends Component {
     //request to server to add a new email/password
     axios
       .post("/api/users/register", {
+        name: this.state.name,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        password2: this.state.password2
       })
       .then(response => {
         if (!response.data.errmsg) {
           console.log("successful registration");
           this.setState({
-            //redirect to login page
-            redirectTo: "/login"
+            success: true,
+            fireRedirect: true
           });
         } else {
           console.log(
             "There is already a user registered with this email. Proceed to login."
           );
           this.setState({
-            //redirect to login page
-            redirectTo: "/login"
+            success: false,
+            fireRedirect: true
           });
         }
       })
@@ -56,7 +61,7 @@ class Registration extends Component {
   render() {
     return (
       <div className="RegistrationForm">
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="col-1 col-ml-auto">
               <label className="form-label" htmlFor="name">
@@ -116,7 +121,7 @@ class Registration extends Component {
 
           <div className="form-group">
             <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="confirmPassword">
+              <label className="form-label" htmlFor="password2">
                 Confirm Password:{" "}
               </label>
             </div>
@@ -124,10 +129,10 @@ class Registration extends Component {
               <input
                 className="form-input"
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
+                id="password2"
+                name="password2"
                 placeholder="Confirm Password"
-                value={this.state.confirmPassword}
+                value={this.state.password2}
                 onChange={this.handleChange}
               />
             </div>
@@ -144,9 +149,15 @@ class Registration extends Component {
             </button>
           </div>
         </form>
+        {this.state.fireRedirect &&
+          (this.state.success ? (
+            <Redirect to="/login" />
+          ) : (
+            <Redirect to="/register" />
+          ))}
       </div>
     );
   }
 }
 
-export default Registration;
+export default Register;
