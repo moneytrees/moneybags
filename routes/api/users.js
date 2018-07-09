@@ -120,8 +120,10 @@ router.post("/login", (req, res) => {
                 success: true,
                 token: `Bearer ${token}`
               });
+              console.log(`BEARER TOKEN: ${token}`);
             }
           );
+          console.log(`CLIENT PAYLOAD:`, payload);
         } else {
           return res.status(400).json({ password: "Password incorrect" });
         }

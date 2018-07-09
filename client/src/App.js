@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Walkthrough from "./components/Walkthrough";
 import AppNavbar from "./components/AppNavbar";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import NavTabs from "./components/NavTabs";
 import UserLogin from "./pages/userlogin";
@@ -19,7 +19,7 @@ class App extends Component {
       <Router>
         <div>
           <NavTabs />
-          <Route path="/login" component={UserLogin} />
+          <Route exact path="/login" component={UserLogin} />
           <Route exact path="/" component={AppNavbar} />
           <Route exact path="/" component={Walkthrough} />
           <Route exact path="/dashboard" component={Dashboard} />

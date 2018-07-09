@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -7,7 +8,8 @@ class Login extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      loggedIn: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,15 +37,18 @@ class Login extends Component {
           console.log("successful login");
           this.setState({
             //redirect to dashboard page
-            redirectTo: "/dashboard"
+            loggedIn: true
           });
         } else {
           console.log("Email or Password incorrect, please try again.");
-          this.setState({
-            //redirect to login page
-            redirectTo: "/login"
-          });
         }
+      })
+      .then(() => {
+        this.state.loggedIn ? (
+          <Redirect to="/dashboard" />
+        ) : (
+          <Redirect to="/login" />
+        );
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -54,25 +59,6 @@ class Login extends Component {
     return (
       <div className="LoginForm">
         <form className="form-horizontal">
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="name">
-                Name:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-
           <div className="form-group">
             <div className="col-1 col-ml-auto">
               <label className="form-label" htmlFor="email">

@@ -69,10 +69,12 @@ app.post("/api/transactions", function(request, response, next) {
 //--------- START SERVER -----------------------
 const PORT = process.env.PORT || 3001;
 
-//app.listen(PORT, () => {console.log(`SERVER LISTENING ON PORT: ${PORT}`)});
-
-const server = https.createServer(httpsOptions, app).listen(PORT, () => {
-  console.log(`Secure server listening on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`SERVER LISTENING ON PORT: ${PORT}`);
 });
+
+// const server = https.createServer(httpsOptions, app).listen(PORT, () => {
+//   console.log(`Secure server listening on port ${PORT}`);
+// });
 
 module.exports = app;
