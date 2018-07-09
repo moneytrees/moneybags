@@ -11,7 +11,7 @@ import {
 } from 'react-vis';
 import regression from 'regression';
 console.log(XYPlot);
-export default class LineGraph30day extends Component {
+export default class LineGraph extends Component {
 
     render() {
         

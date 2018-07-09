@@ -30,6 +30,7 @@ router.post("/register", (req, res) => {
 
   // If input is invalid set header status code to 400 && send errors obj
   if (!isValid) {
+    console.log(errors);
     return res.status(400).json(errors);
   }
 
@@ -41,6 +42,7 @@ router.post("/register", (req, res) => {
       errors.email = "Email already exists.";
       // Set header status to 400 (server error)
       // Send error object as json
+      console.log(errors);
       return res.status(400).json(errors);
     } else {
       // Create new User from model
@@ -120,8 +122,10 @@ router.post("/login", (req, res) => {
                 success: true,
                 token: `Bearer ${token}`
               });
+              console.log(`BEARER TOKEN: ${token}`);
             }
           );
+          console.log(`CLIENT PAYLOAD:`, payload);
         } else {
           return res.status(400).json({ password: "Password incorrect" });
         }
