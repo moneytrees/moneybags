@@ -38,7 +38,6 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
-    "node-walker": "^0.1.0",
     "passport": "^0.4.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
