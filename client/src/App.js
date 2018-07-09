@@ -7,6 +7,7 @@ import AppNavbar from "./components/AppNavbar";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import dashboard from './Pages/dashboard';
 import NavTabs from './components/NavTabs';
+import accountInfoForTesting from './Pages/accountInfoForTesting'; 
 // import Baseline from './components/UserDashboard/Baseline';
 
 
@@ -27,6 +28,9 @@ return (
 <Route exact path="/" component={AppNavbar} />
 <Route exact path="/" component={Walkthrough} />
 <Route exact path="/dashboard" component={dashboard} />
+<Route exact path="/" component={accountInfoForTesting} />
+
+
 {/* <Baseline/> */}
 
 

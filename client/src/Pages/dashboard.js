@@ -35,11 +35,13 @@ class dashboard extends Component {
             <div className="TotalSpending">
               <h1> TotalSpending </h1>
               <div className="row">
-              <div className="col-6">
-                <TotalSpending />
+                <div className="col-6">
+                  <TotalSpending />
+                </div>
+                <div className="col-6 text-center">
+                  we can add some text here
+                </div>
               </div>
-              <div className="col-6 text-center">we can add some text here</div>
-              </div >
             </div>
           </div>
         </div>
