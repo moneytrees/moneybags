@@ -1,5 +1,5 @@
 const Validator = require("validator");
-const _ = require("lodash");
+const isEmpty = require("../../helpers/is-empty");
 
 // Var data is an obj of stuff to validate
 module.exports = function validateRegisterInput(data) {
@@ -9,10 +9,10 @@ module.exports = function validateRegisterInput(data) {
 
   // Check if the field is empty - if it is, set the default value to an empty string (so Validator can use it)
   // Otherwise, take input
-  data.name = !Validator.isEmpty(data.name) ? data.name : "";
-  data.email = !Validator.isEmpty(data.email) ? data.email : "";
-  data.password = !Validator.isEmpty(data.password) ? data.password : "";
-  data.password2 = !Validator.isEmpty(data.password2) ? data.password2 : "";
+  data.name = !isEmpty(data.name) ? data.name : "";
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   // If name is empty throw error
   if (Validator.isEmpty(data.name)) {
@@ -50,6 +50,6 @@ module.exports = function validateRegisterInput(data) {
   // If errors object _.isempty - user input is valid
   return {
     errors,
-    isValid: _.isEmpty(errors)
+    isValid: isEmpty(errors)
   };
 };
