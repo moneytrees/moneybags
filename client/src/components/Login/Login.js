@@ -19,7 +19,8 @@ class Login extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      fireRedirect: true
     });
   }
 
@@ -52,7 +53,7 @@ class Login extends Component {
   render() {
     return (
       <div className="LoginForm">
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="col-1 col-ml-auto">
               <label className="form-label" htmlFor="email">
@@ -102,6 +103,12 @@ class Login extends Component {
             </button>
           </div>
         </form>
+        {this.state.fireRedirect &&
+          (this.state.loggedIn ? (
+            <Redirect to="/dashboard" />
+          ) : (
+            <Redirect to="/login" />
+          ))}
       </div>
     );
   }
