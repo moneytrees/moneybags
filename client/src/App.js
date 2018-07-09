@@ -5,36 +5,32 @@ import AppNavbar from "./components/AppNavbar";
 import PieGraph from "./components/PieGraph";
 import LineGraph from "./components/LineGraph";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import dashboard from './Pages/dashboard';
-import NavTabs from './components/NavTabs';
+import dashboard from "./Pages/dashboard";
+import NavTabs from "./components/NavTabs";
+import Login from "./components/Login";
 // import Baseline from './components/UserDashboard/Baseline';
 
-
-
 class App extends Component {
-render() {
-return (
-// <div className="App">
-// <AppNavbar />
-// <Walkthrough />
-// <DataBody />
-// </div>
-<Router>
-<div>
-<NavTabs/>
-<Route path="/" component={PieGraph} />
-<Route path="/" component={LineGraph} />
-<Route exact path="/" component={AppNavbar} />
-<Route exact path="/" component={Walkthrough} />
-<Route exact path="/dashboard" component={dashboard} />
-{/* <Baseline/> */}
-
-
-</div>
-</Router>
-);
-}
+  render() {
+    return (
+      // <div className="App">
+      // <AppNavbar />
+      // <Walkthrough />
+      // <DataBody />
+      // </div>
+      <Router>
+        <div>
+          <NavTabs />
+          <Route path="/" component={PieGraph} />
+          <Route path="/" component={LineGraph} />
+          <Route path="/" component={Login} />
+          <Route exact path="/" component={AppNavbar} />
+          <Route exact path="/" component={Walkthrough} />
+          <Route exact path="/dashboard" component={dashboard} />
+          {/* <Baseline/> */}
+        </div>
+      </Router>
+    );
+  }
 }
 export default App;
-
-
