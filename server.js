@@ -16,6 +16,17 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("client/build"));
 
+//------------ DATABASE -----------------------
+const db = require("./config/keys").mongoURI;
+
+mongoose
+    .connect(
+        db,
+        { useNewUrlParser: true }
+    )
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.log(err));
+
 //----------- ROUTING ---------------------
 walker.getRoutes({ dir: './api/routes', app: app, express: express});
 const BPORT = process.env.BPORT || 3001;
@@ -27,6 +38,6 @@ const httpsOptions = {
 /*const server = https.createServer(httpsOptions, app).listen(PORT, () => {
     console.log(`Secure server listening on port ${PORT}`);
 });*/
-app.listen(3001, () => {console.log(`Secure server listening on port ${BPORT}`)});
+app.listen(3001, () => {console.log(`Unsecure server listening on port ${BPORT}`)});
 
 module.exports = app;

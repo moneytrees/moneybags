@@ -1,5 +1,6 @@
 const Validator = require("validator");
-const isEmpty = require("../../helpers/is-empty");
+console.log(__basedir);
+const isEmpty = require(__basedir+ "helpers/general/is-empty");
 
 // Var data is an obj of stuff to validate
 module.exports = function validateRegisterInput(data) {

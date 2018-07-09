@@ -16,7 +16,7 @@ module.exports = function(app, express){
     // @route       GET api/users/allusers
     // @desc        Return all users for testing purposes
     // @access      Public
-    usersRouter.get("/allusers", (req, res) => {
+    usersRouter.get("/api/allusers", (req, res) => {
         User.find().then(users => {
             res.json(users);
         });
@@ -25,7 +25,7 @@ module.exports = function(app, express){
     // @route       POST api/users/register
     // @desc        Creates new users
     // @access      Public
-    usersRouter.post("/register", (req, res) => {
+    usersRouter.post("/api/register", (req, res) => {
         // Bring errors obj and isValid property from validateRegisterInput
         const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -79,7 +79,7 @@ module.exports = function(app, express){
     // @route       GET api/users/login
     // @desc        Authenticates user && returns JSON Web Token (JWT) to user to begin session
     // @access      Public
-    usersRouter.post("/login", (req, res) => {
+    usersRouter.post("/api/login", (req, res) => {
         const { errors, isValid } = validateLoginInput(req.body);
 
         // If input is invalid set header status code to 400 && send errors obj

@@ -30,7 +30,7 @@ class Register extends Component {
 
     //request to server to add a new email/password
     axios
-      .post("/api/users/register", {
+      .post("/api/register", {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,

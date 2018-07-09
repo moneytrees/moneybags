@@ -29,7 +29,7 @@ class Login extends Component {
 
     // Post to login api route in order to authenticate user
     axios
-      .post("/api/users/login", {
+      .post("/api/login", {
         email: this.state.email,
         password: this.state.password
       })
