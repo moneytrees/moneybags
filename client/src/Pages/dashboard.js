@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import tamagotchi from ".././imgs/tamagotchi200x220.png";
+import tamagotchi from "../imgs/tamagotchi200x220.png";
 import Baseline from "../components/UserDashboard/Baseline";
 import CashFlow from "../components/UserDashboard/CashFlow";
 import FinancialOverview from "../components/UserDashboard/FinancialOverview";

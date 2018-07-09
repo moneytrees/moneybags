@@ -4,14 +4,18 @@ import axios from 'axios';
 import '../../react-vis.css';
 
 export default class TotalSpending extends Component {
-    state = {
-        transactions: [
-            {
-                amount: '',
-                category: ''
-            }
-        ]
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            transactions: [
+                {
+                    amount: '',
+                    category: ''
+                }
+            ]
+        };
+    }
     
     componentDidMount() {
         let transactions = [];

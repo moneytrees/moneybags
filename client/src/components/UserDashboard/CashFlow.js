@@ -13,9 +13,6 @@ import regression from 'regression';
 
 
 export default class CashFlow extends Component {
-    state = {
-        
-    };
 
     render() {
         let sampleBalance = 1085;
