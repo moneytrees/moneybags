@@ -36,7 +36,6 @@ class Login extends Component {
       })
       .then(response => {
         if (!response.data.errmsg) {
-          console.log("successful login");
           this.setState({
             //redirect to dashboard page
             loggedIn: true
