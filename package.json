@@ -41,7 +41,7 @@
     "passport": "^0.4.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
-    "swagger-express-mw": "^0.1.0",
+    "swagger-express-mw": "^0.7.0",
     "validator": "^10.4.0"
   },
   "devDependencies": {
@@ -56,6 +56,6 @@
     "nodemon": "^1.17.5",
     "react-test-renderer": "^16.4.1",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^3.1.0"
   }
 }
