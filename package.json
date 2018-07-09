@@ -38,10 +38,11 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
+    "node-walker": "^0.1.0",
     "passport": "^0.4.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
-    "swagger-express-mw": "^0.1.0",
+    "swagger-express-mw": "^0.7.0",
     "validator": "^10.4.0"
   },
   "devDependencies": {
@@ -56,6 +57,6 @@
     "nodemon": "^1.17.5",
     "react-test-renderer": "^16.4.1",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^3.1.0"
   }
 }
