@@ -14,28 +14,6 @@ import UserRegister from "./Pages/userRegister";
 
 import helpeducation from './Pages/helpeducation';
 
-
-class App extends Component {
-render() {
-return (
-// <div className="App">
-// <AppNavbar />
-// <Walkthrough />
-// <DataBody />
-// </div>
-<Router>
-<div>
-<NavTabs/>
-<Route path="/" component={DataBody} />
-<Route exact path="/" component={AppNavbar} />
-<Route exact path="/" component={Walkthrough} />
-<Route exact path="/dashboard" component={dashboard} />
-<Route path="/helpeducation" component={helpeducation} />
-
-{/* <Baseline/> */}
-
-
-
 class App extends Component {
   render() {
     return (
