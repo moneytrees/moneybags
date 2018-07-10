@@ -13,6 +13,7 @@ module.exports = function(app, express){
 
     plaidRouter.post("/api/get_access_token", function(request, response, next) {
         __plaidClient.publicToken = request.body.public_token;
+        __plaidClient.metaData = request.body.metadata;
         __plaidClient.getAccessToken().then(link => response.json(link));
     });
 
