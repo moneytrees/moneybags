@@ -122,6 +122,7 @@ yarn.lock
 app/config/config.json
 **/node_modules
 **/.DS_Store
+config/keys.js
 
 # IDE files
 .idea

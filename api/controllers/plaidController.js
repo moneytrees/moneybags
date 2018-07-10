@@ -6,11 +6,15 @@ class PlaidController {
 
     constructor() {
         //TODO check if there's a public key already saved for the logged in user
+        this.public_key = process.env.PLAID_PUBLIC_KEY;
+        this.secret = process.env.PLAID_SECRET;
+        this.client_id = process.env.PLAID_CLIENT_ID;
+        this.environment = plaid.environments[process.env.PLAID_ENV];
         this.client = new plaid.Client(
-            process.env.PLAID_CLIENT_ID,
-            process.env.PLAID_SECRET,
-            process.env.PLAID_PUBLIC_KEY,
-            plaid.environments[process.env.PLAID_ENV]
+            this.client_id,
+            this.secret,
+            this.public_key,
+            this.environment
         );
     }
 
@@ -48,6 +52,10 @@ class PlaidController {
 
     get transactionRange() {
         return {start: this.tStartDate, end: this.tEndDate };
+    }
+
+    getPublicKey() {
+        return { public_key: this.public_key };
     }
 
     async getAccessToken() {
