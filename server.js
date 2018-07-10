@@ -1,56 +1,43 @@
-const express = require('express');
+require('dotenv').config();
 const https = require('https');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const PlaidController = require('./api/controllers/plaidController');
-const bodyParser = require('body-parser');
-global.__plaidClient = false;
-require('dotenv').config();
-
+const mongoose = require('mongoose');
 const app = express();
+const walker = require('./helpers/general/file_traverse');
+//const PlaidController = require('./api/controllers/plaidController');
+//const SwaggerExpress = require('swagger-express-mw');
+global.__basedir = __dirname + '/';
+global.__plaidClient = false;
 
+//------------ MIDDLEWARE -------------
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.static("client/build"));
+
+//------------ DATABASE -----------------------
+const db = require("./config/keys").mongoURI;
+
+mongoose
+    .connect(
+        db,
+        { useNewUrlParser: true }
+    )
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.log(err));
+
+//----------- ROUTING ---------------------
+walker.getRoutes({ dir: './api/routes', app: app, express: express});
+const BPORT = process.env.BPORT || 3001;
+//TODO restore https after tests have been created for secure routes
 const httpsOptions = {
     key: fs.readFileSync('./security/cert.key'),
     cert: fs.readFileSync('./security/cert.pem')
 };
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(express.static('client/build'));
-// app.set('view engine', 'ejs');
-
-app.get('/', function (req, res, next) {
-    res.json({
-        PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
-        PLAID_ENV: process.env.PLAID_ENV
-    });    
-});
-
-app.post('/api/get_access_token', function (request, response, next) {
-    global.__plaidClient = new PlaidController();
-    __plaidClient.publicToken = request.body.public_token;
-    __plaidClient.getAccessToken().then(link => response.json(link));
-});
-
-app.get('/api/accounts', function (request, response, next) {
-    // Retrieve high-level account information and account and routing numbers
-    // for each account associated with the Item.
-    __plaidClient.getAccountInfo(__plaidClient.accessToken).then(accountinfo => response.json(accountinfo));
-});
-
-app.post('/api/item', function (request, response, next) {
-    __plaidClient.getItem(__plaidClient.accessToken).then(itemInfo => response.json(itemInfo));
-});
-
-app.post('/api/transactions', function (request, response, next) {
-    __plaidClient.transactionDaysAgo = 30;
-    __plaidClient.getTransactions().then(transactions => response.json(transactions));
-});
-
-const port = process.env.PORT || 3001;
-
-const server = https.createServer(httpsOptions, app).listen(port, () => {
-    console.log(`Secure server listening on port ${port}`);
-});
+/*const server = https.createServer(httpsOptions, app).listen(PORT, () => {
+    console.log(`Secure server listening on port ${PORT}`);
+});*/
+app.listen(3001, () => {console.log(`Unsecure server listening on port ${BPORT}`)});
 
 module.exports = app;
