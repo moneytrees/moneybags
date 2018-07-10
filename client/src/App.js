@@ -10,6 +10,7 @@ import NavTabs from "./components/NavTabs";
 import accountInfoForTesting from "./Pages/accountInfoForTesting";
 import UserLogin from "./Pages/userlogin";
 import UserRegister from "./Pages/userRegister";
+import ItemCreator from "./components/ItemCreator";
 // import Baseline from './components/UserDashboard/Baseline';
 
 class App extends Component {
@@ -20,11 +21,13 @@ class App extends Component {
       // <Walkthrough />
       // <DataBody />
       // </div>
+    <div>
+      <ItemCreator/>
       <Router>
         <div>
           <NavTabs />
-          {/* <Route path="/" component={PieGraph} />  moved to totalspending component*/}
-          {/* <Route path="/" component={LineGraph} />   CashFlow component*/}
+            {/* <Route path="/" component={PieGraph} />  moved to totalspending component*/}
+            {/* <Route path="/" component={LineGraph} />   CashFlow component*/}
           <Route exact path="/" component={AppNavbar} />
           <Route exact path="/" component={Walkthrough} />
           <Route exact path="/login" component={UserLogin} />
@@ -32,9 +35,10 @@ class App extends Component {
           <Route exact path="/dashboard" component={dashboard} />
           <Route exact path="/" component={accountInfoForTesting} />
 
-          {/* <Baseline/> */}
+            {/* <Baseline/> */}
         </div>
       </Router>
+    </div>
     );
   }
 }
