@@ -13,7 +13,8 @@ class ItemCreator extends Component {
         if(!this.state.public_key)
             fetch('/api/get_public_key')
                 .then(data => data.json())
-                .then(public_key => { this.setState(public_key)});
+                .then(public_key => { this.setState(public_key)})
+                .catch(err => console.log(err.message));;
     }
 
     handleOnSuccess(token, metadata) {
@@ -23,7 +24,7 @@ class ItemCreator extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ public_token: token, metadata: metadata }),
-        });
+        }).catch(err => console.log(err.message));
     }
     handleOnExit() {
         // handle the case when your user exits Link
