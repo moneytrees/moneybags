@@ -1,7 +1,6 @@
 const should = require('should');
 const request = require('supertest');
 var expect  = require('chai').expect;
-var request = require('request');
 const server = require('../../../server');
 
 
