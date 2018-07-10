@@ -1,8 +1,35 @@
 {
-  "name": "plutus",
+  "name": "moneytree",
   "version": "1.0.0",
-  "description": "This is a personal budget management app",
+  "description": "This is a financial forecasting app",
   "main": "server.js",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/src/fileTransformer.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "\\.(s?css|less)$": "identity-obj-proxy"
+    },
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs"
+    ],
+    "automock": false,
+    "setupFiles": [
+      "./api/mocks/jestFetch.js"
+    ],
+    "globals": {
+      "__DEV__": true
+    },
+    "testRegex": "./test/.*.js$",
+    "rootDir": "."
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -10,8 +37,10 @@
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "test": "swagger project test"
+    "build-dev": "ng build --target=development --environment=dev",
+    "build-qa": "ng build --target=uat --environment=qa",
+    "build-prod": "ng build --prod",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,24 +54,51 @@
   "homepage": "https://github.com/moneytrees/moneybags#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "dotenv": "^6.0.0",
-    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "plaid": "^2.6.2",
-    "swagger-express-mw": "^0.1.0"
+    "proxy-agent": "^3.0.0",
+    "rest": "^2.0.0",
+    "swagger-express-mw": "^0.7.0",
+    "validator": "^10.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.2.0",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.6.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "faker": "^4.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.3.0",
+    "jest-cli": "^23.3.0",
+    "jest-enzyme": "^6.0.2",
+    "jest-fetch-mock": "^1.6.5",
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
+    "puppeteer": "^1.5.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.4.1",
+    "resolve-url-loader": "^2.3.0",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "superagent": "^3.8.3",
+    "supertest": "^3.1.0"
   }
 }

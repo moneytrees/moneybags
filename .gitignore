@@ -122,9 +122,14 @@ yarn.lock
 app/config/config.json
 **/node_modules
 **/.DS_Store
+config/keys.js
 
 # IDE files
 .idea
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+# **/swagger/swagger.yaml
+.swagger-codegen-ignore
+.swagger-codegen
+test.html

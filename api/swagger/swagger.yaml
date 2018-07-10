@@ -1,12 +1,12 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: Moneybags
 # during dev, should point to your local machine
 host: localhost:10010
-# basePath prefixes all resource paths 
-basePath: /
-# 
+# basePath prefixes all resource paths
+basePath: /api
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -17,46 +17,32 @@ consumes:
 # format of the responses to the client (Accepts)
 produces:
   - application/json
+  
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+  x-swagger-router-controller: plaidController
+  /get_access_token:
+    post:
+      description: Get the access token for a bank item with the appropriate access tokens and item_id from either Plaid LINK or app database
+      operationId: getAccessToken
+      parameters: 
+      - name: public_token
+        in: body
+        description: The public access token provided by LINK, local storage, or the app's database
+        schema: 
+          $ref: '#/definitions/Plaid'
       responses:
-        "200":
-          description: Success
+        '200':
+          description: Token obtained
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-  /swagger:
-    x-swagger-pipe: swagger_raw
-# complex objects have schema definitions
+            $ref: '#/definitions/Plaid'
+          
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
+  Plaid:
+    type: object
     properties:
-      message:
+      access_token:
         type: string
-  ErrorResponse:
-    required:
-      - message
-    properties:
-      message:
+        description: Unique identifier representing the secret for the linked item.
+      item_id:
         type: string
-
-        
+        description: Another identifier for the linked item.
