@@ -81,6 +81,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-adapter-react-16": "^1.1.1",
+    "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.3.0",
     "jest-cli": "^23.3.0",
