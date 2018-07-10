@@ -5,9 +5,13 @@ const PlaidController = require(__basedir + '/api/controllers/plaidController');
 module.exports = function(app, express){
 
     const plaidRouter = express.Router();
+    global.__plaidClient = new PlaidController();
+
+    plaidRouter.get("/api/get_public_key", function(request, response, next) {
+        return __plaidClient.getPublicKey();
+    });
 
     plaidRouter.post("/api/get_access_token", function(request, response, next) {
-        global.__plaidClient = new PlaidController();
         __plaidClient.publicToken = request.body.public_token;
         __plaidClient.getAccessToken().then(link => response.json(link));
     });
