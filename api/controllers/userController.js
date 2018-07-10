@@ -28,7 +28,7 @@ module.exports = {
         errors.email = "Email already exists.";
         // Set header status to 400 (server error)
         // Send error object as json
-        return res.status(400).json(errors);
+        return res.status(400).json({ error: errors });
       } else {
         // Create new User from model
         // Set respective properties on user to user's input from body of post
@@ -54,8 +54,8 @@ module.exports = {
             // Save new user to db then send it as a json
             newUser
               .save()
-              .then(user => res.json(user))
-              .catch(err => res.json(err));
+              .then(user => res.json( { id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }) )
+              .catch(err => res.json( { error: err.message }));
           });
         });
       }

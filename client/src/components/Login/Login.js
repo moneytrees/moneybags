@@ -37,7 +37,8 @@ class Login extends Component {
       })
       .then(res => {
         // Save token to local storage
-        const { token } = res.data;
+
+        /*const { token } = res.data;
         // Set token to local storage
         localStorage.setItem("jwtToken", token);
         // Set token to auth header
@@ -45,7 +46,8 @@ class Login extends Component {
         // Decode token to get user data
         const decoded = jwt_decode(token);
         // Set current user
-        dispatch(setCurrentUser(decoded));
+        dispatch(setCurrentUser(decoded));*/
+
         if (!res.data.errmsg) {
           this.setState({
             //redirect to dashboard page
