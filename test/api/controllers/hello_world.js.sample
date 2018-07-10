@@ -1,8 +1,15 @@
+<<<<<<< HEAD:test/api/controllers/hello_world.js
 // const should = require('should');
 // // const request = require('supertest');
 // var expect  = require('chai').expect;
 // var request = require('request');
 // const server = require('../../../server');
+=======
+const should = require('should');
+const request = require('supertest');
+var expect  = require('chai').expect;
+const server = require('../../../server');
+>>>>>>> d684be5a803c499ea951886203d09497896acbfd:test/api/controllers/hello_world.js.sample
 
 
 // var assert = require('assert');

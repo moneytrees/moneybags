@@ -13,6 +13,7 @@
 
 //       it('should return a an access token', function(done) {
 
+<<<<<<< HEAD:test/api/controllers/plaidController.js
 //         request(server)
 //           .post('/api/get_access_token')
 //           .set('Accept', 'application/json')
@@ -27,6 +28,22 @@
 //             done();
 //           });
 //       });
+=======
+        request(app)
+          .post('/api/get_access_token')
+          .set('Accept', 'application/json')
+          .send({ public_token: __plaidClient.publicToken})
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end(function(err, res) {
+            should.not.exist(err);
+            should.exist(res.body.access_token);
+            should.exist(res.body.item_id);
+            res.body.should.be.an('object');
+            done();
+          });
+      });
+>>>>>>> d684be5a803c499ea951886203d09497896acbfd:test/api/controllers/plaidController.js.pending
 
 //     });
 
