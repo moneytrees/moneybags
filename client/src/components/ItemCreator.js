@@ -9,10 +9,10 @@ class ItemCreator extends Component {
         this.state = { public_key: null };
     }
 
-    componentDidMount() {
-        fetch('/api/get_public_key')
+    /*componentDidMount() {
+        fetch('http://localhost:3000/api/get_public_key')
             .then(data => this.setData(data.json()));
-    }
+    }*/
 
     static handleOnSuccess(token, metadata) {
         console.log(token);

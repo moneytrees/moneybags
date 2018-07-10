@@ -1,6 +1,6 @@
 //const { ensureAuthenticated } = require(path.join(__basedir,'/helpers/auth'));
 //const plaidController = require(path.join(__basedir,'/controllers/*.js'));
-const PlaidController = require(__basedir + '/api/controllers/plaidController');
+const PlaidController = require(__basedir + 'api/controllers/plaidController');
 
 module.exports = function(app, express){
 
