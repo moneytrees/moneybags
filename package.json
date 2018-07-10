@@ -20,6 +20,10 @@
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/fbjs"
     ],
+    "automock": false,
+    "setupFiles": [
+      "./api/mocks/jestFetch.js"
+    ],
     "globals": {
       "__DEV__": true
     },
@@ -62,6 +66,7 @@
     "moment": "^2.22.2",
     "mongoose": "^5.2.1",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
     "rest": "^2.0.0",
@@ -80,12 +85,15 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-adapter-react-16": "^1.1.1",
+    "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.3.0",
     "jest-cli": "^23.3.0",
     "jest-enzyme": "^6.0.2",
+    "jest-fetch-mock": "^1.6.5",
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
+    "puppeteer": "^1.5.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.4.1",
     "resolve-url-loader": "^2.3.0",

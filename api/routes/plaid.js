@@ -1,14 +1,19 @@
 //const { ensureAuthenticated } = require(path.join(__basedir,'/helpers/auth'));
 //const plaidController = require(path.join(__basedir,'/controllers/*.js'));
-const PlaidController = require(__basedir + '/api/controllers/plaidController');
+const PlaidController = require(__basedir + 'api/controllers/plaidController');
 
 module.exports = function(app, express){
 
     const plaidRouter = express.Router();
+    global.__plaidClient = new PlaidController();
+
+    plaidRouter.get("/api/get_public_key", function(request, response, next) {
+        return response.json(__plaidClient.getPublicKey());
+    });
 
     plaidRouter.post("/api/get_access_token", function(request, response, next) {
-        global.__plaidClient = new PlaidController();
         __plaidClient.publicToken = request.body.public_token;
+        __plaidClient.metaData = request.body.metadata;
         __plaidClient.getAccessToken().then(link => response.json(link));
     });
 

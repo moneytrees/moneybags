@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../../helpers/setAuthToken";
 
 class Login extends Component {
   constructor() {
@@ -33,8 +35,20 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-      .then(response => {
-        if (!response.data.errmsg) {
+      .then(res => {
+        // Save token to local storage
+
+        /*const { token } = res.data;
+        // Set token to local storage
+        localStorage.setItem("jwtToken", token);
+        // Set token to auth header
+        setAuthToken(token);
+        // Decode token to get user data
+        const decoded = jwt_decode(token);
+        // Set current user
+        dispatch(setCurrentUser(decoded));*/
+
+        if (!res.data.errmsg) {
           this.setState({
             //redirect to dashboard page
             loggedIn: true,
@@ -98,11 +112,7 @@ class Login extends Component {
 
           <div className="form-group">
             <div className="col-7" />
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
-              onClick={this.handleSubmit}
-              type="submit"
-            >
+            <button className="btn btn-primary col-1 col-mr-auto" type="submit">
               Login
             </button>
           </div>
