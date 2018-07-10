@@ -3,10 +3,7 @@ const path = require('path');
 const util = require('util');
 
 const TraverseRoutes = function(args, result = []) {
-
-    // list files in directory and loop through
     fs.readdirSync(args.dir).forEach((file) => {
-
         const fPath = path.resolve(args.dir, file);
         const fileStats = { file, path: fPath };
         fileStats.type = 'file';
