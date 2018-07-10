@@ -13,7 +13,7 @@ describe('controllers', function() {
 
       it('should return a an access token', function(done) {
 
-        request(server)
+        request(app)
           .post('/api/get_access_token')
           .set('Accept', 'application/json')
           .send({ public_token: __plaidClient.publicToken})
