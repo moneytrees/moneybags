@@ -8,7 +8,7 @@ module.exports = function(app, express){
     global.__plaidClient = new PlaidController();
 
     plaidRouter.get("/api/get_public_key", function(request, response, next) {
-        return __plaidClient.getPublicKey();
+        return response.json(__plaidClient.getPublicKey());
     });
 
     plaidRouter.post("/api/get_access_token", function(request, response, next) {
