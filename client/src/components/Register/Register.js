@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from "axios";
+import "./Register.css";
 
 class Register extends Component {
   constructor() {
@@ -61,16 +63,16 @@ class Register extends Component {
   render() {
     return (
       <div className="RegistrationForm">
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="name">
-                Name:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+
+        <Form onSubmit={this.handleSubmit}>
+
+          <FormGroup row>
+            <Label for="name"
+              sm={3}>
+              Name:
+          </Label>
+            <Col sm={4}>
+              <Input
                 type="text"
                 id="name"
                 name="name"
@@ -78,18 +80,16 @@ class Register extends Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="email">
-                Email:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="email"
+              sm={3}>
+              Email:
+          </Label>
+            <Col sm={4}>
+              <Input
                 type="text"
                 id="email"
                 name="email"
@@ -97,18 +97,16 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password">
-                Password:{" "}
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="password"
+              sm={3}>
+              Password:{" "}
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="password"
                 id="password"
                 name="password"
@@ -116,18 +114,16 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password2">
-                Confirm Password:{" "}
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="password2"
+              sm={3}>
+              Confirm Password:{" "}
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="password"
                 id="password2"
                 name="password2"
@@ -135,26 +131,30 @@ class Register extends Component {
                 value={this.state.password2}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-7" />
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
+          <Col sm={{ size: 10, offset: 2 }}>
+            <Button
+              className="button"
               onClick={this.handleSubmit}
               type="submit"
+
             >
-              Sign up
-            </button>
-          </div>
-        </form>
+
+              Sign Up
+
+          </Button>
+          </Col>
+        </Form>
+
+
         {this.state.fireRedirect &&
           (this.state.success ? (
             <Redirect to="/login" />
           ) : (
-            <Redirect to="/register" />
-          ))}
+              <Redirect to="/register" />
+            ))}
       </div>
     );
   }

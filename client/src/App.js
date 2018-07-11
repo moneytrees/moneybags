@@ -11,11 +11,15 @@ import accountInfoForTesting from "./Pages/accountInfoForTesting";
 import UserLogin from "./Pages/userlogin";
 import UserRegister from "./Pages/userRegister";
 import ItemCreator from "./components/ItemCreator";
-// import Baseline from './components/UserDashboard/Baseline';
+
 import helpeducation from "./Pages/helpeducation";
 import Team from "./Pages/Team";
 
+
+// import Baseline from './components/UserDashboard/Baseline';
+
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -38,6 +42,7 @@ class App extends Component {
       </div>
     );
   }
+
 }
 
 export default App;

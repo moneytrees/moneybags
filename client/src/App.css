@@ -27,5 +27,13 @@
   to { transform: rotate(360deg); }
 }
 
+<<<<<<< HEAD
 
 
+=======
+.line-graph {
+    display: inline-block;
+    position: relative;
+    top: 13%;
+}
+>>>>>>> a4158cc6d123f0b380824a383664f0d01564f180
