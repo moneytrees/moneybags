@@ -1,6 +1,23 @@
-.TotalSpending  {
-    border-bottom: solid;
+
+
+body{
+   /* background-image: url("../imgs/moneyTreeBG.jpg"); */
+   background-color: rgba(255, 255, 255, 0.879);
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   
 }
-.CashFlow  {
-    border-bottom: solid;
+
+.tamagotchi {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
 }
+
+h1 {
+    text-align: center;
+    color: purple;
+}
+
