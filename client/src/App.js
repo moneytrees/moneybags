@@ -8,9 +8,17 @@ import accountInfoForTesting from "./Pages/accountInfoForTesting";
 import UserLogin from "./Pages/Unprotected/Access/Userlogin";
 import UserRegister from "./Pages/Unprotected/Access/UserRegister";
 import ItemCreator from "./components/ItemCreator";
+
 import Helpeducation from "./Pages/Protected/Education";
 import Team from "./Pages/Unprotected/Team";
+
+/*import helpeducation from "./Pages/helpeducation";
+import Team from "./Pages/Team";
+import PrivateRoute from "./helpers"*/
+
 // import Baseline from './components/UserDashboard/Baseline';
+
+import AuthExample from './helpers/AuthService';
 
 class App extends Component {
 
@@ -18,7 +26,7 @@ class App extends Component {
     return (
       <div>
 
-        <Router>
+        {/*<Router>
           <div>
             <NavTabs />
             <Route exact path="/" component={ItemCreator} />
@@ -30,7 +38,8 @@ class App extends Component {
             <Route path="/helpeducation" component={Helpeducation} />
             <Route path="/team" component={Team} />
           </div>
-        </Router>
+        </Router>*/}
+        <AuthExample/>
       </div>
     );
   }

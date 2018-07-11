@@ -9,7 +9,7 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import { Button } from 'reactstrap';
 import { Card, CardImg } from 'reactstrap';
 import "./Dashboard.css";
-class dashboard extends Component {
+class Dashboard extends Component {
   render() {
     return (
       <div>
@@ -129,4 +129,4 @@ class dashboard extends Component {
   }
 }
 
-export default dashboard;
+export default Dashboard;

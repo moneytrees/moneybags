@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import "./Register.css";
-import Auth from "../../helpers/Passport"
+/*import Auth from "../../helpers/Passport"*/
 
 class Register extends React.Component {
 
@@ -31,13 +31,14 @@ class Register extends React.Component {
         console.log(this.state.email);
         event.preventDefault();
 
-        Auth.registerUser({
+        //console.log(Auth.test);
+        /*Auth.registerUser({
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2
         }).then(() => this.props.history.push('/')
-        ).catch(err => console.log('error signing up: ', err));
+        ).catch(err => console.log('error signing up: ', err));*/
     }
 
     render() {
