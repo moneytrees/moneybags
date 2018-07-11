@@ -10,8 +10,7 @@ import Register from "../components/Register";
 import Dashboard from "../components/UserDashboard";
 import Login from "../components/Login";
 
-const Auth = () => {
-    return {
+const Auth =  {
         isAuthenticated: false,
         authenticate: function (callback) {
             this.isAuthenticated = true
@@ -21,9 +20,7 @@ const Auth = () => {
             this.isAuthenticated = false
             setTimeout(callback, 100)
         }
-    } ;
 };
-
 
 /*class Login extends Component {
 
@@ -67,7 +64,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )} />
 );
 
-export default function AuthExample () {
+export default function AuthExample() {
     return (
         <Router>
           <div>
@@ -76,7 +73,7 @@ export default function AuthExample () {
               <li><Link to="/dashboard">User Dashboard</Link></li>
             </ul>
             <Route path="/register" component={Register}/>
-            <Route path="/login" component={Login} render={Auth}/>
+            <Route path="/login" component={Login}/>
             <PrivateRoute path='/dashboard' component={Dashboard} />
           </div>
         </Router>
