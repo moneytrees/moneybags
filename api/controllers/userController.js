@@ -6,6 +6,7 @@ require("dotenv").config();
 
 //-------------- MODELS -------------------
 const User = require(__basedir + "db/models/user");
+const Achv = require(__basedir + "db/models/achieve");
 //------------- VALIDATION ----------------
 const validateRegisterInput = require(__basedir +
   "helpers/validation/register");
@@ -54,8 +55,8 @@ module.exports = {
             // Save new user to db then send it as a json
             newUser
               .save()
-              .then(user => res.json( { id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }) )
-              .catch(err => res.json( { error: err.message }));
+              .then(user => res.json({ id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }))
+              .catch(err => res.json({ error: err.message }));
           });
         });
       }
@@ -73,17 +74,79 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
+
+    var ourDog = {
+      "name": "Camper",
+      "legs": 4,
+      "tails": 1,
+      "friends": ["everything!"]
+    };
+
+    ourDog.bark = "bow-wow";
+
+    // Setup
+    var myDog = {
+      "name": "Happy Coder",
+      "legs": 4,
+      "tails": 1,
+      "friends": ["freeCodeCamp Campers"]
+    };
+
+    // Only change code below this line.
+
+
+    // console.log(ourDog);
+
+    // console.log(myDog);
+
+
     // Find one user by their email
     User.findOne({ email })
       .then(user => {
 
 
-        console.log(`userrrrr                
-        
-        ${user}
-        
-        
-        `);
+        ///////////////////////
+        //This is code is going to be moved, this is temporary
+        //////////////////////////////
+
+        Achv.find().then((achvData) => {
+
+          let clientAchvArr = [];
+
+
+
+          achvData.forEach((data) => {
+            let tempObj = {
+              id: data.id,
+              name: data.name,
+              desc: data.desc,
+              unlocked: false
+
+            }
+
+            if (user.achievements.includes(data.id)) {
+              tempObj.unlocked = true;
+            }
+          clientAchvArr.push(tempObj);
+
+          });
+
+          // console.log(clientAchvArr);
+
+
+      
+        });
+
+        //////////////////////////////////////////
+        //////////////////////////////////////////////
+        //////////////////////////////////////////
+
+        // console.log(`userrrrr                
+
+        // ${user}
+
+
+        // `);
         // Check if user exists
         // If not set status to 404 && send errors object
         // if (!user) {
@@ -93,40 +156,74 @@ module.exports = {
 
         // Compare user created password to hashed password
         // bcrypt.compare(password, user.password).then(isMatch => {
-          // If hashed password matches user created password
-          // if (isMatch) {
-            // Create JWT payload
-            let achvID = "userlogin" + user.consecutive_login / 2;
+        // If hashed password matches user created password
+        // if (isMatch) {
+        // Create JWT payload
+
+        let newConsecutiveLogin = user.consecutive_login + 1;
+
+        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
+
+          console.log(data);
+        });
+
+
+
+        if (Math.floor(newConsecutiveLogin / 2) > 0) {
+
+          let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+
+          let achvArr = user.achievements;
+
+
+
+          if (!achvArr.includes(achvID)) {
+
+            console.log(achvID);
+
+            Achv.findOne({ _id: achvID }).then((achvData) => {
+
+
+              achvArr.push(achvData.id);
+
+
+              User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
+
+                console.log(data);
+              })
+            })
+
             const payload = {
               id: user.id,
               name: user.name,
               loginAchv: achvID
             };
 
+          }
 
-            User.updateOne({email: user.email}, { consecutive_login: user.consecutive_login+1 }).then((data)=>{
 
-              console.log(data);
+
+        }
+
+
+
+
+
+        // Assign token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 1800 }, // Token expires in 30 minutes
+          (err, token) => {
+            res.json({
+              success: true,
+              token: `Bearer ${token}`
             });
-
-
-
-
-            // Assign token
-            jwt.sign(
-              payload,
-              keys.secretOrKey,
-              { expiresIn: 1800 }, // Token expires in 30 minutes
-              (err, token) => {
-                res.json({
-                  success: true,
-                  token: `Bearer ${token}`
-                });
-              }
-            );
-          // } else {
-          //   return res.status(400).json({ password: "Password incorrect" });
-          // }
+          }
+        );
+        // } else {
+        //   return res.status(400).json({ password: "Password incorrect" });
+        // }
         // });
       })
       .catch(err => res.send(err));
