@@ -7,56 +7,25 @@ import {
     withRouter
 } from 'react-router-dom';
 import Register from "../components/Register";
-import Dashboard from "../components/UserDashboard";
+/*import Dashboard from "../components/UserDashboard";*/
 import Login from "../components/Login";
 
-const Auth =  {
-        isAuthenticated: false,
-        authenticate: function (callback) {
-            this.isAuthenticated = true
-            setTimeout(callback, 100)
-        },
-        signout: function (callback) {
-            this.isAuthenticated = false
-            setTimeout(callback, 100)
-        }
-};
+import Walkthrough from "../components/Walkthrough";
+import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
+import NavTabs from "../components/NavTabs";
+import accountInfoForTesting from "../Pages/accountInfoForTesting";
+import UserLogin from "../Pages/Unprotected/Access/Userlogin";
+import UserRegister from "../Pages/Unprotected/Access/UserRegister";
+import ItemCreator from "../components/ItemCreator";
 
-/*class Login extends Component {
+import Helpeducation from "../Pages/Protected/Education";
+import Team from "../Pages/Unprotected/Team";
 
-    constructor(props) {
-        super(props);
-        this.state = { referrerRedirect: false };
-        this.login = this.login.bind(this);
-    }
-
-    login() {
-    Auth.authenticate(
-            this.setState(() => ({
-                referrerRedirect: true
-            }))
-        );
-    }
-
-    render() {
-        const {from} = this.props.location.state || { from: { pathname: '/'} };
-        const {referrerRedirect} = this.state;
-        if (referrerRedirect)
-            return <Redirect to={from}/>;
-
-        return (
-            <div>
-                <p>You must log in to view the page</p>
-                <button onClick={this.login}>Log in</button>
-            </div>
-        );
-    }
-}*/
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={
         (props) => (
-            Auth.isAuthenticated ? <Component {...props} />
+            localStorage.getItem('isAuthenticated') ? <Component {...props} />
             : <Redirect to={{
             pathname: '/login',
             state: { from: props.location }
@@ -64,7 +33,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )} />
 );
 
-export default function AuthExample() {
+export default function AppContainer() {
     return (
         <Router>
           <div>
@@ -74,7 +43,8 @@ export default function AuthExample() {
             </ul>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
-            <PrivateRoute path='/dashboard' component={Dashboard} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute path='/dashboardx' component={Dashboard} />
           </div>
         </Router>
     )

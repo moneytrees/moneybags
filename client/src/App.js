@@ -18,7 +18,7 @@ import PrivateRoute from "./helpers"*/
 
 // import Baseline from './components/UserDashboard/Baseline';
 
-import AuthExample from './helpers/AuthService';
+import AppContainer from './helpers/AuthService';
 
 class App extends Component {
 
@@ -39,7 +39,7 @@ class App extends Component {
             <Route path="/team" component={Team} />
           </div>
         </Router>*/}
-        <AuthExample/>
+        <AppContainer/>
       </div>
     );
   }

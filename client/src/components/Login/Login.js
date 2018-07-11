@@ -14,7 +14,8 @@ class Login extends Component {
     }
 
     login() {
-        console.log(this.props.children)
+        localStorage.setItem('isAuthenticated', true);
+        this.setState(() => ({ referrerRedirect: true }));
         /*this.props.Auth.authenticate(
             this.setState(() => ({
                 referrerRedirect: true
