@@ -43,8 +43,8 @@ export default class CashFlow extends Component {
     componentDidMount() {
         let sampleBalance = 2085;
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-10' },
-            { amount: 57, date: '2018-06-12' },
+            { amount: 17, date: '2018-06-12' },
+            { amount: 57, date: '2018-06-13' },
             { amount: 100, date: '2018-06-16' },
             { amount: 23, date: '2018-06-17' },
             { amount: -800, date: '2018-06-18' },
@@ -81,7 +81,7 @@ export default class CashFlow extends Component {
         this.setState({ currentState });
     }
 
-    calculate() {
+    calculate () {
         let sampleBalance = 2085;
         let sampleTransactions = [
             { amount: 17, date: '2018-06-10' },
@@ -175,7 +175,7 @@ export default class CashFlow extends Component {
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
-                    <div className="line-graph">
+                    <div className="line-graph-div">
                         <button onClick={this.calculate}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
@@ -183,6 +183,7 @@ export default class CashFlow extends Component {
                         <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
                         <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
                         <XYPlot
+                            className="line-graph"
                             width={500}
                             height={500}
                             xDomain={[0, 30]}

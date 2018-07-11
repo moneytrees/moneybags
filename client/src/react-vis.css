@@ -41,9 +41,9 @@
 
 .rv-xy-plot__inner {
     display: block;
-    position: relative;
-    left: 38%;
-    top: 13%;
+    /* position: relative; */
+    /* left: 38%;
+    top: 13%; */
 }
 
 .rv-xy-plot__axis__line {
