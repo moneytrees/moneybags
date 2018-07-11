@@ -37,14 +37,20 @@ export default function AppContainer() {
     return (
         <Router>
           <div>
-            <ul>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/dashboard">User Dashboard</Link></li>
-            </ul>
-            <Route path="/register" component={Register}/>
-            <Route path="/login" component={Login}/>
-            <Route exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute path='/dashboardx' component={Dashboard} />
+            <NavTabs/>
+            <Route exact path="/" component={UserRegister} />
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/register" component={UserRegister} />
+            <Route exact path="/team" component={Team} />
+            <Route render={() => {
+                      localStorage.removeItem('isAuthenticated');
+                      return <Redirect to='/login'/>
+            }} />
+            <Route exact path="/test" component={accountInfoForTesting} />
+            <Route exact path="/test" component={ItemCreator} />
+            <Route exact path="/test" component={Walkthrough} />
+            <PrivateRoute path="/helpeducation" component={Helpeducation} />
+            <PrivateRoute path='/dashboard' component={Dashboard} />
           </div>
         </Router>
     )

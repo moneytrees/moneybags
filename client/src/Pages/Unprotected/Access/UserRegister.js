@@ -6,7 +6,6 @@ class UserRegister extends Component {
     return (
       <div>
         <h1>Money Tree: User Registration</h1>
-
         <Register />
       </div>
     );

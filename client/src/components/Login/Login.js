@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 //import AuthService from "../../helpers/AuthService";
 
@@ -8,14 +8,70 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
-        this.state = { referrerRedirect: false };
-        this.login = this.login.bind(this);
+        this.state = {
+            name: "",
+            email: "",
+            password: "",
+            referrerRedirect: false
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    login() {
-        localStorage.setItem('isAuthenticated', true);
-        this.setState(() => ({ referrerRedirect: true }));
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const email = this.state.email;
+        console.log(email);
+        fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: this.state.email, password: this.state.password })
+        })
+            .then(data => data.json())
+            .then(response => {
+                localStorage.setItem('isAuthenticated', true);
+                return response;
+            })
+            .then(res => {
+                // Save token to local storage
+
+                /*const { token } = res.data;
+                // Set token to local storage
+                localStorage.setItem("jwtToken", token);
+                // Set token to auth header
+                setAuthToken(token);
+                // Decode token to get user data
+                const decoded = jwt_decode(token);
+                // Set current user
+                dispatch(setCurrentUser(decoded));*/
+
+                if (!res.data.errmsg) {
+                    /*this.setState({
+                        //redirect to dashboard page
+                        loggedIn: true,
+                        fireRedirect: true
+                    });*/
+                    this.setState(() => ({ referrerRedirect: true }));
+                } else {
+                    console.log("Email or Password incorrect, please try again.");
+                    this.setState({
+                        //redirect to dashboard page
+                        loggedIn: false,
+                        fireRedirect: true
+                    });
+                }
+            })
+            .catch(errors => {
+                console.log(`Login error: ${errors}`);
+            });
         /*this.props.Auth.authenticate(
             this.setState(() => ({
                 referrerRedirect: true
@@ -24,68 +80,64 @@ class Login extends Component {
     }
 
     render() {
-        const {from} = this.props.location.state || { from: { pathname: '/'} };
+
+        const {from} = this.props.location.state || { from: { pathname: '/dashboard'} };
         const {referrerRedirect} = this.state;
         if (referrerRedirect)
             return <Redirect to={from}/>;
-
         return (
             <div>
-                <p>You must log in to view the page</p>
-                <button onClick={this.login}>Log in</button>
+                <h2>You must be logged in to access this page</h2>
+                <div className="LoginForm">
+                    <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <div className="col-1 col-ml-auto">
+                                <label className="form-label" htmlFor="email">
+                                    Email:
+                                </label>
+                            </div>
+                            <div className="col-3 col-mr-auto">
+                                <input
+                                    className="form-input"
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <div className="col-1 col-ml-auto">
+                                <label className="form-label" htmlFor="password">
+                                    Password:{" "}
+                                </label>
+                            </div>
+                            <div className="col-3 col-mr-auto">
+                                <input
+                                    className="form-input"
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <div className="col-7" />
+                            <button className="btn btn-primary col-1 col-mr-auto" type="submit">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
-
-        /*
-         <div className="LoginForm">
-         <form className="form-horizontal" onSubmit={this.handleSubmit}>
-         <div className="form-group">
-         <div className="col-1 col-ml-auto">
-         <label className="form-label" htmlFor="email">
-         Email:
-         </label>
-         </div>
-         <div className="col-3 col-mr-auto">
-         <input
-         className="form-input"
-         type="text"
-         id="email"
-         name="email"
-         placeholder="Email"
-         value={this.state.email}
-         onChange={this.handleChange}
-         />
-         </div>
-         </div>
-
-         <div className="form-group">
-         <div className="col-1 col-ml-auto">
-         <label className="form-label" htmlFor="password">
-         Password:{" "}
-         </label>
-         </div>
-         <div className="col-3 col-mr-auto">
-         <input
-         className="form-input"
-         type="password"
-         id="password"
-         name="password"
-         placeholder="Password"
-         value={this.state.password}
-         onChange={this.handleChange}
-         />
-         </div>
-         </div>
-
-         <div className="form-group">
-         <div className="col-7" />
-         <button className="btn btn-primary col-1 col-mr-auto" type="submit">
-         Login
-         </button>
-         </div>
-         </form>
-         </div>
-         */
     }
 }
 export default Login;
@@ -118,44 +170,44 @@ export default Login;
 <<<<<<< HEAD
     // Post to login api route in order to authenticate user
       fetch("/api/login", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ email: this.state.email, password: this.state.password })
-      })
-          .then(data => data.json())
-          .then(res => {
-            // Save token to local storage
+   method: "POST",
+   headers: {
+   "Content-Type": "application/json"
+   },
+   body: JSON.stringify({ email: this.state.email, password: this.state.password })
+   })
+   .then(data => data.json())
+   .then(res => {
+   // Save token to local storage
 
-            /!*const { token } = res.data;
-            // Set token to local storage
-            localStorage.setItem("jwtToken", token);
-            // Set token to auth header
-            setAuthToken(token);
-            // Decode token to get user data
-            const decoded = jwt_decode(token);
-            // Set current user
-            dispatch(setCurrentUser(decoded));*!/
+   /!*const { token } = res.data;
+   // Set token to local storage
+   localStorage.setItem("jwtToken", token);
+   // Set token to auth header
+   setAuthToken(token);
+   // Decode token to get user data
+   const decoded = jwt_decode(token);
+   // Set current user
+   dispatch(setCurrentUser(decoded));*!/
 
-            if (!res.data.errmsg) {
-              this.setState({
-                //redirect to dashboard page
-                loggedIn: true,
-                fireRedirect: true
-              });
-            } else {
-              console.log("Email or Password incorrect, please try again.");
-              this.setState({
-                //redirect to dashboard page
-                loggedIn: false,
-                fireRedirect: true
-              });
-            }
-          })
-          .catch(errors => {
-            console.log(`Login error: ${errors}`);
-          });
+   if (!res.data.errmsg) {
+   this.setState({
+   //redirect to dashboard page
+   loggedIn: true,
+   fireRedirect: true
+   });
+   } else {
+   console.log("Email or Password incorrect, please try again.");
+   this.setState({
+   //redirect to dashboard page
+   loggedIn: false,
+   fireRedirect: true
+   });
+   }
+   })
+   .catch(errors => {
+   console.log(`Login error: ${errors}`);
+   });
 =======
     const user = {
       email: this.state.email.toLowerCase().trim(),
