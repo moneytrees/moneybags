@@ -134,15 +134,18 @@ class Register extends Component {
             </Col>
           </FormGroup>
 
-          <Button
-            className="button"
-            onClick={this.handleSubmit}
-            type="submit"
-            
-          >
-            Sign Up
-            </Button>
+          <Col sm={{ size: 10, offset: 2 }}>
+            <Button
+              className="button"
+              onClick={this.handleSubmit}
+              type="submit"
 
+            >
+
+              Sign Up
+
+          </Button>
+          </Col>
         </Form>
 
 
