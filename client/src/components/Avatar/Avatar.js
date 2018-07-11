@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Happy from "../images/happy.png";
+import Happy from "./imgs/bigFoothappyBigFoot.png";
 import Neutral from "../images/neutral.png";
 import Sad from "../images/sad.jpg";
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,7 +14,7 @@ export class ListItem extends Component {
     state = {
         imageArray : [Happy, Neutral, Sad ],
         currentImageIndex: 1
-    } 
+    }
 
     componentDidMount(){
 
@@ -31,10 +31,8 @@ export class ListItem extends Component {
       
       <div >
         <button className="toast-button" onClick={this.notify}>Notify !</button>
-        <button className="toast-button" onClick={this.update}>Update !</button>
-
+        <button className="toast-button" onClick={this.update}>Update !</button>}
         <ToastContainer/>
-        
       </div>
     )
   }
