@@ -17,7 +17,7 @@ Enzyme.configure({ adapter: new Adapter() });
 //describe the testing
 describe('Register Component', () => {
     it('should render without throwing an error', () => {
-        expect(shallow( < Register /> ).find('form').exists()).toBe(true)
+        expect(shallow( < Register /> ).find('Form').exists()).toBe(true)
     })
 
     //  it('renders an email input', () => {
