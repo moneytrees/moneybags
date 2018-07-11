@@ -1,13 +1,9 @@
-
-
-
 import React, { Component } from 'react';
-import tamagotchi from '.././imgs/tamagotchi200x220.png';
-import Education from '../components/HelpEducation/Education';
-import Help from '../components/HelpEducation/Help';
+import tamagotchi from '../../../imgs/tamagotchi200x220.png';
+/*import Education from 'components/HelpEducation/Education';
+import Help from 'components/HelpEducation/Help';*/
 
-
-class helpeducation extends Component {
+class Helpeducation extends Component {
     render() {
         return (
 
@@ -19,13 +15,13 @@ class helpeducation extends Component {
                     </a>
                 </div>
 
-                <Education/>
+                {/*<Education/>
                 
                 
-                <Help/>
+                <Help/>*/}
             </div>
         );
     }
 }
 
-export default helpeducation ;
+export default Helpeducation ;

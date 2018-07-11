@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import tamagotchi from "../imgs/tamagotchi200x180.png";
-import neutralBigFoot from "../imgs/bigFootSVGs/neutralBigFoot.svg";
-import Baseline from "../components/UserDashboard/Baseline";
-import CashFlow from "../components/UserDashboard/CashFlow";
-import FinancialOverview from "../components/UserDashboard/FinancialOverview";
-import TotalSpending from "../components/UserDashboard/TotalSpending";
-import TransactionDetail from "../components/UserDashboard/TransactionDetail";
+import tamagotchi from "../../../imgs/tamagotchi200x180.png";
+import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+import Baseline from "../../../components/UserDashboard/Baseline";
+import CashFlow from "../../../components/UserDashboard/CashFlow";
+import FinancialOverview from "../../../components/UserDashboard/FinancialOverview";
+import TotalSpending from "../../../components/UserDashboard/TotalSpending";
+import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
 import { Button } from 'reactstrap';
-
-import {
-  Card, CardImg
-} from 'reactstrap';
-import "./dashboard.css";
+import { Card, CardImg } from 'reactstrap';
+import "./Dashboard.css";
 class dashboard extends Component {
   render() {
     return (

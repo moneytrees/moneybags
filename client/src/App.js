@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
-import Walkthrough from "./components/Walkthrough";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import dashboard from "./Pages/dashboard";
+import Walkthrough from "./components/Walkthrough";
+import Dashboard from "./Pages/Protected/Dashboard/Dashboard";
 import NavTabs from "./components/NavTabs";
 import accountInfoForTesting from "./Pages/accountInfoForTesting";
-import UserLogin from "./Pages/userlogin";
-import UserRegister from "./Pages/userRegister";
+import UserLogin from "./Pages/Unprotected/Access/Userlogin";
+import UserRegister from "./Pages/Unprotected/Access/UserRegister";
 import ItemCreator from "./components/ItemCreator";
-
-import helpeducation from "./Pages/helpeducation";
-import Team from "./Pages/Team";
-
-
+import Helpeducation from "./Pages/Protected/Education";
+import Team from "./Pages/Unprotected/Team";
 // import Baseline from './components/UserDashboard/Baseline';
 
 class App extends Component {
@@ -20,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
-       
+
         <Router>
           <div>
             <NavTabs />
@@ -29,8 +26,8 @@ class App extends Component {
             <Route exact path="/" component={accountInfoForTesting} />
             <Route exact path="/login" component={UserLogin} />
             <Route exact path="/register" component={UserRegister} />
-            <Route exact path="/dashboard" component={dashboard} />
-            <Route path="/helpeducation" component={helpeducation} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route path="/helpeducation" component={Helpeducation} />
             <Route path="/team" component={Team} />
           </div>
         </Router>
@@ -39,5 +36,19 @@ class App extends Component {
   }
 
 }
+
+/*import Routes from './helpers/Routes'
+
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+              <Routes />
+            </div>
+        );
+    }
+}
+
+export default App;*/
 
 export default App;
