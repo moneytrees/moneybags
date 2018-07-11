@@ -29,4 +29,6 @@
 
 .line-graph {
     display: inline-block;
+    position: relative;
+    top: 13%;
 }
