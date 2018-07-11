@@ -14,7 +14,7 @@ import ItemCreator from "./components/ItemCreator";
 
 import helpeducation from "./Pages/helpeducation";
 import Team from "./Pages/Team";
-
+import PrivateRoute from "./helpers"
 
 // import Baseline from './components/UserDashboard/Baseline';
 
