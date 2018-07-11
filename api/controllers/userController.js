@@ -76,22 +76,41 @@ module.exports = {
     // Find one user by their email
     User.findOne({ email })
       .then(user => {
+
+
+        console.log(`userrrrr                
+        
+        ${user}
+        
+        
+        `);
         // Check if user exists
         // If not set status to 404 && send errors object
-        if (!user) {
-          errors.email = "User not found.. Double check your email";
-          return res.status(404).json(errors);
-        }
+        // if (!user) {
+        //   errors.email = "User not found.. Double check your email";
+        //   return res.status(404).json(errors);
+        // }
 
         // Compare user created password to hashed password
-        bcrypt.compare(password, user.password).then(isMatch => {
+        // bcrypt.compare(password, user.password).then(isMatch => {
           // If hashed password matches user created password
-          if (isMatch) {
+          // if (isMatch) {
             // Create JWT payload
+            let achvID = "userlogin" + user.consecutive_login / 2;
             const payload = {
               id: user.id,
-              name: user.name
+              name: user.name,
+              loginAchv: achvID
             };
+
+
+            User.updateOne({email: user.email}, { consecutive_login: user.consecutive_login+1 }).then((data)=>{
+
+              console.log(data);
+            });
+
+
+
 
             // Assign token
             jwt.sign(
@@ -105,10 +124,10 @@ module.exports = {
                 });
               }
             );
-          } else {
-            return res.status(400).json({ password: "Password incorrect" });
-          }
-        });
+          // } else {
+          //   return res.status(400).json({ password: "Password incorrect" });
+          // }
+        // });
       })
       .catch(err => res.send(err));
   },
