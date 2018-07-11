@@ -62,7 +62,7 @@ module.exports = {
     });
   },
   loginUser: (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
+    const { errors, isValid } = validateLoginInput(req.body.user);
 
     // If input is invalid set header status code to 400 && send errors obj
     if (!isValid) {
@@ -70,8 +70,8 @@ module.exports = {
     }
 
     // Set email and password to user input from form
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.user.email;
+    const password = req.body.user.password;
 
     // Find one user by their email
     User.findOne({ email })
@@ -101,7 +101,7 @@ module.exports = {
               (err, token) => {
                 res.json({
                   success: true,
-                  token: `Bearer ${token}`
+                  token: `${token}`
                 });
               }
             );

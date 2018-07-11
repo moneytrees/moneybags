@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import setAuthToken from "../../helpers/setAuthToken";
+import AuthService from "../../helpers/AuthService";
 
 class Login extends Component {
   constructor() {
@@ -17,6 +17,7 @@ class Login extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.Auth = new AuthService();
   }
 
   handleChange(event) {
@@ -29,44 +30,17 @@ class Login extends Component {
     console.log(this.state.email);
     event.preventDefault();
 
-    // Post to login api route in order to authenticate user
-    axios
-      .post("/api/login", {
-        email: this.state.email,
-        password: this.state.password
-      })
-      .then(res => {
-        // Save token to local storage
+    const user = {
+      email: this.state.email.toLowerCase().trim(),
+      password: this.state.password.trim()
+    };
 
-        /*const { token } = res.data;
-        // Set token to local storage
-        localStorage.setItem("jwtToken", token);
-        // Set token to auth header
-        setAuthToken(token);
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
-        // Set current user
-        dispatch(setCurrentUser(decoded));*/
-
-        if (!res.data.errmsg) {
-          this.setState({
-            //redirect to dashboard page
-            loggedIn: true,
-            fireRedirect: true
-          });
-        } else {
-          console.log("Email or Password incorrect, please try again.");
-          this.setState({
-            //redirect to dashboard page
-            loggedIn: false,
-            fireRedirect: true
-          });
-        }
-      })
-      .catch(errors => {
-        console.log(`Login error: ${errors}`);
-      });
+    this.Auth.login(user);
   }
+
+  // componentWillMount() {
+  //   if (this.Auth.loggedIn()) console.log("COMPONENT DID MOUNT");
+  // }
 
   render() {
     return (
@@ -117,12 +91,6 @@ class Login extends Component {
             </button>
           </div>
         </form>
-        {this.state.fireRedirect &&
-          (this.state.loggedIn ? (
-            <Redirect to="/dashboard" />
-          ) : (
-            <Redirect to="/login" />
-          ))}
       </div>
     );
   }
