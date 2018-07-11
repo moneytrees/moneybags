@@ -18,6 +18,7 @@ import TwentyYears from './TwentyYears';
 export default class CashFlow extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             regressionEquation: '',
             regressionEquation2: '',
@@ -33,6 +34,11 @@ export default class CashFlow extends Component {
             amountDownPayment: 500,
             monthlyPaymentAmount: 400
         };
+
+        this.calculate = this.calculate.bind(this);
+        this.calculatePurchaseOverInterval = this.calculatePurchaseOverInterval.bind(this);
+        this.timeScaleHandler = this.timeScaleHandler.bind(this);
+
     }
     componentDidMount() {
         let sampleBalance = 2085;
@@ -75,7 +81,7 @@ export default class CashFlow extends Component {
         this.setState({ currentState });
     }
 
-    calculate = () => {
+    calculate() {
         let sampleBalance = 2085;
         let sampleTransactions = [
             { amount: 17, date: '2018-06-10' },
@@ -118,7 +124,7 @@ export default class CashFlow extends Component {
         this.setState({ currentState });
     }
 
-    calculatePurchaseOverInterval = () => {
+    calculatePurchaseOverInterval() {
         const m_c1 = this.state.regressionEquation.equation;
         const m_c2 = this.state.regressionEquation2.equation;
         const intervalWithoutPayments = this.state.selectedTimeScaleInMonths - this.state.numPaymentsInMonths;
@@ -141,7 +147,7 @@ export default class CashFlow extends Component {
         this.setState({ currentState });
     }
 
-    timeScaleHandler = (e) => {
+    timeScaleHandler(e) {
         const currentState = this.state;
         switch (e.target.className) {
             case 'one-year':
