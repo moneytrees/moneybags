@@ -69,7 +69,7 @@
     "passport-jwt": "^4.0.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
-    "react-dom": "^16.4.1",
+
     "reactstrap": "^6.3.0",
     "rest": "^2.0.0",
     "swagger-express-mw": "^0.7.0",
