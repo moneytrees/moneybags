@@ -42,7 +42,7 @@ export default function AppContainer() {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/register" component={UserRegister} />
             <Route exact path="/team" component={Team} />
-            <Route render={() => {
+            <Route exact path="/logout" render={() => {
                       localStorage.removeItem('isAuthenticated');
                       return <Redirect to='/login'/>
             }} />
