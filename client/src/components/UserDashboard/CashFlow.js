@@ -54,8 +54,8 @@ export default class CashFlow extends Component {
         return (
             <div className="line-graph">
                 <XYPlot
-                    width={500}
-                    height={500}
+                    width={300}
+                    height={300}
                     xDomain={[0, 30]}
                     >
                     <HorizontalGridLines />
