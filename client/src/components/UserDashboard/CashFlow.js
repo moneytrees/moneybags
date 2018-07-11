@@ -16,22 +16,24 @@ import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
 
 export default class CashFlow extends Component {
-    state = {
-        regressionEquation: '',
-        regressionEquation2: '',
-        regressionEquation3: '',
-        regLineData: [],
-        regLineData2: [],
-        regLineData3: [],
-        dataSet: [],
-        dataSet2: [],
-        selectedTimeScaleInMonths: 1,
-        compare: false, //false
-        numPaymentsInMonths: 60,
-        amountDownPayment: 500,
-        monthlyPaymentAmount: 400
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            regressionEquation: '',
+            regressionEquation2: '',
+            regressionEquation3: '',
+            regLineData: [],
+            regLineData2: [],
+            regLineData3: [],
+            dataSet: [],
+            dataSet2: [],
+            selectedTimeScaleInMonths: 1,
+            compare: false, //false
+            numPaymentsInMonths: 60,
+            amountDownPayment: 500,
+            monthlyPaymentAmount: 400
+        };
+    }
     componentDidMount() {
         let sampleBalance = 2085;
         let sampleTransactions = [
