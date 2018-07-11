@@ -14,7 +14,7 @@ export class AchievemntToast extends Component {
       
       <div>
         <h3> Achievement Title </h3>
-        {/* <img  src={Trophy}/> */}
+       <img className="trophy" src={Trophy}/> 
         <p> Description of Acievement </p>
         
       </div>

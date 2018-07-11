@@ -18,23 +18,12 @@ export class ListItem extends Component {
 
     componentDidMount(){
 
+      //make ajax call to route
+
         this.setState({
             currentImageIndex: Math.floor(Math.random() *3)
         });
     }
-
-    notify = () => {
-      this.toastId = toast("Achievement GOT!", {type: toast.TYPE.INFO, autoClose: 5000 });
-    }
-
-    // update = () => {
-    //   toast.update(this.toastId, 
-    //     { 
-    //       render: <Avatar/>,
-    //       type: toast.TYPE.INFO, 
-    //       autoClose: 5000 
-    //     });
-    // }
 
 
   render() {
