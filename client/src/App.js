@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import Walkthrough from "./components/Walkthrough";
-import AppNavbar from "./components/AppNavbar";
-// import PieGraph from "./components/PieGraph" moved to totalspending component;
-// import LineGraph from "./components/LineGraph"; moved to CashFlow component
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import dashboard from "./Pages/dashboard";
 import NavTabs from "./components/NavTabs";
@@ -23,13 +20,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ItemCreator />
+       
         <Router>
           <div>
             <NavTabs />
-            {/*<Route path="/" component={PieGraph} />  moved to totalspending component*/}
-            {/* <Route path="/" component={LineGraph} />   CashFlow component*/}
-            <Route exact path="/" component={AppNavbar} />
+            <Route exact path="/" component={ItemCreator} />
             <Route exact path="/" component={Walkthrough} />
             <Route exact path="/" component={accountInfoForTesting} />
             <Route exact path="/login" component={UserLogin} />
