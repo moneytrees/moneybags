@@ -3,54 +3,61 @@ import { Link } from "react-router-dom";
 
 const NavTabs = () => (
   <div>
-  <nav className="navbar navbar-dark bg-dark">
-  
-  <a className="navbar-brand" >MoneyTree</a>
-  
-  
-  
-  <ul className="nav nav-tabs">
-    
-    <li className="nav-item">
-      <Link
-        to="/"
-        className={
-          window.location.pathname === "/" ? "nav-link active" : "nav-link"
-        }
-      >
-        Account information
-      </Link>
-    </li>
+    <nav className="navbar navbar-dark bg-dark">
+      <a className="navbar-brand">MoneyTree</a>
 
-    <li className="nav-item">
-      <Link
-        to="/dashboard"
-        className={
-          window.location.pathname === "/dashboard"
-            ? "nav-link active"
-            : "nav-link"
-        }
-      >
-        dashboard
-      </Link>
-    </li>
-   
-    <li className="nav-item">
-      <Link
-        to="/helpeducation"
-        className={
-          window.location.pathname === "/helpeducation"
-            ? "nav-link active"
-            : "nav-link"
-        }
-      >
-        HelpEducation
-      </Link>
-    </li>
-  </ul>
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
+          <Link
+            to="/"
+            className={
+              window.location.pathname === "/" ? "nav-link active" : "nav-link"
+            }
+          >
+            Account information
+          </Link>
+        </li>
 
+        <li className="nav-item">
+          <Link
+            to="/dashboard"
+            className={
+              window.location.pathname === "/dashboard"
+                ? "nav-link active"
+                : "nav-link"
+            }
+          >
+            dashboard
+          </Link>
+        </li>
 
-  </nav>
+        <li className="nav-item">
+          <Link
+            to="/helpeducation"
+            className={
+              window.location.pathname === "/helpeducation"
+                ? "nav-link active"
+                : "nav-link"
+            }
+          >
+            HelpEducation
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            to="/team"
+            className={
+              window.location.pathname === "/team"
+                ? "nav-link active"
+                : "nav-link"
+            }
+          >
+            Team
+          </Link>
+        </li>
+      </ul>
+    </nav>
   </div>
 );
 

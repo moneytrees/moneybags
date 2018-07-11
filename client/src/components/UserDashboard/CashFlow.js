@@ -217,7 +217,7 @@ export default class CashFlow extends Component {
             case 12:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
@@ -229,7 +229,7 @@ export default class CashFlow extends Component {
             case 60:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
@@ -253,7 +253,7 @@ export default class CashFlow extends Component {
             case 240:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
