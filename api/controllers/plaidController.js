@@ -63,6 +63,8 @@ class PlaidController {
         const data = await this.client.exchangePublicToken(this.publicToken)
             .then( response => {
                 this.accessToken = response.access_token;
+                console.log('access token');
+                console.log(this.accessToken);
                 return response;
             })
             .catch((err) => err);
@@ -75,10 +77,30 @@ class PlaidController {
         const data = await this.client.getAuth(this.accessToken)
                 .then( response => response )
                 .catch((err) => err);
+        console.log(data)
+        return data;
+    }
+   
+
+     async getItem() {
+        //TODO: check database for existing access token for currently requested item
+        const data = await this.client.getItem(this.accessToken)
+                .then( itemResponse => {
+                    console.log('item info');
+                    console.log(itemResponse);
+                    return this.client.getInstitutionById(itemResponse.item.institution_id)
+                        .then(institutionResponse => {
+                            //THIS MAY NOT BE NECESSARY
+                            console.log('institution info');
+                            console.log(institutionResponse);
+                            return { item: itemResponse, institution: institutionResponse }
+                        })
+                        .catch((err) => err);
+                } )
+                .catch((err) => err);
 
         return data;
     }
-
     async getItem() {
         //TODO: check database for existing access token for currently requested item
         const data = await this.client.getItem(this.accessToken)
