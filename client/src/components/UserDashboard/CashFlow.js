@@ -77,7 +77,6 @@ export default class CashFlow extends Component {
     }
 
     calculate() {
-        console.log(this);
         let sampleBalance = 2085;
         let sampleTransactions = [
             { amount: 17, date: '2018-06-10' },
