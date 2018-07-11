@@ -10,7 +10,7 @@ import NavTabs from "./components/NavTabs";
 import accountInfoForTesting from "./Pages/accountInfoForTesting";
 import UserLogin from "./Pages/userlogin";
 import UserRegister from "./Pages/userRegister";
-
+import ItemCreator from "./components/ItemCreator";
 
 import helpeducation from "./Pages/helpeducation";
 import Team from "./Pages/Team";
