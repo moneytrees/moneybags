@@ -112,6 +112,31 @@ module.exports = {
       })
       .catch(err => res.send(err));
   },
+
+  resetPassword: (req, res) => {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user) {
+        password.Update(
+          bcrypt.genSalt(10, (err, salt) => {
+
+          if (err) throw err;
+          
+          bcrypt.hash(user.password, salt, (err, hash) => {
+          if (err) throw err;
+          
+          user.password = hash;
+
+          user.save()
+          .then(user => res.json ({id:user._id, success:`Your Password has been successfully reset.`}) )
+          .catch(err => res.json( {error: err.message }))
+        })
+      })
+      )
+
+      }
+    })
+    
+  },
   currentUser: (req, res) => {
     res.json({
       id: req.user._id,

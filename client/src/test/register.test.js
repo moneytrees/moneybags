@@ -20,7 +20,7 @@ describe('Register Component', () => {
         expect(shallow( < Register /> ).find('form').exists()).toBe(true)
     })
 
-    //  it('renders an email input' () => {
+    //  it('renders an email input', () => {
     //     expect(shallow( < Register /> ).find('#email').lenth).toEqual(1)
     // })
 
