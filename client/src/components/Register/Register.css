@@ -1,0 +1,23 @@
+
+body {
+    background: url(./images/moneyTreeBG.jpg);
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.button {
+    background-color: #015249;
+}
+
+.form-group {
+    font-family: 'Lato', sans-serif;
+}
+
+Form {
+    margin-left: 30%;
+}
+
+Button {
+    margin-left: 8%;
+    width:400px;
+}
