@@ -1,20 +1,13 @@
-require('dotenv').config();
-const https = require('https');
 const express = require('express');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
-const app = express();
-const walker = require('./helpers/general/file_traverse');
-//const PlaidController = require('./api/controllers/plaidController');
-//const SwaggerExpress = require('swagger-express-mw');
-global.__basedir = __dirname + '/';
+const PlaidController = require('./api/controllers/plaidController');
+const bodyParser = require('body-parser');
 global.__plaidClient = false;
+require('dotenv').config();
 
-//------------ MIDDLEWARE -------------
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-app.use(express.static("client/build"));
+const app = express();
 
 //------------ DATABASE -----------------------
 const db = require("./config/keys").mongoURI;
@@ -35,6 +28,7 @@ const httpsOptions = {
     key: fs.readFileSync('./security/cert.key'),
     cert: fs.readFileSync('./security/cert.pem')
 };
+
 /*const server = https.createServer(httpsOptions, app).listen(PORT, () => {
     console.log(`Secure server listening on port ${PORT}`);
 });*/

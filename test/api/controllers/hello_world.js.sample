@@ -9,7 +9,11 @@ const should = require('should');
 const request = require('supertest');
 var expect  = require('chai').expect;
 const server = require('../../../server');
+<<<<<<< HEAD
+>>>>>>> develop:test/api/controllers/hello_world.js.sample
+=======
 >>>>>>> d684be5a803c499ea951886203d09497896acbfd:test/api/controllers/hello_world.js.sample
+>>>>>>> 1d9885129efbc683b56508aa159ee0f036eff89f
 
 
 // var assert = require('assert');
