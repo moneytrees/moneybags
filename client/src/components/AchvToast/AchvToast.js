@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 // import Trophy from "../images/trophy.jpg";
-import "./ach-toast.css";
+import "./AchvToast.css";
 
 
 
 
-export class AchievemntToast extends Component {
+class AchievementToast extends Component {
 
  
 
@@ -15,11 +15,11 @@ export class AchievemntToast extends Component {
       <div>
         <h3> Achievement Title </h3>
        <img className="trophy" src={Trophy}/> 
-        <p> Description of Acievement </p>
+        <p> Description of Achievement </p>
         
       </div>
     )
   }
 }
 
-export default AchievemntToast
+export default AchievementToast

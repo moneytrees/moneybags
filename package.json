@@ -69,7 +69,10 @@
     "passport-jwt": "^4.0.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
-
+    "react-bootstrap": "^0.32.1",
+    "react-bootstrap-sidebar": "^0.0.1",
+    "react-redux": "^5.0.7",
+    "react-sidebar": "^2.3.2",
     "reactstrap": "^6.3.0",
     "rest": "^2.0.0",
     "swagger-express-mw": "^0.7.0",
