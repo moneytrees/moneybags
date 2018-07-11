@@ -20,6 +20,8 @@ class helpeducation extends Component {
                 </div>
 
                 <Education/>
+                
+                
                 <Help/>
             </div>
         );
