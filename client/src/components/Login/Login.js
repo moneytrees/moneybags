@@ -8,12 +8,13 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = { referrerRedirect: false };
         this.login = this.login.bind(this);
     }
 
     login() {
-        console.log(this.props.ch)
+        console.log(this.props.children)
         /*this.props.Auth.authenticate(
             this.setState(() => ({
                 referrerRedirect: true

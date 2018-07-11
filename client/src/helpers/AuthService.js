@@ -10,42 +10,22 @@ import Register from "../components/Register";
 import Dashboard from "../components/UserDashboard";
 import Login from "../components/Login";
 
-const Auth = {
-    isAuthenticated: false,
-    authenticate(callback) {
-        this.isAuthenticated = true
-        setTimeout(callback, 100)
-    },
-    signout(callback) {
-        this.isAuthenticated = false
-        setTimeout(callback, 100)
-    }
+const Auth = () => {
+    return {
+        isAuthenticated: false,
+        authenticate: function (callback) {
+            this.isAuthenticated = true
+            setTimeout(callback, 100)
+        },
+        signout: function (callback) {
+            this.isAuthenticated = false
+            setTimeout(callback, 100)
+        }
+    } ;
 };
 
 
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={
-        (props) => (
-            Auth.isAuthenticated ? <Component {...props} />
-                : <Redirect to={{
-                pathname: '/login',
-                state: { from: props.location }
-            }} />
-        )} />
-);
-
-export default function AuthExample () {
-    return (
-        <Router>
-            <div>
-                <ul>
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/dashboard">User Dashboard</Link></li>
-                </ul>
-                <Route path="/register" component={Register}/>
-                <Route path="/login" component={Login}/>
-                <PrivateRoute path='/dashboard/*class Login extends Component {
+/*class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -75,7 +55,29 @@ export default function AuthExample () {
         );
     }
 }*/
-' component={Dashboard} />
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={
+        (props) => (
+            Auth.isAuthenticated ? <Component {...props} />
+            : <Redirect to={{
+            pathname: '/login',
+            state: { from: props.location }
+        }} />
+    )} />
+);
+
+export default function AuthExample () {
+    return (
+        <Router>
+          <div>
+            <ul>
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/dashboard">User Dashboard</Link></li>
+            </ul>
+            <Route path="/register" component={Register}/>
+            <Route path="/login" component={Login} render={Auth}/>
+            <PrivateRoute path='/dashboard' component={Dashboard} />
           </div>
         </Router>
     )
