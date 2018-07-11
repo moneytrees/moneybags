@@ -113,6 +113,46 @@ export default class CashFlow extends Component {
 
         const result = regression.linear(regressionSet);
 
+        console.log(result.equation);
+        // const regLineData = [{x: 0, y: result.equation[0] + result.equation[1]},
+        //                      {x: timePeriodInDays, y: timePeriodInDays * result.equation[0] + result.equation[1]}];
+        const regLineData = [{x: 0, y: result.equation[0] + result.equation[1]},
+                             {x: 30, y: 30 * result.equation[0] + result.equation[1]}];                     
+        return (
+            <div className="line-graph">
+                <XYPlot
+                    width={700}
+                    height={500}
+                    xDomain={[0, 30]}
+                    >
+                    <HorizontalGridLines />
+                    <VerticalGridLines />
+                    <XAxis 
+                    title="X Axis" 
+                    position="start"
+                    tickTotal={6} 
+                    />
+                    <YAxis title="Y Axis" />
+                    <LineSeries
+                        data={dataSet} />
+                    <LineSeries
+                        style={{
+                            strokeDasharray: '2 2'
+                        }}
+                        data={regLineData}
+                        strokeDasharray="7, 3"
+                    />
+                    <LineSeries
+                        data={[
+                            { x: 1, y: 0 },
+                            { x: 2, y: 0 },
+                            { x: 3, y: 0 },
+                            { x: 4, y: 0 }
+                        ]} />
+                </XYPlot>
+            </div>
+        )
+
         const regLineData2 = [{ x: 0, y: result.equation[0] + result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
@@ -265,6 +305,7 @@ export default class CashFlow extends Component {
             default:
                 return <h1>An error occurred</h1>
         }
+
     }
 }
 
