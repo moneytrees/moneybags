@@ -33,6 +33,7 @@ export default class CashFlow extends Component {
             amountDownPayment: 500,
             monthlyPaymentAmount: 400
         };
+        this.calculate = this.calculate.bind(this);
     }
     componentDidMount() {
         let sampleBalance = 2085;
@@ -75,7 +76,8 @@ export default class CashFlow extends Component {
         this.setState({ currentState });
     }
 
-    calculate = () => {
+    calculate() {
+        console.log(this);
         let sampleBalance = 2085;
         let sampleTransactions = [
             { amount: 17, date: '2018-06-10' },
@@ -211,7 +213,7 @@ export default class CashFlow extends Component {
             case 12:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
@@ -223,7 +225,7 @@ export default class CashFlow extends Component {
             case 60:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
@@ -247,7 +249,7 @@ export default class CashFlow extends Component {
             case 240:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
+                        <button onClick={this.calculate.bind(this)}>Compare</button>
                         <button onClick={this.timeScaleHandler}>30 Days</button>
                         <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
                         <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
