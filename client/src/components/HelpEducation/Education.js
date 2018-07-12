@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 // import { Collapse } from 'reactstrap';
 
+
 class Education extends Component {
     render() {
         return (
 
             <div>
-                <h2>Education Section</h2>
+               
                 
-             
-        
+      
+            <section className="accordion-section clearfix mt-3" aria-label="Question Accordions">
+            <div className="container">
             <h2>Educational Resources </h2>
             <h3>Frequently Asked Questions</h3>
             <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -184,8 +186,16 @@ class Education extends Component {
                     <a href="https://www.youtube.com/watch?v=Q4gxHArR7P8" target="_blank" rel="noopener noreferrer">Learn More</a>
                 
                 </div>
+             
               </div>
+   
+
+
+              </div>
+             
+              </section>
             </div>
+   
 
          
            
