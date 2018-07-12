@@ -15,9 +15,10 @@ body {
 
 Form {
     margin-left: 30%;
+    color: #015249;
 }
 
-Button {
-    margin-left: 8%;
-    width:400px;
-}
+ Button {
+   width:20%;
+   
+} 
