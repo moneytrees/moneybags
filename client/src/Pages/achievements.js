@@ -4,11 +4,10 @@ import axios from "axios";
 
 class achievements extends Component {
 
-    state = {
-        achvArray: []
+    constructor(props){
+        super(props);
+        this.state = { achvArray: [] };
     }
-
-
     componentDidMount() {
 
         axios

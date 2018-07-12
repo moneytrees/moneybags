@@ -102,7 +102,7 @@ module.exports = {
     // Find one user by their email
     User.findOne({ email })
       .then(user => {
-          
+
         // Check if user exists
         // If not set status to 404 && send errors object
         if (!user) {
