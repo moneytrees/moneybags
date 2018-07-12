@@ -4,3 +4,12 @@
 [submodule "testing"]
 	path = testing
 	url = git@github.com:moneytrees/backendtesting.git
+[submodule "client/src/frontendtesting"]
+	path = client/src/frontendtesting
+	url = https://github.com/moneytrees/frontendtesting.git
+[submodule "client/src/test"]
+	path = client/src/test
+	url = https://github.com/moneytrees/frontendtesting.git
+[submodule "test"]
+	path = test
+	url = https://github.com/moneytrees/backendtesting.git
