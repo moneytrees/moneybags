@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 
-class achievements extends Component {
+class Achievements extends Component {
 
     constructor(props){
         super(props);
         this.state = { achvArray: [] };
     }
+
     componentDidMount() {
 
         axios
@@ -21,7 +22,6 @@ class achievements extends Component {
                 console.log(`error: ${errors}`);
             });
     }
-
 
 
     render() {
@@ -50,4 +50,4 @@ class achievements extends Component {
     }
 }
 
-export default achievements;
+export default Achievements;

@@ -14,9 +14,10 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
   registerUser: (req, res) => {
-
     const { errors, isValid } = validateRegisterInput(req.body);
+    console.log(`error on register handler `,{errors}
 
+)
     // If input is invalid set header status code to 400 && send errors obj
     if (!isValid) {
    
@@ -27,11 +28,14 @@ module.exports = {
     User.findOne({ email: req.body.email }).then(user => {
       // If user : email already exists...
       if (user) {
+        console.log("// If user : email already exists..")
+        console.log(user)
+        console.log("******************")
         // Create email property on errors obj
         errors.email = "Email already exists.";
         // Set header status to 400 (server error)
         // Send error object as json
-        return res.status(400).json({ error: errors });
+        return res.status(400).json(errors);
       } else {
         console.log("user found");
         // Create new User from model

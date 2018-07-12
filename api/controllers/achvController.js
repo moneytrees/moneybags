@@ -13,7 +13,7 @@ module.exports = {
         let clientAchvArr = [];
         let tempObj;
 
-        User.findOne({ email:"low@low.com" })
+        User.findOne({ email:"wesley@email.com" })
         .then(user => {
 
 
@@ -29,7 +29,7 @@ module.exports = {
                     desc: data.desc,
                     unlocked: false
       
-                  }
+                  };
       
                   if (user.achievements.includes(data.id)) {
                     tempObj.unlocked = true;
@@ -66,7 +66,7 @@ module.exports = {
             
               });
 
-        });
+        }).catch( err => err.message);
 
       
 
