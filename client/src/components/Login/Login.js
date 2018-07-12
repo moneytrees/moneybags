@@ -15,7 +15,6 @@ class Login extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.Auth = new AuthService();
   }
   handleChange(event) {
     this.setState({
@@ -100,27 +99,17 @@ class Login extends Component {
               </div>
             </div>
 
-<<<<<<< HEAD
-          <div className="form-group">
-            <div className="col-7" />
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
-              type="submit"
-            >
-              Login
+            <div className="form-group">
+              <div className="col-7" />
+              <button
+                className="btn btn-primary col-1 col-mr-auto"
+                type="submit"
+              >
+                Login
               </button>
-          </div>
+            </div>
           </form>
-      </div>
-=======
-          <div className="form-group">
-            <div className="col-7" />
-            <button className="btn btn-primary col-1 col-mr-auto" type="submit">
-              Login
-            </button>
-          </div>
-        </form>
->>>>>>> f3148b09b39d7a0cdc5f61c70844b676f581fd2e
+        </div>
       </div >
     );
   }
