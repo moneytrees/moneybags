@@ -22,7 +22,8 @@
     ],
     "automock": false,
     "setupFiles": [
-      "./api/mocks/jestFetch.js"
+      "./api/mocks/jestFetch.js",
+      "./client/src/mocks/browserMocks.js"
     ],
     "globals": {
       "__DEV__": true

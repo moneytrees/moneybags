@@ -17,22 +17,22 @@ class TransactionDetail extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row">3/31/2018</th>
+                            <td>Neiman Marcus</td>
+                            <td>Valentino</td>
+                            <td>$895</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                            <th scope="row">5/20/2018</th>
+                            <td>Macy's</td>
+                            <td>Watch</td>
+                            <td>$100</td>
                         </tr>
                         <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                            <th scope="row">6/20/2018</th>
+                            <td>Chuy's</td>
+                            <td>Food</td>
+                            <td>$20</td>
                         </tr>
                     </tbody>
                 </Table>

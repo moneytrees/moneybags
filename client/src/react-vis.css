@@ -39,11 +39,9 @@
     position: absolute
 }
 
-.rv-xy-plot__inner {
+.rv-xy-plot__inner .line-graph {
     display: block;
-    position: relative;
-    left: 38%;
-    top: 13%;
+    left: 20%;
 }
 
 .rv-xy-plot__axis__line {
