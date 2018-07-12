@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Collapse } from 'reactstrap';
 
+
 class Education extends Component {
     render() {
         return (
 
             <div>
-                <h2>Education Section</h2>
+               
                 
-             
-        
+      
+            <section className="accordion-section clearfix mt-3" aria-label="Question Accordions">
+            <div className="container">
             <h2>Educational Resources </h2>
             <h3>Frequently Asked Questions</h3>
             <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -182,10 +184,18 @@ class Education extends Component {
                 <div className="panel-body px-3 mb-4">
                   <p>A qualified retirement account for individuals. Contributions to a Traditional IRA may be fully or partially deductible, depending on your individual circumstance. Distributions from Traditional IRA and most other employer-sponsored retirement plans are taxed as ordinary income and, if taken before age 59Â½, may be subject to a 10% federal income tax penalty. Generally, once you reach age 70Â½, you must begin taking required minimum distributions.</p>
                     <a href="https://www.youtube.com/watch?v=Q4gxHArR7P8" target="_blank">Learn More</a>
-                
+                   
                 </div>
+             
               </div>
+   
+
+
+              </div>
+             
+              </section>
             </div>
+   
 
          
            
