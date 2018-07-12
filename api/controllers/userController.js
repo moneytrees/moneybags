@@ -96,7 +96,6 @@ module.exports = {
 
           // If hashed password matches user created password
           if (isMatch) {
-            console.log("password is matching ")
             // Create JWT payload
             const payload = {
               id: user.id,
