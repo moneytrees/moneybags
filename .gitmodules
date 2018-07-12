@@ -1,0 +1,6 @@
+[submodule "backendtesting"]
+	path = backendtesting
+	url = git@github.com:moneytrees/backendtesting.git
+[submodule "testing"]
+	path = testing
+	url = git@github.com:moneytrees/backendtesting.git
