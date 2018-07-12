@@ -112,92 +112,92 @@ module.exports = {
         // `);
         // Check if user exists
         // If not set status to 404 && send errors object
-        // if (!user) {
-        //   errors.email = "User not found.. Double check your email";
-        //   return res.status(404).json(errors);
-        // }
-
-        // Compare user created password to hashed password
-        // bcrypt.compare(password, user.password).then(isMatch => {
-        // If hashed password matches user created password
-        // if (isMatch) {
-        // Create JWT payload
-
-        let newConsecutiveLogin = user.consecutive_login + 1;
-
-        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
-
-          console.log(data);
-        });
-
-
-
-        if (Math.floor(newConsecutiveLogin / 2) > 0) {
-
-          let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
-
-          let achvArr = user.achievements;
-
-
-
-          if (!achvArr.includes(achvID)) {
-
-            console.log(achvID);
-
-            Achv.findOne({ _id: achvID }).then((achvData) => {
-
-
-              achvArr.push(achvData.id);
-
-
-              User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
-
-                console.log(data);
-              })
-            })
-
-            const payload = {
-              id: user.id,
-              name: user.name,
-              loginAchv: achvID
-            };
-
-          }
-
-
-
+        if (!user) {
+          errors.email = "User not found.. Double check your email";
+          return res.status(404).json(errors);
         }
 
+        // Compare user created password to hashed password
+        bcrypt.compare(password, user.password).then(isMatch => {
+          // If hashed password matches user created password
+          if (isMatch) {
+            // Create JWT payload
 
+            let newConsecutiveLogin = user.consecutive_login + 1;
 
+            User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
 
-
-        // Assign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 1800 }, // Token expires in 30 minutes
-          (err, token) => {
-            res.json({
-              success: true,
-              token: `Bearer ${token}`
+              console.log(data);
             });
-          }
-        );
-        // } else {
-        //   return res.status(400).json({ password: "Password incorrect" });
-        // }
-        // });
-      })
-      .catch(err => res.send(err));
-  },
-  currentUser: (req, res) => {
-    res.json({
-      id: req.user._id,
-      name: req.user.name,
-      email: req.user.email,
-      achievements: req.user.achievements,
-      institutions: req.user.institutions
-    });
-  }
+
+
+
+            if (Math.floor(newConsecutiveLogin / 2) > 0) {
+
+              let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+
+              let achvArr = user.achievements;
+
+
+
+              if (!achvArr.includes(achvID)) {
+
+                console.log(achvID);
+
+                Achv.findOne({ _id: achvID }).then((achvData) => {
+
+
+                  achvArr.push(achvData.id);
+
+
+                  User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
+
+                    console.log(data);
+                  })
+                })
+
+                const payload = {
+                  id: user.id,
+                  name: user.name,
+                  loginAchv: achvID
+                };
+
+              }
+
+
+
+            }
+
+
+
+
+
+            // Assign token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 1800 }, // Token expires in 30 minutes
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: `Bearer ${token}`
+                });
+              }
+            );
+            } else {
+              return res.status(400).json({ password: "Password incorrect" });
+            }
+            });
+          })
+          .catch(err => res.send(err));
+      },
+        currentUser: (req, res) => {
+          res.json({
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            achievements: req.user.achievements,
+            institutions: req.user.institutions
+          });
+        }
 };
