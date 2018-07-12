@@ -36,8 +36,6 @@ class Login extends Component {
     })
       .then(data => data.json())
       .then(response => {
-        console.log(response);
-        console.log("*************************************");
         localStorage.setItem("isAuthenticated", true);
         const { token } = response;
         // Set token to local storage
@@ -49,7 +47,7 @@ class Login extends Component {
         // Set current user
         decoded
           ? this.setState(() => ({ referrerRedirect: true }))
-          : console.log("YOU GOT THE SHIT WRONG");
+          : console.log("YOU GOT THE $%#%$% WRONG");
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -120,93 +118,3 @@ class Login extends Component {
   }
 }
 export default Login;
-/*constructor() {
-    super();
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-      loggedIn: false,
-      fireRedirect: false
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.Auth = new AuthService();
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    console.log(event.target);
-  }
-
-  handleSubmit(event) {
-    console.log(this.state.email);
-    event.preventDefault();
-
-    const user = {
-      email: this.state.email.toLowerCase().trim(),
-      password: this.state.password.trim()
-    };
-
-    this.Auth.login(user);
-  }
-
-  // componentWillMount() {
-  //   if (this.Auth.loggedIn()) console.log("COMPONENT DID MOUNT");
-  // }
-
-  render() {
-    return (
-      <div className="LoginForm">
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="email">
-                Email:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password">
-                Password:{" "}
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <div className="col-7" />
-            <button className="btn btn-primary col-1 col-mr-auto" type="submit">
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }*/
