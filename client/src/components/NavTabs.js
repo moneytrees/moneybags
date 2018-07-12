@@ -1,76 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavTabs = () => (
-  <div>
-    <nav className="navbar navbar-dark bg-dark">
-      <a className="navbar-brand">MoneyTree</a>
+const NavTabs = () => {
 
-      <ul className="nav nav-tabs">
-        <li className="nav-item">
-          <Link
-            to="/"
-            className={
-              window.location.pathname === "/" ? "nav-link active" : "nav-link"
-            }
-          >
-            Account information
-          </Link>
-        </li>
+  return (<div>
+          <nav className="navbar navbar-dark bg-dark">
+            <a className="navbar-brand">MoneyTree</a>
 
-        <li className="nav-item">
-          <Link
-            to="/dashboard"
-            className={
-              window.location.pathname === "/dashboard"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            dashboard
-          </Link>
-        </li>
+            <ul className="nav nav-tabs">
+              <li className="nav-item">{
+                  localStorage.getItem('isAuthenticated') ?
+                  <Link to="/logout" className="nav-link">Logout</Link>
+                  : <Link to="/login" className="nav-link">Login</Link>
+              }
+              </li>
+              <li className="nav-item">
+                <Link
+                    to="/dashboard"
+                    className={
+                        window.location.pathname === "/dashboard"
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                  dashboard
+                </Link>
+              </li>
 
-        <li className="nav-item">
-          <Link
-            to="/helpeducation"
-            className={
-              window.location.pathname === "/helpeducation"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            HelpEducation
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            to="/team"
-            className={
-              window.location.pathname === "/team"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            Team
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
-            to="/achievements"
-            className={
-              window.location.pathname === "/achievements"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            Achievements
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  </div>
-);
+              <li className="nav-item">
+                <Link
+                    to="/helpeducation"
+                    className={
+                        window.location.pathname === "/helpeducation"
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                  HelpEducation
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                    to="/team"
+                    className={
+                        window.location.pathname === "/team"
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                  Team
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                    to="/achievements"
+                    className={
+                        window.location.pathname === "/achievements"
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                    Achievements
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+    );
+};
 
 export default NavTabs;
