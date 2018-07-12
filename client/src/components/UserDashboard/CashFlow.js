@@ -213,6 +213,10 @@ export default class CashFlow extends Component {
                                 strokeDasharray="1, 3"
                             />
                         </XYPlot>
+                        <form>
+                            <label>This is a test form</label>
+                            <input type="text" />
+                        </form>
                     </div>
                 );
             case 12:
