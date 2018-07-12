@@ -82,8 +82,8 @@ module.exports = {
     }
 
     // Set email and password to user input from form
-    const email = req.body.user.email;
-    const password = req.body.user.password;
+    const email = req.body.email;
+    const password = req.body.password;
 
 
     var ourDog = {
