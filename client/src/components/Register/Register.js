@@ -29,6 +29,9 @@ class Register extends React.Component {
 
     handleSubmit(event) {
         console.log(this.state.email);
+        console.log(this.state);
+
+
         event.preventDefault();
 
         //console.log(Auth.test);

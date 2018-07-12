@@ -112,10 +112,6 @@ export default class CashFlow extends Component {
         regressionSet.push([30, sampleBalance]);
 
         const result = regression.linear(regressionSet);
-<<<<<<< HEAD
-
-=======
->>>>>>> 372bf847f1c9952f1ddbff8fa80d2334f24bcc22
         const regLineData2 = [{ x: 0, y: result.equation[0] + result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 

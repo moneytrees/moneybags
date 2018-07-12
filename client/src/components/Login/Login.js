@@ -26,8 +26,8 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const email = this.state.email;
-        console.log(email);
+      
+        console.log(this.state.email);
         fetch("/api/login", {
             method: "POST",
             headers: {
@@ -35,43 +35,44 @@ class Login extends Component {
             },
             body: JSON.stringify({ email: this.state.email, password: this.state.password })
         })
-            .then(data => data.json())
-            .then(response => {
-                localStorage.setItem('isAuthenticated', true);
-                return response;
-            })
-            .then(res => {
-                // Save token to local storage
+ 
+      .then(data => data.json())
+      .then(response => console.log(response))
+      .catch(err => console.log(err.message));
+            // .then(res => {
+            //     console.log(res)
+               
+            //     // Save token to local storage
 
-                /*const { token } = res.data;
-                // Set token to local storage
-                localStorage.setItem("jwtToken", token);
-                // Set token to auth header
-                setAuthToken(token);
-                // Decode token to get user data
-                const decoded = jwt_decode(token);
-                // Set current user
-                dispatch(setCurrentUser(decoded));*/
+            //     /*const { token } = res.data;
+            //     // Set token to local storage
+            //     localStorage.setItem("jwtToken", token);
+            //     // Set token to auth header
+            //     setAuthToken(token);
+            //     // Decode token to get user data
+            //     const decoded = jwt_decode(token);
+            //     // Set current user
+            //     dispatch(setCurrentUser(decoded));*/
 
-                if (!res.data.errmsg) {
-                    /*this.setState({
-                        //redirect to dashboard page
-                        loggedIn: true,
-                        fireRedirect: true
-                    });*/
-                    this.setState(() => ({ referrerRedirect: true }));
-                } else {
-                    console.log("Email or Password incorrect, please try again.");
-                    this.setState({
-                        //redirect to dashboard page
-                        loggedIn: false,
-                        fireRedirect: true
-                    });
-                }
-            })
-            .catch(errors => {
-                console.log(`Login error: ${errors}`);
-            });
+            //     if (!res.data.errmsg) {
+            //         // this.setState({
+            //         //     //redirect to dashboard page
+            //         //     loggedIn: true,
+            //         //     fireRedirect: true
+            //         // });
+            //         this.setState(() => ({ referrerRedirect: true }));
+            //     } else {
+            //         console.log("Email or Password incorrect, please try again.");
+            //         this.setState({
+            //             //redirect to dashboard page
+            //             loggedIn: false,
+            //             fireRedirect: true
+            //         });
+            //     }
+            // })
+            // .catch(errors => {
+            //     console.log(`Login error: ${errors}`);
+            // });
         /*this.props.Auth.authenticate(
             this.setState(() => ({
                 referrerRedirect: true

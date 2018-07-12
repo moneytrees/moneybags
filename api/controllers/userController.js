@@ -13,10 +13,12 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
   registerUser: (req, res) => {
+
     const { errors, isValid } = validateRegisterInput(req.body);
 
     // If input is invalid set header status code to 400 && send errors obj
     if (!isValid) {
+   
       return res.status(400).json(errors);
     }
 
@@ -30,6 +32,7 @@ module.exports = {
         // Send error object as json
         return res.status(400).json({ error: errors });
       } else {
+        console.log("SHYT")
         // Create new User from model
         // Set respective properties on user to user's input from body of post
         const newUser = new User({
@@ -41,12 +44,14 @@ module.exports = {
         // Instantiate bcrypt obj
         // Run genSalt method of bcrypt (Creates a random string of characters = #, callback)
         bcrypt.genSalt(10, (err, salt) => {
+          console.log("imhere")
           if (err) throw err;
 
           // Run hash method of bcrypt
           //  - Hash: takes passed string and replaces it with the generated salt while maintaining integrity of initial string
           //  - (string to be hashed, generated salt to pass to string, callback)
           bcrypt.hash(newUser.password, salt, (err, hash) => {
+            console.log(newUser)
             if (err) throw err;
 
             newUser.password = hash;
@@ -55,6 +60,7 @@ module.exports = {
             newUser
               .save()
               .then(user => res.json( { id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }) )
+              .then(console.log("checkcheck"))
               .catch(err => res.json( { error: err.message }));
           });
         });
@@ -62,7 +68,8 @@ module.exports = {
     });
   },
   loginUser: (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body.user);
+    console.log(req.body)
+    const { errors, isValid } = validateLoginInput(req.body);
 
     // If input is invalid set header status code to 400 && send errors obj
     if (!isValid) {
@@ -70,8 +77,8 @@ module.exports = {
     }
 
     // Set email and password to user input from form
-    const email = req.body.user.email;
-    const password = req.body.user.password;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // Find one user by their email
     User.findOne({ email })
@@ -82,19 +89,25 @@ module.exports = {
           errors.email = "User not found.. Double check your email";
           return res.status(404).json(errors);
         }
+        
 
         // Compare user created password to hashed password
         bcrypt.compare(password, user.password).then(isMatch => {
+
           // If hashed password matches user created password
           if (isMatch) {
+            console.log("password is matching ")
             // Create JWT payload
             const payload = {
               id: user.id,
-              name: user.name
+              name: user.name,
+              achievements :user.achievements,
+              institutions: user.institutions
             };
-
+            console.log(payload)
             // Assign token
             jwt.sign(
+
               payload,
               keys.secretOrKey,
               { expiresIn: 1800 }, // Token expires in 30 minutes
