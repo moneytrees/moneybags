@@ -6,6 +6,7 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       name: "",
       email: "",
@@ -23,7 +24,6 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log(this.state.email);
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -38,8 +38,6 @@ class Login extends Component {
       .then(response => {
         localStorage.setItem("isAuthenticated", true);
         const { token } = response;
-        // Set token to local storage
-        localStorage.setItem("token", token);
         // Set token to auth header
         decode.setToken(token);
         // Decode token to get user data
@@ -61,7 +59,6 @@ class Login extends Component {
     if (referrerRedirect) return <Redirect to={from} />;
     return (
       <div>
-        <h2>You must be logged in to access this page</h2>
         <div className="LoginForm">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
