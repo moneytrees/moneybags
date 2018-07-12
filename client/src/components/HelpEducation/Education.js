@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import { Collapse } from 'reactstrap';
+// import { Button } from 'reactstrap';
+// import { Collapse } from 'reactstrap';
 
 class Education extends Component {
     render() {
@@ -27,7 +27,7 @@ class Education extends Component {
                     <p>Wealth management is the consultative process of meeting the needs and wants of affluent clients by providing the appropriate financial products and services.
 
                       Wealth management entails coordinating a team of experts to address the needs and wants of affluent clients.</p>
-                      <a href="https://www.youtube.com/watch?v=g_kx-u6hxjs" target="_blank">Learn More</a>
+                      <a href="https://www.youtube.com/watch?v=g_kx-u6hxjs" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@ class Education extends Component {
                 <div id="collapse1" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
                   <div className="panel-body px-3 mb-4">
                     <p>Wealth management is quite broader in perspective and includes asset management services, investment management, real estate planning, tax planning, etc. Asset management, on the other hand, is related to the management of assets and investments such as stocks, bonds, real estate and other assets.</p>
-                    <a href="https://www.youtube.com/watch?v=zHGwQMy5h7k" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=zHGwQMy5h7k" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -59,7 +59,7 @@ class Education extends Component {
                 <div id="collapse2" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
                   <div className="panel-body px-3 mb-4">
                     <p>Asset allocation involves forecasting trends and making the necessary allocation. The origin of asset allocation is primarily rooted in growth projections.</p>
-                    <a href="https://www.youtube.com/watch?v=zHGwQMy5h7k" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=zHGwQMy5h7k" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -74,7 +74,7 @@ class Education extends Component {
                 <div id="collapse3" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
                   <div className="panel-body px-3 mb-4">
                     <p>Commodities include any good exchanged during commerce, which includes goods traded on a commodity exchange. Examples include corn, oil, coffee, gold, etc.</p>
-                    <a href="https://study.com/academy/lesson/what-are-commodities-definition-types-examples.html" target="_blank">Learn More</a>
+                    <a href="https://study.com/academy/lesson/what-are-commodities-definition-types-examples.html" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -89,7 +89,7 @@ class Education extends Component {
                 <div id="collapse4" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
                   <div className="panel-body px-3 mb-4">
                     <p>Consumer confidence is a measure of the level of optimism consumers have about the performance of the economy. Generally consumer confidence is high when the unemployment rate is low and gross domestic product (GDP) growth is strong. Business confidence is a measure of the level of optimism businesses have about the performance of the economy. Generally business confidence is high when GDP growth is strong and business leaders feel good about the prospects of their companies.</p>
-                    <a href="https://www.youtube.com/watch?v=5MrLLWuJ5hw" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=5MrLLWuJ5hw" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -104,7 +104,7 @@ class Education extends Component {
                 <div id="collapse5" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
                   <div className="panel-body px-3 mb-4">
                     <p>A measure that examines the weighted average prices of a basket of consumer goods and services (such as transportation, food and medical care). Changes in CPI are associated with the cost of living.</p>
-                    <a href="https://www.youtube.com/watch?v=TALwNlM6gFI" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=TALwNlM6gFI" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
 
@@ -120,7 +120,7 @@ class Education extends Component {
                 <div id="collapse6" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
                   <div className="panel-body px-3 mb-4">
                   <p>A stock or any other security representing an ownership interest. In terms of investment strategies, equity (stocks) is one of the principal asset classes. The other two are fixed-income (bonds) and cash/cash-equivalents. These are used in asset allocation planning to structure a desired risk and return profile for an investors portfolio.</p>
-                  <a href="https://www.youtube.com/watch?v=fWz_50p2CLc" target="_blank">Learn More</a>
+                  <a href="https://www.youtube.com/watch?v=fWz_50p2CLc" target="_blank" rel="noopener noreferrer">Learn More</a>
                 </div>
                 </div>
                   
@@ -136,7 +136,7 @@ class Education extends Component {
                 <div id="collapse7" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
                   <div className="panel-body px-3 mb-4">
                     <p>Any investment paying a fixed interest rate such as a money market account, a certificate of deposit, a bond, a note, or a preferred stock. A fixed investment is the opposite of a variable investment.</p>
-                    <a href="https://www.youtube.com/watch?v=p6UiBmw4SOU" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=p6UiBmw4SOU" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -151,7 +151,7 @@ class Education extends Component {
                 <div id="collapse8" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
                   <div className="panel-body px-3 mb-4">
                     <p>A qualified retirement plan available to eligible employees of companies. 401(k) plans allow eligible employees to defer taxation on a specific percentage of their income that is to be put toward retirement savings; taxes on this deferred income and on any earnings the account generates are deferred until the funds are withdrawnâ€”normally in retirement. Employers may match part or all of an employeeâ€™s contributions. Employees may be responsible for investment selections and enjoy the direct tax savings.</p>
-                    <a href="https://www.youtube.com/watch?v=tP4zWCS4dMM" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=tP4zWCS4dMM" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -166,7 +166,7 @@ class Education extends Component {
                 <div id="collapse9" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
                   <div className="panel-body px-3 mb-4">
                     <p>A contract with an insurance company that guarantees current or future payments in exchange for a premium or series of premiums. The interest earned on an annuity contract is not taxable until the funds are paid out or withdrawn. Withdrawals and income payments are taxed as ordinary income. If a withdrawal is made prior to age 59Â½, penalties may apply. The guarantees of an annuity contract depend on the issuing companyâ€™s claims-paying ability. Annuities have fees and charges associated with the contract, and a surrender charge also may apply if the contract owner elects to give up the annuity before certain time-period conditions are satisfied</p>
-                    <a href="https://www.youtube.com/watch?v=JkgBbZRiE3g" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=JkgBbZRiE3g" target="_blank" rel="noopener noreferrer">Learn More</a>
                   </div>
                 </div>
                 <div className="panel panel-default">
@@ -181,7 +181,7 @@ class Education extends Component {
               <div id="collapse10" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
                 <div className="panel-body px-3 mb-4">
                   <p>A qualified retirement account for individuals. Contributions to a Traditional IRA may be fully or partially deductible, depending on your individual circumstance. Distributions from Traditional IRA and most other employer-sponsored retirement plans are taxed as ordinary income and, if taken before age 59Â½, may be subject to a 10% federal income tax penalty. Generally, once you reach age 70Â½, you must begin taking required minimum distributions.</p>
-                    <a href="https://www.youtube.com/watch?v=Q4gxHArR7P8" target="_blank">Learn More</a>
+                    <a href="https://www.youtube.com/watch?v=Q4gxHArR7P8" target="_blank" rel="noopener noreferrer">Learn More</a>
                 
                 </div>
               </div>
