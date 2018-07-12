@@ -1,8 +1,5 @@
-[submodule "backendtesting"]
-	path = backendtesting
-	url = git@github.com:moneytrees/backendtesting.git
-[submodule "testing"]
-	path = testing
+[submodule "test"]
+	path = test
 	url = git@github.com:moneytrees/backendtesting.git
 [submodule "client/src/test"]
 	path = client/src/test
