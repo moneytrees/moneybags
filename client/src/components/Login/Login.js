@@ -10,7 +10,8 @@ class Login extends Component {
       name: "",
       email: "",
       password: "",
-      referrerRedirect: false
+      referrerRedirect: false,
+      referrer: props.location
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,8 +23,7 @@ class Login extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log(this.state.email);
+      
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -52,6 +52,7 @@ class Login extends Component {
       });
   }
   render() {
+    console.log(Object.keys(this.props));
     const { from } = this.props.location.state || {
       from: { pathname: "/dashboard" }
     };

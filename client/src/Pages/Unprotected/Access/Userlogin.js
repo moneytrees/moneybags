@@ -7,7 +7,7 @@ class UserLogin extends Component {
       <div>
         <h1>Money Tree: User Login</h1>
 
-        <Login />
+        <Login location={this.props.location || null}/>
       </div>
     );
   }
