@@ -264,6 +264,7 @@ export default class CashFlow extends Component {
             default:
                 return <h1>An error occurred</h1>
         }
+
     }
 }
 
