@@ -39,7 +39,6 @@ const NavTabs = () => {
                   HelpEducation
                 </Link>
               </li>
-
               <li className="nav-item">
                 <Link
                     to="/team"
@@ -50,6 +49,18 @@ const NavTabs = () => {
                     }
                 >
                   Team
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                    to="/achievements"
+                    className={
+                        window.location.pathname === "/achievements"
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                    Achievements
                 </Link>
               </li>
             </ul>

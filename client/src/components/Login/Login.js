@@ -4,6 +4,7 @@ import Decode from "../../helpers/Decode";
 
 const decode = new Decode();
 class Login extends Component {
+
   constructor(props) {
     super(props);
     this.state = {

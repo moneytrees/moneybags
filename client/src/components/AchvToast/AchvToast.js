@@ -5,7 +5,7 @@ import "./ach-toast.css";
 
 
 
-export class AchievemntToast extends Component {
+export class AchievementToast extends Component {
 
  
 

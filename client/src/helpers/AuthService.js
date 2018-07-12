@@ -17,7 +17,7 @@ import accountInfoForTesting from "../Pages/accountInfoForTesting";
 import UserLogin from "../Pages/Unprotected/Access/Userlogin";
 import UserRegister from "../Pages/Unprotected/Access/UserRegister";
 import ItemCreator from "../components/ItemCreator";
-
+import Achievements from "../Pages/achievements"
 import Helpeducation from "../Pages/Protected/Education";
 import Team from "../Pages/Unprotected/Team";
 
@@ -49,6 +49,7 @@ export default function AppContainer() {
             <Route exact path="/test" component={accountInfoForTesting} />
             <Route exact path="/test" component={ItemCreator} />
             <Route exact path="/test" component={Walkthrough} />
+            <PrivateRoute path="/achievements" component={Achievements} />
             <PrivateRoute path="/helpeducation" component={Helpeducation} />
             <PrivateRoute path='/dashboard' component={Dashboard} />
           </div>
