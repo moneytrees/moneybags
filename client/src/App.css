@@ -27,12 +27,4 @@
   to { transform: rotate(360deg); }
 }
 
-.line-graph-div {
-    display: inline-block;
-    /* position: relative; */
-    /* top: 13%; */
-}
 
-.line-graph {
-    margin: auto;
-}

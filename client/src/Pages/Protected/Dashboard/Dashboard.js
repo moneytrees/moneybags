@@ -93,7 +93,7 @@ class Dashboard extends Component {
 
               <div className="col-12 text-center">
                 <Card>
-                  <h1> CashFlow </h1>
+                  <h1> Cash Flow </h1>
                   <CashFlow />
 
 
@@ -130,7 +130,7 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-md-8">
               <Card>
-                  <h1> TransactionDetail</h1>
+                  <h1> Transaction Detail</h1>
 
                   <TransactionDetail />
 
@@ -150,7 +150,7 @@ class Dashboard extends Component {
 
               <div className="col-md-4">
               <Card>
-                  <h1> TotalSpending</h1>
+                  <h1> Total Spending</h1>
                   <TotalSpending />
 
 
