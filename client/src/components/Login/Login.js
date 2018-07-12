@@ -6,12 +6,12 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       name: "",
       email: "",
       password: "",
-      referrerRedirect: false,
-      referrer: props.location
+      referrerRedirect: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,7 +23,7 @@ class Login extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-      
+
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -52,7 +52,6 @@ class Login extends Component {
       });
   }
   render() {
-    console.log(Object.keys(this.props));
     const { from } = this.props.location.state || {
       from: { pathname: "/dashboard" }
     };
@@ -60,7 +59,6 @@ class Login extends Component {
     if (referrerRedirect) return <Redirect to={from} />;
     return (
       <div>
-        <h2>You must be logged in to access this page</h2>
         <div className="LoginForm">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">

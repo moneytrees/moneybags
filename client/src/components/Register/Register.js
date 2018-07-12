@@ -3,9 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "./Register.css";
 
-/*import Auth from "../../helpers/Passport"*/
-
-class Register extends React.Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +12,7 @@ class Register extends React.Component {
       password: "",
       password2: "",
       referrerRedirect: false,
+      feedback: false,
       emailValid: false,
       passwordValid: false,
       formValid: false
@@ -60,6 +59,8 @@ class Register extends React.Component {
     })
       .then(data => data.json())
       .then(response => {
+        if(response.success)
+            this.setState({referrerRedirect: true, feedback: response.success});
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -72,12 +73,18 @@ class Register extends React.Component {
     const { from } = this.props.location.state || {
       from: { pathname: "/dashboard" }
     };
+
+      /*{
+          pathname: '/login',
+              state: { feedback: this.state.feedback, from: '/register' }
+      }*/
+
+      /*{
+          from: { pathname: "/dashboard" }
+      }*/
     const { referrerRedirect } = this.state;
-    if (referrerRedirect) return <Redirect to={from} />
-
-  
-
-
+    if (referrerRedirect)
+      return <Redirect to={from}/>;
     return (
       
       <div className="RegistrationForm">
