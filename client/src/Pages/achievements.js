@@ -8,6 +8,7 @@ class achievements extends Component {
         super(props);
         this.state = { achvArray: [] };
     }
+
     componentDidMount() {
 
         axios
@@ -21,7 +22,6 @@ class achievements extends Component {
                 console.log(`error: ${errors}`);
             });
     }
-
 
 
     render() {
