@@ -15,20 +15,23 @@ import ItemCreator from "../components/ItemCreator";
 import Achievements from "../Pages/Protected/Achievements"
 import Helpeducation from "../Pages/Protected/Education";
 import Team from "../Pages/Unprotected/Team";
+import Decode from "../helpers/Decode";
 import { PrivateRoute } from "../helpers/AuthService";
+
+const decode = new Decode();
 
 const AppRouting = () => {
     return (
         <Router>
             <div>
-                <NavTabs/>
+                <NavTabs />
                 <Route exact path="/" component={UserRegister} />
-                <Route exact path="/login" component={UserLogin}/>
+                <Route exact path="/login" component={UserLogin} />
                 <Route exact path="/register" component={UserRegister} />
                 <Route exact path="/team" component={Team} />
                 <Route exact path="/logout" render={() => {
-                    localStorage.removeItem('isAuthenticated');
-                    return <Redirect to='/login'/>
+                    decode.logout();
+                    return <Redirect to='/login' />
                 }} />
                 <Route exact path="/test" component={accountInfoForTesting} />
                 <Route exact path="/test" component={ItemCreator} />
