@@ -13,6 +13,7 @@ import UserRegister from "./Pages/userRegister";
 import ItemCreator from "./components/ItemCreator";
 
 import helpeducation from "./Pages/helpeducation";
+import achievements from "./Pages/achievements"
 import Team from "./Pages/Team";
 
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path="/register" component={UserRegister} />
             <Route exact path="/dashboard" component={dashboard} />
             <Route path="/helpeducation" component={helpeducation} />
+            <Route path="/achievements" component={achievements} />
             <Route path="/team" component={Team} />
           </div>
         </Router>

@@ -104,43 +104,6 @@ module.exports = {
     User.findOne({ email })
       .then(user => {
 
-
-        ///////////////////////
-        //This is code is going to be moved, this is temporary
-        //////////////////////////////
-
-        Achv.find().then((achvData) => {
-
-          let clientAchvArr = [];
-
-
-
-          achvData.forEach((data) => {
-            let tempObj = {
-              id: data.id,
-              name: data.name,
-              desc: data.desc,
-              unlocked: false
-
-            }
-
-            if (user.achievements.includes(data.id)) {
-              tempObj.unlocked = true;
-            }
-          clientAchvArr.push(tempObj);
-
-          });
-
-          // console.log(clientAchvArr);
-
-
-      
-        });
-
-        //////////////////////////////////////////
-        //////////////////////////////////////////////
-        //////////////////////////////////////////
-
         // console.log(`userrrrr                
 
         // ${user}
