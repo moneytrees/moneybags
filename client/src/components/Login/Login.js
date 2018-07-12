@@ -38,8 +38,6 @@ class Login extends Component {
       .then(response => {
         localStorage.setItem("isAuthenticated", true);
         const { token } = response;
-        // Set token to local storage
-        localStorage.setItem("token", token);
         // Set token to auth header
         decode.setToken(token);
         // Decode token to get user data
