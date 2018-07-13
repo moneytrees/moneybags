@@ -13,7 +13,7 @@ module.exports = {
         let clientAchvArr = [];
         let tempObj;
 
-        User.findOne({ email:"wesley@email.com" })
+        User.findOne({ email:"ron@ron.com" })
         .then(user => {
 
 

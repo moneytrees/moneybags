@@ -3,8 +3,7 @@ import axios from "axios";
 
 
 class Achievements extends Component {
-
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = { achvArray: [] };
     }
