@@ -1,11 +1,21 @@
 .App {
   text-align: center;
+  background: blue;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body {
+
+  background-image: url("./imgs/moneytreebg.jpg");
+
+  /* background-image: url("./imgs/moneyTreeBG.jpg"); */
+
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+
 
 .App-header {
   background-color: #222;

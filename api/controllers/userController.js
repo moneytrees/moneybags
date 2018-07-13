@@ -168,6 +168,7 @@ module.exports = {
             const payload = {
               id: user.id,
               name: user.name,
+              email: user.email,
               achievements: user.achievements,
               institutions: user.institutions
             };
@@ -183,7 +184,7 @@ module.exports = {
               (err, token) => {
                 res.json({
                   success: true,
-                  token: `${token}`
+                  token: `${token}`,
                 });
               }
             );
