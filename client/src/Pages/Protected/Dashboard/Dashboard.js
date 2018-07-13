@@ -8,9 +8,78 @@ import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
 import { Animated } from "react-animated-css";
 import "./Dashboard.css";
+import { ToastContainer, toast } from 'react-toastify';
+import AchvToast from "../../../components/AchvToast"
+import 'react-toastify/dist/ReactToastify.css';
+import "./Dashboard.css";
+import axios from "axios";
 
 
 class Dashboard extends Component {
+
+  constructor(props){
+        super(props);
+        this.state = { newAchvArr: [] };
+  }
+
+  componentDidMount(){
+      axios
+          .get("/api/getNewUserAchievements")
+          .then(response => {
+
+              let newAchvArr = response.data;
+
+              setTimeout(()=>{
+
+                  if (newAchvArr.length > 0) {
+
+
+                      toast(<AchvToast title={newAchvArr[0].name} desc={newAchvArr[0].desc} />, { type: toast.TYPE.INFO, autoClose: 5000 });
+
+                      let i = 1;
+
+
+                      let toastInterval = setInterval(() => {
+
+                          if (i >= newAchvArr.length) {
+                              clearInterval(toastInterval);
+                          }
+                          else{
+                              toast(<AchvToast title={newAchvArr[i].name} desc={newAchvArr[i].desc} />, { type: toast.TYPE.INFO, autoClose: 5000 });
+                              i++;
+
+                          }
+
+
+
+
+
+                      }, 5500);
+                  }
+
+
+              }, 1500);
+
+              console.log(newAchvArr);
+
+
+
+
+              axios
+                  .delete("/api/deleteNewAchievements")
+                  .then(response => {
+                      console.log(response);
+                  })
+                  .catch(errors => {
+                      console.log(`error: ${errors}`);
+                  });
+
+
+          })
+          .catch(errors => {
+              console.log(`error: ${errors}`);
+          });
+  }
 
   render() {
     return (
@@ -18,6 +87,15 @@ class Dashboard extends Component {
 
       <div className="background">
 
+        <ToastContainer/>
+
+        <h1>
+
+          Money Tree: User Dashboard
+        </h1>
+
+        {/* <Baseline /> */}
+        {/* <Button color="danger">Danger!</Button> */}
         <div className="col-12">
           <div className="container">
 
@@ -81,7 +159,7 @@ class Dashboard extends Component {
                   <Card>
 
                     <h1> Cash Flow </h1>
-  <CashFlow />
+                    <CashFlow />
                   </Card>
                
                

@@ -32,8 +32,15 @@ const UserSchema = new Schema({
     required: true
   },
   achievements: [],
+<<<<<<< HEAD
   institutions: [Inst],
   transaction: [],
+=======
+  newAchv: [],
+  transactions: [],
+  cashFlowArray: [],
+  institutions: [],
+>>>>>>> e7eb0c8... achievement notification working, must delete after shown
   date: {
     type: Date,
     default: Date.now
