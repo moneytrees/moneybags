@@ -6,7 +6,7 @@ body{
  
 }
 
-h2 {
+/* h2 {
     font-family: 'Roboto', sans-serif;
     font-weight: 800;
     font-size: 2.5rem;
@@ -14,7 +14,7 @@ h2 {
     text-shadow: 2px 2px #57BC90;
   
  
-}
+} */
 
 h3 {
     color:#015249;
@@ -52,7 +52,7 @@ h3 {
     float: right;
     margin-top: -12px;
 }
-.accordion-section .panel-default .panel-title a.collapsed:after {
+/* .accordion-section .panel-default .panel-title a.collapsed:after {
     content: "\f107";
 }
 .accordion-section .panel-default .panel-body {
@@ -81,4 +81,4 @@ h3 {
 .email{
     height:400px;
     width:400px;
-}
+} */
