@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './UserDashboard.css';
+
 
 export default class LoanCalculator extends Component {
     constructor(props) {
@@ -85,7 +87,7 @@ export default class LoanCalculator extends Component {
                     <input onChange={this.inputHandler} type="number" name="loanTerm" /><br /><br />
                     <label>Interest Rate as Percent</label><br />
                     <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" /><br /><br />
-                    <button onClick={this.loanCalc.bind(this)}>Submit</button>
+                    <Button color="info" onClick={this.loanCalc.bind(this)}>Submit</Button>
                 </form>
                 <div className="loanModal">
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
