@@ -5,7 +5,6 @@ class UserLogin extends Component {
 
   constructor(props) {
       super(props);
-      console.log(props);
       this.getFeedback = this.getFeedback.bind(this);
   }
 
@@ -17,15 +16,16 @@ class UserLogin extends Component {
               switch(from.pathname){
                   case '/':
                   case '/login':
-                      userfeedback = '';
-                      break;
                   case '/register':
-                      userfeedback = from.pathname.feedback;
+                      userfeedback = '';
                       break;
                   default:
                       userfeedback = 'You must be logged in to access this page';
               }
           }
+
+          userfeedback = this.props.location.state.feedback || userfeedback;
+          if(userfeedback.includes('registered successfully')) userfeedback += " Confirm your signing-on:";
 
           return  <h2>{userfeedback}</h2>;
       }
