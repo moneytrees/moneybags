@@ -62,8 +62,8 @@ class ItemCreator extends Component {
       return (
         <div id="foo">
 
-     
-        
+
+
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -79,9 +79,9 @@ class ItemCreator extends Component {
           </PlaidLink>
 
           <Button
-           account={this.account} 
-           transactions={this.transaction} />
-           
+            account={this.account}
+            transactions={this.transaction} />
+
         </div>
       );
     } else {
