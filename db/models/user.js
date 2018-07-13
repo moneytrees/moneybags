@@ -19,6 +19,10 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  consecutive_login: {
+    type: Number,
+    default: 0
   }
 });
 

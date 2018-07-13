@@ -15,6 +15,7 @@ module.exports = function(app, express){
         __plaidClient.publicToken = request.body.public_token;
         __plaidClient.metaData = request.body.metadata;
         __plaidClient.getAccessToken().then(link => response.json(link));
+        //__plaidClient.accessToken = 
     });
 
     plaidRouter.get("/api/accounts", function(request, response, next) {
@@ -34,7 +35,7 @@ module.exports = function(app, express){
     plaidRouter.post("/api/transactions", function(request, response, next) {
         __plaidClient.transactionDaysAgo = 30;
         __plaidClient
-            .getTransactions()
+            .getTransactions(__plaidClient.accessToken)
             .then(transactions => response.json(transactions));
     });
 

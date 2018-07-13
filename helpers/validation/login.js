@@ -3,6 +3,7 @@ const isEmpty = require(__basedir + "helpers/general/is-empty");
 
 // Var data is an obj of stuff to validate
 module.exports = function validateLoginInput(data) {
+
   // Set errors to empty object
   // If everything goes right, should remain empty to end
   let errors = {};

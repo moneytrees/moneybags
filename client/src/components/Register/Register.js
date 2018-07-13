@@ -1,76 +1,100 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
+import { Redirect, withRouter } from "react-router-dom";
+import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import "./Register.css";
 
 class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       email: "",
       password: "",
       password2: "",
-      success: false,
-      fireRedirect: false
+      referrerRedirect: false,
+      feedback: false,
+      emailValid: false,
+      passwordValid: false,
+      formValid: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},
+                  () => { this.validateField(name, value) });
+  }
+  validateField(name, value) {
+    const {password,password2, email} = this.state
+//need some work here
+    if((password===password2)  ){
+      this.setState({passwordValid:true})
+    }
+    else{
+      this.setState({passwordValid:false})
+    }
+
+
+
+
   }
 
   handleSubmit(event) {
-    console.log(this.state.email);
     event.preventDefault();
-
-    //request to server to add a new email/password
-    axios
-      .post("/api/register", {
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,
         password2: this.state.password2
       })
+    })
+      .then(data => data.json())
       .then(response => {
-        if (!response.data.errmsg) {
-          console.log("successful registration");
-          this.setState({
-            success: true,
-            fireRedirect: true
-          });
-        } else {
-          console.log(
-            "There is already a user registered with this email. Proceed to login."
-          );
-          this.setState({
-            success: false,
-            fireRedirect: true
-          });
-        }
+        if(response.success)
+            this.setState({referrerRedirect: true, feedback: response.success});
       })
       .catch(errors => {
-        console.log(`Registration error: ${errors}`);
+        console.log(`Login error: ${errors}`);
       });
   }
 
   render() {
+
+
+    const { from } = this.props.location.state || {
+      from: { pathname: "/dashboard" }
+    };
+
+      /*{
+          pathname: '/login',
+              state: { feedback: this.state.feedback, from: '/register' }
+      }*/
+
+      /*{
+          from: { pathname: "/dashboard" }
+      }*/
+    const { referrerRedirect } = this.state;
+    if (referrerRedirect)
+      return <Redirect to={from}/>;
     return (
+      
       <div className="RegistrationForm">
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="name">
-                Name:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup row>
+            <Label for="name" sm={3}>
+              Name:
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="text"
                 id="name"
                 name="name"
@@ -78,18 +102,15 @@ class Register extends Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="email">
-                Email:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="email" sm={3}>
+              Email:
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="text"
                 id="email"
                 name="email"
@@ -97,18 +118,15 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password">
-                Password:{" "}
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="password" sm={3}>
+              Password:{" "}
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="password"
                 id="password"
                 name="password"
@@ -116,18 +134,15 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password2">
-                Confirm Password:{" "}
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
+          <FormGroup row>
+            <Label for="password2" sm={3}>
+              Confirm Password:{" "}
+            </Label>
+            <Col sm={4}>
+              <Input
                 type="password"
                 id="password2"
                 name="password2"
@@ -135,29 +150,23 @@ class Register extends Component {
                 value={this.state.password2}
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
+            </Col>
+          </FormGroup>
 
-          <div className="form-group">
-            <div className="col-7" />
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
+          <Col sm={{ size: 10, offset: 2 }}>
+            <Button
+              className="button"
               onClick={this.handleSubmit}
               type="submit"
+              disabled={!this.state.passwordValid}
             >
-              Sign up
-            </button>
-          </div>
-        </form>
-        {this.state.fireRedirect &&
-          (this.state.success ? (
-            <Redirect to="/login" />
-          ) : (
-            <Redirect to="/register" />
-          ))}
+              Sign Up
+            </Button>
+          </Col>
+        </Form>
       </div>
     );
   }
 }
 
-export default Register;
+export default withRouter(Register);
