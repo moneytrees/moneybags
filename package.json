@@ -22,8 +22,7 @@
     ],
     "automock": false,
     "setupFiles": [
-      "./api/mocks/jestFetch.js",
-      "./client/src/mocks/browserMocks.js"
+      "./api/mocks/jestFetch.js"
     ],
     "globals": {
       "__DEV__": true
@@ -54,7 +53,6 @@
   },
   "homepage": "https://github.com/moneytrees/moneybags#readme",
   "dependencies": {
-    "animate.css": "^3.6.1",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.1",
@@ -71,9 +69,14 @@
     "passport-jwt": "^4.0.0",
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
+<<<<<<< HEAD
     "react-animate-on-scroll": "^2.1.5",
     "react-animated-css": "^1.0.4",
     "react-reveal": "^1.2.2",
+=======
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+>>>>>>> 6696aff4be7dc7d8bca326d9523d23fd0b714602
     "reactstrap": "^6.3.0",
     "rest": "^2.0.0",
     "swagger-express-mw": "^0.7.0",
