@@ -32,8 +32,10 @@ const UserSchema = new Schema({
     required: true
   },
   achievements: [],
-  institutions: [Inst],
-  transaction: [],
+
+  cashFlowArray: [],
+  institutions: [],
+
   date: {
     type: Date,
     default: Date.now

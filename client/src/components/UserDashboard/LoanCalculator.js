@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import './UserDashboard.css';
+
 
 export default class LoanCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            modal: false,
             purchaseAmount: '',
             downPayment: '',
             loanTerm: '',
@@ -19,9 +23,8 @@ export default class LoanCalculator extends Component {
         };
         this.loanCalc = this.loanCalc.bind(this);
         this.inputHandler = this.inputHandler.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
-
-
 
     // this is an amortization calculator
 
@@ -53,14 +56,21 @@ export default class LoanCalculator extends Component {
             currentState.purchaseData.loanTerm = this.state.loanTerm * 12;
             currentState.purchaseData.downPayment = parseInt(this.state.downPayment);
         }
-        
-        this.setState({currentState});
+
+        this.setState({ currentState });
         this.props.purchaseData(this.state.purchaseData);
+        this.toggle();
     }
 
     inputHandler(e) {
         const currentState = this.state;
         currentState[e.target.name] = e.target.value;
+        this.setState({ currentState });
+    }
+
+    toggle() {
+        const currentState = this.state;
+        currentState.modal = !this.state.modal;
         this.setState({ currentState });
     }
 
@@ -79,6 +89,20 @@ export default class LoanCalculator extends Component {
                     <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" /><br /><br />
                     <Button color="info" onClick={this.loanCalc.bind(this)}>Submit</Button>
                 </form>
+                <div className="loanModal">
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Purchase Info</ModalHeader>
+                        <ModalBody>
+                            <p className="loanDataLine">Monthly Payment: <span className="loanDataVal">${this.state.purchaseData.monthlyPayment}</span></p>
+                            <p className="loanDataLine">Total Interest: <span className="loanDataVal">${this.state.purchaseData.totalInterest}</span></p>
+                            <p className="loanDataLine">Total Cost over Term: <span className="loanDataVal">${this.state.purchaseData.totalPayout}</span></p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>OK</Button>
+                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </div>
             </div>
         )
     }
