@@ -14,6 +14,7 @@ class Helpeducation extends Component {
 
         <Education/>
                 <Help/>
+                
             </div>
         );
     }
