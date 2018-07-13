@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import './UserDashboard.css';
 import '../../react-vis.css';
 import {
     XYPlot,
@@ -14,6 +15,7 @@ import OneYear from './OneYear';
 import FiveYears from './FiveYears';
 import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
+import LoanCalculator from './LoanCalculator';
 
 export default class CashFlow extends Component {
     constructor(props) {
@@ -31,8 +33,8 @@ export default class CashFlow extends Component {
             selectedTimeScaleInMonths: 1,
             compare: false, //false
             numPaymentsInMonths: 60,
-            amountDownPayment: 500,
-            monthlyPaymentAmount: 400
+            monthlyPaymentAmount: 400,
+            purchaseData: ''
         };
 
         this.calculate = this.calculate.bind(this);
@@ -43,8 +45,8 @@ export default class CashFlow extends Component {
     componentDidMount() {
         let sampleBalance = 2085;
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-10' },
-            { amount: 57, date: '2018-06-12' },
+            { amount: 17, date: '2018-06-12' },
+            { amount: 57, date: '2018-06-13' },
             { amount: 100, date: '2018-06-16' },
             { amount: 23, date: '2018-06-17' },
             { amount: -800, date: '2018-06-18' },
@@ -96,8 +98,8 @@ export default class CashFlow extends Component {
             { amount: 6, date: '2018-07-01' },
             { amount: 12, date: '2018-07-05' }
         ];
-        sampleBalance -= this.state.amountDownPayment;
-        sampleTransactions.push({ amount: this.state.monthlyPaymentAmount, date: Date.now() });
+        sampleBalance -= this.state.purchaseData.downPayment;
+        sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment, date: Date.now() });
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
@@ -112,6 +114,7 @@ export default class CashFlow extends Component {
         regressionSet.push([30, sampleBalance]);
 
         const result = regression.linear(regressionSet);
+
         const regLineData2 = [{ x: 0, y: result.equation[0] + result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
@@ -170,48 +173,66 @@ export default class CashFlow extends Component {
         }
     }
 
+    getPurchaseData(data) {
+        const currentState = this.state;
+        currentState.purchaseData = data;
+        console.log(data);
+        this.setState({
+            currentState
+        });
+    }
+
     render() {
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
-                    <div className="line-graph">
-                        <button onClick={this.calculate}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <XYPlot
-                            width={500}
-                            height={500}
-                            xDomain={[0, 30]}
-                        >
-                            <HorizontalGridLines />
-                            <VerticalGridLines />
-                            <XAxis
-                                title="X Axis"
-                                position="start"
-                                tickTotal={6}
-                            />
-                            <YAxis title="Y Axis" />
-                            <LineSeries
-                                data={this.state.dataSet} />
-                            <LineSeries
-                                style={{
-                                    strokeDasharray: '2 2'
-                                }}
-                                data={this.state.regLineData2}
-                                strokeDasharray="7, 3"
-                            />
-                            <LineSeries
-                                style={{
-                                    strokeDasharray: '1 1'
-                                }}
-                                data={this.state.regLineData}
-                                strokeDasharray="1, 3"
-                            />
-                        </XYPlot>
-                    </div>
+                    <div>
+                        <div className="cashFlow-btn-group">
+                            <button onClick={this.calculate}>Compare</button>
+                            <button onClick={this.timeScaleHandler}>30 Days</button>
+                            <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
+                            <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
+                            <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
+                            <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
+                        </div>
+                        <div className="graph-input-group">
+                            <div className="cashFlow-graph">
+                                <XYPlot
+                                    width={500}
+                                    height={500}
+                                    xDomain={[0, 30]}
+                                >
+                                    <HorizontalGridLines />
+                                    <VerticalGridLines />
+                                    <XAxis
+                                        title="X Axis"
+                                        position="start"
+                                        tickTotal={6}
+                                    />
+                                    <YAxis title="Y Axis" />
+                                    <LineSeries
+                                        data={this.state.dataSet} />
+                                    <LineSeries
+                                        style={{
+                                            strokeDasharray: '2 2'
+                                        }}
+                                        data={this.state.regLineData2}
+                                        strokeDasharray="7, 3"
+                                    />
+                                    <LineSeries
+                                        style={{
+                                            strokeDasharray: '1 1'
+                                        }}
+                                        data={this.state.regLineData}
+                                        strokeDasharray="1, 3"
+                                    />
+                                </XYPlot>
+                            </div>
+                            <div className="testForm">
+                                <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
+                            </div>
+                        </div>
+                    </div >
                 );
             case 12:
                 return (
@@ -264,7 +285,6 @@ export default class CashFlow extends Component {
             default:
                 return <h1>An error occurred</h1>
         }
-
     }
 }
 
