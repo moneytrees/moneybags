@@ -35,9 +35,9 @@ const httpsOptions = {
     key: fs.readFileSync('./security/cert.key'),
     cert: fs.readFileSync('./security/cert.pem')
 };
-/*const server = https.createServer(httpsOptions, app).listen(PORT, () => {
+const server = https.createServer(httpsOptions, app).listen(PORT, () => {
     console.log(`Secure server listening on port ${PORT}`);
-});*/
+});
 app.listen(3001, () => {console.log(`Unsecure server listening on port ${BPORT}`)});
 
 module.exports = app;
