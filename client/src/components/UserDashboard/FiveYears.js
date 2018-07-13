@@ -8,7 +8,7 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'react-vis';
+} from 'react-vis/dist';
 
 export default class FiveYears extends Component {
     render() {

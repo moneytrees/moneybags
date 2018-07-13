@@ -13,79 +13,54 @@ const validateRegisterInput = require(__basedir +
 const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
-    addCashFlow: (req, res) => {
-        User.findOne({ email: 'ron@ron.com' }).then(user => {
-            let addCashFlowArray = user.cashFlowArray;
-            addCashFlowArray.push(req.body.cashFlow);
-            User.updateOne({ email: 'ron@ron.com' }, { cashFlowArray: addCashFlowArray })
-                .then(() => {
-                    res.json('It worked!!!');
-                }); // this email addy is temporary!!!
-        });
-    },
-    addTransactions: (req, res) => {
-        User.findOne({ email: 'ron@ron.com' }).then(user => {
-            let userTransactions = user.userTransactions;
-            userTransactions.push(req.body);
-            User.updateOne({ email: 'ron@ron.com' }, { cashFlowArray: addCashFlowArray })
-                .then(() => {
-                    res.json('It worked!!!');
-                }); // this email addy is temporary!!!
-        });
-    },
-    registerUser: (req, res) => {
+  registerUser: (req, res) => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+    console.log(`error on register handler `, { errors });
+    // If input is invalid set header status code to 400 && send errors obj
+    if (!isValid)
+      return res.status(400).json(errors);
+      User.findOne({ email: req.body.email }).then(user => {
+          // If user : email already exists...
+          if (user) {
+              // Create email property on errors obj
+              errors.email = "Email already exists.";
+              // Set header status to 400 (server error)
+              // Send error object as json
+              return res.status(400).json({ error: errors });
+          } else {
+              console.log("user found");
+              // Create new User from model
+              // Set respective properties on user to user's input from body of post
+              const newUser = new User({
+                  name: req.body.name,
+                  email: req.body.email,
+                  password: req.body.password
+              });
 
-        const { errors, isValid } = validateRegisterInput(req.body);
+              // Instantiate bcrypt obj
+              // Run genSalt method of bcrypt (Creates a random string of characters = #, callback)
+              bcrypt.genSalt(10, (err, salt) => {
+                  console.log("salt generated for new user:");
+                  if (err) throw err;
 
-        // If input is invalid set header status code to 400 && send errors obj
-        if (!isValid) {
+                  // Run hash method of bcrypt
+                  //  - Hash: takes passed string and replaces it with the generated salt while maintaining integrity of initial string
+                  //  - (string to be hashed, generated salt to pass to string, callback)
+                  bcrypt.hash(newUser.password, salt, (err, hash) => {
+                      console.log(newUser);
+                      if (err) throw err;;
 
-            return res.status(400).json(errors);
-        }
+                      newUser.password = hash;
 
-        // Find user where: email = email from body of post
-        User.findOne({ email: req.body.email }).then(user => {
-            // If user : email already exists...
-            if (user) {
-                // Create email property on errors obj
-                errors.email = "Email already exists.";
-                // Set header status to 400 (server error)
-                // Send error object as json
-                return res.status(400).json({ error: errors });
-            } else {
-                console.log("user found");
-                // Create new User from model
-                // Set respective properties on user to user's input from body of post
-                const newUser = new User({
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: req.body.password
-                });
-
-                // Instantiate bcrypt obj
-                // Run genSalt method of bcrypt (Creates a random string of characters = #, callback)
-                bcrypt.genSalt(10, (err, salt) => {
-                    console.log("salt generated for new user:");
-                    if (err) throw err;
-
-                    // Run hash method of bcrypt
-                    //  - Hash: takes passed string and replaces it with the generated salt while maintaining integrity of initial string
-                    //  - (string to be hashed, generated salt to pass to string, callback)
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        console.log(newUser);
-                        if (err) throw err;;
-
-                        newUser.password = hash;
-
-                        // Save new user to db then send it as a json
-                        newUser
-                            .save()
-                            .then(user => res.json({ id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }))
-                            .catch(err => res.json({ error: err.message }));
-                    });
-                });
-            }
-        });
+                      // Save new user to db then send it as a json
+                      newUser
+                          .save()
+                          .then(user => res.json({ id: user._id, success: `Welcome, ${user.name}! You have registered successfully.` }))
+                          .catch(err => res.json({ error: err.message }));
+                  });
+              });
+          }
+      });
     },
     loginUser: (req, res) => {
         console.log('user login body');
@@ -100,24 +75,6 @@ module.exports = {
         // Set email and password to user input from form
         const email = req.body.email;
         const password = req.body.password;
-
-
-        var ourDog = {
-            "name": "Camper",
-            "legs": 4,
-            "tails": 1,
-            "friends": ["everything!"]
-        };
-
-        ourDog.bark = "bow-wow";
-
-        // Setup
-        var myDog = {
-            "name": "Happy Coder",
-            "legs": 4,
-            "tails": 1,
-            "friends": ["freeCodeCamp Campers"]
-        };
 
         // Find one user by their email
         User.findOne({ email })
@@ -148,75 +105,92 @@ module.exports = {
 
 
 
-                        if (Math.floor(newConsecutiveLogin / 2) > 0) {
+                        if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
 
                             let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
 
                             let achvArr = user.achievements;
+                            let newAchvArr = user.newAchv;
 
                             if (!achvArr.includes(achvID)) {
 
                                 console.log(achvID);
 
-                                Achv.findOne({ _id: achvID }).then((achvData) => {
+                                Achv.findOne({_id: achvID}).then((achvData) => {
 
 
                                     achvArr.push(achvData.id);
+                                    newAchvArr.push(achvData);
 
 
-                                    User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
+                                    console.log(`
+                  
+                  NEW ACHIEVE ARRAY
+                  
+                  
+                  ${newAchvArr}
+                  
+                  
+                  
+                  
+                  `);
+
+
+                                    User.updateOne({email: user.email}, {
+                                        achievements: achvArr,
+                                        newAchv: newAchvArr
+                                    }).then((data) => {
 
                                         console.log(data);
-                                    })
+                                    });
                                 })
 
                                 /*const payload = {
-                                  id: user.id,
-                                  name: user.name,
-                                  loginAchv: achvID
-                                };*/
+                                 id: user.id,
+                                 name: user.name,
+                                 loginAchv: achvID
+                                 };*/
 
                             }
-
-
-
                         }
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            achievements: user.achievements,
-                            institutions: user.institutions
-                        };
 
-                        /***** END GAMIFICATION CHANGES ****/
+            const payload = {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              achievements: user.achievements,
+              institutions: user.institutions
+            };
 
-                        // Assign token
-                        jwt.sign(
+            /***** END GAMIFICATION CHANGES ****/
 
-                            payload,
-                            keys.secretOrKey,
-                            { expiresIn: 1800 }, // Token expires in 30 minutes
-                            (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: `${token}`
-                                });
-                            }
-                        );
-                    } else {
-                        return res.status(400).json({ password: "Password incorrect" });
-                    }
+            // Assign token
+            jwt.sign(
+
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 1800 }, // Token expires in 30 minutes
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: `${token}`,
                 });
-            })
-            .catch(err => res.send(err));
-    },
-    currentUser: (req, res) => {
-        res.json({
-            id: req.user._id,
-            name: req.user.name,
-            email: req.user.email,
-            achievements: req.user.achievements,
-            institutions: req.user.institutions
+              }
+            );
+          } else {
+            return res.status(400).json({ password: "Password incorrect" });
+          }
         });
-    }
+      })
+      .catch(err => res.send(err));
+  },
+  currentUser: (req, res) => {
+    res.json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      achievements: req.user.achievements,
+      institutions: req.user.institutions
+    });
+  }
 };

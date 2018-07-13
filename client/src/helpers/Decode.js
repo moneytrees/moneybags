@@ -54,10 +54,17 @@ export default class Decode {
 
   logout() {
     // Clear user token and profile data from localStorage
+    localStorage.removeItem('isAuthenticated');
     localStorage.removeItem("id_token");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_email");
+    window.location.reload();
   }
 
   getProfile() {
+    console.log("get profile");
     // Using jwt-decode npm package to decode the token
     return decode(this.getToken());
-  }}
+  }
+
+}

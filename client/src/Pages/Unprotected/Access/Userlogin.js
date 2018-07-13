@@ -9,11 +9,11 @@ class UserLogin extends Component {
     }
 
     getFeedback() {
-        if(this.props.location.state){
+        if (this.props.location.state) {
             const { from } = this.props.location.state;
-            let userfeedback  = '';
-            if(from) {
-                switch(from.pathname){
+            let userfeedback = '';
+            if (from) {
+                switch (from.pathname) {
                     case '/':
                     case '/login':
                         userfeedback = '';
@@ -25,7 +25,6 @@ class UserLogin extends Component {
                         userfeedback = 'You must be logged in to access this page';
                 }
             }
-
             return  <h2>{userfeedback}</h2>;
         }
     }

@@ -1,10 +1,24 @@
 .App {
   text-align: center;
+  background: blue;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body {
+<<<<<<< HEAD
+  background-image: url("./imgs/moneytreebg.jpg");
+  /* background-image: url("./imgs/moneyTreeBG.jpg"); */
+=======
+
+
+ /* background-image: url("./imgs/moneytreebg.jpg"); */
+
+  /* background-image: url("./imgs/moneyTreeBG.jpg"); */
+
+>>>>>>> 4d14dc6398176aba3128eeb8cd3ee8b9a00a9bd9
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-header {
@@ -23,8 +37,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-
