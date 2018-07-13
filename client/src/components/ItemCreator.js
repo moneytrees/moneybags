@@ -57,7 +57,7 @@ class ItemCreator extends Component {
   render() {
     if (this.state.public_key) {
       return (
-        <div>
+        <div id="foo">
 
      
         
