@@ -5,19 +5,15 @@ var Inst = new Schema({
 
   access_token: {
     type: String,
-    required: true
   },
   item_id: {
     type: String,
-    required: true
   },
   bank_name: {
     type: String,
-    required: true
   },
   inst_id: {
     type: String,
-    required: true
   }
 });
 
