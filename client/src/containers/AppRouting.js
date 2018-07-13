@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Route,
     Link,
-    Redirect
+    Redirect,
+    browserHistory as history
 } from 'react-router-dom';
 import Walkthrough from "../components/Walkthrough";
 import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
@@ -20,14 +21,15 @@ import Decode from "../helpers/Decode";
 import { PrivateRoute } from "../helpers/AuthService";
 
 const decode = new Decode();
-let isAuth = localStorage.getItem('isAuthenticated');
+let isAuth = (function () { if (localStorage.getItem("isAuthenticated")) { return <NavbarAuth /> } else { return <NavbarNoAuth /> } }());
+let auth = localStorage.getItem("isAuthenticated") === true ? auth = true : auth = false;
 
 const AppRouting = () => {
     return (
-        <Router>
+        < Router >
             <div>
                 {
-                    isAuth === true ? <NavbarAuth /> : <NavbarNoAuth />
+                    isAuth
                 }
                 <Route exact path="/" component={UserRegister} />
                 <Route exact path="/login" component={UserLogin} />
@@ -44,7 +46,7 @@ const AppRouting = () => {
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
             </div>
-        </Router>
+        </Router >
     );
 };
 

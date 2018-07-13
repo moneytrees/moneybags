@@ -46,9 +46,13 @@ class Login extends Component {
         localStorage.setItem("user_id", profile.id);
         localStorage.setItem("user_email", profile.email);
 
+        window.location.reload();
+
         profile
           ? this.setState(() => ({ referrerRedirect: true }))
           : console.log("YOU GOT THE $%#%$% WRONG");
+
+
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);

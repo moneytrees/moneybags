@@ -1,3 +1,4 @@
+#!/usr/bin/env nodejs
 require('dotenv').config();
 const https = require('https');
 const express = require('express');
