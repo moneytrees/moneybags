@@ -7,13 +7,48 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievement from "../../../components/Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import AchvToast from "../../../components/AchvToast"
+import 'react-toastify/dist/ReactToastify.css';
+import "./Dashboard.css";
+import axios from "axios";
+
 import { Animated } from "react-animated-css";
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
-import "./Dashboard.css";
 
 
 class Dashboard extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = { newAchvArr: [] };
+}
+
+  componentDidMount(){
+
+    axios
+    .get("/api/getNewUserAchievements")
+    .then(response => {
+
+      console.log(response.data);
+
+        response.data.forEach((item)=>{
+
+          setTimeout(()=>{
+            toast(<AchvToast title= {item.name} desc ={item.desc}/>, { type: toast.TYPE.INFO, autoClose: 5000 });
+          }, 1500);
+          
+        });
+        // this.setState({
+        //   newAchvArr: response.data
+        // })
+    })
+    .catch(errors => {
+        console.log(`error: ${errors}`);
+    });
+  }
+
 
   render() {
     return (
@@ -21,6 +56,7 @@ class Dashboard extends Component {
 
       <div className="background">
 
+        <ToastContainer/>
         {/* <h1>
 
           Money Tree: User Dashboard
@@ -100,14 +136,8 @@ class Dashboard extends Component {
                 <div className="col-12 text-center">
                 <Zoom>
                   <Card>
-<<<<<<< HEAD
                     <h1 id= "dashboardTitle"> Cash Flow </h1>
                     <CashFlow />
-=======
-
-                    <h1> Cash Flow </h1>
-  <CashFlow />
->>>>>>> b281dac60f6710e22e2468803ce911704ab81793
 
 
                     {/* <CardBody>
@@ -146,12 +176,7 @@ class Dashboard extends Component {
 
                 <Zoom>
                   <Card>
-<<<<<<< HEAD
                     <h1 id= "dashboardTitle"> Transaction Detail</h1>
-=======
-
-                    <h1> Transaction Detail</h1>
->>>>>>> b281dac60f6710e22e2468803ce911704ab81793
 
 
                     <TransactionDetail />
@@ -163,17 +188,14 @@ class Dashboard extends Component {
 
                     </CardBody> */}
                   </Card>
-<<<<<<< HEAD
                 </Zoom>
-=======
 
-                </Animated>
+                {/* </Animated> */}
 
 
 
    
 
->>>>>>> b281dac60f6710e22e2468803ce911704ab81793
                 </div>
 
                 <div className="col-md-4">
@@ -191,14 +213,11 @@ class Dashboard extends Component {
 
                     </CardBody> */}
                   </Card>
-<<<<<<< HEAD
                 {/* </Animated> */}
                 </Fade>
-=======
 
-                </Animated>
+                {/* </Animated> */}
 
->>>>>>> b281dac60f6710e22e2468803ce911704ab81793
                 </div>
 
               </div>
