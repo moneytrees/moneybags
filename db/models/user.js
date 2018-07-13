@@ -15,6 +15,7 @@ const UserSchema = new Schema({
     required: true
   },
   achievements: [],
+  cashFlowArray: [],
   institutions: [],
   date: {
     type: Date,
