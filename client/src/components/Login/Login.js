@@ -41,9 +41,12 @@ class Login extends Component {
         // Set token to auth header
         decode.setToken(token);
         // Decode token to get user data
-        const decoded = decode.getProfile(token);
+        const profile = decode.getProfile(token);
         // Set current user
-        decoded
+        localStorage.setItem("user_id", profile.id);
+        localStorage.setItem("user_email", profile.email);
+
+        profile
           ? this.setState(() => ({ referrerRedirect: true }))
           : console.log("YOU GOT THE $%#%$% WRONG");
       })

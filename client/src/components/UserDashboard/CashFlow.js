@@ -8,7 +8,7 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'react-vis';
+} from 'react-vis/dist';
 import regression from 'regression';
 import OneYear from './OneYear';
 import FiveYears from './FiveYears';

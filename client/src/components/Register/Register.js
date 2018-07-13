@@ -25,17 +25,17 @@ class Register extends Component {
   handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({[name]: value},
-                  () => { this.validateField(name, value) });
+    this.setState({ [name]: value },
+      () => { this.validateField(name, value) });
   }
   validateField(name, value) {
-    const {password,password2, email} = this.state
-//need some work here
-    if((password===password2)  ){
-      this.setState({passwordValid:true})
+    const { password, password2, email } = this.state
+    //need some work here
+    if ((password === password2)) {
+      this.setState({ passwordValid: true })
     }
-    else{
-      this.setState({passwordValid:false})
+    else {
+      this.setState({ passwordValid: false })
     }
 
 
@@ -59,8 +59,8 @@ class Register extends Component {
     })
       .then(data => data.json())
       .then(response => {
-        if(response.success)
-            this.setState({referrerRedirect: true, feedback: response.success});
+        if (response.success)
+          this.setState({ referrerRedirect: true, feedback: response.success });
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -74,19 +74,19 @@ class Register extends Component {
       from: { pathname: "/dashboard" }
     };
 
-      /*{
-          pathname: '/login',
-              state: { feedback: this.state.feedback, from: '/register' }
-      }*/
+    /*{
+        pathname: '/login',
+            state: { feedback: this.state.feedback, from: '/register' }
+    }*/
 
-      /*{
-          from: { pathname: "/dashboard" }
-      }*/
+    /*{
+        from: { pathname: "/dashboard" }
+    }*/
     const { referrerRedirect } = this.state;
     if (referrerRedirect)
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     return (
-      
+
       <div className="RegistrationForm">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row>

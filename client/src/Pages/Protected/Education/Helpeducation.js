@@ -13,10 +13,10 @@ class Helpeducation extends Component {
                         <img className="tamagotchi" src={tamagotchi} alt="logo" />
                     </a>
                 </div>
-                <Education/>
-                <Help/>
+                <Education />
+                <Help />
             </div>
         );
     }
 }
-export default Helpeducation ;
+export default Helpeducation;
