@@ -4,6 +4,7 @@ import Button from "./PlaidSelection/PlaidSelection";
 require("dotenv").config({ path: "../.env" });
 var userTransactions = [];
 var userInst = [];
+var userAccount = [];
 
 class ItemCreator extends Component {
   constructor(props) {
@@ -32,7 +33,8 @@ class ItemCreator extends Component {
       },
       body: JSON.stringify({ public_token: token, metadata: metadata })
     })
-      .then(console.log(metadata))
+      .then(
+        console.log(metadata))
       .catch(err => console.log(err.message));
   }
 
@@ -40,7 +42,10 @@ class ItemCreator extends Component {
   account() {
     fetch("/api/accounts")
       .then(data => data.json())
-      .then(response => console.log(response))
+      .then(response => {
+        buildAccountObj(response);
+        console.log(userAccount);
+      })
       .catch(err => err.message);
     console.log("account");
   }
@@ -51,8 +56,9 @@ class ItemCreator extends Component {
     })
       .then(data => data.json())
       .then(response => {
-        buildTransObj(response)
-        console.log(response)})
+        buildTransObj(response);
+        console.log(userAccount)
+      })
       .catch(err => console.log(err.message));
     console.log("transaction");
   }
@@ -61,9 +67,6 @@ class ItemCreator extends Component {
     if (this.state.public_key) {
       return (
         <div>
-
-     
-        
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -79,9 +82,9 @@ class ItemCreator extends Component {
           </PlaidLink>
 
           <Button
-           account={this.account} 
-           transactions={this.transaction} />
-           
+            account={this.account}
+            transactions={this.transaction} />
+
         </div>
       );
     } else {
@@ -91,32 +94,59 @@ class ItemCreator extends Component {
 }
 
 
-  function buildTransObj(response){
-    for (var i=0; i<response.transactions.length; i++){
-      var userTransObj = {
-        "account":response.transactions[i].account_id,
-        "amount": response.transactions[i].amount,
-        "category": response.transactions[i].category[0],
-        "category_id": response.transactions[i].category_id,
-        "date": response.transactions[i].date,
-        "iso_currency_code": response.transactions[i].iso_currency_code,
-        "location": response.transactions[i].location.city,
-        "name": response.transactions[i].name,
-        "pending": response.transactions[i].pending,
-        "transaction_id": response.transactions[i].transaction_id,
-        "transaction_type": response.transactions[i].transaction_type}
-
-        userTransactions.push(userTransObj);
+// -------Builds out Inst object------- //
+function buildInstObj(response) {
+  for (var i = 0; i < response.transaction.length; i++) {
+    var userInstObj = {
+      "user": { "type": response.type },
+      "registered_inst": { "id": response }
     }
   }
+}
 
-  function buildInstObj(response){
-    for (var i=0; i<response.transaction.length; i++){
-      var userInstObj = {
-        "user": {"type":response.type},
-        "registered_inst":{"id":response}
-      }
+
+// -------Builds out account object------- //
+function buildAccountObj(response) {
+  for (var i = 0; i < response.accounts.length; i++) {
+    var accountObj = {
+      account_id: response.accounts[i].account_id,
+      balances: [{
+        available: response.accounts[i].balances.available,
+        current: response.accounts[i].balances.current,
+      }],
+      mask: response.accounts[i].mask,
+      name: response.accounts[i].name,
+      official_name: response.accounts[i].official_name,
+      subtype: response.accounts[i].subtype,
+      type: response.accounts[i].type
     }
+    userAccount.push(accountObj);
   }
+
+}
+
+// -------Builds out Trans object------- //
+function buildTransObj(response) {
+  for (var i = 0; i < response.transactions.length; i++) {
+    var userTransObj = {
+      "account": response.transactions[i].account_id,
+      "amount": response.transactions[i].amount,
+      "category": response.transactions[i].category[0],
+      "category_id": response.transactions[i].category_id,
+      "date": response.transactions[i].date,
+      "iso_currency_code": response.transactions[i].iso_currency_code,
+      "location": response.transactions[i].location.city,
+      "name": response.transactions[i].name,
+      "pending": response.transactions[i].pending,
+      "transaction_id": response.transactions[i].transaction_id,
+      "transaction_type": response.transactions[i].transaction_type
+    }
+
+    userTransactions.push(userTransObj);
+  }
+}
+
+
+
 
 export default ItemCreator;
