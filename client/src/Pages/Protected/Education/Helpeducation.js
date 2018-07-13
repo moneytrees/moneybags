@@ -9,14 +9,16 @@ class Helpeducation extends Component {
     render() {
         return (
             <div>
+
                 
               
 
         <Education/>
                 <Help/>
                 
+
             </div>
         );
     }
 }
-export default Helpeducation ;
+export default Helpeducation;

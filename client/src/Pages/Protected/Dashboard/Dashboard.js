@@ -97,8 +97,9 @@ class Dashboard extends Component {
                 <div className="col-12 text-center">
                 
                   <Card>
+
                     <h1> Cash Flow </h1>
-                    <CashFlow />
+  <CashFlow />
 
 
                     {/* <CardBody>
@@ -136,7 +137,9 @@ class Dashboard extends Component {
                 <div className="col-md-8">
                 <Animated animationIn="slideInLeft" animationOut="zoomOutDown" isVisible={true}>
                   <Card>
+
                     <h1> Transaction Detail</h1>
+
 
                     <TransactionDetail />
 
@@ -154,6 +157,9 @@ class Dashboard extends Component {
                 </Animated>
 
 
+
+   
+
                 </div>
 
                 <div className="col-md-4">
@@ -162,6 +168,7 @@ class Dashboard extends Component {
                     <h1> Total Spending</h1>
                     <TotalSpending />
 
+
                     {/* <CardBody>
                       <CardTitle>Card title</CardTitle>
                       <CardSubtitle>Card subtitle</CardSubtitle>
@@ -169,13 +176,17 @@ class Dashboard extends Component {
 
                     </CardBody> */}
                   </Card>
+
                 </Animated>
+
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </div >
+
     );
   }
 }

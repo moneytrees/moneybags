@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RadialChart } from 'react-vis';
+import { RadialChart } from 'react-vis/dist';
 import axios from 'axios';
 import '../../react-vis.css';
 
@@ -36,9 +36,11 @@ export default class TotalSpending extends Component {
             }).catch(err => console.log(err));
     }
 
+
     render() {
 
         const {hoveredSection} = this.state;
+
 
         let expenses = this.state.transactions;
         let duplicate;
@@ -76,7 +78,9 @@ export default class TotalSpending extends Component {
             }
         }
         let data = [];
+
         let colors = ['#77c9d4', '#015249', '#49a3e3', '#57bc90', '#e38949', '#a5a5af'];
+
         for (let i = 0; i < expenses.length; i++) {
             data.push({ angle: expenses[i].amount, label: expenses[i].category, color: colors[i] });
         }
@@ -85,18 +89,22 @@ export default class TotalSpending extends Component {
         }
 
         return (
-            
+
             <div className="pieChart">
                 <RadialChart
                     data={data[0].angle === '' ? data = [{ angle: 1 }] : data}
                     colorType={'literal'}
                     showLabels={true}
+
                     labelsRadiusMultiplier={.8}
                     labelsStyle={{ fontSize: 10 }}
+
                     radius={150}
                     width={400}
                     height={400} />
             </div>
+
         );
+
     }
 }
