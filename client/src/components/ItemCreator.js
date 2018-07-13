@@ -31,12 +31,10 @@ class ItemCreator extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ public_token: token, metadata: metadata })
+      body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => {
-        console.log(response)
-      })
+      .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("LOLLLLLL");
   }
@@ -99,20 +97,6 @@ class ItemCreator extends Component {
   }
 }
 
-
-// -------Builds out Inst object------- //
-function buildInstObj(response) {
-
-  var userInstObj = {
-    "user": { "type": response.type },
-    "registered_inst": { "id": response },
-    item_id: response.item_id,
-    access_token: response.access_token
-  }
-
-}
-
-
 // -------Builds out account object------- //
 function buildAccountObj(response) {
   for (var i = 0; i < response.accounts.length; i++) {
@@ -130,7 +114,6 @@ function buildAccountObj(response) {
     }
     userAccount.push(accountObj);
   }
-
 }
 
 // -------Builds out Trans object------- //
