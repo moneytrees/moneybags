@@ -9,14 +9,14 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'react-vis';
+} from 'react-vis/dist';
 import regression from 'regression';
 import OneYear from './OneYear';
 import FiveYears from './FiveYears';
 import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
 import LoanCalculator from './LoanCalculator';
-// import axios from 'axios';
+import { Button } from 'reactstrap';
 
 export default class CashFlow extends Component {
     constructor(props) {
@@ -211,12 +211,12 @@ export default class CashFlow extends Component {
                 return (
                     <div>
                         <div className="cashFlow-btn-group">
-                            <button onClick={this.calculate}>Compare</button>
-                            <button onClick={this.timeScaleHandler}>30 Days</button>
-                            <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                            <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                            <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                            <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
+                            <Button color="info" onClick={this.calculate}>Compare</Button>
+                            <Button color="info" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
                         </div>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">

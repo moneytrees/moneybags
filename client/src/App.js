@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
-import AppContainer from './helpers/AuthService';
+import AppRouting from './containers/AppRouting';
 
 class App extends Component {
 
   render() {
     return (
       <div>
-        <AppContainer/>
+        <AppRouting />
+        
       </div>
     );
   }
-}
-export default App;
+} export default App;

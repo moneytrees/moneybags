@@ -7,6 +7,9 @@ jobs:
             - image: circleci/node:6.10-browsers
         steps:
             - checkout
+            - run: git submodule sync
+            - run: git submodule update --init --recursive || (rm -fr .git/config .git/modules && git submodule deinit -f . && git submodule update --init --recursive)
+            - run: git submodule foreach git pull origin develop
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}

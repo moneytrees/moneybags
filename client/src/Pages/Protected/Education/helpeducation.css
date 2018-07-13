@@ -1,0 +1,84 @@
+
+
+body{
+    background-image: url("../../../imgs/moneytreebg.jpg");
+    background-size:cover;
+ 
+}
+
+/* h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: #015249;
+    text-shadow: 2px 2px #57BC90;
+  
+ 
+} */
+
+h3 {
+    color:#015249;
+    font-size:1.2em;
+   
+}
+.collapsed{
+    color: #015249;
+ 
+}
+
+.accordion-section .panel-default > .panel-heading {
+    border: 2px;
+    border-color:#015249;
+    background: #f4f4f4;
+    opacity:0.6;
+    padding: 0;
+    box-shadow: 3px 6px;
+  
+}
+
+
+
+
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-size: 1.0rem;
+}
+.accordion-section .panel-default .panel-title a:after {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-size: 0rem;
+    content: "\f106";
+    color: #015249;
+    float: right;
+    margin-top: -12px;
+}
+/* .accordion-section .panel-default .panel-title a.collapsed:after {
+    content: "\f107";
+}
+.accordion-section .panel-default .panel-body {
+    font-size: 1.0rem;
+}
+
+.row{
+    background-color:white;
+    opacity:0.7;
+    padding: 0;
+    box-shadow: 3px 6px;
+    height:280px;
+}
+
+.col-12{
+ 
+    background-color:white;
+    height:240px;
+    width:auto;
+    opacity:0.6;
+    box-shadow: 3px 6px;
+    
+}
+
+
+.email{
+    height:400px;
+    width:400px;
+} */

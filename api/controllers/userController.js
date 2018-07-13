@@ -161,62 +161,44 @@ module.exports = {
                                 Achv.findOne({ _id: achvID }).then((achvData) => {
 
 
-                                    achvArr.push(achvData.id);
+            });
+            const payload = {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              achievements: user.achievements,
+              institutions: user.institutions
+            };
 
+            /***** END GAMIFICATION CHANGES ****/
 
-                                    User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
+            // Assign token
+            jwt.sign(
 
-                                        console.log(data);
-                                    })
-                                })
-
-                                /*const payload = {
-                                  id: user.id,
-                                  name: user.name,
-                                  loginAchv: achvID
-                                };*/
-
-                            }
-
-
-
-                        }
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            achievements: user.achievements,
-                            institutions: user.institutions
-                        };
-
-                        /***** END GAMIFICATION CHANGES ****/
-
-                        // Assign token
-                        jwt.sign(
-
-                            payload,
-                            keys.secretOrKey,
-                            { expiresIn: 1800 }, // Token expires in 30 minutes
-                            (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: `${token}`
-                                });
-                            }
-                        );
-                    } else {
-                        return res.status(400).json({ password: "Password incorrect" });
-                    }
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 1800 }, // Token expires in 30 minutes
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: `${token}`,
                 });
-            })
-            .catch(err => res.send(err));
-    },
-    currentUser: (req, res) => {
-        res.json({
-            id: req.user._id,
-            name: req.user.name,
-            email: req.user.email,
-            achievements: req.user.achievements,
-            institutions: req.user.institutions
+              }
+            );
+          } else {
+            return res.status(400).json({ password: "Password incorrect" });
+          }
         });
-    }
+      })
+      .catch(err => res.send(err));
+  },
+  currentUser: (req, res) => {
+    res.json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      achievements: req.user.achievements,
+      institutions: req.user.institutions
+    });
+  }
 };
