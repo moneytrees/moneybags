@@ -74,17 +74,12 @@ class Register extends Component {
       from: { pathname: "/dashboard" }
     };
 
-      /*{
-          pathname: '/login',
-              state: { feedback: this.state.feedback, from: '/register' }
-      }*/
-
-      /*{
-          from: { pathname: "/dashboard" }
-      }*/
     const { referrerRedirect } = this.state;
     if (referrerRedirect)
-      return <Redirect to={from}/>;
+      return <Redirect to={{
+          pathname: '/login',
+          state: { feedback: this.state.feedback, from: '/register' }
+      }}/>;
     return (
       
       <div className="RegistrationForm">
