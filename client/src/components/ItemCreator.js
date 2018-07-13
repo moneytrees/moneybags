@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import Button from "./PlaidSelection/PlaidSelection";
 require("dotenv").config({ path: "../.env" });
+var userTransactions = [];
+var userInst = [];
 
 class ItemCreator extends Component {
   constructor(props) {
@@ -48,11 +50,12 @@ class ItemCreator extends Component {
       method: "POST"
     })
       .then(data => data.json())
-      .then(response => console.log(response))
+      .then(response => {
+        buildTransObj(response)
+        console.log(response)})
       .catch(err => console.log(err.message));
     console.log("transaction");
   }
-
 
   render() {
     if (this.state.public_key) {
@@ -86,5 +89,34 @@ class ItemCreator extends Component {
     }
   }
 }
+
+
+  function buildTransObj(response){
+    for (var i=0; i<response.transactions.length; i++){
+      var userTransObj = {
+        "account":response.transactions[i].account_id,
+        "amount": response.transactions[i].amount,
+        "category": response.transactions[i].category[0],
+        "category_id": response.transactions[i].category_id,
+        "date": response.transactions[i].date,
+        "iso_currency_code": response.transactions[i].iso_currency_code,
+        "location": response.transactions[i].location.city,
+        "name": response.transactions[i].name,
+        "pending": response.transactions[i].pending,
+        "transaction_id": response.transactions[i].transaction_id,
+        "transaction_type": response.transactions[i].transaction_type}
+
+        userTransactions.push(userTransObj);
+    }
+  }
+
+  function buildInstObj(response){
+    for (var i=0; i<response.transaction.length; i++){
+      var userInstObj = {
+        "user": {"type":response.type},
+        "registered_inst":{"id":response}
+      }
+    }
+  }
 
 export default ItemCreator;
