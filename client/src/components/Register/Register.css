@@ -1,4 +1,3 @@
-
 body {
     background: url(./images/moneyTreeBG.jpg);
     background-repeat: no-repeat;
@@ -18,7 +17,6 @@ Form {
     color: #015249;
 }
 
- Button {
-   width:20%;
-   
-} 
+Button {
+    width: 20%;
+}
