@@ -30,6 +30,7 @@ export default class NavbarNoAuth extends React.Component {
     });
   }
 
+
   render() {
     return (
       <div>

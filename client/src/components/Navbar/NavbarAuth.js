@@ -30,6 +30,7 @@ export default class NavbarAuth extends React.Component {
     });
   }
 
+
   render() {
     return (
       <div>
@@ -43,6 +44,9 @@ export default class NavbarAuth extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink href="/helpeducation">Education</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/team">Team</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/logout">Logout</NavLink>

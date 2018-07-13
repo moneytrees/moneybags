@@ -99,8 +99,14 @@ class Dashboard extends Component {
                 <div className="col-12 text-center">
                 <Zoom>
                   <Card>
+<<<<<<< HEAD
                     <h1 id= "dashboardTitle"> Cash Flow </h1>
                     <CashFlow />
+=======
+
+                    <h1> Cash Flow </h1>
+  <CashFlow />
+>>>>>>> b281dac60f6710e22e2468803ce911704ab81793
 
 
                     {/* <CardBody>
@@ -139,7 +145,13 @@ class Dashboard extends Component {
 
                 <Zoom>
                   <Card>
+<<<<<<< HEAD
                     <h1 id= "dashboardTitle"> Transaction Detail</h1>
+=======
+
+                    <h1> Transaction Detail</h1>
+>>>>>>> b281dac60f6710e22e2468803ce911704ab81793
+
 
                     <TransactionDetail />
 
@@ -150,7 +162,17 @@ class Dashboard extends Component {
 
                     </CardBody> */}
                   </Card>
+<<<<<<< HEAD
                 </Zoom>
+=======
+
+                </Animated>
+
+
+
+   
+
+>>>>>>> b281dac60f6710e22e2468803ce911704ab81793
                 </div>
 
                 <div className="col-md-4">
@@ -160,6 +182,7 @@ class Dashboard extends Component {
                     <h1 id= "dashboardTitle"> Total Spending</h1>
                     <TotalSpending />
 
+
                     {/* <CardBody>
                       <CardTitle>Card title</CardTitle>
                       <CardSubtitle>Card subtitle</CardSubtitle>
@@ -167,14 +190,22 @@ class Dashboard extends Component {
 
                     </CardBody> */}
                   </Card>
+<<<<<<< HEAD
                 {/* </Animated> */}
                 </Fade>
+=======
+
+                </Animated>
+
+>>>>>>> b281dac60f6710e22e2468803ce911704ab81793
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </div >
+
     );
   }
 }
