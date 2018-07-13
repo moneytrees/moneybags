@@ -7,8 +7,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AppRouting/>
+        <AppRouting />
+        
       </div>
     );
   }
-}export default App;
+} export default App;

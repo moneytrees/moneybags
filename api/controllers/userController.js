@@ -26,12 +26,12 @@ module.exports = {
 
   registerUser: (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
-    console.log(`error on register handler `,{errors}
+    console.log(`error on register handler `, { errors }
 
-)
+    )
     // If input is invalid set header status code to 400 && send errors obj
     if (!isValid) {
-   
+
       return res.status(400).json(errors);
     }
 
@@ -124,7 +124,7 @@ module.exports = {
           errors.email = "User not found.. Double check your email";
           return res.status(404).json(errors);
         }
-        
+
 
         // Compare user created password to hashed password
         bcrypt.compare(password, user.password).then(isMatch => {
@@ -191,14 +191,15 @@ module.exports = {
 
 
             }
-              const payload = {
-                  id: user.id,
-                  name: user.name,
-                  achievements :user.achievements,
-                  institutions: user.institutions
-              };
+            const payload = {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              achievements: user.achievements,
+              institutions: user.institutions
+            };
 
-              /***** END GAMIFICATION CHANGES ****/
+            /***** END GAMIFICATION CHANGES ****/
 
             // Assign token
             jwt.sign(
@@ -209,24 +210,24 @@ module.exports = {
               (err, token) => {
                 res.json({
                   success: true,
-                  token: `${token}`
+                  token: `${token}`,
                 });
               }
             );
-            } else {
-              return res.status(400).json({ password: "Password incorrect" });
-            }
-            });
-          })
-          .catch(err => res.send(err));
-      },
-        currentUser: (req, res) => {
-          res.json({
-            id: req.user._id,
-            name: req.user.name,
-            email: req.user.email,
-            achievements: req.user.achievements,
-            institutions: req.user.institutions
-          });
-        }
+          } else {
+            return res.status(400).json({ password: "Password incorrect" });
+          }
+        });
+      })
+      .catch(err => res.send(err));
+  },
+  currentUser: (req, res) => {
+    res.json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      achievements: req.user.achievements,
+      institutions: req.user.institutions
+    });
+  }
 };

@@ -27,4 +27,4 @@ export default class Walkthrough extends Component {
         );
     }
 }
-            
+

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import './UserDashboard.css';
 import '../../react-vis.css';
 import {
     XYPlot,
@@ -8,12 +9,16 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'react-vis';
+} from 'react-vis/dist';
 import regression from 'regression';
 import OneYear from './OneYear';
 import FiveYears from './FiveYears';
 import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
+import LoanCalculator from './LoanCalculator';
+import { Button } from 'reactstrap';
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
 
 export default class CashFlow extends Component {
     constructor(props) {
@@ -31,8 +36,9 @@ export default class CashFlow extends Component {
             selectedTimeScaleInMonths: 1,
             compare: false, //false
             numPaymentsInMonths: 60,
-            amountDownPayment: 500,
-            monthlyPaymentAmount: 400
+            monthlyPaymentAmount: 400,
+            purchaseData: '',
+            sampleBalance: 2085
         };
 
         this.calculate = this.calculate.bind(this);
@@ -41,33 +47,46 @@ export default class CashFlow extends Component {
 
     }
     componentDidMount() {
-        let sampleBalance = 2085;
+        // axios.post('/api/addCashFlow', {cashFlow: 'cash flow string'})
+        //     .then((data) => {
+        //         console.log(data);
+        //         // send 'positive', 'negative', or 'neutral'
+        //     });
+
+        // fetch("/api/transactions", {
+        //     method: "POST"
+        //   })
+        //     .then(data => data.json())
+        //     .then(response => console.log(response))
+        //     .catch(err => console.log(err.message));
+        //   console.log("transaction");
+
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-10' },
-            { amount: 57, date: '2018-06-12' },
-            { amount: 100, date: '2018-06-16' },
-            { amount: 23, date: '2018-06-17' },
-            { amount: -800, date: '2018-06-18' },
-            { amount: 8, date: '2018-06-20' },
-            { amount: 15, date: '2018-06-21' },
-            { amount: 75, date: '2018-06-25' },
-            { amount: 11, date: '2018-06-28' },
-            { amount: 6, date: '2018-07-01' },
-            { amount: 12, date: '2018-07-05' }
+            { amount: 17, date: '2018-06-15' },
+            { amount: 57, date: '2018-06-17' },
+            { amount: 100, date: '2018-06-19' },
+            { amount: 23, date: '2018-06-21' },
+            { amount: -800, date: '2018-06-24' },
+            { amount: 8, date: '2018-06-26' },
+            { amount: 15, date: '2018-06-28' },
+            { amount: 75, date: '2018-06-30' },
+            { amount: 11, date: '2018-07-02' },
+            { amount: 6, date: '2018-07-04' },
+            { amount: 12, date: '2018-07-08' }
         ];
 
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = sampleBalance;
+        let yPointCoord = this.state.sampleBalance;
         for (let i = sampleTransactions.length - 1; i >= 0; i--) {
             xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
             yPointCoord += sampleTransactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: sampleBalance });
-        regressionSet.push([30, sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
+        regressionSet.push([30, this.state.sampleBalance]);
 
         const result = regression.linear(regressionSet);
 
@@ -82,36 +101,45 @@ export default class CashFlow extends Component {
     }
 
     calculate() {
-        let sampleBalance = 2085;
+
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-10' },
-            { amount: 57, date: '2018-06-12' },
-            { amount: 100, date: '2018-06-16' },
-            { amount: 23, date: '2018-06-17' },
-            { amount: -800, date: '2018-06-18' },
-            { amount: 8, date: '2018-06-20' },
-            { amount: 15, date: '2018-06-21' },
-            { amount: 75, date: '2018-06-25' },
-            { amount: 11, date: '2018-06-28' },
-            { amount: 6, date: '2018-07-01' },
-            { amount: 12, date: '2018-07-05' }
+            { amount: 17, date: '2018-06-15' },
+            { amount: 57, date: '2018-06-17' },
+            { amount: 100, date: '2018-06-19' },
+            { amount: 23, date: '2018-06-21' },
+            { amount: -800, date: '2018-06-24' },
+            { amount: 8, date: '2018-06-26' },
+            { amount: 15, date: '2018-06-28' },
+            { amount: 75, date: '2018-06-30' },
+            { amount: 11, date: '2018-07-02' },
+            { amount: 6, date: '2018-07-04' },
+            { amount: 12, date: '2018-07-08' }
         ];
-        sampleBalance -= this.state.amountDownPayment;
-        sampleTransactions.push({ amount: this.state.monthlyPaymentAmount, date: Date.now() });
+        const crntState = this.state;
+        console.log(crntState.purchaseData.downPayment);
+        console.log(crntState.sampleBalance);
+        console.log(crntState.sampleBalance - crntState.purchaseData.downPayment - crntState.purchaseData.monthlyPayment);
+        crntState.sampleBalance = (crntState.sampleBalance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
+        this.setState({ crntState });
+        console.log(this.state.sampleBalance);
+        sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment + this.state.purchaseData.downPayment, date: Date.now() });
+        console.log(sampleTransactions[sampleTransactions.length - 1]);
+        console.log(this.state.sampleBalance);
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = sampleBalance;
+        let yPointCoord = this.state.sampleBalance;
         for (let i = sampleTransactions.length - 1; i >= 0; i--) {
             xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
             yPointCoord += sampleTransactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: sampleBalance });
-        regressionSet.push([30, sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
+        regressionSet.push([30, this.state.sampleBalance]);
 
         const result = regression.linear(regressionSet);
+
         const regLineData2 = [{ x: 0, y: result.equation[0] + result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
@@ -170,48 +198,70 @@ export default class CashFlow extends Component {
         }
     }
 
+    getPurchaseData(data) {
+        const currentState = this.state;
+        currentState.purchaseData = data;
+        console.log(data);
+        this.setState({
+            currentState
+        });
+    }
+
     render() {
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
-                    <div className="line-graph">
-                        <button onClick={this.calculate}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <XYPlot
-                            width={500}
-                            height={500}
-                            xDomain={[0, 30]}
-                        >
-                            <HorizontalGridLines />
-                            <VerticalGridLines />
-                            <XAxis
-                                title="X Axis"
-                                position="start"
-                                tickTotal={6}
-                            />
-                            <YAxis title="Y Axis" />
-                            <LineSeries
-                                data={this.state.dataSet} />
-                            <LineSeries
-                                style={{
-                                    strokeDasharray: '2 2'
-                                }}
-                                data={this.state.regLineData2}
-                                strokeDasharray="7, 3"
-                            />
-                            <LineSeries
-                                style={{
-                                    strokeDasharray: '1 1'
-                                }}
-                                data={this.state.regLineData}
-                                strokeDasharray="1, 3"
-                            />
-                        </XYPlot>
-                    </div>
+                    <div>
+                        <Rotate top left>
+                        <div className="cashFlow-btn-group">
+                            <Button color="info" onClick={this.calculate}>Compare</Button>
+                            <Button color="info" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>   
+                        </div>
+                        </Rotate>
+                        <div className="graph-input-group">
+                            <div className="cashFlow-graph">
+                                <XYPlot
+                                    width={500}
+                                    height={500}
+                                    xDomain={[0, 30]}
+                                >
+                                    <HorizontalGridLines />
+                                    <VerticalGridLines />
+                                    <XAxis
+                                        title="X Axis"
+                                        position="start"
+                                        tickTotal={6}
+                                    />
+                                    <YAxis title="Y Axis" />
+                                    <LineSeries
+                                        data={this.state.dataSet} />
+                                    <LineSeries
+                                        style={{
+                                            strokeDasharray: '2 2'
+                                        }}
+                                        data={this.state.regLineData2}
+                                        strokeDasharray="7, 3"
+                                    />
+                                    <LineSeries
+                                        style={{
+                                            strokeDasharray: '1 1'
+                                        }}
+                                        data={this.state.regLineData}
+                                        strokeDasharray="1, 3"
+                                    />
+                                </XYPlot>
+                            </div>
+                            <Fade right>
+                            <div className="testForm">
+                                <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
+                            </div>
+                            </Fade>
+                        </div>
+                    </div >
                 );
             case 12:
                 return (
@@ -264,7 +314,6 @@ export default class CashFlow extends Component {
             default:
                 return <h1>An error occurred</h1>
         }
-
     }
 }
 
