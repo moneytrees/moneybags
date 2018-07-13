@@ -13,6 +13,17 @@ const validateRegisterInput = require(__basedir +
 const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
+
+
+
+  getNewAchievements: (req, res) =>{
+    User.findOne({ email: "ron@ron.com" }).then(user => {
+
+      return res.json(user.newAchv);
+
+    });
+  },
+
   registerUser: (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
     console.log(`error on register handler `,{errors}
@@ -132,11 +143,12 @@ module.exports = {
 
 
 
-            if (Math.floor(newConsecutiveLogin / 2) > 0) {
+            if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
 
               let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
 
               let achvArr = user.achievements;
+              let newAchvArr = user.newAchv;
 
               if (!achvArr.includes(achvID)) {
 
@@ -146,12 +158,26 @@ module.exports = {
 
 
                   achvArr.push(achvData.id);
+                  newAchvArr.push(achvData);
 
 
-                  User.updateOne({ email: user.email }, { achievements: achvArr }).then((data) => {
+                  console.log(`
+                  
+                  NEW ACHIEVE ARRAY
+                  
+                  
+                  ${newAchvArr}
+                  
+                  
+                  
+                  
+                  `);
+
+
+                  User.updateOne({ email: user.email }, { achievements: achvArr, newAchv: newAchvArr }).then((data) => {
 
                     console.log(data);
-                  })
+                  });
                 })
 
                 /*const payload = {

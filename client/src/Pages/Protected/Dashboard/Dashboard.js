@@ -7,13 +7,53 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievement from "../../../components/Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import AchvToast from "../../../components/AchvToast"
+import 'react-toastify/dist/ReactToastify.css';
 import "./Dashboard.css";
+import axios from "axios";
+
+
+
 class Dashboard extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = { newAchvArr: [] };
+}
+
+  componentDidMount(){
+
+    axios
+    .get("/api/getNewUserAchievements")
+    .then(response => {
+
+      console.log(response.data);
+
+        response.data.forEach((item)=>{
+
+          setTimeout(()=>{
+            toast(<AchvToast title= {item.name} desc ={item.desc}/>, { type: toast.TYPE.INFO, autoClose: 5000 });
+          }, 1500);
+          
+        });
+        // this.setState({
+        //   newAchvArr: response.data
+        // })
+    })
+    .catch(errors => {
+        console.log(`error: ${errors}`);
+    });
+  }
+
+
   render() {
     return (
 
 
       <div>
+
+        <ToastContainer/>
 
         <h1>
 
