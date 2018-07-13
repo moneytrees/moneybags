@@ -33,9 +33,12 @@ class ItemCreator extends Component {
       },
       body: JSON.stringify({ public_token: token, metadata: metadata })
     })
-      .then(
-        console.log(metadata))
+      .then(data => data.json())
+      .then(response => {
+        console.log(response)
+      })
       .catch(err => console.log(err.message));
+    console.log("LOLLLLLL");
   }
 
   //fetching account
@@ -66,7 +69,10 @@ class ItemCreator extends Component {
   render() {
     if (this.state.public_key) {
       return (
-        <div>
+        <div id="foo">
+
+
+
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -96,12 +102,14 @@ class ItemCreator extends Component {
 
 // -------Builds out Inst object------- //
 function buildInstObj(response) {
-  for (var i = 0; i < response.transaction.length; i++) {
-    var userInstObj = {
-      "user": { "type": response.type },
-      "registered_inst": { "id": response }
-    }
+
+  var userInstObj = {
+    "user": { "type": response.type },
+    "registered_inst": { "id": response },
+    item_id: response.item_id,
+    access_token: response.access_token
   }
+
 }
 
 
