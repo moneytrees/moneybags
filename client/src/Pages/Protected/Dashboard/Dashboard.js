@@ -8,12 +8,14 @@ import Achievement from "../../../components/Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
 import "./Dashboard.css";
+
+
 class Dashboard extends Component {
   render() {
     return (
 
 
-      <div>
+      <div className="background">
 
         <h1>
 
@@ -89,8 +91,9 @@ class Dashboard extends Component {
 
                 <div className="col-12 text-center">
                   <Card>
-                    <h1> CashFlow </h1>
-                    <CashFlow />
+
+                    <h1> Cash Flow </h1>
+  <CashFlow />
 
 
                     {/* <CardBody>
@@ -126,7 +129,9 @@ class Dashboard extends Component {
               <div className="row">
                 <div className="col-md-8">
                   <Card>
-                    <h1> TransactionDetail</h1>
+
+                    <h1> Transaction Detail</h1>
+
 
                     <TransactionDetail />
 
@@ -142,13 +147,16 @@ class Dashboard extends Component {
                   </Card>
 
 
+
+   
+
                 </div>
 
                 <div className="col-md-4">
                   <Card>
-                    <h1> TotalSpending</h1>
+                    <h1> Total Spending</h1>
                     <TotalSpending />
-
+                    
 
                     {/* <CardBody>
                       <CardTitle>Card title</CardTitle>
@@ -161,18 +169,13 @@ class Dashboard extends Component {
                 </div>
 
               </div>
-
             </div>
           </div>
         </div>
       </div >
-
-      // <FinancialOverview />
-
 
     );
   }
 }
 
 export default Dashboard;
-
