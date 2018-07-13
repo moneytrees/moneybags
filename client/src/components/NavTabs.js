@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/react-router-dom";
 import {
 	Collapse,
 	Navbar,
@@ -12,8 +12,8 @@ import {
 	DropdownToggle,
 	DropdownMenu,
 	DropdownItem
-} from 'reactstrap';
-const isAuth = localStorage.getItem('isAuthenticated');
+} from '../../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/reactstrap';
+
 
 // const NavTabs = () => {
 
@@ -126,7 +126,7 @@ export default class Example extends React.Component {
 					<Collapse isOpen={!this.state.collapsed} navbar>
 						<Nav navbar>
 							<NavItem>
-								<NavLink href="/components/" display={this.toggleBtnDisplay}>Components</NavLink>
+								<NavLink href="/components/" display={this.state.auth}>Components</NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
