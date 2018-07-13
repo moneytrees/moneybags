@@ -41,7 +41,6 @@
 
 .rv-xy-plot__inner .line-graph {
     display: block;
-    left: 20%;
 }
 
 .rv-xy-plot__axis__line {
@@ -276,5 +275,6 @@
 }
 
 .rv-radial-chart .rv-xy-plot__series--label {
-    pointer-events: none
+    pointer-events: none;
+    color: red
 }
