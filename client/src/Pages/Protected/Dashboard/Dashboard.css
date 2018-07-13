@@ -1,12 +1,9 @@
-
-
-body{
-   /* background-image: url("../imgs/moneyTreeBG.jpg"); */
-   background-color: rgba(255, 255, 255, 0.879);
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
-   
+body {
+    /* background-image: url("../imgs/moneyTreeBG.jpg"); */
+    background-color: rgba(255, 255, 255, 0.879);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .tamagotchi {
@@ -20,4 +17,3 @@ h1 {
     text-align: center;
     color: purple;
 }
-
