@@ -1,0 +1,20 @@
+.cashFlow-btn-group {
+    margin: 0;
+    padding: 0;
+}
+
+.graph-input-group {
+    
+}
+
+.cashFlow-graph {
+    float: left;
+    width: 50%;
+    padding-left: 1rem;
+}
+
+.testForm {
+    float: left;
+    width: 50%;
+    height: 300px;
+}
