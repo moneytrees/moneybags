@@ -83,7 +83,7 @@ class Dashboard extends Component {
       <div className="background">
         <ToastContainer />
 
-        <h1>Money Tree: User Dashboard</h1>
+        
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
@@ -108,9 +108,32 @@ class Dashboard extends Component {
                     isVisible={true}
                   >
                     <Card>
-                      <h1 id="dashboardTitle"> Achievements </h1>
+                      {/* <h1 id="dashboardTitle"> Achievements </h1> */}
+                      <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+         Achievements
+        </button>
+      </h5>
+    </div>
 
-                      <Achievements />
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      <Achievements />
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+
+
+
+
+
+                      
                     </Card>
                   </Animated>
                 </div>

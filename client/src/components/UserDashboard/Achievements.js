@@ -16,7 +16,7 @@ class Achievements extends Component {
             params: {
                 email: localStorage.getItem("user_email")
             }
-          })
+        })
             .then(response => {
                 this.setState({
                     achvArray: response.data
@@ -37,15 +37,15 @@ class Achievements extends Component {
                         {this.state.achvArray.map(function (item, i) {
                             return (
 
-                                <div className="col-md-4">
-                                    <h3> {item.name}</h3>
-                                        {console.log(item)}
+                                <div className="col-md-6">
 
-                                   {/* <img src={Trophy}/> */}
-                                   <img src={item.unlocked ? Trophy:greyTrophy}/>
+                                    <img src={item.unlocked ? Trophy : greyTrophy} />
 
+                                    <h3 className="itemName"> {item.name}</h3>
                                     <span> {item.desc}</span>
+
                                 </div>
+
                             );
                         })
                         }
