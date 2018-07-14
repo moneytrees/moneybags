@@ -39,18 +39,18 @@ class Footer extends Component {
                             </Modal>
                         </Col>
                     </Row>
-                    <Row className="smallTextFooter">
-                        <Col lg="4" sm="12"> <p>Company</p>
+                    <Row>
+                        <Col lg="4" sm="12"> <h3>Company</h3>
                             <NavItem>
                                 <NavLink href="/team">Our Team</NavLink>
                             </NavItem>
                         </Col>
-                        <Col lg="4" sm="12"> <p>Support</p>
+                        <Col lg="4" sm="12"> <h3>Support</h3>
                             <NavItem>
                                 <NavLink href="/dashboard">FAQ</NavLink>
                             </NavItem>
                         </Col>
-                        <Col lg="4" sm="12"> <p>Legal</p>
+                        <Col lg="4" sm="12"> <h3>Legal</h3>
                             <NavItem>
                                 <NavLink href="/dashboard">Terms of Service</NavLink>
                             </NavItem>

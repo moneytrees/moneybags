@@ -17,9 +17,10 @@
     color: #ffffff !important;
 }
 
-.smallTextFooter p {
+.page-footer h3 {
     font-family: 'Varela Round', sans-serif;
     font-size: 1.5em;
+    color: #ffffff;
 }
 
 li{

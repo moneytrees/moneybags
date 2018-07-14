@@ -1,8 +1,6 @@
 .about{
     color: #37474F;
     background-color: #ffffff;
-    /* background-image: url("../images/whiteMoneyTreeBG.jpg");
-    background-attachment: fixed; */
     padding: 3em;
 }
 
@@ -19,8 +17,9 @@ h2 {
     text-align: center;
 }
 
-p {
+.about p {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.5em;
+    text-align: justify;
 }
 
