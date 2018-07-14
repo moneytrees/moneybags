@@ -40,15 +40,32 @@ class ItemCreator extends Component {
   }
 
   //fetching account
+  // account() {
+  //   fetch("/api/accounts")
+  //     .then(data => data.json())
+  //     .then(response => {
+  //       // buildAccountObj(response);
+  //       console.log(response);
+  //     })
+  //     .catch(err => err.message);
+  //   console.log("account");
+  // }
+
   account() {
-    fetch("/api/accounts")
+    console.log({ user_id: localStorage.getItem("user_id") })
+
+    fetch("/api/accounts"
+      , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+      }
+    )
       .then(data => data.json())
-      .then(response => {
-        buildAccountObj(response);
-        console.log(userAccount);
-      })
-      .catch(err => err.message);
-    console.log("account");
+      .then(response => console.log(response))
+      .catch(err => console.log(err.message));
   }
 
   transaction() {
@@ -68,9 +85,6 @@ class ItemCreator extends Component {
     if (this.state.public_key) {
       return (
         <div id="foo">
-
-
-
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"

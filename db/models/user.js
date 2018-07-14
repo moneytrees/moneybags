@@ -1,6 +1,35 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const AccountSchema = new mongoose.Schema({
+  account_id: {
+    type: String,
+  },
+  balances: [{
+    available: {
+      type: String
+    },
+    current: {
+      type: String
+    },
+  }],
+  mask: {
+    type: Number,
+  },
+  name: {
+    type: String,
+  },
+  official_name: {
+    type: String,
+  },
+  subtype: {
+    type: String,
+  },
+  type: {
+    type: String
+  }
+});
+
 var Inst = new Schema({
 
   access_token: {
@@ -11,11 +40,16 @@ var Inst = new Schema({
   },
   bank_name: {
     type: String,
+
   },
   inst_id: {
     type: String,
-  }
+  },
+  account_ids: [
+    AccountSchema
+  ]
 });
+
 
 
 const UserSchema = new Schema({
