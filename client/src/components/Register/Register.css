@@ -7,7 +7,7 @@ Form {
     color: #015249;
 }
 
-.btn-secondary .btn .btn-secondary{
+ Button{
     color: #9cd2ba !important;
     background-color: #ffffff !important;
     font-family: lato !important;
@@ -15,9 +15,9 @@ Form {
     border: none !important;
     box-shadow: 2px 2px 2px #494949;
 }
-.btn-secondary .btn .btn-secondary:hover {
+Button:hover {
     color: #9cd2ba !important;
     background-color: #ffffffb2 !important;
     box-shadow: none;
     transition: 0.5s;
-}
+} 
