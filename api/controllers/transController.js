@@ -7,5 +7,6 @@ module.exports = {
       inst_data = user.institutions
       return res.json(inst_data)
     });
-  }
+  },
+
 }

@@ -32,9 +32,13 @@ module.exports = function (app, express) {
 
             User.findOne({ _id: user_id },
             ).then((user) => {
-                user.institutions.push(instData)
-                console.log("saving")
-                user.save();
+                if (user.institutions[0]) {
+                    return "you've already got a inst set."
+                } else {
+                    user.institutions.push(instData)
+                    console.log("saving")
+                    user.save();
+                }
             }
             ).catch(err => console.log(err))
             response.json(instData)

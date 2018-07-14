@@ -29,7 +29,7 @@ class ItemCreator extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ public_token: token, metadata: metadata })
+      body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
       .then(response => console.log(response.access_token))
@@ -37,21 +37,7 @@ class ItemCreator extends Component {
     console.log("LOLLLLLL");
   }
 
-  //fetching account
-  // account() {
-  //   fetch("/api/accounts")
-  //     .then(data => data.json())
-  //     .then(response => {
-  //       // buildAccountObj(response);
-  //       console.log(response);
-  //     })
-  //     .catch(err => err.message);
-  //   console.log("account");
-  // }
-
   account() {
-    console.log({ user_id: localStorage.getItem("user_id") })
-
     fetch("/api/accounts"
       , {
         method: "POST",
@@ -59,8 +45,7 @@ class ItemCreator extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
-      }
-    )
+      })
       .then(data => data.json())
       .then(response => console.log(response))
       .catch(err => console.log(err.message));

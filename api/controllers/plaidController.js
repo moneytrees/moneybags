@@ -42,9 +42,9 @@ class PlaidController {
     }
 
     get accessToken() {
-        // return this.access_token;
+        return this.access_token;
         //choose a inst hard setting static token
-        return "access-sandbox-ffabcd33-94e4-4499-9a00-96272c6b2b59";
+        // return "access-sandbox-ffabcd33-94e4-4499-9a00-96272c6b2b59";
     }
 
     set transactionDaysAgo(number) {
