@@ -37,7 +37,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
-    "postinstall": "chmod +x \"submodules.sh\" && submodules.sh",
+    "postinstall": "bash ./submodules.sh",
     "build": "cd client && npm run build",
     "build-dev": "ng build --target=development --environment=dev",
     "build-qa": "ng build --target=uat --environment=qa",
