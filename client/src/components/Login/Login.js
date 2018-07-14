@@ -63,7 +63,7 @@ class Login extends Component {
       from: { pathname: "/dashboard" }
     };
     const { referrerRedirect } = this.state;
-    if (referrerRedirect) return <Redirect to={from} />;
+    if (referrerRedirect) return <Redirect to="/dashboard" />;
     return (
       <div>
         <div className="LoginForm">

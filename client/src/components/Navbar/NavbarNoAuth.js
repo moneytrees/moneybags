@@ -40,6 +40,9 @@ export default class NavbarNoAuth extends React.Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
+                <NavLink href="/register">Register</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="/login">Login</NavLink>
               </NavItem>
               <NavItem>

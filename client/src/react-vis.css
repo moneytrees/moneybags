@@ -36,12 +36,19 @@
 
 .rv-xy-plot .rv-xy-canvas {
     pointer-events: none;
-    position: absolute
+    position: absolute;
 }
 
 .rv-xy-plot__inner .line-graph {
     display: block;
 }
+
+.rv-xy-plot__inner {
+   
+   margin-right:50%;
+}
+
+
 
 .rv-xy-plot__axis__line {
     fill: none;
@@ -276,5 +283,4 @@
 
 .rv-radial-chart .rv-xy-plot__series--label {
     pointer-events: none;
-    color: red
 }

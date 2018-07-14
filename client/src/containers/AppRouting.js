@@ -23,7 +23,7 @@ import Landing from "../Pages/Unprotected/Landing/Landing";
 
 const decode = new Decode();
 let isAuth = (function () { if (localStorage.getItem("isAuthenticated")) { return <NavbarAuth /> } else { return <NavbarNoAuth /> } }());
-let auth = localStorage.getItem("isAuthenticated") === true ? auth = true : auth = false;
+
 
 const AppRouting = () => {
     return (

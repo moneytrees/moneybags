@@ -6,82 +6,67 @@ var user_m = new User;
 
 
 module.exports = function (app, express) {
-    const plaidRouter = express.Router();
-    global.__plaidClient = new PlaidController();
+	const plaidRouter = express.Router();
+	global.__plaidClient = new PlaidController();
 
-    plaidRouter.get("/api/get_public_key", function (request, response, next) {
-        return response.json(__plaidClient.getPublicKey());
-    });
+	plaidRouter.get("/api/get_public_key", function (request, response, next) {
+		return response.json(__plaidClient.getPublicKey());
+	});
 
-    plaidRouter.post("/api/get_access_token", function (request, response, next) {
-        __plaidClient.publicToken = request.body.public_token;
-        __plaidClient.metaData = request.body.metadata;
-        __plaidClient.institution = request.body.metadata.institution;
-        let inst_data = __plaidClient.metaData.institution
-        let user_id = request.body.user_id
+	plaidRouter.post("/api/get_access_token", function (request, response, next) {
+		__plaidClient.publicToken = request.body.public_token;
+		__plaidClient.metaData = request.body.metadata;
+		__plaidClient.institution = request.body.metadata.institution;
+		let inst_data = __plaidClient.metaData.institution
+		let user_id = request.body.user_id
 
-        __plaidClient.getAccessToken().then((link) => {
+		__plaidClient.getAccessToken().then((link) => {
 
-            var instData = {
-                access_token: link.access_token,
-                item_id: link.item_id,
-                bank_name: inst_data.name,
-                inst_id: inst_data.institution_id
-            }
+			var instData = {
+				access_token: link.access_token,
+				item_id: link.item_id,
+				bank_name: inst_data.name,
+				inst_id: inst_data.institution_id
+			}
 
-            User.findOne({ _id: user_id }, {  /* projection */
-                institutions: instData.bank_name
-            }
-            ).then((user) => {
-                console.log()
-
-
-
-                // for (var i = 0; i < user.institutions.length; i++) {
-                //     // console.log(` checkkkk it ${user.institutions[i].bank_name}`)
-                //     if (user.institutions[i].bank_name !== instData.bank_name) {
-                //         user.institutions.push(instData)
-                //         console.log("saving")
-                //         user.save();
-                //     } else {
-                //         console.log("it exist")
-                //     }
-                // }
-                // console.log(user)
-
-            }
-            ).catch(err => console.log(err))
+			User.findOne({ _id: user_id }).then(
+				(user) => {
+					user.institutions.push(instData)
+					console.log("SAVING NEW INSTITUTION")
+					user.save();
+				}
+			).catch(err => console.log(err))
 
 
-            response.json(instData)
-        });
-        //__plaidClient.accessToken = 
-    });
+			response.json(instData)
+		});
+		//__plaidClient.accessToken = 
+	});
 
-    plaidRouter.get("/api/accounts", function (request, response, next) {
-        // Retrieve high-level account information and account and routing numbers
-        // for each account associated with the Item.
-        __plaidClient
-            .getAccountInfo(__plaidClient.accessToken)
-            .then(accountinfo => {
+	plaidRouter.get("/api/accounts", function (request, response, next) {
+		// Retrieve high-level account information and account and routing numbers
+		// for each account associated with the Item.
+		__plaidClient
+			.getAccountInfo(__plaidClient.accessToken)
+			.then(accountinfo => {
 
-                console.log(accountinfo);
-                response.json(accountinfo)
-            });
-    });
+				console.log(accountinfo);
+				response.json(accountinfo)
+			});
+	});
 
-    plaidRouter.post("/api/item", function (request, response, next) {
-        __plaidClient
-            .getItem(__plaidClient.accessToken)
-            .then(itemInfo => response.json(itemInfo));
-    });
+	plaidRouter.post("/api/item", function (request, response, next) {
+		__plaidClient
+			.getItem(__plaidClient.accessToken)
+			.then(itemInfo => response.json(itemInfo));
+	});
 
-    plaidRouter.post("/api/transactions", function (request, response, next) {
-        __plaidClient.transactionDaysAgo = 30;
-        __plaidClient
-            .getTransactions(__plaidClient.accessToken)
-            .then(transactions => response.json(transactions));
-    });
+	plaidRouter.post("/api/transactions", function (request, response, next) {
+		__plaidClient.transactionDaysAgo = 30;
+		__plaidClient
+			.getTransactions(__plaidClient.accessToken)
+			.then(transactions => response.json(transactions));
+	});
 
-    return plaidRouter;
+	return plaidRouter;
 };
