@@ -238,7 +238,7 @@ export default class CashFlow extends Component {
                             <div className="cashFlow-graph">
                                 <XYPlot
                                     margin={{ left: 60 }}
-                                    width={500}
+                                    width={600}
                                     height={500}
                                     xDomain={[0, 30]}
                                 >

@@ -182,7 +182,7 @@ class Dashboard extends Component {
                 <div className="col-md-8">
                   <Zoom>
                     <Card>
-                      <h1 className="dashboardTitle"> Transaction Detail</h1>
+                      <h2 className="dbTitle"> Transaction Detail</h2>
 
                       <TransactionDetail />
                     </Card>
