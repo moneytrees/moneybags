@@ -16,14 +16,14 @@ module.exports = {
 
     deleteNewAchievements: (req, res) => {
 
-        User.updateOne({email:"ron@ron.com"}, {newAchv: []}).then((data)=>{
+        User.updateOne({email:req.query.email}, {newAchv: []}).then((data)=>{
             return res.json(data);
         });
 
     },
 
     getNewAchievements: (req, res) =>{
-        User.findOne({ email: "ron@ron.com" }).then(user => {
+        User.findOne({ email: req.query.email }).then(user => {
 
             return res.json(user.newAchv);
 

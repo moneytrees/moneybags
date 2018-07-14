@@ -26,7 +26,7 @@ class Dashboard extends Component {
 
   componentDidMount(){
       axios
-          .get("/api/getNewUserAchievements")
+          .get("/api/getNewUserAchievements",{params:{email: localStorage.getItem("user_email")}})
           .then(response => {
 
               let newAchvArr = response.data;
@@ -68,7 +68,7 @@ class Dashboard extends Component {
 
 
               axios
-                  .delete("/api/deleteNewAchievements")
+                  .delete("/api/deleteNewAchievements",{params:{email: localStorage.getItem("user_email")}})
                   .then(response => {
                       console.log(response);
                   })

@@ -13,7 +13,8 @@ module.exports = {
         let clientAchvArr = [];
         let tempObj;
 
-        User.findOne({ email:"wesley@email.com" })
+
+        User.findOne({ email:req.query.email })
         .then(user => {
 
 
@@ -36,30 +37,11 @@ module.exports = {
                   }
                 clientAchvArr.push(tempObj);
 
-                  console.log(`in loop
-                  
-                  
-                  
-                  ${clientAchvArr}
                 
-                
-                
-                
-                
-                `);
       
                 });
       
       
-                console.log(`out loop
-        
-        
-                ${clientAchvArr}
-            
-            
-            
-            
-            `);
         
         
                 return res.json(clientAchvArr)
