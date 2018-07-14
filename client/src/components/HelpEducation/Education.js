@@ -14,7 +14,7 @@ class Education extends Component {
       
             <section className="accordion-section clearfix mt-3" aria-label="Question Accordions">
             <div className="container">
-            <h2>Educational Resources </h2>
+            <h1>Educational Resources </h1>
             <h3>Frequently Asked Questions</h3>
             <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <div className="panel panel-default">
