@@ -6,13 +6,15 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievement from "../../../components/Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
-import { Animated } from "react-animated-css";
-import "./Dashboard.css";
 import { ToastContainer, toast } from 'react-toastify';
 import AchvToast from "../../../components/AchvToast"
 import 'react-toastify/dist/ReactToastify.css';
 import "./Dashboard.css";
 import axios from "axios";
+import { Animated } from "react-animated-css";
+import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
+
 
 
 class Dashboard extends Component {
@@ -81,6 +83,7 @@ class Dashboard extends Component {
           });
   }
 
+
   render() {
     return (
 
@@ -90,12 +93,8 @@ class Dashboard extends Component {
         <ToastContainer/>
 
         <h1>
-
           Money Tree: User Dashboard
         </h1>
-
-        {/* <Baseline /> */}
-        {/* <Button color="danger">Danger!</Button> */}
         <div className="col-12">
           <div className="container">
 
@@ -121,7 +120,7 @@ class Dashboard extends Component {
 
                 <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}>
                   <Card>
-                    <h1> Achievements </h1>
+                    <h1 id= "dashboardTitle"> Achievements </h1>
 
                     <Achievement />
 
@@ -139,7 +138,7 @@ class Dashboard extends Component {
                 <div className="col-12">
                   <div className="ProgressBar">
                     <Card>
-                      <h1> Progress Bar </h1>
+                      <h1 id= "dashboardTitle"> Progress Bar </h1>
                       <ProgressBar />
                     </Card>
                   </div>
@@ -155,14 +154,12 @@ class Dashboard extends Component {
               <div className="row">
 
                 <div className="col-12 text-center">
-                
+                <Zoom>
                   <Card>
-
-                    <h1> Cash Flow </h1>
-                    <CashFlow />
+                    <h1 id= "dashboardTitle"> Cash Flow </h1>
                   </Card>
                
-               
+               </Zoom>
                 </div>
               </div>
             </div>
@@ -175,32 +172,24 @@ class Dashboard extends Component {
 
               <div className="row">
                 <div className="col-md-8">
-                <Animated animationIn="slideInLeft" animationOut="zoomOutDown" isVisible={true}>
-                  <Card>
 
-                    <h1> Transaction Detail</h1>
+                <Zoom>
+                  <Card>
+                    <h1 id= "dashboardTitle"> Transaction Detail</h1>
 
 
                     <TransactionDetail />
                   </Card>
-
-                </Animated>
-
-
-
-   
-
+                </Zoom>
                 </div>
 
                 <div className="col-md-4">
-                <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}>
+                <Fade right>
                   <Card>
-                    <h1> Total Spending</h1>
+                    <h1 id= "dashboardTitle"> Total Spending</h1>
                     <TotalSpending />
                   </Card>
-
-                </Animated>
-
+                </Fade>
                 </div>
 
               </div>

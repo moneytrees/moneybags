@@ -17,6 +17,8 @@ import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
 import LoanCalculator from './LoanCalculator';
 import { Button } from 'reactstrap';
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
 
 export default class CashFlow extends Component {
     constructor(props) {
@@ -197,14 +199,16 @@ export default class CashFlow extends Component {
             case 1:
                 return (
                     <div>
+                        <Rotate top left>
                         <div className="cashFlow-btn-group">
                             <Button color="info" onClick={this.calculate}>Compare</Button>
                             <Button color="info" onClick={this.timeScaleHandler}>30 Days</Button>
                             <Button color="info" className="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
                             <Button color="info" className="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
                             <Button color="info" className="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
-                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>   
                         </div>
+                        </Rotate>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">
                                 <XYPlot
@@ -238,9 +242,11 @@ export default class CashFlow extends Component {
                                     />
                                 </XYPlot>
                             </div>
+                            <Fade right>
                             <div className="testForm">
                                 <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
                             </div>
+                            </Fade>
                         </div>
                     </div >
                 );
