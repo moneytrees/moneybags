@@ -18,3 +18,12 @@
     width: 50%;
     height: 300px;
 }
+
+.loanDataLine {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.loanDataVal {
+    float: right;
+}

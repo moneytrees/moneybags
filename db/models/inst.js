@@ -2,26 +2,23 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const InstSchema = new mongoose.Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "users"
+var Inst = new Schema({
+
+    access_token: {
+        type: String,
+        required: true
     },
-    registered_inst: {
-        _id: new ObjectId[{
-            token: {
-                type: String,
-                required: true
-            },
-            inst_id: {
-                type: String,
-                required: true,
-            },
-            inst_name: {
-                type: String,
-                required: true
-            }
-        }]
+    item_id: {
+        type: String,
+        required: true
+    },
+    bank_name: {
+        type: String,
+        required: true
+    },
+    inst_id: {
+        type: String,
+        required: true
     }
 });
 
