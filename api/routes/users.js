@@ -7,6 +7,7 @@ module.exports = (app, express) => {
 
   userRouter.route("/api/register").post(userController.registerUser);
   userRouter.route("/api/login").post(userController.loginUser);
+  userRouter.route("/api/addCashFlow").post(userController.addCashFlow);
   userRouter.route("/api/getNewUserAchievements").get(userController.getNewAchievements);
   userRouter.route("/api/getLatestCashFlow").get(userController.getLatestCashFlow);
   userRouter.route("/api/deleteNewAchievements").delete(userController.deleteNewAchievements);

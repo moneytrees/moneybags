@@ -85,6 +85,30 @@ export default class CashFlow extends Component {
         currentState.regLineData = regLineData;
         currentState.dataSet = dataSet;
         this.setState({ currentState });
+
+        let currentCashFlow;
+        if (result.equation[0] >= 0) {
+            currentCashFlow = 'positive';
+        } else {
+            currentCashFlow = 'negative';
+        }
+        
+        fetch("/api/addCashFlow", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+              },
+            body: JSON.stringify({ email:localStorage.getItem("user_email") , cashFlow:currentCashFlow })
+
+        })
+        .then(res => {console.log(res.json())})
+        .then(data =>{console.log(data)})
+            .catch(err => {console.log(err.message)});
+
+//localStorage.getItem('user_email')
+
+        console.log("transaction");
+    
     }
 
     calculate() {
@@ -136,6 +160,7 @@ export default class CashFlow extends Component {
         currentState.dataSet2 = dataSet;
         currentState.compare = true;
         this.setState({ currentState });
+        
     }
 
     calculatePurchaseOverInterval() {

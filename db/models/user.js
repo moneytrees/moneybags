@@ -37,6 +37,10 @@ const UserSchema = new Schema({
   newAchv: [],
   transactions: [],
   cashFlowArray: [],
+  lastCashFlow: {
+    type: Date,
+    default: Date.now
+  },
   date: {
     type: Date,
     default: Date.now
