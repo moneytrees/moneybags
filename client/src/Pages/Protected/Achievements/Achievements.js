@@ -10,9 +10,7 @@ class Achievements extends Component {
     }
 
     componentDidMount() {
-
-        axios
-            .get("/api/getAllAchievements")
+        fetch("/api/getAllAchievements")
             .then(response => {
                 this.setState({
                     achvArray: response.data
