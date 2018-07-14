@@ -1,28 +1,88 @@
 import React, { Component } from "react";
-
 import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
-import Achievement from "../../../components/Achievements";
+import Achievements from "../Achievements";
 import ProgressBar from "../../../components/ProgressBar";
 import { Card, CardImg } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+import AchvToast from "../../../components/AchvToast";
+import "react-toastify/dist/ReactToastify.css";
+import "./Dashboard.css";
+import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
-import "./Dashboard.css";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { newAchvArr: [] };
+  }
+
+  componentDidMount() {
+    axios
+      .get("/api/getNewUserAchievements", {
+        params: { email: localStorage.getItem("user_email") }
+      })
+      .then(response => {
+        let newAchvArr = response.data;
+
+        setTimeout(() => {
+          if (newAchvArr.length > 0) {
+            toast(
+              <AchvToast
+                title={newAchvArr[0].name}
+                desc={newAchvArr[0].desc}
+              />,
+              { type: toast.TYPE.INFO, autoClose: 5000 }
+            );
+
+            let i = 1;
+
+            let toastInterval = setInterval(() => {
+              if (i >= newAchvArr.length) {
+                clearInterval(toastInterval);
+              } else {
+                toast(
+                  <AchvToast
+                    title={newAchvArr[i].name}
+                    desc={newAchvArr[i].desc}
+                  />,
+                  { type: toast.TYPE.INFO, autoClose: 5000 }
+                );
+                i++;
+              }
+            }, 5500);
+          }
+        }, 1500);
+
+        console.log(newAchvArr);
+
+        axios
+          .delete("/api/deleteNewAchievements", {
+            params: { email: localStorage.getItem("user_email") }
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(errors => {
+            console.log(`error: ${errors}`);
+          });
+      })
+      .catch(errors => {
+        console.log(`error: ${errors}`);
+      });
+  }
+
   render() {
     return (
       <div className="background">
-        {/* <h1>
+        <ToastContainer />
 
-          Money Tree: User Dashboard
-        </h1> */}
-
-        {/* <Baseline /> */}
-        {/* <Button color="danger">Danger!</Button> */}
+        <h1>Money Tree: User Dashboard</h1>
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
@@ -34,11 +94,7 @@ class Dashboard extends Component {
                     isVisible={true}
                   >
                     {/* <h1> BigFoot Avatar </h1> */}
-                    <img
-                      className="neutralBigFoot"
-                      src={neutralBigFoot}
-                      alt="logo"
-                    />
+                    <Avatar />
                   </Animated>
                 </div>
 
@@ -51,14 +107,7 @@ class Dashboard extends Component {
                     <Card>
                       <h1 id="dashboardTitle"> Achievements </h1>
 
-                      <Achievement />
-
-                      {/* <CardBody>
-      <CardTitle>Card title</CardTitle>
-      <CardSubtitle>Card subtitle</CardSubtitle>
-      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-    </CardBody> */}
+                      <Achievements />
                     </Card>
                   </Animated>
                 </div>
@@ -73,14 +122,12 @@ class Dashboard extends Component {
             >
               <div className="row">
                 <div className="col-12">
-                  {/* <div className="container"> */}
                   <div className="ProgressBar">
                     <Card>
                       <h1 id="dashboardTitle"> Progress Bar </h1>
                       <ProgressBar />
                     </Card>
                   </div>
-                  {/* </div> */}
                 </div>
               </div>
             </Animated>
@@ -93,31 +140,11 @@ class Dashboard extends Component {
                   <Zoom>
                     <Card>
                       <h1 id="dashboardTitle"> Cash Flow </h1>
-                      <CashFlow />
-
-                      {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
                     </Card>
                   </Zoom>
                 </div>
               </div>
             </div>
-
-            {/* <div>
-              <Card>
-
-                <CardBody>
-                  <CardTitle>Card title</CardTitle>
-                  <CardSubtitle>Card subtitle</CardSubtitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                </CardBody>
-              </Card>
-            </div> */}
 
             <hr />
 
@@ -129,32 +156,16 @@ class Dashboard extends Component {
                       <h1 id="dashboardTitle"> Transaction Detail</h1>
 
                       <TransactionDetail />
-
-                      {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
                     </Card>
                   </Zoom>
                 </div>
 
                 <div className="col-md-4">
                   <Fade right>
-                    {/* <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}> */}
                     <Card>
                       <h1 id="dashboardTitle"> Total Spending</h1>
                       <TotalSpending />
-
-                      {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
                     </Card>
-                    {/* </Animated> */}
                   </Fade>
                 </div>
               </div>

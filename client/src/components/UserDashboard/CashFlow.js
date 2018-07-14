@@ -47,19 +47,6 @@ export default class CashFlow extends Component {
 
     }
     componentDidMount() {
-        // axios.post('/api/addCashFlow', {cashFlow: 'cash flow string'})
-        //     .then((data) => {
-        //         console.log(data);
-        //         // send 'positive', 'negative', or 'neutral'
-        //     });
-
-        // fetch("/api/transactions", {
-        //     method: "POST"
-        //   })
-        //     .then(data => data.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.log(err.message));
-        //   console.log("transaction");
 
         let sampleTransactions = [
             { amount: 17, date: '2018-06-15' },

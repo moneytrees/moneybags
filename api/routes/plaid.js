@@ -29,14 +29,25 @@ module.exports = function (app, express) {
                 inst_id: inst_data.institution_id
             }
 
-            User.findOne({ _id: user_id }).then((user) => {
-                console.log(user)
-                user.institutions.push(instData)
-                var subdoc = user.institutions[0];
-                console.log(user.institutions[0]);
-                subdoc.isNew;
+            User.findOne({ _id: user_id }, {  /* projection */
+                institutions: instData.bank_name
+            }
+            ).then((user) => {
+                console.log()
 
-                user.save();
+
+
+                // for (var i = 0; i < user.institutions.length; i++) {
+                //     // console.log(` checkkkk it ${user.institutions[i].bank_name}`)
+                //     if (user.institutions[i].bank_name !== instData.bank_name) {
+                //         user.institutions.push(instData)
+                //         console.log("saving")
+                //         user.save();
+                //     } else {
+                //         console.log("it exist")
+                //     }
+                // }
+                // console.log(user)
 
             }
             ).catch(err => console.log(err))
@@ -52,7 +63,11 @@ module.exports = function (app, express) {
         // for each account associated with the Item.
         __plaidClient
             .getAccountInfo(__plaidClient.accessToken)
-            .then(accountinfo => response.json(accountinfo));
+            .then(accountinfo => {
+
+                console.log(accountinfo);
+                response.json(accountinfo)
+            });
     });
 
     plaidRouter.post("/api/item", function (request, response, next) {
