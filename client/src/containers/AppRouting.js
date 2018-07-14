@@ -18,6 +18,7 @@ import NavbarAuth from "../components/Navbar/NavbarAuth";
 import NavbarNoAuth from "../components/Navbar/NavbarNoAuth";
 import Decode from "../helpers/Decode";
 import { PrivateRoute } from "../helpers/AuthService";
+import Landing from "../Pages/Unprotected/Landing/Landing";
 
 const decode = new Decode();
 let isAuth = (function () { if (localStorage.getItem("isAuthenticated")) { return <NavbarAuth /> } else { return <NavbarNoAuth /> } }());
@@ -30,7 +31,7 @@ const AppRouting = () => {
                 {
                     isAuth
                 }
-                <Route exact path="/" component={UserRegister} />
+                <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={UserLogin} />
                 <Route exact path="/register" component={UserRegister} />
                 <Route exact path="/team" component={Team} />
