@@ -13,7 +13,7 @@ import {
 	DropdownMenu,
 	DropdownItem
 } from 'reactstrap';
-const isAuth = localStorage.getItem('isAuthenticated');
+
 
 // const NavTabs = () => {
 
@@ -92,49 +92,49 @@ const isAuth = localStorage.getItem('isAuthenticated');
 // export default NavTabs;
 
 
-export default class Example extends React.Component {
-	constructor(props) {
-		super(props);
+// export default class Example extends React.Component {
+// 	constructor(props) {
+// 		super(props);
 
-		this.toggleNavbar = this.toggleNavbar.bind(this);
-		this.state = {
-			collapsed: true,
-			auth: false
-		};
-	}
+// 		this.toggleNavbar = this.toggleNavbar.bind(this);
+// 		this.state = {
+// 			collapsed: true,
+// 			auth: false
+// 		};
+// 	}
 
-	toggleNavbar() {
-		this.setState({
-			collapsed: !this.state.collapsed
-		});
-	}
+// 	toggleNavbar() {
+// 		this.setState({
+// 			collapsed: !this.state.collapsed
+// 		});
+// 	}
 
-	toggleBtnDisplay() {
-		const localAuth = localStorage.getItem("isAuthenticated");
+// 	toggleBtnDisplay() {
+// 		const localAuth = localStorage.getItem("isAuthenticated");
 
-		if (localAuth) this.setState({
-			auth: true
-		});
-	}
+// 		if (localAuth) this.setState({
+// 			auth: true
+// 		});
+// 	}
 
-	render() {
-		return (
-			<div>
-				<Navbar color="light" light>
-					<NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
-					<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-					<Collapse isOpen={!this.state.collapsed} navbar>
-						<Nav navbar>
-							<NavItem>
-								<NavLink href="/components/" display={this.toggleBtnDisplay}>Components</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-							</NavItem>
-						</Nav>
-					</Collapse>
-				</Navbar>
-			</div>
-		);
-	}
-}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<Navbar color="light" light>
+// 					<NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
+// 					<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+// 					<Collapse isOpen={!this.state.collapsed} navbar>
+// 						<Nav navbar>
+// 							<NavItem>
+// 								<NavLink href="/components/" display={this.state.auth}>Components</NavLink>
+// 							</NavItem>
+// 							<NavItem>
+// 								<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+// 							</NavItem>
+// 						</Nav>
+// 					</Collapse>
+// 				</Navbar>
+// 			</div>
+// 		);
+// 	}
+// }

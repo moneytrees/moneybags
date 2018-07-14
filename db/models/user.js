@@ -1,6 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+var Inst = new Schema({
+
+  access_token: {
+    type: String,
+  },
+  item_id: {
+    type: String,
+  },
+  bank_name: {
+    type: String,
+  },
+  inst_id: {
+    type: String,
+  }
+});
+
+
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -15,7 +32,8 @@ const UserSchema = new Schema({
     required: true
   },
   achievements: [],
-  institutions: [],
+  institutions: [Inst],
+  transaction: [],
   date: {
     type: Date,
     default: Date.now

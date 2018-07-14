@@ -9,13 +9,14 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries
-} from 'react-vis';
+} from 'react-vis/dist';
 import regression from 'regression';
 import OneYear from './OneYear';
 import FiveYears from './FiveYears';
 import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
 import LoanCalculator from './LoanCalculator';
+import { Button } from 'reactstrap';
 
 export default class CashFlow extends Component {
     constructor(props) {
@@ -34,7 +35,8 @@ export default class CashFlow extends Component {
             compare: false, //false
             numPaymentsInMonths: 60,
             monthlyPaymentAmount: 400,
-            purchaseData: ''
+            purchaseData: '',
+            sampleBalance: 2085
         };
 
         this.calculate = this.calculate.bind(this);
@@ -43,33 +45,33 @@ export default class CashFlow extends Component {
 
     }
     componentDidMount() {
-        let sampleBalance = 2085;
+
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-12' },
-            { amount: 57, date: '2018-06-13' },
-            { amount: 100, date: '2018-06-16' },
-            { amount: 23, date: '2018-06-17' },
-            { amount: -800, date: '2018-06-18' },
-            { amount: 8, date: '2018-06-20' },
-            { amount: 15, date: '2018-06-21' },
-            { amount: 75, date: '2018-06-25' },
-            { amount: 11, date: '2018-06-28' },
-            { amount: 6, date: '2018-07-01' },
-            { amount: 12, date: '2018-07-05' }
+            { amount: 17, date: '2018-06-15' },
+            { amount: 57, date: '2018-06-17' },
+            { amount: 100, date: '2018-06-19' },
+            { amount: 23, date: '2018-06-21' },
+            { amount: -800, date: '2018-06-24' },
+            { amount: 8, date: '2018-06-26' },
+            { amount: 15, date: '2018-06-28' },
+            { amount: 75, date: '2018-06-30' },
+            { amount: 11, date: '2018-07-02' },
+            { amount: 6, date: '2018-07-04' },
+            { amount: 12, date: '2018-07-08' }
         ];
 
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = sampleBalance;
+        let yPointCoord = this.state.sampleBalance;
         for (let i = sampleTransactions.length - 1; i >= 0; i--) {
             xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
             yPointCoord += sampleTransactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: sampleBalance });
-        regressionSet.push([30, sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
+        regressionSet.push([30, this.state.sampleBalance]);
 
         const result = regression.linear(regressionSet);
 
@@ -84,34 +86,42 @@ export default class CashFlow extends Component {
     }
 
     calculate() {
-        let sampleBalance = 2085;
+
         let sampleTransactions = [
-            { amount: 17, date: '2018-06-10' },
-            { amount: 57, date: '2018-06-12' },
-            { amount: 100, date: '2018-06-16' },
-            { amount: 23, date: '2018-06-17' },
-            { amount: -800, date: '2018-06-18' },
-            { amount: 8, date: '2018-06-20' },
-            { amount: 15, date: '2018-06-21' },
-            { amount: 75, date: '2018-06-25' },
-            { amount: 11, date: '2018-06-28' },
-            { amount: 6, date: '2018-07-01' },
-            { amount: 12, date: '2018-07-05' }
+            { amount: 17, date: '2018-06-15' },
+            { amount: 57, date: '2018-06-17' },
+            { amount: 100, date: '2018-06-19' },
+            { amount: 23, date: '2018-06-21' },
+            { amount: -800, date: '2018-06-24' },
+            { amount: 8, date: '2018-06-26' },
+            { amount: 15, date: '2018-06-28' },
+            { amount: 75, date: '2018-06-30' },
+            { amount: 11, date: '2018-07-02' },
+            { amount: 6, date: '2018-07-04' },
+            { amount: 12, date: '2018-07-08' }
         ];
-        sampleBalance -= this.state.purchaseData.downPayment;
-        sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment, date: Date.now() });
+        const crntState = this.state;
+        console.log(crntState.purchaseData.downPayment);
+        console.log(crntState.sampleBalance);
+        console.log(crntState.sampleBalance - crntState.purchaseData.downPayment - crntState.purchaseData.monthlyPayment);
+        crntState.sampleBalance = (crntState.sampleBalance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
+        this.setState({ crntState });
+        console.log(this.state.sampleBalance);
+        sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment + this.state.purchaseData.downPayment, date: Date.now() });
+        console.log(sampleTransactions[sampleTransactions.length - 1]);
+        console.log(this.state.sampleBalance);
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = sampleBalance;
+        let yPointCoord = this.state.sampleBalance;
         for (let i = sampleTransactions.length - 1; i >= 0; i--) {
             xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
             yPointCoord += sampleTransactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: sampleBalance });
-        regressionSet.push([30, sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
+        regressionSet.push([30, this.state.sampleBalance]);
 
         const result = regression.linear(regressionSet);
 
@@ -188,12 +198,12 @@ export default class CashFlow extends Component {
                 return (
                     <div>
                         <div className="cashFlow-btn-group">
-                            <button onClick={this.calculate}>Compare</button>
-                            <button onClick={this.timeScaleHandler}>30 Days</button>
-                            <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                            <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                            <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                            <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
+                            <Button color="info" onClick={this.calculate}>Compare</Button>
+                            <Button color="info" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
                         </div>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">

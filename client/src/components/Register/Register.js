@@ -23,8 +23,8 @@ class Register extends Component {
       email: "",
       name: "",
       password: "",
-      referrerRedirect:false,
-      feedback:false
+      referrerRedirect: false,
+      feedback: false
 
     };
   }
@@ -53,8 +53,8 @@ class Register extends Component {
       .then(data => data.json())
       .then(response => {
 
-       if(response.success)
-       this.setState({referrerRedirect: true, feedback: response.success});
+        if (response.success)
+          this.setState({ referrerRedirect: true, feedback: response.success });
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -75,9 +75,9 @@ class Register extends Component {
     const { referrerRedirect } = this.state;
     if (referrerRedirect)
       return <Redirect to={{
-          pathname: '/login',
-          state: { feedback: this.state.feedback, from: '/register' }
-      }}/>;
+        pathname: '/login',
+        state: { feedback: this.state.feedback, from: '/register' }
+      }} />;
     return (
       <div className="row justify-content-center">
         <div className="col-10 col-sm-7 col-md-5 col-lg-4">
@@ -168,4 +168,4 @@ class Register extends Component {
     );
   }
 }
-export default  withRouter(Register)
+export default withRouter(Register)

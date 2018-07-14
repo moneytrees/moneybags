@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
@@ -7,59 +6,49 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievement from "../../../components/Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
+import { Animated } from "react-animated-css";
 import "./Dashboard.css";
 
 
 class Dashboard extends Component {
+
   render() {
     return (
 
 
       <div className="background">
 
-        <h1>
-
-          Money Tree: User Dashboard
-        </h1>
-
-        {/* <Baseline /> */}
-        {/* <Button color="danger">Danger!</Button> */}
         <div className="col-12">
           <div className="container">
+
             <div className="Acheivement">
+
+
 
               <div className="row">
 
-                <div className="col-md-4">
+               
+                  <div className="col-md-4">
+                  <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
+                    
+                      {/* <h1> BigFoot Avatar </h1> */}
+                      <img className="neutralBigFoot" src={neutralBigFoot} alt="logo" />
+                    
+                    </Animated>
+                  </div>
+                
 
 
-                  <Card>
-                    <h1> BigFoot Avatar </h1>
-                    <img className="neutralBigFoot" src={neutralBigFoot} alt="logo" />
-
-
-                    {/* <CardBody>
-      <CardTitle>Card title</CardTitle>
-      <CardSubtitle>Card subtitle</CardSubtitle>
-      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-    </CardBody> */}
-                  </Card>
-                </div>
                 <div className="col-md-8 text-center">
+
+                <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}>
                   <Card>
                     <h1> Achievements </h1>
 
                     <Achievement />
 
-
-                    {/* <CardBody>
-      <CardTitle>Card title</CardTitle>
-      <CardSubtitle>Card subtitle</CardSubtitle>
-      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-    </CardBody> */}
                   </Card>
+                  </Animated>
 
                 </div>
               </div>
@@ -67,20 +56,18 @@ class Dashboard extends Component {
 
             <hr>
             </hr>
-            <div className="row">
-              <div className="col-12">
-                {/* <div className="container"> */}
-                <div className="ProgressBar">
-                  <Card>
-                    <h1> Progress Bar </h1>
-                    <ProgressBar />
-
-                  </Card>
-
+            <Animated animationIn="fadeInUp" animationOut="zoomOutDown" isVisible={true}>
+              <div className="row">
+                <div className="col-12">
+                  <div className="ProgressBar">
+                    <Card>
+                      <h1> Progress Bar </h1>
+                      <ProgressBar />
+                    </Card>
+                  </div>
                 </div>
-                {/* </div> */}
               </div>
-            </div>
+            </Animated>
 
             <hr>
             </hr>
@@ -90,34 +77,17 @@ class Dashboard extends Component {
               <div className="row">
 
                 <div className="col-12 text-center">
+                
                   <Card>
+
                     <h1> Cash Flow </h1>
-                    <CashFlow />
-
-
-                    {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
+  <CashFlow />
                   </Card>
-
+               
+               
                 </div>
               </div>
             </div>
-
-            {/* <div>
-              <Card>
-
-                <CardBody>
-                  <CardTitle>Card title</CardTitle>
-                  <CardSubtitle>Card subtitle</CardSubtitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                </CardBody>
-              </Card>
-            </div> */}
 
             <hr>
 
@@ -127,43 +97,40 @@ class Dashboard extends Component {
 
               <div className="row">
                 <div className="col-md-8">
+                <Animated animationIn="slideInLeft" animationOut="zoomOutDown" isVisible={true}>
                   <Card>
+
                     <h1> Transaction Detail</h1>
 
+
                     <TransactionDetail />
-
-
-
-
-                    {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
                   </Card>
 
+                </Animated>
+
+
+
+   
 
                 </div>
 
                 <div className="col-md-4">
+                <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}>
                   <Card>
                     <h1> Total Spending</h1>
                     <TotalSpending />
-                    
-                    {/* <CardBody>
-                      <CardTitle>Card title</CardTitle>
-                      <CardSubtitle>Card subtitle</CardSubtitle>
-                      <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-
-                    </CardBody> */}
                   </Card>
+
+                </Animated>
+
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </div >
+
     );
   }
 }

@@ -4,14 +4,12 @@
 }
 
 body {
-  /* background-image: url("./imgs/moneyTreeBG.jpg"); */
+  background-image: url("./imgs/moneytreebg.jpg");
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-
 
 .App-header {
   background-color: #222;
@@ -29,8 +27,10 @@ body {
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-

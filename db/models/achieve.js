@@ -9,11 +9,10 @@ const AchieveSchema = new Schema({
     desc: String,
     item: String,
     cosmetics: {
-            id: String,
-            name: String,
-            data: Buffer,
-            contentType: String
-        
+        id: String,
+        name: String,
+        data: Buffer,
+        contentType: String
     }
 
 });
