@@ -94,9 +94,6 @@ class Dashboard extends Component {
 
         <ToastContainer/>
 
-        <h1>
-          Money Tree: User Dashboard
-        </h1>
         <div className="col-12">
           <div className="container">
 
