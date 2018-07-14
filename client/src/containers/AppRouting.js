@@ -4,6 +4,7 @@ import {
     Route,
     Link,
     Redirect,
+    hashHistory,
     browserHistory as history
 } from 'react-router-dom';
 import Walkthrough from "../components/Walkthrough";
@@ -26,7 +27,7 @@ let auth = localStorage.getItem("isAuthenticated") === true ? auth = true : auth
 
 const AppRouting = () => {
     return (
-        < Router >
+        < Router history={hashHistory}>
             <div>
                 {
                     isAuth

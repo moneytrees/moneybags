@@ -1,3 +1,4 @@
+#!/usr/bin/env nodejs
 require('dotenv').config();
 const https = require('https');
 const express = require('express');
@@ -14,8 +15,12 @@ global.__plaidClient = false;
 //------------ MIDDLEWARE -------------
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.static("client/build"));
-
+//app.use(express.static("client/build"));
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+et('Content-Encoding', 'gzip');next();
+});
 //------------ DATABASE -----------------------
 const db = require("./config/keys").mongoURI;
 
