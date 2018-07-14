@@ -147,6 +147,10 @@ class Register extends Component {
             </AvGroup>
 
             <AvGroup>
+              <Button className="bank-link">Link Your Bank Account</Button>
+            </AvGroup>
+
+            <AvGroup>
               <span className="registrationNotes">
                 We recommend a password service like&nbsp;
                 <a
