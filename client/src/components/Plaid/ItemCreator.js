@@ -34,7 +34,6 @@ class ItemCreator extends Component {
       .then(data => data.json())
       .then(response => console.log(response.access_token))
       .catch(err => console.log(err.message));
-    console.log("LOLLLLLL");
   }
 
   account() {

@@ -96,62 +96,60 @@ module.exports = {
         });
     },
     loginUser: (req, res) => {
-        console.log('user login body');
-        console.log(req.body);
+
         const { errors, isValid } = validateLoginInput(req.body);
 
         // If input is invalid set header status code to 400 && send errors obj
         if (!isValid) {
-            return res.status(400).json(errors);
-        }
-
-        // Set email and password to user input from form
-        const email = req.body.email;
-        const password = req.body.password;
-
-        // Find one user by their email
-        User.findOne({ email })
-            .then(user => {
-
-                // Check if user exists
-                // If not set status to 404 && send errors object
-                if (!user) {
-                    errors.email = "User not found.. Double check your email";
-                    return res.status(404).json(errors);
-                }
+            console.log("LOGIN IS INVALID");
+            throw res.status(400).json(errors);
+        } else {
+            console.log("Fetching user information...");
+            // Set email and password to user input from form
+            const email = req.body.email;
+            const password = req.body.password;
 
 
-                // Compare user created password to hashed password
-                bcrypt.compare(password, user.password).then(isMatch => {
+            // Find one user by their email
+            User.findOne({ email })
+                .then(user => {
 
-                    // If hashed password matches user created password
-                    if (isMatch) {
-                        // Create JWT payload
+                    // Check if user exists
+                    // If not set status to 404 && send errors object
+                    if (!user) {
+                        errors.email = "User not found.. Double check your email";
+                        return res.status(404).json(errors);
+                    }                    // Compare user created password to hashed password
+                    bcrypt.compare(password, user.password).then(isMatch => {
 
-                        /***** GAMIFICATION CHANGES ****/
-                        let newConsecutiveLogin = user.consecutive_login + 1;
+                        // If hashed password matches user created password
+                        if (isMatch) {
+                            // Create JWT payload
 
-                        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
+                            /***** GAMIFICATION CHANGES ****/
+                            let newConsecutiveLogin = user.consecutive_login + 1;
 
-                            console.log("Updated consecutive login");
-                        });
+                            User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
 
-                        if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
+                                console.log("Updated consecutive login");
+                            });
 
-                            let achvArr = user.achievements;
-                            let newAchvArr = user.newAchv
-                            let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+                            if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
 
-
-                            if (!achvArr.includes(achvID)) {
-
-                                Achv.findOne({ _id: achvID }).then((achvData) => {
-
-                                    achvArr.push(achvData.id);
-                                    newAchvArr.push(achvData);
+                                let achvArr = user.achievements;
+                                let newAchvArr = user.newAchv
+                                let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
 
 
-                                    console.log(`
+                                if (!achvArr.includes(achvID)) {
+
+                                    Achv.findOne({ _id: achvID }).then((achvData) => {
+
+                                        achvArr.push(achvData.id);
+                                        newAchvArr.push(achvData);
+
+
+                                        console.log(`
                                   
                                   NEW ACHIEVE ARRAY
                                   
@@ -164,48 +162,49 @@ module.exports = {
                                   `);
 
 
-                                    User.updateOne({ email: user.email }, {
-                                        achievements: achvArr,
-                                        newAchv: newAchvArr
-                                    }).then((data) => {
+                                        User.updateOne({ email: user.email }, {
+                                            achievements: achvArr,
+                                            newAchv: newAchvArr
+                                        }).then((data) => {
 
-                                        console.log(data);
+                                            console.log(data);
+                                        });
                                     });
-                                });
+                                }
                             }
+
+
+                            const payload = {
+                                id: user.id,
+                                name: user.name,
+                                email: user.email,
+                                achievements: user.achievements,
+                                institutions: user.institutions
+                            };
+
+                            /***** END GAMIFICATION CHANGES ****/
+
+                            // Assign token
+                            jwt.sign(
+
+                                payload,
+                                keys.secretOrKey,
+                                { expiresIn: 1800 }, // Token expires in 30 minutes
+                                (err, token) => {
+                                    res.json({
+                                        success: true,
+                                        token: `${token}`,
+                                        user: payload
+                                    });
+                                }
+                            );
+                        } else {
+                            return res.status(400).json({ password: "Password incorrect" });
                         }
 
-
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email,
-                            achievements: user.achievements,
-                            institutions: user.institutions
-                        };
-
-                        /***** END GAMIFICATION CHANGES ****/
-
-                        // Assign token
-                        jwt.sign(
-
-                            payload,
-                            keys.secretOrKey,
-                            { expiresIn: 1800 }, // Token expires in 30 minutes
-                            (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: `${token}`,
-                                });
-                            }
-                        );
-                    } else {
-                        return res.status(400).json({ password: "Password incorrect" });
-                    }
-
-                });
-            })
-            .catch(err => res.send(err));
+                    });
+                }).catch(err => res.send(err));
+        }
     },
     currentUser: (req, res) => {
         res.json({
