@@ -14,93 +14,79 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./Dashboard.css";
 import axios from "axios";
 import { Animated } from "react-animated-css";
-import Zoom from 'react-reveal/Zoom';
-import Fade from 'react-reveal/Fade';
-
-
+import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
 
 class Dashboard extends Component {
-
-  constructor(props){
-        super(props);
-        this.state = { newAchvArr: [] };
+  constructor(props) {
+    super(props);
+    this.state = { newAchvArr: [] };
   }
 
-  componentDidMount(){
-      axios
-          .get("/api/getNewUserAchievements",{params:{email: localStorage.getItem("user_email")}})
+  componentDidMount() {
+    axios
+      .get("/api/getNewUserAchievements", {
+        params: { email: localStorage.getItem("user_email") }
+      })
+      .then(response => {
+        let newAchvArr = response.data;
+
+        setTimeout(() => {
+          if (newAchvArr.length > 0) {
+            toast(
+              <AchvToast
+                title={newAchvArr[0].name}
+                desc={newAchvArr[0].desc}
+              />,
+              { type: toast.TYPE.INFO, autoClose: 5000 }
+            );
+
+            let i = 1;
+
+            let toastInterval = setInterval(() => {
+              if (i >= newAchvArr.length) {
+                clearInterval(toastInterval);
+              } else {
+                toast(
+                  <AchvToast
+                    title={newAchvArr[i].name}
+                    desc={newAchvArr[i].desc}
+                  />,
+                  { type: toast.TYPE.INFO, autoClose: 5000 }
+                );
+                i++;
+              }
+            }, 5500);
+          }
+        }, 1500);
+
+        console.log(newAchvArr);
+
+        axios
+          .delete("/api/deleteNewAchievements", {
+            params: { email: localStorage.getItem("user_email") }
+          })
           .then(response => {
-
-              let newAchvArr = response.data;
-
-              setTimeout(()=>{
-
-                  if (newAchvArr.length > 0) {
-
-
-                      toast(<AchvToast title={newAchvArr[0].name} desc={newAchvArr[0].desc} />, { type: toast.TYPE.INFO, autoClose: 5000 });
-
-                      let i = 1;
-
-
-                      let toastInterval = setInterval(() => {
-
-                          if (i >= newAchvArr.length) {
-                              clearInterval(toastInterval);
-                          }
-                          else{
-                              toast(<AchvToast title={newAchvArr[i].name} desc={newAchvArr[i].desc} />, { type: toast.TYPE.INFO, autoClose: 5000 });
-                              i++;
-
-                          }
-
-
-
-
-
-                      }, 5500);
-                  }
-
-
-              }, 1500);
-
-              console.log(newAchvArr);
-
-
-
-
-              axios
-                  .delete("/api/deleteNewAchievements",{params:{email: localStorage.getItem("user_email")}})
-                  .then(response => {
-                      console.log(response);
-                  })
-                  .catch(errors => {
-                      console.log(`error: ${errors}`);
-                  });
-
-
+            console.log(response);
           })
           .catch(errors => {
-              console.log(`error: ${errors}`);
+            console.log(`error: ${errors}`);
           });
+      })
+      .catch(errors => {
+        console.log(`error: ${errors}`);
+      });
   }
-
 
   render() {
     return (
-
-
       <div className="background">
+        <ToastContainer />
 
-        <ToastContainer/>
-
+        <h1>Money Tree: User Dashboard</h1>
         <div className="col-12">
           <div className="container">
-
             <div className="Acheivement">
-
-
-
               <div className="row">
 
                
@@ -116,28 +102,32 @@ class Dashboard extends Component {
 
 
                 <div className="col-md-8 text-center">
+                  <Animated
+                    animationIn="slideInRight"
+                    animationOut="zoomOutDown"
+                    isVisible={true}
+                  >
+                    <Card>
+                      <h1 id="dashboardTitle"> Achievements </h1>
 
-                <Animated animationIn="slideInRight" animationOut="zoomOutDown" isVisible={true}>
-                  <Card>
-                    <h1 id= "dashboardTitle"> Achievements </h1>
-
-                    <Achievements />
-
-                  </Card>
+                      <Achievements />
+                    </Card>
                   </Animated>
-
                 </div>
               </div>
             </div>
 
-            <hr>
-            </hr>
-            <Animated animationIn="fadeInUp" animationOut="zoomOutDown" isVisible={true}>
+            <hr />
+            <Animated
+              animationIn="fadeInUp"
+              animationOut="zoomOutDown"
+              isVisible={true}
+            >
               <div className="row">
                 <div className="col-12">
                   <div className="ProgressBar">
                     <Card>
-                      <h1 id= "dashboardTitle"> Progress Bar </h1>
+                      <h1 id="dashboardTitle"> Progress Bar </h1>
                       <ProgressBar />
                     </Card>
                   </div>
@@ -145,59 +135,47 @@ class Dashboard extends Component {
               </div>
             </Animated>
 
-            <hr>
-            </hr>
-
+            <hr />
 
             <div className="CashFlow">
               <div className="row">
-
                 <div className="col-12 text-center">
-                {/* <Zoom> */}
-                  <Card>
-                    <h1 id= "dashboardTitle"> Cash Flow </h1>
-                    <CashFlow/>
-                  </Card>
-               
-               {/* </Zoom> */}
+                  <Zoom>
+                    <Card>
+                      <h1 id="dashboardTitle"> Cash Flow </h1>
+                    </Card>
+                  </Zoom>
                 </div>
               </div>
             </div>
 
-            <hr>
-
-            </hr>
+            <hr />
 
             <div className="TransactionDetail">
-
               <div className="row">
                 <div className="col-md-8">
+                  <Zoom>
+                    <Card>
+                      <h1 id="dashboardTitle"> Transaction Detail</h1>
 
-                <Zoom>
-                  <Card>
-                    <h1 id= "dashboardTitle"> Transaction Detail</h1>
-
-
-                    <TransactionDetail />
-                  </Card>
-                </Zoom>
+                      <TransactionDetail />
+                    </Card>
+                  </Zoom>
                 </div>
 
                 <div className="col-md-4">
-                <Fade right>
-                  <Card>
-                    <h1 id= "dashboardTitle"> Total Spending</h1>
-                    <TotalSpending />
-                  </Card>
-                </Fade>
+                  <Fade right>
+                    <Card>
+                      <h1 id="dashboardTitle"> Total Spending</h1>
+                      <TotalSpending />
+                    </Card>
+                  </Fade>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-      </div >
-
+      </div>
     );
   }
 }
