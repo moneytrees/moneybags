@@ -1,6 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+var Inst = new Schema({
+
+  access_token: {
+    type: String,
+  },
+  item_id: {
+    type: String,
+  },
+  bank_name: {
+    type: String,
+  },
+  inst_id: {
+    type: String,
+  }
+});
+
+
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -15,7 +32,15 @@ const UserSchema = new Schema({
     required: true
   },
   achievements: [],
+<<<<<<< HEAD
+  institutions: [Inst],
+  transaction: [],
+=======
+  newAchv: [],
+  transactions: [],
+  cashFlowArray: [],
   institutions: [],
+>>>>>>> e7eb0c8... achievement notification working, must delete after shown
   date: {
     type: Date,
     default: Date.now

@@ -1,10 +1,15 @@
 .App {
   text-align: center;
+  background: blue;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body {
+
+  background-image: url("./imgs/moneytreebg.jpg");
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-header {
@@ -23,12 +28,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.line-graph {
-    display: inline-block;
-    position: relative;
-    top: 13%;
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
