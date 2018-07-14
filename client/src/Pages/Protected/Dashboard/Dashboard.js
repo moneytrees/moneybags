@@ -158,6 +158,7 @@ class Dashboard extends Component {
                 <Zoom>
                   <Card>
                     <h1 id= "dashboardTitle"> Cash Flow </h1>
+                    <CashFlow />
                   </Card>
                
                </Zoom>

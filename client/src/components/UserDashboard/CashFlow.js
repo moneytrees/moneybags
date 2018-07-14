@@ -176,6 +176,7 @@ export default class CashFlow extends Component {
         const currentState = this.state;
         currentState.regressionEquation3 = regressionEquation3;
         this.setState({ currentState });
+        console.log(regressionEquation3);
     }
 
     timeScaleHandler(e) {
