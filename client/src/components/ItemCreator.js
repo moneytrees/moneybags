@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import Button from "./PlaidSelection/PlaidSelection";
+import TransData from "../helpers/TransData"
 require("dotenv").config({ path: "../.env" });
-var userTransactions = [];
-var userInst = [];
-var userAccount = [];
 
 class ItemCreator extends Component {
   constructor(props) {
@@ -31,11 +29,11 @@ class ItemCreator extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
+      body: JSON.stringify({ public_token: token, metadata: metadata })
     })
-      .then(data => data.json())
-      .then(response => console.log(response))
-      .catch(err => console.log(err.message));
+    .then(data => data.json())
+    .then(response => console.log(response.access_token))
+    .catch(err => console.log(err.message));
     console.log("LOLLLLLL");
   }
 
@@ -43,10 +41,7 @@ class ItemCreator extends Component {
   account() {
     fetch("/api/accounts")
       .then(data => data.json())
-      .then(response => {
-        buildAccountObj(response);
-        console.log(userAccount);
-      })
+      .then(response => console.log(response))
       .catch(err => err.message);
     console.log("account");
   }
@@ -56,13 +51,12 @@ class ItemCreator extends Component {
       method: "POST"
     })
       .then(data => data.json())
-      .then(response => {
-        buildTransObj(response);
-        console.log(userAccount)
-      })
+      .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("transaction");
+
   }
+
 
   render() {
     if (this.state.public_key) {
@@ -70,7 +64,7 @@ class ItemCreator extends Component {
         <div id="foo">
 
 
-
+        
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -86,9 +80,9 @@ class ItemCreator extends Component {
           </PlaidLink>
 
           <Button
-            account={this.account}
-            transactions={this.transaction} />
-
+           account={this.account} 
+           transactions={this.transaction} />
+           <TransData/>
         </div>
       );
     } else {
@@ -96,48 +90,5 @@ class ItemCreator extends Component {
     }
   }
 }
-
-// -------Builds out account object------- //
-function buildAccountObj(response) {
-  for (var i = 0; i < response.accounts.length; i++) {
-    var accountObj = {
-      account_id: response.accounts[i].account_id,
-      balances: [{
-        available: response.accounts[i].balances.available,
-        current: response.accounts[i].balances.current,
-      }],
-      mask: response.accounts[i].mask,
-      name: response.accounts[i].name,
-      official_name: response.accounts[i].official_name,
-      subtype: response.accounts[i].subtype,
-      type: response.accounts[i].type
-    }
-    userAccount.push(accountObj);
-  }
-}
-
-// -------Builds out Trans object------- //
-function buildTransObj(response) {
-  for (var i = 0; i < response.transactions.length; i++) {
-    var userTransObj = {
-      "account": response.transactions[i].account_id,
-      "amount": response.transactions[i].amount,
-      "category": response.transactions[i].category[0],
-      "category_id": response.transactions[i].category_id,
-      "date": response.transactions[i].date,
-      "iso_currency_code": response.transactions[i].iso_currency_code,
-      "location": response.transactions[i].location.city,
-      "name": response.transactions[i].name,
-      "pending": response.transactions[i].pending,
-      "transaction_id": response.transactions[i].transaction_id,
-      "transaction_type": response.transactions[i].transaction_type
-    }
-
-    userTransactions.push(userTransObj);
-  }
-}
-
-
-
 
 export default ItemCreator;

@@ -10,13 +10,13 @@ class Achievements extends Component {
     }
 
     componentDidMount() {
-
-        axios
-            .get("/api/getAllAchievements")
+        console.log("YO")
+        axios.get("/api/getAllAchievements")
             .then(response => {
                 this.setState({
                     achvArray: response.data
                 })
+
             })
             .catch(errors => {
                 console.log(`error: ${errors}`);
