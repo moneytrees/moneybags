@@ -29,11 +29,11 @@ class ItemCreator extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ public_token: token, metadata: metadata })
+      body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
     })
-    .then(data => data.json())
-    .then(response => console.log(response.access_token))
-    .catch(err => console.log(err.message));
+      .then(data => data.json())
+      .then(response => console.log(response.access_token))
+      .catch(err => console.log(err.message));
     console.log("LOLLLLLL");
   }
 
@@ -64,7 +64,7 @@ class ItemCreator extends Component {
         <div id="foo">
 
 
-        
+
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -80,9 +80,9 @@ class ItemCreator extends Component {
           </PlaidLink>
 
           <Button
-           account={this.account} 
-           transactions={this.transaction} />
-           <TransData/>
+            account={this.account}
+            transactions={this.transaction} />
+          <TransData />
         </div>
       );
     } else {
