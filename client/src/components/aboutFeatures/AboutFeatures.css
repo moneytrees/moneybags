@@ -1,0 +1,26 @@
+.about{
+    color: #37474F;
+    background-color: #ffffff;
+    /* background-image: url("../images/whiteMoneyTreeBG.jpg");
+    background-attachment: fixed; */
+    padding: 3em;
+}
+
+.midTextAbout {
+    font-family: 'Varela Round', sans-serif;
+    text-align: center;
+    font-size: 6em;
+}
+
+h2 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 3em;
+    padding: .5em;
+    text-align: center;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
+}
+
