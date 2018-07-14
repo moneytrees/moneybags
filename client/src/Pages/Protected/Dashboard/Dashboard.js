@@ -3,7 +3,7 @@ import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
-import Achievement from "../../../components/Achievements";
+import Achievements from "../Achievements";
 import ProgressBar from "../../../components/ProgressBar"
 import { Card, CardImg } from 'reactstrap';
 import { Animated } from "react-animated-css";
@@ -45,7 +45,7 @@ class Dashboard extends Component {
                   <Card>
                     <h1> Achievements </h1>
 
-                    <Achievement />
+                    <Achievements />
 
                   </Card>
                   </Animated>

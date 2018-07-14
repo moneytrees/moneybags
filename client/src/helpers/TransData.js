@@ -8,7 +8,6 @@ import axios from "axios";
 //   constructor() {
 //     this.login = this.login.bind(this);
 //   }
-
 //   grabInst() {
 //     console.log("pull Inst fired");
 //     fetch("/api/get_inst", {
@@ -23,9 +22,6 @@ import axios from "axios";
 //       .catch(err => console.log(err.message));
 //     console.log("LOLLLLLL");
 //   }
-
-
-
 // }
 import React, { Component } from 'react';
 
