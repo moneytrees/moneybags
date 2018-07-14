@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var Inst = new Schema({
+const Inst = new Schema({
 
   access_token: {
     type: String,
@@ -34,6 +34,9 @@ const UserSchema = new Schema({
   achievements: [],
   institutions: [Inst],
   transaction: [],
+  newAchv: [],
+  transactions: [],
+  cashFlowArray: [],
   date: {
     type: Date,
     default: Date.now
