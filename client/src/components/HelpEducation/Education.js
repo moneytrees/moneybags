@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 // import { Collapse } from 'reactstrap';
-
+import '../../App.css';
 
 class Education extends Component {
 

@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 //import tamagotchi from '.././imgs/tamagotchi200x220.png';
 import Education from '../../../components/HelpEducation/Education';
-import Help from '../../../components/HelpEducation/Help';
+//import Help from '../../../components/HelpEducation/Help';
 import "./helpeducation.css";
+
 
 class Helpeducation extends Component {
     render() {
@@ -14,7 +15,7 @@ class Helpeducation extends Component {
               
 
         <Education/>
-                <Help/>
+            
                 
 
             </div>
