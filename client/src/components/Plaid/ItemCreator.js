@@ -37,13 +37,18 @@ class ItemCreator extends Component {
     console.log("LOLLLLLL");
   }
 
-  //fetching account
   account() {
-    fetch("/api/accounts")
+    fetch("/api/accounts"
+      , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+      })
       .then(data => data.json())
       .then(response => console.log(response))
-      .catch(err => err.message);
-    console.log("account");
+      .catch(err => console.log(err.message));
   }
 
   transaction() {
