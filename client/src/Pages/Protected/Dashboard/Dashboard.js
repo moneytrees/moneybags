@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
@@ -26,7 +27,7 @@ class Dashboard extends Component {
 
   componentDidMount(){
       axios
-          .get("/api/getNewUserAchievements")
+          .get("/api/getNewUserAchievements",{params:{email: localStorage.getItem("user_email")}})
           .then(response => {
 
               let newAchvArr = response.data;
@@ -68,7 +69,7 @@ class Dashboard extends Component {
 
 
               axios
-                  .delete("/api/deleteNewAchievements")
+                  .delete("/api/deleteNewAchievements",{params:{email: localStorage.getItem("user_email")}})
                   .then(response => {
                       console.log(response);
                   })
@@ -109,7 +110,7 @@ class Dashboard extends Component {
                   <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
                     
                       {/* <h1> BigFoot Avatar </h1> */}
-                      <img className="neutralBigFoot" src={neutralBigFoot} alt="logo" />
+                      <Avatar/>
                     
                     </Animated>
                   </div>

@@ -10,8 +10,12 @@ class Achievements extends Component {
     }
 
     componentDidMount() {
-        console.log("YO")
-        axios.get("/api/getAllAchievements")
+
+        axios.get("/api/getAllAchievements", {
+            params: {
+                email: localStorage.getItem("user_email")
+            }
+          })
             .then(response => {
                 this.setState({
                     achvArray: response.data

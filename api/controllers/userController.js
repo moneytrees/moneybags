@@ -14,16 +14,32 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
 
+
+    getLatestCashFlow: (req, res) => {
+
+        User.findOne({email:req.query.email}).then((user)=>{
+          console.log(user.cashFlowArray);
+          if(user.cashFlowArray.length>0){
+            return res.json(user.cashFlowArray[(user.cashFlowArray.length-1)]);
+          }
+          else{
+            return res.json("neutral");
+          }
+          
+        });
+    
+      },
+
     deleteNewAchievements: (req, res) => {
 
-        User.updateOne({email:"ron@ron.com"}, {newAchv: []}).then((data)=>{
+        User.updateOne({email:req.query.email}, {newAchv: []}).then((data)=>{
             return res.json(data);
         });
 
     },
 
     getNewAchievements: (req, res) =>{
-        User.findOne({ email: "ron@ron.com" }).then(user => {
+        User.findOne({ email: req.query.email }).then(user => {
 
             return res.json(user.newAchv);
 
