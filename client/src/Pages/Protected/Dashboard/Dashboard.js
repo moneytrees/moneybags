@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+// import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
@@ -159,7 +159,7 @@ class Dashboard extends Component {
                   <Zoom>
                     <Card>
                       <h1 id="dashboardTitle"> Cash Flow </h1>
-                      <CashFlow/>
+                      <CashFlow />
                     </Card>
                   </Zoom>
                 </div>
