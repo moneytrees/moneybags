@@ -5,8 +5,9 @@ import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
-import { Card } from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
+import ItemCreator from "../../../components/Plaid/ItemCreator";
+import { Card, CardImg } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Dashboard.css";
@@ -80,8 +81,12 @@ class Dashboard extends Component {
     return (
       <div className="background">
         <ToastContainer />
+<<<<<<< HEAD
 
 
+=======
+        <ItemCreator />
+>>>>>>> c09a54cbac681488ed1bea19fd6bdb0a651f616b
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
@@ -167,8 +172,8 @@ class Dashboard extends Component {
                 <div className="col-12 text-center">
                   <Zoom>
                     <Card>
-                      <h1 className="dbTitle"> Cash Flow </h1>
-                      <CashFlow />
+                      <h1 id="dashboardTitle"> Cash Flow </h1>
+                      <CashFlow/>
                     </Card>
                   </Zoom>
                 </div>
