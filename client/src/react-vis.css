@@ -36,7 +36,7 @@
 
 .rv-xy-plot .rv-xy-canvas {
     pointer-events: none;
-    position: absolute
+    position: absolute;
 }
 
 .rv-xy-plot__inner .line-graph {

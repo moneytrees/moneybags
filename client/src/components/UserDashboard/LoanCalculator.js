@@ -16,7 +16,8 @@ export default class LoanCalculator extends Component {
                 monthlyPayment: '',
                 totalInterest: '',
                 loanTerm: '',
-                downPayment: ''
+                downPayment: '',
+                submit: false
             }
         };
         this.loanCalc = this.loanCalc.bind(this);
@@ -53,11 +54,11 @@ export default class LoanCalculator extends Component {
             currentState.purchaseData.totalInterest = parseInt(totalInterest.toFixed(2));
             currentState.purchaseData.loanTerm = this.state.loanTerm * 12;
             currentState.purchaseData.downPayment = parseInt(this.state.downPayment);
+            currentState.purchaseData.submit = true;
+            this.setState({ currentState });
+            this.props.purchaseData(this.state.purchaseData);
+            this.toggle();
         }
-
-        this.setState({ currentState });
-        this.props.purchaseData(this.state.purchaseData);
-        this.toggle();
     }
 
     inputHandler(e) {
@@ -85,7 +86,7 @@ export default class LoanCalculator extends Component {
                     <input onChange={this.inputHandler} type="number" name="loanTerm" /><br /><br />
                     <label>Interest Rate as Percent</label><br />
                     <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" /><br /><br />
-                    <button onClick={this.loanCalc.bind(this)}>Submit</button>
+                    <Button onClick={this.loanCalc} color="info">Submit</Button>
                 </form>
                 <div className="loanModal">
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
