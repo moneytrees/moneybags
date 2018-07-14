@@ -162,7 +162,7 @@ class Register extends Component {
               </span>
             </AvGroup>
 
-            <Button className="btn-secondary">Register</Button>
+            <Button className="btn-secondary">Register Test</Button>
           </AvForm>
         </div>
       </div>

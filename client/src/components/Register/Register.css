@@ -1,9 +1,3 @@
-
-
-/* .button {
-    background-color: #015249;
-} */
-
 .form-group {
     font-family: "Varela Round", sans-serif;
 }
@@ -12,10 +6,6 @@ Form {
     margin-left: 30%;
     color: #015249;
 }
-
-/* Button {
-    width: 20%;
-} */
 
 .btn-secondary .btn .btn-secondary{
     color: #9cd2ba !important;
