@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 
-const Button = (props) => (
+const PlaidButtons = (props) => (
   <div>
 
     <div className="container">
@@ -16,13 +16,13 @@ const Button = (props) => (
         >
           Get Accounts
             </button>
-        <button
+        {/* <button
           type="button"
           className="btn btn-outline-success"
           id="get-item-btn"
         >
           Get Item
-            </button>
+            </button> */}
         <button
           type="button"
           className="btn btn-outline-danger"
@@ -36,4 +36,4 @@ const Button = (props) => (
   </div>
 );
 
-export default Button;
+export default PlaidButtons;

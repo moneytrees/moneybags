@@ -6,6 +6,7 @@ import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
 import Achievements from "../Achievements";
 import ProgressBar from "../../../components/ProgressBar";
+import ItemCreator from "../../../components/Plaid/ItemCreator";
 import { Card, CardImg } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
@@ -83,6 +84,9 @@ class Dashboard extends Component {
         <ToastContainer />
 
         <h1>Money Tree: User Dashboard</h1>
+
+        <ItemCreator />
+
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
