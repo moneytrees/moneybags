@@ -7,8 +7,20 @@ import greyTrophy from "../../imgs/greyTrophy.png";
 class Achievements extends Component {
     constructor(props) {
         super(props);
-        this.state = { loginAchvArray: [], cashFlowAchvArray:[] };
-    };
+        this.state = { loginAchvArray: [], cashFlowAchvArray: [] };
+        this.sortThrophies=this.sortThrophies.bind(this);
+        
+    }
+
+    sortThrophies(tArray) {
+        return tArray.sort((a, b) => {
+            if (a.id < b.id)
+                return -1;
+            if (a.id > b.id)
+                return 1;
+            return 0;
+        });
+    }
 
     componentDidMount() {
 
@@ -22,15 +34,15 @@ class Achievements extends Component {
                 let tempCash = [];
                 console.log(response.data);
 
-                response.data.forEach((item)=>{
-                    if(item.id.length<16){
+                response.data.forEach((item) => {
+                    if (item.id.length < 16) {
                         tempLogin.push(item);
                     }
-                    else{
+                    else {
                         tempCash.push(item);
                     }
                 })
-                
+
                 this.setState({
                     loginAchvArray: tempLogin,
                     cashFlowAchvArray: tempCash
@@ -48,33 +60,33 @@ class Achievements extends Component {
             <div className="col-md-12">
                 <div className="fluid-container">
                     <div className="row">
-                        {this.state.loginAchvArray.map(function (item, i) {
+                        {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
                             return (
 
-                                <div className="col-md-6">
-
-                                    <img src={item.unlocked ? Trophy : greyTrophy} />
-
+                                <div className="col-md-4">
+                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
-                                    <span> {item.desc}</span>
+                                    <span className="itemDesc"> {item.desc}</span>
 
                                 </div>
 
                             );
                         })
                         }
+                        
 
-                                                {this.state.cashFlowAchvArray.map(function (item, i) {
+                     
+ 
+                        {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
                             return (
-
                                 <div className="col-md-4">
-                                    <h3> {item.name}</h3>
 
-                                    <img src="" />
-                                    <span> {item.desc}</span>
+                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
+                                    <h3 className="itemName"> {item.name}</h3>
+
+
+                                    <span className="itemDesc"> {item.desc}</span>
                                 </div>
-
-
                             );
                         })
                         }

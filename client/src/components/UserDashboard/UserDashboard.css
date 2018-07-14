@@ -1,3 +1,26 @@
+.background {
+    /* background-color:  rgba(255, 255, 255, 0.879); */
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+
+
+.avatar-img{
+    width: 85%;
+    right: 29%;
+    padding-left: 75px;
+    margin-top:29px;
+   
+}
+
+
+.achvCard{
+    margin-top: 50px;
+}
+
 .cashFlow-btn-group {
     margin: 0;
     padding: 0;
@@ -10,7 +33,16 @@
     padding-left: 1rem;
 }
 
+h2 .dbTitle{
+    font-family: ‘Varela Round’, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #015249 !important;
+}
 
+.progress{
+    padding: 10px 10px 25px 10px;
+}
 .testForm {
     margin-top: 2rem;
     float: left;
@@ -52,8 +84,17 @@
     transition: 0.5s;
  } */
 
- .achvCard {
-     width:75%;
-     left: 24%;
+
+ 
+
+ .trophyPic{
+     width: 27%;
  }
 
+ .itemName{
+    font-size: 18px;
+ }
+
+ .itemDesc{
+     font-size:14px;
+ }
