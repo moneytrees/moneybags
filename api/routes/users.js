@@ -8,12 +8,12 @@ module.exports = (app, express) => {
   userRouter.route("/api/register").post(userController.registerUser);
   userRouter.route("/api/login").post(userController.loginUser);
   userRouter.route("/api/getNewUserAchievements").get(userController.getNewAchievements);
+  userRouter.route("/api/deleteNewAchievements").delete(userController.deleteNewAchievements);
   userRouter
     .route("/api/current")
     .get(
       passport.authenticate("jwt", { session: false }),
       userController.currentUser
     );
-
   return userRouter;
 };

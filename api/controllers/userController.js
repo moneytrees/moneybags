@@ -14,7 +14,13 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
 
+    deleteNewAchievements: (req, res) => {
 
+        User.updateOne({email:"ron@ron.com"}, {newAchv: []}).then((data)=>{
+            return res.json(data);
+        });
+
+    },
 
   getNewAchievements: (req, res) =>{
     User.findOne({ email: "ron@ron.com" }).then(user => {
