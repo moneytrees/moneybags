@@ -3,9 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Link,
-    Redirect,
-    hashHistory,
-    browserHistory as history
+    Redirect
 } from 'react-router-dom';
 import Walkthrough from "../components/Walkthrough";
 import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
@@ -27,7 +25,7 @@ let auth = localStorage.getItem("isAuthenticated") === true ? auth = true : auth
 
 const AppRouting = () => {
     return (
-        < Router history={hashHistory}>
+        <Router>
             <div>
                 {
                     isAuth
@@ -47,7 +45,7 @@ const AppRouting = () => {
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
             </div>
-        </Router >
+        </Router>
     );
 };
 
