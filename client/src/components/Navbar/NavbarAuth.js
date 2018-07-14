@@ -1,4 +1,5 @@
 import React from "react";
+import "./Navbar.css";
 import {
   Collapse,
   Navbar,
@@ -35,7 +36,6 @@ export default class NavbarAuth extends React.Component {
     return (
       <div>
         <Navbar color="light" light>
-          <NavbarBrand href="/" className="mr-auto">Money Trees</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
