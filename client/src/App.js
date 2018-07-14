@@ -4,12 +4,12 @@ import AppRouting from './containers/AppRouting';
 
 
 class App extends Component {
-
   render() {
     return (
       <div>
         <AppRouting />
-        
+
+
       </div>
     );
   }

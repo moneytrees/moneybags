@@ -6,9 +6,10 @@
     width: 20%;
 }
 
-h1 {
+#dashboardTitle {
+    font-size: 24px;
     text-align: center;
-    color: purple;
+    color: #025758
 }
 
 .background {
@@ -19,4 +20,6 @@ h1 {
     background-size: cover; 
 }
 
-
+.neutralBigFoot {
+    width: 75%;
+}

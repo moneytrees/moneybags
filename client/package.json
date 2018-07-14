@@ -16,7 +16,13 @@
     "react-scripts": "1.1.4",
     "react-vis": "^1.10.3",
     "reactstrap": "^6.2.0",
-    "regression": "^2.0.1"
+    "regression": "^2.0.1",
+    "react-toastify": "^4.1.0",
+    "react-animate-on-scroll": "^2.1.5",
+    "react-animated-css": "^1.0.4",
+    "react-reveal": "^1.2.2",
+    "animate.css": "^3.6.1",
+    "availity-reactstrap-validation": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,5 +30,13 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "babel-jest": "^23.4.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react-test-renderer": "^16.4.1"
+  }
 }

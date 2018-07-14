@@ -4,13 +4,19 @@ import "./AchvToast.css";
 
 class AchievementToast extends Component {
 
+  constructor(props){
+    super(props);
+    this.props = props;
+    
+}
+
   render() {
     return (
       
       <div>
-        <h3> Achievement Title </h3>
-       <img className="trophy" src={Trophy}/> 
-        <p> Description of Achievement </p>
+        <h3> {this.props.title} </h3>
+       {/* <img className="trophy" src={Trophy}/>  */}
+        <p> {this.props.desc} </p>
         
       </div>
     )
