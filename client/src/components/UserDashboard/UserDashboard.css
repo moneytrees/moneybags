@@ -13,6 +13,7 @@
     padding-left: 1rem;
 }
 
+
 .testForm {
     float: left;
     width: 50%;
@@ -26,4 +27,8 @@
 
 .loanDataVal {
     float: right;
+}
+
+.pieChart {
+    margin:auto;
 }
