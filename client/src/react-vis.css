@@ -43,6 +43,13 @@
     display: block;
 }
 
+.rv-xy-plot__inner {
+   
+   margin-right:50%;
+}
+
+
+
 .rv-xy-plot__axis__line {
     fill: none;
     stroke-width: 2px;
@@ -276,5 +283,4 @@
 
 .rv-radial-chart .rv-xy-plot__series--label {
     pointer-events: none;
-    color: red
 }

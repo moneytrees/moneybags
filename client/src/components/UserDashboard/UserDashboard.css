@@ -9,6 +9,7 @@
     padding-left: 1rem;
 }
 
+
 .testForm {
     margin-top: 2rem;
     float: left;
@@ -25,7 +26,13 @@
     float: right;
 }
 
+
+.pieChart {
+    margin:auto;
+}
+
 .cashFlowBtn {
     margin-right: 1rem;
 }
+
 
