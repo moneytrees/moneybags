@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
@@ -109,7 +110,7 @@ class Dashboard extends Component {
                   <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
                     
                       {/* <h1> BigFoot Avatar </h1> */}
-                      <img className="neutralBigFoot" src={neutralBigFoot} alt="logo" />
+                      <Avatar/>
                     
                     </Animated>
                   </div>

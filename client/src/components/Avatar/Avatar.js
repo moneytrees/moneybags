@@ -1,28 +1,54 @@
 import React, { Component } from "react";
-import Happy from "./imgs/bigFoothappyBigFoot.png";
-import Neutral from "../images/neutral.png";
-import Sad from "../images/sad.jpg";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { AchievemntToast } from "../ach-toast/ach-toast.js";
+import Happy from "../../imgs/bigFootSVGs/happyBigFoot.svg";
+import Neutral from "../../imgs/bigFootSVGs/neutralBigFoot.svg";
+import Mad from "../../imgs/bigFootSVGs/madBigFoot.svg";
+import "./Avatar.css";
+import axios from "axios";
 
 
-export class ListItem extends Component {
+export class Avatar extends Component {
 
   toastId = null;
 
     state = {
-        imageArray : [Happy, Neutral, Sad ],
+        imageArray : [Happy, Neutral, Mad ],
         currentImageIndex: 1
     }
 
     componentDidMount(){
 
-      //make ajax call to route
 
-        this.setState({
-            currentImageIndex: Math.floor(Math.random() *3)
-        });
+      axios
+      .get("/api/getLatestCashFlow", {params:{email: localStorage.getItem("user_email")}})
+      .then(response => {
+
+        setTimeout(()=>{
+
+          switch (response.data){
+            case "positive":
+              this.setState({
+                currentImageIndex: 0
+              });
+              break;
+            case "negative":
+              this.setState({
+                currentImageIndex: 2
+              })
+              break;
+  
+            case "neutral":
+              this.setState({
+                currentImageIndex: 1
+              })
+              break;
+            default:
+              break;
+          }
+          
+        }, 1000);
+
+      });
+
     }
 
 
@@ -30,12 +56,10 @@ export class ListItem extends Component {
     return (
       
       <div >
-        <button className="toast-button" onClick={this.notify}>Notify !</button>
-        <button className="toast-button" onClick={this.update}>Update !</button>}
-        <ToastContainer/>
+        <img className ="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} />
       </div>
     )
   }
 }
 
-export default ListItem
+export default Avatar
