@@ -9,10 +9,9 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        {/* <Nav/> */}
-        <Hero/>
-        <AboutFeatures/>
-        <Footer/>
+        <Hero />
+        <AboutFeatures />
+        <Footer />
       </div>
     );
   }
