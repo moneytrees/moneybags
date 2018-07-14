@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './UserDashboard.css';
+
 
 export default class LoanCalculator extends Component {
     constructor(props) {

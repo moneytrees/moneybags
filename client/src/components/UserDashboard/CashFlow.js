@@ -18,6 +18,8 @@ import TwentyYears from './TwentyYears';
 import LoanCalculator from './LoanCalculator';
 import { Button } from 'reactstrap';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
 
 const ITEMS = [
     { title: 'Current Cash Flow', color: 'green' },
@@ -49,20 +51,6 @@ export default class CashFlow extends Component {
 
     }
     componentDidMount() {
-        // axios.post('/api/addCashFlow', {cashFlow: 'cash flow string'})
-        //     .then((data) => {
-        //         console.log(data);
-        //         // send 'positive', 'negative', or 'neutral'
-        //     });
-
-        // fetch("/api/transactions", {
-        //     method: "POST"
-        //   })
-        //     .then(data => data.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.log(err.message));
-        //   console.log("transaction");
-        console.log(this.state.sampleBalance);
         let sampleTransactions = [
             { amount: 17, date: '2018-06-15' },
             { amount: 57, date: '2018-06-17' },
@@ -236,6 +224,7 @@ export default class CashFlow extends Component {
             case 1:
                 return (
                     <div>
+                        <Rotate top left>
                         <div className="cashFlow-btn-group">
                             {compare}
                             <Button color="info" disabled={true} className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
@@ -244,6 +233,7 @@ export default class CashFlow extends Component {
                             <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
                             <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
                         </div>
+                        </Rotate>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">
                                 <XYPlot
@@ -280,9 +270,11 @@ export default class CashFlow extends Component {
                                     items={ITEMS}
                                 />
                             </div>
+                            <Fade right>
                             <div className="testForm">
                                 <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
                             </div>
+                            </Fade>
                         </div>
                     </div >
                 );

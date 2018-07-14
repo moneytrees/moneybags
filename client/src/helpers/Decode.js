@@ -12,12 +12,19 @@ export default class Decode {
 
   login(user) {
     console.log("login function fired");
-    axios.post("/api/login", { user }).then(res => {
+    fetch("/api/login", { 
+      method: "POST",
+      headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({user})
+       }).then(res => {
       console.log(res);
-
       this.setToken(res.data.token); // Setting the token in localStorage
-      return Promise.resolve(res);
-      // }
+      // return Promise.resolve(res);
+    })
+    .catch(errors => {
+      console.log(` error: ${errors}`);
     });
   }
 
