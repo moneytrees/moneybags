@@ -7,7 +7,6 @@ import {
 } from "availity-reactstrap-validation";
 import { Redirect, withRouter } from "react-router-dom";
 import { Button, Label } from "reactstrap";
-import "./Register.css";
 
 
 
@@ -162,7 +161,7 @@ class Register extends Component {
               </span>
             </AvGroup>
 
-            <Button className="btn-secondary">Register</Button>
+            <Button color="primary">Register</Button>
           </AvForm>
         </div>
       </div>
