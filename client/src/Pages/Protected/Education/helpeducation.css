@@ -6,16 +6,32 @@ body{
  
 }
 
-/* h2 {
-    font-family: 'Roboto', sans-serif;
+ h1 {
+    font-family:‘Varela Round’, sans-serif;
     font-weight: 800;
     font-size: 2.5rem;
     color: #015249;
     text-shadow: 2px 2px #57BC90;
   
  
-} */
+} 
 
+a:link {
+    color: 015249;
+}
+a:hover {
+    color:#E38949;
+}
+
+a:active {
+    color:#E38949;
+}
+
+
+
+p:hover {
+    color:#E38949;
+}
 h3 {
     color:#015249;
     font-size:1.2em;
