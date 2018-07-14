@@ -2,8 +2,6 @@ version: 2
 jobs:
     # The build job
     build:
-        environment:
-              BASH_ENV: "~/.bashrc"
         working_directory: ~/project3
         docker:
             - image: circleci/node:6.10-browsers

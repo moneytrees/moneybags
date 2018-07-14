@@ -8,12 +8,14 @@ import axios from "axios";
 
 export class Avatar extends Component {
 
-  toastId = null;
-
-    state = {
+  constructor(props){
+    super(props);
+    this.toastId = null;
+    this.state = {
         imageArray : [Happy, Neutral, Mad ],
         currentImageIndex: 1
     }
+  }
 
     componentDidMount(){
 
