@@ -37,6 +37,59 @@
     opacity: .5;
 }
 
+.socialIcons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.socialIcons li {
+    list-style: none;
+}
+
+.socialIcons li a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: #fff;
+    color: #262626;
+    margin: 0 5px;
+    border-radius: 50%;
+    transition: 0.5s;
+    transform: translateY(200px);
+    opacity: 0;
+}
+
+.box:hover .socialIcons li a {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.box .socialIcons li a .fa {
+    transition: 0.5s;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+.box .socialIcons li a:hover .fa {
+    transform: rotateY(360deg);
+}
+
+.box:hover .socialIcons li:nth-child(1) a {
+    transition-delay: 0s;
+}
+
+.box:hover .socialIcons li:nth-child(2) a {
+    transition-delay: 0.2s;
+}
+
 .details {
     position: relative;
     bottom: 0;

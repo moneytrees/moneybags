@@ -16,7 +16,13 @@
     "react-scripts": "1.1.4",
     "react-vis": "^1.10.3",
     "reactstrap": "^6.2.0",
-    "regression": "^2.0.1"
+    "regression": "^2.0.1",
+    "react-toastify": "^4.1.0",
+    "react-animate-on-scroll": "^2.1.5",
+    "react-animated-css": "^1.0.4",
+    "react-reveal": "^1.2.2",
+    "animate.css": "^3.6.1",
+    "availity-reactstrap-validation": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
