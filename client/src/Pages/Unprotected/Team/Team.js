@@ -326,7 +326,7 @@ class Team extends Component {
                     </a>
                   </li>
                   <li>
-                    <a href="hhttps://github.com/ejeme" target="_blank">
+                    <a href="https://github.com/ejeme" target="_blank">
                       <i class="fa fa-github" aria-hidden="true" />
                     </a>
                   </li>
