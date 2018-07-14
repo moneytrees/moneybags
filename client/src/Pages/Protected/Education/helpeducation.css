@@ -7,7 +7,7 @@ body{
 }
 
  h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family:‘Varela Round’, sans-serif;
     font-weight: 800;
     font-size: 2.5rem;
     color: #015249;
@@ -16,6 +16,22 @@ body{
  
 } 
 
+a:link {
+    color: 015249;
+}
+a:hover {
+    color:#E38949;
+}
+
+a:active {
+    color:#E38949;
+}
+
+
+
+p:hover {
+    color:#E38949;
+}
 h3 {
     color:#015249;
     font-size:1.2em;
