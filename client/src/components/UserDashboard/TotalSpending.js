@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { RadialChart } from 'react-vis/dist';
 import axios from 'axios';
 import '../../react-vis.css';
+import "./UserDashboard.css";
+import '../../App.css';
 
 export default class TotalSpending extends Component {
 
@@ -100,8 +102,8 @@ export default class TotalSpending extends Component {
                     labelsStyle={{ fontSize: 10 }}
 
                     radius={150}
-                    width={400}
-                    height={400} />
+                    width={300}
+                    height={300} />
             </div>
 
         );

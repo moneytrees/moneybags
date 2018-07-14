@@ -3,17 +3,15 @@
     padding: 0;
 }
 
-.graph-input-group {
-    
-}
-
 .cashFlow-graph {
     float: left;
     width: 50%;
     padding-left: 1rem;
 }
 
+
 .testForm {
+    margin-top: 2rem;
     float: left;
     width: 50%;
     height: 300px;
@@ -27,3 +25,15 @@
 .loanDataVal {
     float: right;
 }
+
+.pieChart {
+    margin:auto;
+}
+
+
+
+.cashFlowBtn {
+    margin-right: 1rem;
+}
+
+

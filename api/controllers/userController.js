@@ -49,28 +49,28 @@ module.exports = {
 
     getLatestCashFlow: (req, res) => {
 
-        User.findOne({email:req.query.email}).then((user)=>{
-          console.log(user.cashFlowArray);
-          if(user.cashFlowArray.length>0){
-            return res.json(user.cashFlowArray[(user.cashFlowArray.length-1)]);
-          }
-          else{
-            return res.json("neutral");
-          }
-          
+        User.findOne({ email: req.query.email }).then((user) => {
+            console.log(user.cashFlowArray);
+            if (user.cashFlowArray.length > 0) {
+                return res.json(user.cashFlowArray[(user.cashFlowArray.length - 1)]);
+            }
+            else {
+                return res.json("neutral");
+            }
+
         });
-    
-      },
+
+    },
 
     deleteNewAchievements: (req, res) => {
 
-        User.updateOne({email:req.query.email}, {newAchv: []}).then((data)=>{
+        User.updateOne({ email: req.query.email }, { newAchv: [] }).then((data) => {
             return res.json(data);
         });
 
     },
 
-    getNewAchievements: (req, res) =>{
+    getNewAchievements: (req, res) => {
         User.findOne({ email: req.query.email }).then(user => {
 
             return res.json(user.newAchv);
@@ -165,7 +165,7 @@ module.exports = {
 
                         User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
 
-                            console.log(data);
+                            console.log("Updated consecutive login");
                         });
 
                         if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
@@ -177,7 +177,7 @@ module.exports = {
 
                             if (!achvArr.includes(achvID)) {
 
-                                Achv.findOne({_id: achvID}).then((achvData) => {
+                                Achv.findOne({ _id: achvID }).then((achvData) => {
 
                                     achvArr.push(achvData.id);
                                     newAchvArr.push(achvData);
@@ -196,7 +196,7 @@ module.exports = {
                                   `);
 
 
-                                    User.updateOne({email: user.email}, {
+                                    User.updateOne({ email: user.email }, {
                                         achievements: achvArr,
                                         newAchv: newAchvArr
                                     }).then((data) => {
