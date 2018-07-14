@@ -3,10 +3,6 @@
     padding: 0;
 }
 
-.graph-input-group {
-    
-}
-
 .cashFlow-graph {
     float: left;
     width: 50%;
@@ -14,6 +10,7 @@
 }
 
 .testForm {
+    margin-top: 2rem;
     float: left;
     width: 50%;
     height: 300px;
@@ -27,3 +24,8 @@
 .loanDataVal {
     float: right;
 }
+
+.cashFlowBtn {
+    margin-right: 1rem;
+}
+
