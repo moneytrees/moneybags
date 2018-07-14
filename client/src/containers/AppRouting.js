@@ -11,6 +11,7 @@ import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
 import accountInfoForTesting from "../Pages/accountInfoForTesting";
 import UserLogin from "../Pages/Unprotected/Access/Userlogin";
 import UserRegister from "../Pages/Unprotected/Access/UserRegister";
+//import Achievements from "../Pages/Protected/Achievements"
 import ItemCreator from "../components/ItemCreator";
 import Achievements from "../components/UserDashboard/Achievements";
 import Helpeducation from "../Pages/Protected/Education";
@@ -41,7 +42,6 @@ const AppRouting = () => {
                     return <Redirect to='/login' />
                 }} />
                 <Route exact path="/test" component={accountInfoForTesting} />
-                <Route exact path="/test" component={ItemCreator} />
                 <Route exact path="/test" component={Walkthrough} />
                 <PrivateRoute path="/achievements" component={Achievements} />
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
