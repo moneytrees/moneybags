@@ -113,7 +113,7 @@ class Dashboard extends Component {
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
          Achievements
         </button>
       </h5>
@@ -126,14 +126,7 @@ class Dashboard extends Component {
     </div>
   </div>
  
-</div>
-
-
-
-
-
-
-                      
+</div>  
                     </Card>
                   </Animated>
                 </div>
@@ -166,6 +159,7 @@ class Dashboard extends Component {
                   <Zoom>
                     <Card>
                       <h1 id="dashboardTitle"> Cash Flow </h1>
+                      <CashFlow/>
                     </Card>
                   </Zoom>
                 </div>
