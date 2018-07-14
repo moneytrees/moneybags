@@ -1,11 +1,11 @@
 
 
-.button {
+/* .button {
     background-color: #015249;
-}
+} */
 
 .form-group {
-    font-family: 'Lato', sans-serif;
+    font-family: "Varela Round", sans-serif;
 }
 
 Form {
@@ -13,6 +13,21 @@ Form {
     color: #015249;
 }
 
-Button {
+/* Button {
     width: 20%;
+} */
+
+.btn-secondary .btn .btn-secondary{
+    color: #9cd2ba !important;
+    background-color: #ffffff !important;
+    font-family: lato !important;
+    margin-left: 77px !important;
+    border: none !important;
+    box-shadow: 2px 2px 2px #494949;
+}
+.btn-secondary .btn .btn-secondary:hover {
+    color: #9cd2ba !important;
+    background-color: #ffffffb2 !important;
+    box-shadow: none;
+    transition: 0.5s;
 }

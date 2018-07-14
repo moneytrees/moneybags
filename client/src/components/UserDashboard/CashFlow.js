@@ -17,9 +17,15 @@ import TenYears from './TenYears';
 import TwentyYears from './TwentyYears';
 import LoanCalculator from './LoanCalculator';
 import { Button } from 'reactstrap';
+import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 import Fade from 'react-reveal/Fade';
 import Rotate from 'react-reveal/Rotate';
 
+const ITEMS = [
+    { title: 'Current Cash Flow', color: 'green' },
+    { title: 'Current Cash Flow Trend', color: 'blue' },
+    { title: 'Trend w/Optional Purchase', color: 'red' }
+];
 export default class CashFlow extends Component {
     constructor(props) {
         super(props);
@@ -30,12 +36,10 @@ export default class CashFlow extends Component {
             regressionEquation3: '',
             regLineData: [],
             regLineData2: [],
-            regLineData3: [],
             dataSet: [],
             dataSet2: [],
             selectedTimeScaleInMonths: 1,
-            compare: false, //false
-            numPaymentsInMonths: 60,
+            compare: false,
             monthlyPaymentAmount: 400,
             purchaseData: '',
             sampleBalance: 2085
@@ -47,7 +51,6 @@ export default class CashFlow extends Component {
 
     }
     componentDidMount() {
-
         let sampleTransactions = [
             { amount: 17, date: '2018-06-15' },
             { amount: 57, date: '2018-06-17' },
@@ -77,7 +80,7 @@ export default class CashFlow extends Component {
 
         const result = regression.linear(regressionSet);
 
-        const regLineData = [{ x: 0, y: result.equation[0] + result.equation[1] },
+        const regLineData = [{ x: 0, y: result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
         const currentState = this.state;
@@ -85,10 +88,25 @@ export default class CashFlow extends Component {
         currentState.regLineData = regLineData;
         currentState.dataSet = dataSet;
         this.setState({ currentState });
+        let cashFlow;
+        if (result.equation[0] >= 0) {
+            cashFlow = 'positive';
+        } else {
+            cashFlow = 'negative';
+        }
+        console.log(result.equation[0]);
+        fetch("/api/addCashFlow", {
+            method: "POST",
+            body: { email: localStorage.getItem('user_email'), cashFlow }
+
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err.message));
+        console.log("transaction");
     }
 
     calculate() {
-
+        console.log('calculate function ran');
         let sampleTransactions = [
             { amount: 17, date: '2018-06-15' },
             { amount: 57, date: '2018-06-17' },
@@ -103,15 +121,9 @@ export default class CashFlow extends Component {
             { amount: 12, date: '2018-07-08' }
         ];
         const crntState = this.state;
-        console.log(crntState.purchaseData.downPayment);
-        console.log(crntState.sampleBalance);
-        console.log(crntState.sampleBalance - crntState.purchaseData.downPayment - crntState.purchaseData.monthlyPayment);
         crntState.sampleBalance = (crntState.sampleBalance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
         this.setState({ crntState });
-        console.log(this.state.sampleBalance);
         sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment + this.state.purchaseData.downPayment, date: Date.now() });
-        console.log(sampleTransactions[sampleTransactions.length - 1]);
-        console.log(this.state.sampleBalance);
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
@@ -127,7 +139,7 @@ export default class CashFlow extends Component {
 
         const result = regression.linear(regressionSet);
 
-        const regLineData2 = [{ x: 0, y: result.equation[0] + result.equation[1] },
+        const regLineData2 = [{ x: 0, y: result.equation[1] },
         { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
         const currentState = this.state;
@@ -139,12 +151,18 @@ export default class CashFlow extends Component {
     }
 
     calculatePurchaseOverInterval() {
+        console.log('calculate purchase over interval ran');
+        console.log('number of payments in months', this.state.purchaseData.loanTerm);
+        console.log('selected time scale in months', this.state.selectedTimeScaleInMonths);
+        console.log('regression equation number 1', this.state.regressionEquation);
+        console.log('regression equation number 2', this.state.regressionEquation2);
         const m_c1 = this.state.regressionEquation.equation;
         const m_c2 = this.state.regressionEquation2.equation;
-        const intervalWithoutPayments = this.state.selectedTimeScaleInMonths - this.state.numPaymentsInMonths;
-        let weightedFactor1 = intervalWithoutPayments / this.state.numPaymentsInMonths;
-        let weightedFactor2 = this.state.numPaymentsInMonths / intervalWithoutPayments;
-        if (!intervalWithoutPayments) {
+        const intervalWithoutPayments = this.state.selectedTimeScaleInMonths - this.state.purchaseData.loanTerm;
+        let weightedFactor1 = intervalWithoutPayments / this.state.purchaseData.loanTerm;
+        let weightedFactor2 = this.state.purchaseData.loanTerm / intervalWithoutPayments;
+        if (intervalWithoutPayments <= 0) {
+            console.log('interval without payments ran');
             weightedFactor1 = 1;
             weightedFactor2 = 1;
         }
@@ -154,16 +172,16 @@ export default class CashFlow extends Component {
         const constProduct2 = weightedFactor2 * m_c2[1];
         const newSlope = (slopeProduct1 + slopeProduct2) / 2;
         const newConst = (constProduct1 + constProduct2) / 2;
-        const regLineData3 = [{ x: 0, y: newConst },
-        { x: this.state.selectedTimeScaleInMonths, y: newSlope * this.state.selectedTimeScaleInMonths + newConst }];
+        const regressionEquation3 = [newSlope, newConst];
         const currentState = this.state;
-        currentState.regLineData3 = regLineData3;
+        currentState.regressionEquation3 = regressionEquation3;
         this.setState({ currentState });
     }
 
     timeScaleHandler(e) {
+        console.log('the time scale handler ran');
         const currentState = this.state;
-        switch (e.target.className) {
+        switch (e.target.name) {
             case 'one-year':
                 currentState.selectedTimeScaleInMonths = 12;
                 break;
@@ -181,6 +199,7 @@ export default class CashFlow extends Component {
         }
         this.setState({ currentState });
         if (this.state.compare) {
+            console.log('calculate purchase over interval ran');
             this.calculatePurchaseOverInterval();
         }
     }
@@ -188,6 +207,7 @@ export default class CashFlow extends Component {
     getPurchaseData(data) {
         const currentState = this.state;
         currentState.purchaseData = data;
+        currentState.compare = true;
         console.log(data);
         this.setState({
             currentState
@@ -195,23 +215,29 @@ export default class CashFlow extends Component {
     }
 
     render() {
+        console.log(this.state.regressionEquation3);
+        let compare = '';
+        if (this.state.purchaseData.submit) {
+            compare = <Button color="info" className="cashFlowBtn" onClick={this.calculate}>Compare</Button>;
+        }
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
                     <div>
                         <Rotate top left>
                         <div className="cashFlow-btn-group">
-                            <Button color="info" onClick={this.calculate}>Compare</Button>
-                            <Button color="info" onClick={this.timeScaleHandler}>30 Days</Button>
-                            <Button color="info" className="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
-                            <Button color="info" className="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
-                            <Button color="info" className="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
-                            <Button color="info" className="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>   
+                            {compare}
+                            <Button color="info" disabled={true} className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
                         </div>
                         </Rotate>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">
                                 <XYPlot
+                                    margin={{ left: 60 }}
                                     width={500}
                                     height={500}
                                     xDomain={[0, 30]}
@@ -219,28 +245,30 @@ export default class CashFlow extends Component {
                                     <HorizontalGridLines />
                                     <VerticalGridLines />
                                     <XAxis
-                                        title="X Axis"
+                                        title="Days"
                                         position="start"
                                         tickTotal={6}
                                     />
-                                    <YAxis title="Y Axis" />
+                                    <YAxis title="Dollars" />
                                     <LineSeries
+                                        color="green"
                                         data={this.state.dataSet} />
                                     <LineSeries
-                                        style={{
-                                            strokeDasharray: '2 2'
-                                        }}
-                                        data={this.state.regLineData2}
-                                        strokeDasharray="7, 3"
+                                        strokeStyle="dashed"
+                                        data={this.state.regLineData}
+                                        color="blue"
                                     />
                                     <LineSeries
-                                        style={{
-                                            strokeDasharray: '1 1'
-                                        }}
-                                        data={this.state.regLineData}
-                                        strokeDasharray="1, 3"
+                                        strokeStyle="dashed"
+                                        data={this.state.regLineData2}
+                                        color="red"
                                     />
                                 </XYPlot>
+                                <DiscreteColorLegend
+                                    height={200}
+                                    width={300}
+                                    items={ITEMS}
+                                />
                             </div>
                             <Fade right>
                             <div className="testForm">
@@ -253,49 +281,53 @@ export default class CashFlow extends Component {
             case 12:
                 return (
                     <div>
-                        <button onClick={this.calculate.bind(this)}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <OneYear regEq={this.state.regLineData} regEq3={this.state.regLineData3} />
+                        <div className="cashFlow-btn-group">
+                            <Button color="info" className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button disabled={true} color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                        </div>
+                        <OneYear regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>
                 );
             case 60:
                 return (
                     <div>
-                        <button onClick={this.calculate.bind(this)}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <FiveYears regEq={this.state.regLineData} regEq3={this.state.regLineData3} />
+                        <div className="cashFlow-btn-group">
+                            <Button color="info" className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button disabled={true} color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                        </div>
+                        <FiveYears regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>
                 );
             case 120:
                 return (
                     <div>
-                        <button onClick={this.calculate}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <TenYears regEq={this.state.regLineData} regEq3={this.state.regLineData3} />
+                        <div className="cashFlow-btn-group">
+                            <Button color="info" className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button disabled={true} color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                        </div>
+                        <TenYears regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>
                 );
             case 240:
                 return (
                     <div>
-                        <button onClick={this.calculate.bind(this)}>Compare</button>
-                        <button onClick={this.timeScaleHandler}>30 Days</button>
-                        <button className="one-year" onClick={this.timeScaleHandler}>1 Year</button>
-                        <button className="five-years" onClick={this.timeScaleHandler}>5 Years</button>
-                        <button className="ten-years" onClick={this.timeScaleHandler}>10 Years</button>
-                        <button className="twenty-years" onClick={this.timeScaleHandler}>20 Years</button>
-                        <TwentyYears regEq={this.state.regLineData} regEq3={this.state.regLineData3} />
+                        <div className="cashFlow-btn-group">
+                            <Button color="info" className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                            <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                            <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                            <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                            <Button disabled={true} color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                        </div>
+                        <TwentyYears regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>
                 );
             default:

@@ -9,39 +9,65 @@ import {
     VerticalGridLines,
     LineSeries
 } from 'react-vis/dist';
+import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 
+const ITEMS = [
+    {title: 'Current Cash Flow Trend', color: 'blue'},
+    {title: 'Trend w/Optional Purchase', color: 'red'}
+];
 export default class FiveYears extends Component {
     render() {
+        const m1 = this.props.regEq.equation[0];
+        const c1 = this.props.regEq.equation[1];
+        const lineData = [{x: 0, y: c1}, {x: 5 * 365, y: 5 * 365 * m1 + c1}];
+       
+        let compareLine = [];
+        if (this.props.regEq3) {
+            const m2 = this.props.regEq3[0];
+            const c2 = this.props.regEq3[1];
+            const lineData2 = [{ x: 0, y: c2 }, { x: 5 * 365, y: 5 * 365 * m2 + c2 }];
+            compareLine = lineData2;
+        }
+
+        const ticks = ['0', '1', '2', '3', '4', '5'];
+        const tickFormat = function (t, i) {
+            return (<tspan>
+                <tspan x="0" dy="1em">{ticks[i]}</tspan>
+            </tspan>);
+        }
         return (
-            <div>
+            <div className="cashFlow-graph">
                 <XYPlot
+                    margin={{left: 60}}
                     width={500}
                     height={500}
-                    xDomain={[0, 5]}
+                    xDomain={[0, 5 * 365]}
                 >
                     <HorizontalGridLines />
                     <VerticalGridLines />
                     <XAxis
-                        title="X Axis"
+                        title="Years"
                         position="start"
-                        tickTotal={6}
+                        tickValues={[0, 365, 730, 1095, 1460, 1825]}
+                        tickFormat={tickFormat}
                     />
                     <YAxis title="Y Axis" />
                     <LineSeries
-                        style={{
-                            strokeDasharray: '2 2'
-                        }}
-                        data={this.props.regEq3}
-                        strokeDasharray="7, 3"
+                        data={lineData}
+                        color="blue"
+                        strokeStyle="dashed"
                     />
                     <LineSeries
-                        style={{
-                            strokeDasharray: '1 1'
-                        }}
-                        data={this.props.regEq}
-                        strokeDasharray="1, 3"
+                        data={compareLine}
+                        color="red"
+                        strokeStyle="dashed"
                     />
                 </XYPlot>
+                <DiscreteColorLegend
+                    height={200}
+                    width={300}
+                    items={ITEMS}
+                />
             </div>
         )
     }
