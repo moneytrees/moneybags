@@ -17,10 +17,7 @@ class Dashboard extends Component {
 
       <div className="background">
 
-        <h1>
-
-          Money Tree: User Dashboard
-        </h1>
+      
 
         {/* <Baseline /> */}
         {/* <Button color="danger">Danger!</Button> */}
@@ -33,8 +30,8 @@ class Dashboard extends Component {
                 <div className="col-md-4">
 
 
-                  <Card>
-                    <h1> BigFoot Avatar </h1>
+              
+                 
                     <img className="neutralBigFoot" src={neutralBigFoot} alt="logo" />
 
 
@@ -44,7 +41,7 @@ class Dashboard extends Component {
       <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
 
     </CardBody> */}
-                  </Card>
+                 
                 </div>
                 <div className="col-md-8 text-center">
                   <Card>
@@ -91,7 +88,7 @@ class Dashboard extends Component {
 
                 <div className="col-12 text-center">
                   <Card>
-                    <h1> Cash Flow </h1>
+                  
                     <CashFlow />
 
 
@@ -128,7 +125,7 @@ class Dashboard extends Component {
               <div className="row">
                 <div className="col-md-8">
                   <Card>
-                    <h1> Transaction Detail</h1>
+                    
 
                     <TransactionDetail />
 
