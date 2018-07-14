@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import Trophy from "../../imgs/goldTrophy.png";
+import greyTrophy from "../../imgs/greyTrophy.png";
 
 
 class Achievements extends Component {
@@ -37,8 +39,11 @@ class Achievements extends Component {
 
                                 <div className="col-md-4">
                                     <h3> {item.name}</h3>
+                                        {console.log(item)}
 
-                                    <img src="" />
+                                   {/* <img src={Trophy}/> */}
+                                   <img src={item.unlocked ? Trophy:greyTrophy}/>
+
                                     <span> {item.desc}</span>
                                 </div>
                             );

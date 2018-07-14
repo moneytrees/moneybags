@@ -7,7 +7,7 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 // import Achievements from "../Achievements";
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
-import { Card, CardImg } from 'reactstrap';
+import { Card} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
