@@ -37,8 +37,6 @@ class Achievements extends Component {
                                     <img src="" />
                                     <span> {item.desc}</span>
                                 </div>
-
-
                             );
                         })
                         }

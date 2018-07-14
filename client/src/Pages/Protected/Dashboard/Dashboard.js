@@ -145,7 +145,7 @@ class Dashboard extends Component {
 
                 <div className="col-md-4">
                   <Card>
-                    <h1> Total Spending</h1>
+                   
                     <TotalSpending />
 
                     {/* <CardBody>
