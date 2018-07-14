@@ -15,6 +15,38 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 module.exports = {
 
 
+    addCashFlow: (req, res) =>{
+        User.findOne({email:req.body.email}).then((user)=>{
+
+            
+            if((Math.abs(Date.now() - user.lastCashFlow) / 36e5)>24){
+
+                if(req.body.cashFlow==="positive"){
+                    
+                }
+
+                let newCashFlowArray = user.cashFlowArray;
+
+                newCashFlowArray.push(req.body.cashFlow);
+
+                User.updateOne({email:req.body.email}, {cashFlowArray: newCashFlowArray, lastCashFlow: Date.now()}).then((data)=>{
+                    return res.json(data);
+                });
+            }
+            else{
+                return res.json("Under 24 hours");
+            }
+                
+                
+               
+
+            
+
+        });
+
+    },
+
+
     getLatestCashFlow: (req, res) => {
 
         User.findOne({ email: req.query.email }).then((user) => {
