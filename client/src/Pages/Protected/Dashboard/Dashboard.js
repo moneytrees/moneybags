@@ -107,19 +107,19 @@ class Dashboard extends Component {
                     animationOut="zoomOutDown"
                     isVisible={true}
                   >
-                    <Card>
+                    <Card className="achvCard">
                       {/* <h1 id="dashboardTitle"> Achievements </h1> */}
                       <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+  <div className="card">
+    <div className="card-header" id="headingOne">
+      <h5 className="mb-0">
+        <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
          Achievements
-        </button>
+        </a>
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapseOne"  className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
       <Achievements />
       </div>
