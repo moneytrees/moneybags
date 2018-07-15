@@ -1,14 +1,13 @@
-.pageFooter{
+.pageFooter {
     background-color: #37474F;
     color: #ffffff;
-    padding: 20px 0;
     text-align: center;
+    padding: 2em 0 2em 0;
 }
 
 .pageFooter h1 {
     font-family: 'Varela Round', sans-serif;
     font-size: 3em;
-    padding: .5em;
 }
 
 .pageFooter h3 {
@@ -17,22 +16,23 @@
     color: #ffffff;
 }
 
-.pageFooter li{
-    list-style-type: none;
-}
-
 .btn-danger {
-    color: #fff;border-color: #e38949;
-    background-color: #e38949;
     font-size: 1.5em;
     margin-bottom: 1em;
+    background-color: #e38949;
+    border-color: #e38949;
     box-shadow: 2px 2px 2px #000000;
 }
 
 .btn-danger:hover {
-    border-color: #d66b1f;
-    background-color: #d66b1f;
+    background-color: #bd692d;
+    border-color: #bd692d;
     box-shadow: none;
+    transition: 0.5s;
+}
+
+.pageFooter ul{
+    list-style-type: none;
 }
 
 .pageFooter a{
@@ -43,18 +43,3 @@
     color: #e38949;
     transition: 0.5s;
 }
-
-.btn-primary {
-    color: #fff;border-color: #e38949;
-    background-color: #e38949;
-    font-size: 1em;
-    margin-bottom: 1em;
-    box-shadow: 2px 2px 2px #000000;
-}
-
-.btn-primary:hover {
-    border-color: #d66b1f;
-    background-color: #d66b1f;
-    box-shadow: none;
-}
-
