@@ -70,10 +70,6 @@ class Register extends Component {
 
   render() {
 
-    const { from } = this.props.location.state || {
-      from: { pathname: "/dashboard" }
-    };
-
     const { referrerRedirect } = this.state;
     if (referrerRedirect)
       return <Redirect to={{

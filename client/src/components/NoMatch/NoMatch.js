@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./NoMatch.css";
 import { Jumbotron } from 'reactstrap';
-import Logo from "../images/moneyTree.png";
 
 class NoMatch extends Component {
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Footer from "../../../components/Footer/Footer"
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
@@ -7,7 +6,7 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
 import ItemCreator from "../../../components/Plaid/ItemCreator";
-import { Card, CardImg } from "reactstrap";
+import { Card } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
