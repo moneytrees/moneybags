@@ -52,10 +52,14 @@ class ItemCreator extends Component {
 
   transaction() {
     fetch("/api/transactions", {
-      method: "POST"
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => console.log(response))
+      .then(response => { response })
       .catch(err => console.log(err.message));
     console.log("transaction");
 

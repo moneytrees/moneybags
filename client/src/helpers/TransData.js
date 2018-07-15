@@ -36,19 +36,19 @@ class TransData extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ user_id: "5b474bb457b0352b14a20035" })
+      body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
-    .then(data => data.json())
-    .then(response => console.log(response))
-    .catch(err => console.log(err.message));
-    
+      .then(data => data.json())
+      .then(response => console.log(response))
+      .catch(err => console.log(err.message));
+
     return (
       <div>
-        
 
 
 
-        
+
+
       </div>
     );
   }

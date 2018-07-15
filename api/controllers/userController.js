@@ -16,33 +16,31 @@ module.exports = {
 
 
     addCashFlow: (req, res) =>{
-        User.findOne({email:req.body.email}).then((user)=>{
+        User.findOne({ email: req.body.email }).then((user) => {
 
-            
-            if((Math.abs(Date.now() - user.lastCashFlow) / 36e5)>24){
 
-                if(req.body.cashFlow==="positive"){
-                    
-                }
+            if ((Math.abs(Date.now() - user.lastCashFlow) / 60000) > 0.1 && user.canAddCashFlow) {
+
 
                 let newCashFlowArray = user.cashFlowArray;
 
                 newCashFlowArray.push(req.body.cashFlow);
 
-                User.updateOne({email:req.body.email}, {cashFlowArray: newCashFlowArray, lastCashFlow: Date.now()}).then((data)=>{
+                User.updateOne({ email: req.body.email }, { cashFlowArray: newCashFlowArray, lastCashFlow: Date.now(), canAddCashFlow: false }).then((data) => {
                     return res.json(data);
                 });
             }
-            else{
+            else {
                 return res.json("Under 24 hours");
             }
-                
-                
-               
 
-            
+
+
+
+
 
         });
+
 
     },
 
@@ -161,49 +159,112 @@ module.exports = {
                             /***** GAMIFICATION CHANGES ****/
                             let newConsecutiveLogin = user.consecutive_login + 1;
 
-                            User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
+                        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin, canAddCashFlow: true }).then((data) => {
 
-                                console.log("Updated consecutive login");
+                            console.log("Updated consecutive login");
+                        });
+
+                        let achvArr = user.achievements;
+                        let newAchvArr = user.newAchv
+
+
+
+                        let cashAchvID = "";
+
+
+                        let cashFlowAchvNum = -1;
+
+
+                        for (let i = (user.cashFlowArray.length - 1); i >= 0; i--) {
+
+                            if (user.cashFlowArray[i] === "positive") {
+                                cashFlowAchvNum++;
+                            }
+                            else {
+                                break;
+                            }
+
+                        }
+
+
+
+
+                        cashAchvID = "positiveCashFlow" + cashFlowAchvNum;
+
+
+
+                        let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+
+
+                        if ((Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6 && !achvArr.includes(achvID)) && (cashFlowAchvNum > 0 && cashFlowAchvNum < 6 && !user.achievements.includes(cashAchvID))) {
+
+
+                            Achv.findOne({ _id: achvID }).then((achvData) => {
+
+                                achvArr.push(achvData.id);
+                                newAchvArr.push(achvData);
+                                Achv.findOne({ _id: cashAchvID }).then((cashAchvData) => {
+
+
+
+
+                                    achvArr.push(cashAchvData.id);
+                                    newAchvArr.push(cashAchvData);
+
+
+                                    User.updateOne({ email: user.email }, {
+                                        achievements: achvArr,
+                                        newAchv: newAchvArr
+                                    }).then((data) => {
+
+                                        console.log(data);
+                                    });
+
+                                });
+
+
+                            });
+                        }
+                        else if(Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6 && !achvArr.includes(achvID)){
+
+                            Achv.findOne({ _id: achvID }).then((achvData) => {
+
+                                achvArr.push(achvData.id);
+                                newAchvArr.push(achvData);
+
+                                User.updateOne({ email: user.email }, {
+                                    achievements: achvArr,
+                                    newAchv: newAchvArr
+                                }).then((data) => {
+
+                                    console.log(data);
+                                });
+
                             });
 
-                            if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
-
-                                let achvArr = user.achievements;
-                                let newAchvArr = user.newAchv
-                                let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+                        }
+                        else if(cashFlowAchvNum > 0 && cashFlowAchvNum < 6 && !user.achievements.includes(cashAchvID)){
 
 
-                                if (!achvArr.includes(achvID)) {
-
-                                    Achv.findOne({ _id: achvID }).then((achvData) => {
-
-                                        achvArr.push(achvData.id);
-                                        newAchvArr.push(achvData);
+                            Achv.findOne({ _id: cashAchvID }).then((cashAchvData) => {
 
 
-                                        console.log(`
-                                  
-                                  NEW ACHIEVE ARRAY
-                                  
-                                  
-                                  ${newAchvArr}
-                                  
-                                  
-                                  
-                                  
-                                  `);
 
 
-                                        User.updateOne({ email: user.email }, {
-                                            achievements: achvArr,
-                                            newAchv: newAchvArr
-                                        }).then((data) => {
+                                achvArr.push(cashAchvData.id);
+                                newAchvArr.push(cashAchvData);
 
-                                            console.log(data);
-                                        });
-                                    });
-                                }
-                            }
+
+                                User.updateOne({ email: user.email }, {
+                                    achievements: achvArr,
+                                    newAchv: newAchvArr
+                                }).then((data) => {
+
+                                    console.log(data);
+                                });
+
+                            });
+                        }
 
 
                             const payload = {
