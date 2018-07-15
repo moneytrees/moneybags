@@ -117,3 +117,17 @@
     color: #bbb;
     font-size: 16px;
 }
+
+@media only screen and (max-width: 768px){
+    .rowWrap {
+        margin-left: 8%;
+        margin-top: 70px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .rowWrap {
+        margin-left: 7%;
+        margin-top: 70px;
+    }
+}
