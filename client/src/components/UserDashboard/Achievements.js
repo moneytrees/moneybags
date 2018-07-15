@@ -63,7 +63,7 @@ class Achievements extends Component {
                             return (
 
                                 <div className="col-md-3">
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
+                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
                                     <h3 className="itemName"> {item.name}</h3>
                                     <span className="itemDesc"> {item.desc}</span>
 
@@ -80,7 +80,7 @@ class Achievements extends Component {
                             return (
                                 <div className="col-md-3">
 
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
+                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
                                     <h3 className="itemName"> {item.name}</h3>
 
 

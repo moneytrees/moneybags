@@ -3,6 +3,7 @@ import "./Navbar.css";
 import {
   Collapse,
   Navbar,
+  NavbarBrand,
   NavbarToggler,
   Nav,
   NavItem,
@@ -29,7 +30,8 @@ export default class NavbarAuth extends React.Component {
   render() {
     return (
       <div className="navigationBar">
-        <Navbar color="light" light>
+        <Navbar color="light" light fixed="top">
+          <NavbarBrand href="/" className="mr-auto">Money Tree</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>

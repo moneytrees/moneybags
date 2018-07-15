@@ -182,7 +182,7 @@ class Team extends Component {
             <div className="wrapperTeam">
               <div className="box">
                 <div className="imgBox">
-                  <img className="teamPic" src={team.picture} />
+                  <img className="teamPic" src={team.picture} alt={team.name} />
                   <ul className="socialIcons">
                     <li className="liTeam">
                       <a className="aTeam" href={team.linkedin} target="_blank">
