@@ -10,11 +10,15 @@ import { Card, CardImg } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
-import "./Dashboard.css";
+// import "./Dashboard.css";
 import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
+import "../../../components/UserDashboard/UserDashboard.css";
+
+
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -81,33 +85,46 @@ class Dashboard extends Component {
     return (
       <div className="background">
         <ToastContainer />
-       
-        <div className="col-12">
-          <div className="container">
-            <div className="Acheivement">
-              <div className="row">
+
+        {/* <div className="col-md-12"> */}
+        <div className="container">
+          <div className="topSection">
+            <div className="row">
+
+              <div className="topCol" className="col-md-12">
+                <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
+
+                  <Card className="topAvatar">
+                    <div className="dashAvatar"> <Avatar /> </div>
+
+                    <div className="row">
+                      <div className="col-md-12">
+                        <ItemCreator />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-md-12">
+                        <ProgressBar className="progress" />
+                      </div>
+                    </div>
+
+                  </Card>
+
+                </Animated>
+              </div>
 
 
-                <div className="col-md-4">
-                  <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
 
-
-                    <Avatar />
-
-                  </Animated>
-                </div>
-
-
-
-                <div className="col-md-8 text-center">
+              {/* <div className="col-md-8 text-center">
                   <Animated
                     animationIn="slideInRight"
                     animationOut="zoomOutDown"
                     isVisible={true}
-                  >
+                  > */}
 
-                  
-                    <div className="achvCard">
+
+              {/* <div className="achvCard">
 
                       <div id="accordion">
                         <div className="card">
@@ -120,32 +137,103 @@ class Dashboard extends Component {
                           </div>
 
                           <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                              <Achievements />
-                            </div>
+                            <div class="card-body"> */}
+
+
+              {/* </div>
                           </div>
                         </div>
 
                       </div>
+                    </div> */}
+              {/* </Animated>
+                </div>*/}
+            </div>
+          </div>
+
+
+
+
+
+          <div className="transactionDetail">
+            <div className="row">
+              <div className="col-md-8">
+                <Zoom>
+                  <Card className="transCard">
+                    <h2 className="dbTitle"> Transaction Detail</h2>
+
+                    <TransactionDetail />
+                  </Card>
+                </Zoom>
+              </div>
+
+
+              <div className="col-md-4">
+                <Fade right>
+                  <Card className="totalSpendCard">
+                    <h2 className="dbTitle"> Total Spending</h2>
+                    <TotalSpending />
+                  </Card>
+                </Fade>
+              </div>
+            </div>
+
+            <div className="achieveCard">
+              <div className="row">
+                <div className="col-md-12">
+                  <Fade right>
+
+
+
+                    <div className="col-md-8 text-center">
+                      <Animated
+                        animationIn="slideInRight"
+                        animationOut="zoomOutDown"
+                        isVisible={true}
+                      >
+
+
+                        <div className="achvCard">
+
+                          <div id="accordion">
+                            <div className="card">
+                              <div className="card-header" id="headingOne">
+                                <h5 className="mb-0">
+                                  <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <h2 className="dbTitle"> Achievements </h2>
+                                  </a>
+                                </h5>
+                              </div>
+
+                              <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                  <Achievements />
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </Animated>
                     </div>
-                  </Animated>
+
+
+
+
+
+                  </Fade>
                 </div>
               </div>
             </div>
 
-           <div className="row">
-           <div className="col-md-12">
-           <ItemCreator/>
-           </div>
-           </div>
-           
 
 
 
 
 
 
-            <Animated
+
+            {/* <Animated
               animationIn="fadeInUp"
               animationOut="zoomOutDown"
               isVisible={true}
@@ -155,64 +243,42 @@ class Dashboard extends Component {
                   <div className="ProgressBar">
 
 
-                    <Card className="progressCard">
-                      <h2 className="dbTitle"> Progress Bar </h2>
+                    <Card className="progressCard"> */}
+            {/* <h2 className="dbTitle"> Progress Bar </h2> */}
 
-                      <div className="row">
-                        <div className="col-md-12">
-                          <ProgressBar className="progress"/>
-                        </div>
+            {/* // <div className="row">
+                      //   <div className="col-md-12">
+                      //     <ProgressBar className="progress"/>
+                      //   </div>
 
-                      </div>
+                      // </div> */}
 
-                    </Card>
+            {/* </Card>
                   </div>
                 </div>
               </div>
-            </Animated>
+            </Animated> */}
 
-            <hr />
 
-            <div className="CashFlow">
-              <div className="row">
+            <div className="row">
+              <div className="CashFlow">
                 <div className="col-12 text-center">
                   <Zoom>
                     <Card>
-                      <h1 id="dashboardTitle"> Cash Flow </h1>
-                      <CashFlow/>
+                      <h2 className="dbTitle"> Cash Flow </h2>
+                      <CashFlow />
                     </Card>
                   </Zoom>
                 </div>
               </div>
             </div>
 
-            <hr />
 
-            <div className="TransactionDetail">
-              <div className="row">
-                <div className="col-md-8">
-                  <Zoom>
-                    <Card>
-                      <h2 className="dbTitle"> Transaction Detail</h2>
-
-                      <TransactionDetail />
-                    </Card>
-                  </Zoom>
-                </div>
-
-                <div className="col-md-4">
-                  <Fade right>
-                    <Card>
-                      <h2 className="dbTitle"> Total Spending</h2>
-                      <TotalSpending />
-                    </Card>
-                  </Fade>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
+
     );
   }
 }
