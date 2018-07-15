@@ -12,7 +12,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
+} from "reactstrap";
 
 export default class NavbarNoAuth extends React.Component {
   constructor(props) {
@@ -30,7 +30,6 @@ export default class NavbarNoAuth extends React.Component {
       collapsed: !this.state.collapsed
     });
   }
-
 
   render() {
     return (
