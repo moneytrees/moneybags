@@ -54,7 +54,6 @@ module.exports = function (app, express) {
             .getAccountInfo(__plaidClient.access_token)
             .then(accountinfo => {
                 var userAccount2 = []
-                // for (var i = 0; i < accountinfo.accounts.length; i++) {
                 var accountObj = {
                     account_id: accountinfo.accounts[0].account_id,
                     balances: [{
@@ -75,7 +74,6 @@ module.exports = function (app, express) {
                     user.save();
                 }
                 ).catch(err => console.log(err))
-                // }
                 response.json(accountinfo)
             });
     });

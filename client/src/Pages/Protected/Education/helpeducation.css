@@ -6,9 +6,10 @@ body{
  
 }
 
- h1 {
+ .header1 {
     font-family:‘Varela Round’, sans-serif;
     font-weight: 800;
+    text-align:center;
     font-size: 2.5rem;
     color: #015249;
     text-shadow: 2px 2px #57BC90;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
-import Button from "./PlaidSelection/PlaidSelection";
-import TransData from "../helpers/TransData"
+import TransData from "../../helpers/TransData";
+import PlaidButtons from "./PlaidButtons";
 require("dotenv").config({ path: "../.env" });
 
 class ItemCreator extends Component {
@@ -34,7 +34,6 @@ class ItemCreator extends Component {
       .then(data => data.json())
       .then(response => console.log(response.access_token))
       .catch(err => console.log(err.message));
-    console.log("LOLLLLLL");
   }
 
   account() {
@@ -67,6 +66,8 @@ class ItemCreator extends Component {
     if (this.state.public_key) {
       return (
         <div id="foo">
+
+
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -77,11 +78,13 @@ class ItemCreator extends Component {
             publicKey={this.state.public_key}
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
+            className="btn btn-outline"
           >
-            Open Link and connect your bank!
+            Connect your Account
           </PlaidLink>
 
-          <Button
+
+          <PlaidButtons
             account={this.account}
             transactions={this.transaction} />
           <TransData />
