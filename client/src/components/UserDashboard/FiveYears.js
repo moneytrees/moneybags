@@ -51,7 +51,7 @@ export default class FiveYears extends Component {
                         tickValues={[0, 365, 730, 1095, 1460, 1825]}
                         tickFormat={tickFormat}
                     />
-                    <YAxis title="Y Axis" />
+                    <YAxis title="Dollars" />
                     <LineSeries
                         data={lineData}
                         color="blue"

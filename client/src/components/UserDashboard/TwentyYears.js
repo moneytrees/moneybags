@@ -46,12 +46,12 @@ export default class TwentyYears extends Component {
                     <HorizontalGridLines />
                     <VerticalGridLines />
                     <XAxis
-                        title="X Axis"
+                        title="Years"
                         position="start"
                         tickValues={[0, 730, 1460, 2190, 2920, 3650, 4380, 5110, 5840, 6570, 7300]}
                         tickFormat={tickFormat}
                     />
-                    <YAxis title="Y Axis" />
+                    <YAxis title="Dollars" />
                     <LineSeries
                         data={lineData}
                         color="blue"

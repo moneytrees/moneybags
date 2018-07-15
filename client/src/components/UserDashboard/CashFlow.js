@@ -40,7 +40,6 @@ export default class CashFlow extends Component {
             dataSet2: [],
             selectedTimeScaleInMonths: 1,
             compare: false,
-            monthlyPaymentAmount: 400,
             purchaseData: '',
             sampleBalance: 2085
         };
@@ -48,7 +47,6 @@ export default class CashFlow extends Component {
         this.calculate = this.calculate.bind(this);
         this.calculatePurchaseOverInterval = this.calculatePurchaseOverInterval.bind(this);
         this.timeScaleHandler = this.timeScaleHandler.bind(this);
-
     }
     componentDidMount() {
         let sampleTransactions = [
@@ -147,6 +145,7 @@ export default class CashFlow extends Component {
         currentState.regLineData2 = regLineData2;
         currentState.dataSet2 = dataSet;
         currentState.compare = true;
+        currentState.compareButtonToggle = false;
         this.setState({ currentState });
     }
 
@@ -158,20 +157,21 @@ export default class CashFlow extends Component {
         console.log('regression equation number 2', this.state.regressionEquation2);
         const m_c1 = this.state.regressionEquation.equation;
         const m_c2 = this.state.regressionEquation2.equation;
-        const intervalWithoutPayments = this.state.selectedTimeScaleInMonths - this.state.purchaseData.loanTerm;
-        let weightedFactor1 = intervalWithoutPayments / this.state.purchaseData.loanTerm;
-        let weightedFactor2 = this.state.purchaseData.loanTerm / intervalWithoutPayments;
-        if (intervalWithoutPayments <= 0) {
-            console.log('interval without payments ran');
-            weightedFactor1 = 1;
+        console.log(m_c1, m_c2);
+        let weightedFactor1 = (this.state.selectedTimeScaleInMonths - this.state.purchaseData.loanTerm) / this.state.selectedTimeScaleInMonths;
+        let weightedFactor2 = this.state.purchaseData.loanTerm / this.state.selectedTimeScaleInMonths;
+        console.log(weightedFactor1, weightedFactor2);
+        if (weightedFactor1 <= 0) {
+            weightedFactor1 = 0;
             weightedFactor2 = 1;
         }
         const slopeProduct1 = weightedFactor1 * m_c1[0];
         const constProduct1 = weightedFactor1 * m_c1[1];
         const slopeProduct2 = weightedFactor2 * m_c2[0];
         const constProduct2 = weightedFactor2 * m_c2[1];
-        const newSlope = (slopeProduct1 + slopeProduct2) / 2;
-        const newConst = (constProduct1 + constProduct2) / 2;
+        console.log(slopeProduct1, slopeProduct2);
+        const newSlope = (slopeProduct1 + slopeProduct2);
+        const newConst = (constProduct1 + constProduct2);
         const regressionEquation3 = [newSlope, newConst];
         const currentState = this.state;
         currentState.regressionEquation3 = regressionEquation3;
@@ -198,42 +198,49 @@ export default class CashFlow extends Component {
             default:
                 currentState.selectedTimeScaleInMonths = 1;
         }
-        this.setState({ currentState });
+
         if (this.state.compare) {
             console.log('calculate purchase over interval ran');
             this.calculatePurchaseOverInterval();
+            currentState.compare = false;
         }
+        this.setState({ currentState });
     }
 
     getPurchaseData(data) {
         const currentState = this.state;
+        currentState.regressionEquation2 = '',
+        currentState.regressionEquation3 = '',
+        currentState.regLineData2 = [],
+        currentState.dataSet2 = [],
+        currentState.selectedTimeScaleInMonths = 1,
+        currentState.compare = false,
+        currentState.sampleBalance = 2085
         currentState.purchaseData = data;
         currentState.compare = true;
         console.log(data);
         this.setState({
             currentState
         });
+        console.log('get purchase data ran');
+        this.calculate();
+        this.calculatePurchaseOverInterval();
     }
 
     render() {
         console.log(this.state.regressionEquation3);
-        let compare = '';
-        if (this.state.purchaseData.submit) {
-            compare = <Button color="info" className="cashFlowBtn" onClick={this.calculate}>Compare</Button>;
-        }
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
                     <div>
                         <Rotate top left>
-                        <div className="cashFlow-btn-group">
-                            {compare}
-                            <Button color="info" disabled={true} className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
-                            <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
-                            <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
-                            <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
-                            <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
-                        </div>
+                            <div className="cashFlow-btn-group">
+                                <Button color="info" disabled={true} className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>
+                                <Button color="info" className="cashFlowBtn" name="one-year" onClick={this.timeScaleHandler}>1 Year</Button>
+                                <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
+                                <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
+                                <Button color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+                            </div>
                         </Rotate>
                         <div className="graph-input-group">
                             <div className="cashFlow-graph">
@@ -272,9 +279,9 @@ export default class CashFlow extends Component {
                                 />
                             </div>
                             <Fade right>
-                            <div className="testForm">
-                                <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
-                            </div>
+                                <div className="testForm">
+                                    <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
+                                </div>
                             </Fade>
                         </div>
                     </div >
