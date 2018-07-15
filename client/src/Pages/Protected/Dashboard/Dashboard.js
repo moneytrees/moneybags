@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-// import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
-// import Achievements from "../Achievements";
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
 import ItemCreator from "../../../components/Plaid/ItemCreator";
@@ -83,22 +81,22 @@ class Dashboard extends Component {
     return (
       <div className="background">
         <ToastContainer />
-        <ItemCreator />
+       
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
               <div className="row">
 
-               
-                  <div className="col-md-4">
+
+                <div className="col-md-4">
                   <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
-                    
-                     
-                      <Avatar/>
-                    
-                    </Animated>
-                  </div>
-                
+
+
+                    <Avatar />
+
+                  </Animated>
+                </div>
+
 
 
                 <div className="col-md-8 text-center">
@@ -107,33 +105,46 @@ class Dashboard extends Component {
                     animationOut="zoomOutDown"
                     isVisible={true}
                   >
-                    <Card>
-                      {/* <h1 id="dashboardTitle"> Achievements </h1> */}
-                      <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-         Achievements
-        </button>
-      </h5>
-    </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-      <Achievements />
-      </div>
-    </div>
-  </div>
- 
-</div>  
-                    </Card>
+                  
+                    <div className="achvCard">
+
+                      <div id="accordion">
+                        <div className="card">
+                          <div className="card-header" id="headingOne">
+                            <h5 className="mb-0">
+                              <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <h2 className="dbTitle"> Achievements </h2>
+                              </a>
+                            </h5>
+                          </div>
+
+                          <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                              <Achievements />
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
                   </Animated>
                 </div>
               </div>
             </div>
 
-            <hr />
+           <div className="row">
+           <div className="col-md-12">
+           <ItemCreator/>
+           </div>
+           </div>
+           
+
+
+
+
+
+
             <Animated
               animationIn="fadeInUp"
               animationOut="zoomOutDown"
@@ -142,9 +153,18 @@ class Dashboard extends Component {
               <div className="row">
                 <div className="col-12">
                   <div className="ProgressBar">
-                    <Card>
-                      <h1 id="dashboardTitle"> Progress Bar </h1>
-                      <ProgressBar />
+
+
+                    <Card className="progressCard">
+                      <h2 className="dbTitle"> Progress Bar </h2>
+
+                      <div className="row">
+                        <div className="col-md-12">
+                          <ProgressBar className="progress"/>
+                        </div>
+
+                      </div>
+
                     </Card>
                   </div>
                 </div>
@@ -173,7 +193,7 @@ class Dashboard extends Component {
                 <div className="col-md-8">
                   <Zoom>
                     <Card>
-                      <h1 id="dashboardTitle"> Transaction Detail</h1>
+                      <h2 className="dbTitle"> Transaction Detail</h2>
 
                       <TransactionDetail />
                     </Card>
@@ -183,7 +203,7 @@ class Dashboard extends Component {
                 <div className="col-md-4">
                   <Fade right>
                     <Card>
-                      <h1 id="dashboardTitle"> Total Spending</h1>
+                      <h2 className="dbTitle"> Total Spending</h2>
                       <TotalSpending />
                     </Card>
                   </Fade>
