@@ -4,14 +4,9 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from "reactstrap";
 
 export default class NavbarNoAuth extends React.Component {
@@ -39,13 +34,13 @@ export default class NavbarNoAuth extends React.Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/register">Register</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/login">Login</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/register">Register</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/helpeducation">Education</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/team">Team</NavLink>

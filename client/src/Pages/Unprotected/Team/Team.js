@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./team.css";
+import Footer from "../../../components/Footer"
 import addis from "../../../imgs/teamPotraits/addis.jpg";
 import brant from "../../../imgs/teamPotraits/brant.jpg";
 import caro from "../../../imgs/teamPotraits/caro.jpg";
@@ -175,7 +176,7 @@ const team = [
 class Team extends Component {
   render() {
     return (
-      <div>
+      <div className="team">
         <div className="d-flex flex-row flex-wrap rowWrap">
           {team.map(team => (
             <div className="wrapperTeam">
@@ -205,6 +206,7 @@ class Team extends Component {
             </div>
           ))}
         </div>
+        <Footer/>
       </div>
     );
   }

@@ -9,37 +9,33 @@ const User = require(__basedir + "db/models/user");
 const Achv = require(__basedir + "db/models/achieve");
 //------------- VALIDATION ----------------
 const validateRegisterInput = require(__basedir +
-    "helpers/validation/register");
+	"helpers/validation/register");
 const validateLoginInput = require(__basedir + "helpers/validation/login");
 
 module.exports = {
 
 
     addCashFlow: (req, res) =>{
-        User.findOne({ email: req.body.email }).then((user) => {
+        User.findOne({ email: req.body.email })
+            .then((user) => {
+
+                if(user.cashFlowArray){
+                    if ((Math.abs(Date.now() - user.lastCashFlow) / 60000) > 0.1 && user.canAddCashFlow) {
 
 
-            if ((Math.abs(Date.now() - user.lastCashFlow) / 60000) > 0.1 && user.canAddCashFlow) {
+                        let newCashFlowArray = user.cashFlowArray;
 
+                        newCashFlowArray.push(req.body.cashFlow);
 
-                let newCashFlowArray = user.cashFlowArray;
-
-                newCashFlowArray.push(req.body.cashFlow);
-
-                User.updateOne({ email: req.body.email }, { cashFlowArray: newCashFlowArray, lastCashFlow: Date.now(), canAddCashFlow: false }).then((data) => {
-                    return res.json(data);
-                });
-            }
-            else {
-                return res.json("Under 24 hours");
-            }
-
-
-
-
-
-
-        });
+                        User.updateOne({ email: req.body.email }, { cashFlowArray: newCashFlowArray, lastCashFlow: Date.now(), canAddCashFlow: false }).then((data) => {
+                            return res.json(data);
+                        });
+                    }
+                    else {
+                        return res.json("Under 24 hours");
+                    }
+                }
+            }).catch(err => err);
 
 
     },
@@ -48,7 +44,6 @@ module.exports = {
     getLatestCashFlow: (req, res) => {
 
         User.findOne({ email: req.query.email }).then((user) => {
-            console.log(user.cashFlowArray);
             if (user.cashFlowArray.length > 0) {
                 return res.json(user.cashFlowArray[(user.cashFlowArray.length - 1)]);
             }
@@ -56,7 +51,7 @@ module.exports = {
                 return res.json("neutral");
             }
 
-        });
+        }).catch(err => err);
 
     },
 
@@ -64,7 +59,7 @@ module.exports = {
 
         User.updateOne({ email: req.query.email }, { newAchv: [] }).then((data) => {
             return res.json(data);
-        });
+        }).catch(err => err);
 
     },
 
@@ -73,7 +68,7 @@ module.exports = {
 
             return res.json(user.newAchv);
 
-        });
+        }).catch(err => err);
     },
 
     registerUser: (req, res) => {
@@ -84,7 +79,7 @@ module.exports = {
             return res.status(400).json(errors);
         User.findOne({ email: req.body.email }).then(user => {
             // If user : email already exists...
-            if (user) {
+            if(user) {
                 // Create email property on errors obj
                 errors.email = "Email already exists.";
                 // Set header status to 400 (server error)
@@ -123,7 +118,7 @@ module.exports = {
                     });
                 });
             }
-        });
+        }).catch(err => err);
     },
     loginUser: (req, res) => {
 

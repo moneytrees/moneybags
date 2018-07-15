@@ -10,6 +10,11 @@
 .navbar-light .navbar-toggler {
     border: none;
     width: 50px;
+    box-shadow: 2px 2px 2px #494949;
+}
+
+.navbar-light .navbar-toggler:hover {
+    box-shadow: none;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {

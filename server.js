@@ -13,37 +13,29 @@ global.__basedir = __dirname + '/';
 global.__plaidClient = false;
 
 //------------ MIDDLEWARE -------------
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.static("client/build"));
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
-et('Content-Encoding', 'gzip');next();
+  et('Content-Encoding', 'gzip');
+  next();
 });
+
 //------------ DATABASE -----------------------
 const db = require("./config/keys").mongoURI;
-
 mongoose
-    .connect(
-        db,
-        { useNewUrlParser: true }
-    )
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log(err));
+	.connect(
+		db,
+		{ useNewUrlParser: true }
+	)
+	.then(() => console.log("MongoDB Connected"))
+	.catch(err => console.log(err));
 
 //----------- ROUTING ---------------------
-walker.getRoutes({ dir: './api/routes', app: app, express: express});
-const BPORT = process.env.BPORT || 3001;
-//TODO restore https after tests have been created for secure routes
-// const httpsOptions = {
-//     key: fs.readFileSync('./security/cert.key'),
-//     cert: fs.readFileSync('./security/cert.pem')
-// };
-/*const server = https.createServer(httpsOptions, app).listen(PORT, () => {
-    console.log(`Secure server listening on port ${PORT}`);
-});*/
-app.listen(3001, () => {console.log(`Unsecure server listening on port ${BPORT}`)});
+walker.getRoutes({ dir: './api/routes', app: app, express: express });
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => { console.log(`Unsecure server listening on port ${PORT}`) });
 
 module.exports = app;
 
