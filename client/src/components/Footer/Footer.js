@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import ContactForm from "../Contact"
+import ContactForm from "../Contact"
 import "./Footer.css";
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, NavItem, NavLink } from 'reactstrap';
 
@@ -31,7 +31,7 @@ class Footer extends Component {
                             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                                 <ModalHeader toggle={this.toggle}>Contact Form</ModalHeader>
                                 <ModalBody>
-                                    {/* <ContactForm/> */}
+                                    <ContactForm/>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="primary" onClick={this.toggle}>Submit</Button>{' '}
@@ -47,7 +47,7 @@ class Footer extends Component {
                         </Col>
                         <Col lg="4" sm="12"> <h3>Support</h3>
                             <NavItem>
-                                <NavLink href="/dashboard">FAQ</NavLink>
+                                <NavLink href="/helpeducation">FAQ</NavLink>
                             </NavItem>
                         </Col>
                         <Col lg="4" sm="12"> <h3>Legal</h3>

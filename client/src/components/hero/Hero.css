@@ -6,7 +6,7 @@
     background-attachment: fixed;
 }
 
-img {
+.hero img {
     width: 90%;
     height: 90%;
     margin-left: 5%;
@@ -33,7 +33,7 @@ img {
          animation: fadein 4s;
 }
 
-.btn-secondary{
+.signIn .btn-secondary{
     color: #9cd2ba !important;
     background-color: #ffffff !important;
     font-family: lato !important;
@@ -42,9 +42,9 @@ img {
     box-shadow: 2px 2px 2px #494949;
 }
 
-.btn-secondary:hover {
+.signIn .btn-secondary:hover {
     color: #9cd2ba !important;
-    background-color: #ffffffb2 !important;
+    background-color: #ebebeb !important;
     box-shadow: none;
     transition: 0.5s;
 }

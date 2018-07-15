@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Avatar from "../Avatar";
 import {
   AvForm,
   AvGroup,
@@ -80,90 +81,93 @@ class Register extends Component {
         state: { feedback: this.state.feedback, from: '/register' }
       }} />;
     return (
-      <div className="row justify-content-center">
-        <div className="col-10 col-sm-7 col-md-5 col-lg-4">
-          <AvForm onValidSubmit={this.handleValidSubmit}>
-            <AvGroup>
-              <Label for="Name">Name</Label>
-              <AvInput
-                id="name"
-                name="name"
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleKeyPress}
-                placeholder="Sergei"
-                required
-                type="text"
-                value={this.state.firstName}
-              />
-              <AvFeedback>A first name is required to register</AvFeedback>
-            </AvGroup>
-            <AvGroup>
-              <Label for="email">Email</Label>
-              <AvInput
-                id="email"
-                name="email"
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleKeyPress}
-                placeholder="noreply@moneyBAGS.com"
-                required
-                type="email"
-                value={this.state.email}
-              />
-              <AvFeedback>A valid email is required to register.</AvFeedback>
-            </AvGroup>
+      <div id="register">
+        <div className="row justify-content-center">
+          <div className="col-10 col-sm-7 col-md-5 col-lg-4">
+            <AvForm onValidSubmit={this.handleValidSubmit}>
+              <AvGroup>
+              <Avatar />
+                <Label for="Name">Name</Label>
+                <AvInput
+                  id="name"
+                  name="name"
+                  onChange={this.handleInputChange}
+                  onKeyPress={this.handleKeyPress}
+                  placeholder="Sergei"
+                  required
+                  type="text"
+                  value={this.state.firstName}
+                />
+                <AvFeedback>A first name is required to register</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <Label for="email">Email</Label>
+                <AvInput
+                  id="email"
+                  name="email"
+                  onChange={this.handleInputChange}
+                  onKeyPress={this.handleKeyPress}
+                  placeholder="noreply@moneyBAGS.com"
+                  required
+                  type="email"
+                  value={this.state.email}
+                />
+                <AvFeedback>A valid email is required to register.</AvFeedback>
+              </AvGroup>
 
-            <AvGroup>
-              <Label for="password">Password</Label>
-              <AvInput
-                id="password"
-                minLength="8"
-                name="password"
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleKeyPress}
-                placeholder="password"
-                required
-                type="password"
-                value={this.state.password}
-              />
-              <AvFeedback>
-                Passwords must be at least eight characters in length
+              <AvGroup>
+                <Label for="password">Password</Label>
+                <AvInput
+                  id="password"
+                  minLength="8"
+                  name="password"
+                  onChange={this.handleInputChange}
+                  onKeyPress={this.handleKeyPress}
+                  placeholder="password"
+                  required
+                  type="password"
+                  value={this.state.password}
+                />
+                <AvFeedback>
+                  Passwords must be at least eight characters in length
               </AvFeedback>
-              <Label for="password"> Confirm Password</Label>
-              <AvInput
-                id="password2"
-                minLength="8"
-                name="password2"
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleKeyPress}
-                placeholder="password"
-                required
-                type="password"
-                value={this.state.password2}
-                validate={{ match: { value: "password" } }}
-              />
+                <Label for="password"> Confirm Password</Label>
+                <AvInput
+                  id="password2"
+                  minLength="8"
+                  name="password2"
+                  onChange={this.handleInputChange}
+                  onKeyPress={this.handleKeyPress}
+                  placeholder="password"
+                  required
+                  type="password"
+                  value={this.state.password2}
+                  validate={{ match: { value: "password" } }}
+                />
 
-              <span>
-                We recommend a password service like&nbsp;
+                <span>
+                  We recommend a password service like&nbsp;
                 <a
-                  href="https://www.lastpass.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LastPass
+                    href="https://www.lastpass.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LastPass
                 </a>
-                &nbsp;or{" "}
-                <a
-                  href="https://1password.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  1Password
+                  &nbsp;or{" "}
+                  <a
+                    href="https://1password.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    1Password
                 </a>
-              </span>
-            </AvGroup>
+                </span>
+              </AvGroup>
 
-            <Button className="register-button">Register</Button>
-          </AvForm>
+              <Button className="register-btn">Register</Button>
+            </AvForm>
+          </div>
         </div>
       </div>
     );
