@@ -24,3 +24,22 @@
     text-align: justify;
 }
 
+@media only screen and (max-width: 600px)  {
+    .midTextAbout {
+        padding-top: 1em;
+        font-size: 4em;
+    }
+
+    .about h2 {
+        font-size: 2em;
+    }
+
+    .about .col-sm-12{
+        margin: 2em 0 2em 0;
+    }
+
+    .feature{
+        border-bottom: 2px solid #37474F;
+        padding-bottom: 4em;
+    }
+}

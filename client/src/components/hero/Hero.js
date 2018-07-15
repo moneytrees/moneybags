@@ -32,9 +32,9 @@ class Hero extends Component {
                     <Row className="signIn">
                         <Col className="logo" md={{ size: 8, offset: 2 }}><img src={Logo} alt="logoPic" />
                         </Col>
-                        <Col className="loginBtn" sm="12" md={{ size: 8, offset: 2 }}>
-                            <Button color="secondary" size="lg" href="/login">Login</Button>
-                            <Button color="secondary" size="lg" href="/register">Register</Button>
+                        <Col className="loginBtn" md={{ size: 8, offset: 2 }}>
+                            <Button sm="12" color="secondary" size="lg" href="/login">Login</Button>
+                            <Button sm="12" color="secondary" size="lg" href="/register">Register</Button>
                         </Col>
                     </Row>
                 </Container>

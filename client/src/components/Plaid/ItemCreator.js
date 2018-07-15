@@ -20,7 +20,7 @@ class ItemCreator extends Component {
         .then(public_key => {
           this.setState(public_key);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => JSON.stringify(err));
   }
 
   handleOnSuccess(token, metadata) {
@@ -84,7 +84,7 @@ class ItemCreator extends Component {
             onSuccess={this.handleOnSuccess}
             className="btn btn-outline"
           >
-            Connect your Account
+            Connect your Financial Institution
           </PlaidLink>
 
 
