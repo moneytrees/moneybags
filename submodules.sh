@@ -9,7 +9,7 @@ if [[ $(git submodule--helper list) ]]; then
     else
        cd ..
        rm -rf ./test
-       git clone git@github.com:moneytrees/backendtesting.git test
+       git submodule add git@github.com:moneytrees/backendtesting.git test
     fi
     cd client/src/test
     if [[ $(git remote -vv) ]]; then
@@ -18,7 +18,7 @@ if [[ $(git submodule--helper list) ]]; then
     else
        cd ../../../
        rm -rf ./client/src/test
-       git clone git@github.com:moneytrees/frontendtesting.git client/src/test
+       git submodule add git@github.com:moneytrees/frontendtesting.git client/src/test
     fi
 
     git submodule sync
@@ -29,12 +29,12 @@ else
    if [ -d './test' ]; then
        rm -rf ./test
    fi
-   git clone git@github.com:moneytrees/backendtesting.git test
+   git submodule add git@github.com:moneytrees/backendtesting.git test
 
    if [ -d './client/src/test' ]; then
        rm -rf ./client/src/test
    fi
-   git clone git@github.com:moneytrees/frontendtesting.git client/src/test
+   git submodule add git@github.com:moneytrees/frontendtesting.git client/src/test
 
    git submodule sync
    git submodule update --init --recursive

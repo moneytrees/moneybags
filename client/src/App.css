@@ -6,9 +6,9 @@
 body {
   background-image: url("./imgs/moneytreebg.jpg");
   width: 100%;
+  background-attachment: fixed;
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  
 }
 
 .App-header {
@@ -33,4 +33,10 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  position:fixed;
+  top: 0;
+  left:0;
 }

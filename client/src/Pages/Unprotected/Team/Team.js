@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./team.css";
+import Footer from "../../../components/Footer"
 import addis from "../../../imgs/teamPotraits/addis.jpg";
 import brant from "../../../imgs/teamPotraits/brant.jpg";
 import caro from "../../../imgs/teamPotraits/caro.jpg";
@@ -175,27 +176,27 @@ const team = [
 class Team extends Component {
   render() {
     return (
-      <div>
+      <div className="team">
         <div className="d-flex flex-row flex-wrap rowWrap">
           {team.map(team => (
-            <div className="wrapper">
+            <div className="wrapperTeam">
               <div className="box">
                 <div className="imgBox">
-                  <img src={team.picture} />
+                  <img className="teamPic" src={team.picture} alt={team.name} />
                   <ul className="socialIcons">
-                    <li>
-                      <a href={team.linkedin} target="_blank">
+                    <li className="liTeam">
+                      <a className="aTeam" href={team.linkedin} target="_blank">
                         <i class="fa fa-linkedin" aria-hidden="true" />
                       </a>
                     </li>
-                    <li>
-                      <a href={team.github} target="_blank">
+                    <li className="liTeam">
+                      <a className="aTeam" href={team.github} target="_blank">
                         <i class="fa fa-github" aria-hidden="true" />
                       </a>
                     </li>
                   </ul>
                   <div className="details">
-                    <h2>
+                    <h2 className="h2Team">
                       {team.name} <br />
                       <span>{team.title}</span>
                     </h2>
@@ -205,6 +206,7 @@ class Team extends Component {
             </div>
           ))}
         </div>
+        <Footer/>
       </div>
     );
   }
