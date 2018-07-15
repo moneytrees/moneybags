@@ -8,22 +8,29 @@
 
 
 
-.avatar-img{
-    width: 35%;
+.top .avatar-img{
+    width: 31%;
     right: 29%;
     padding-left: 75px;
     /* margin-top:-125px; */
    
 }
 
-.topcard .card {
+.top .card {
     margin-top: 19%;
 }
 
+.achievement {
+    margin-bottom: 3%;
+}
 
-/* .achvCard{
-    padding-top: 50px;
-} */
+.transactionDetail {
+    margin-bottom: 3%;
+}
+.achieveCard{
+    margin-top: -12%;
+    margin-bottom: 3%;
+}
 
 .btn-info {
     margin: 10px 20px 20px 10px !important;

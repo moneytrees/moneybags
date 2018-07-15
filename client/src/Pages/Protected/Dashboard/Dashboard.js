@@ -88,7 +88,7 @@ class Dashboard extends Component {
 
         <div className="col-md-12">
           <div className="container">
-            <div className="Achievement">
+            <div className="achievement">
               <div className="row">
 
 
@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
 
                     <Card className="top">
-                      <Avatar />
+                      <Avatar/>
 
                       <div className="row">
                         <div className="col-md-12">
@@ -155,15 +155,11 @@ class Dashboard extends Component {
               </div>
             </div>
 
-            {/* <div className="row">
-           <div className="col-md-12">
-           <ItemCreator/>
-           </div>
-           </div> */}
+          
 
 
 
-            <div className="TransactionDetail">
+            <div className="transactionDetail">
               <div className="row">
                 <div className="col-md-8">
                   <Zoom>
