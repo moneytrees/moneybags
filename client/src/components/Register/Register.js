@@ -54,9 +54,15 @@ class Register extends Component {
     })
       .then(data => data.json())
       .then(response => {
-
+  
         if (response.success)
           this.setState({ referrerRedirect: true, feedback: response.success });
+          else {
+            console.log("********ERROR**********")
+            console.log(response.error)
+            console.log("********ERROR**********")
+
+          }
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
