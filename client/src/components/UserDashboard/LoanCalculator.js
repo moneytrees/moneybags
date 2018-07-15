@@ -8,6 +8,8 @@ export default class LoanCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            step: 1,
+            stepFunction: '',
             modal: false,
             purchaseAmount: '',
             downPayment: '',
@@ -25,6 +27,8 @@ export default class LoanCalculator extends Component {
         this.loanCalc = this.loanCalc.bind(this);
         this.inputHandler = this.inputHandler.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.step1Handler = this.step1Handler.bind(this);
+        this.step1initialState = this.step1initialState.bind(this);
     }
 
     // this is an amortization calculator
@@ -75,6 +79,26 @@ export default class LoanCalculator extends Component {
         this.setState({ currentState });
     }
 
+    step1Handler() {
+        const crntState = this.state;
+        let myStep = setInterval(() => {
+            const currentState = this.state;
+            currentState.step++;
+            currentState.step *= 2; 
+            this.setState({currentState});
+        }, 200);
+        crntState.stepFunction = myStep;
+        this.setState({crntState});
+    }
+
+    step1initialState() {
+        const currentState = this.state;
+        let myStep = currentState.stepFunction;
+        clearInterval(myStep);
+        currentState.step = 1;
+        this.setState({currentState});
+    }
+
     render() {
         return (
             <div>
@@ -82,13 +106,13 @@ export default class LoanCalculator extends Component {
 
                 <form>
                     <label>Purchase Amount</label><br />
-                    <input onChange={this.inputHandler} type="number" name="purchaseAmount" /><br /><br />
+                    <input onChange={this.inputHandler} onMouseDown={this.step1Handler} onMouseUp={this.step1initialState} type="number" name="purchaseAmount" step={this.state.step} min="0" /><br /><br />
                     <label>Down Payment</label><br />
-                    <input onChange={this.inputHandler} type="number" name="downPayment" /><br /><br />
+                    <input onChange={this.inputHandler} onMouseDown={this.step1Handler} onMouseUp={this.step1initialState} type="number" name="downPayment" min="0" /><br /><br />
                     <label>Term of Loan in Years</label><br />
-                    <input onChange={this.inputHandler} type="number" name="loanTerm" /><br /><br />
+                    <input onChange={this.inputHandler} type="number" name="loanTerm" min="0" /><br /><br />
                     <label>Interest Rate as Percent</label><br />
-                    <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" /><br /><br />
+                    <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" min="0" /><br /><br />
                     <Button onClick={this.loanCalc} color="info">Submit</Button>
                 </form>
 
