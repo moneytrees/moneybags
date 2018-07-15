@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { RadialChart } from 'react-vis/dist';
-import axios from 'axios';
 import '../../react-vis.css';
 import "./UserDashboard.css";
 import '../../App.css';
@@ -22,7 +21,7 @@ export default class TotalSpending extends Component {
     }
 
     componentDidMount() {
-        let transactions = [];
+        // let transactions = [];
         // fetch("/api/transactions", {
         //     method: "GET",
         // })
@@ -33,10 +32,6 @@ export default class TotalSpending extends Component {
 
 
     render() {
-
-        const { hoveredSection } = this.state;
-
-
         let expenses = this.state.transactions;
         let duplicate;
         do {

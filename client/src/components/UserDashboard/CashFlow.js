@@ -31,6 +31,7 @@ export default class CashFlow extends Component {
         super(props);
 
         this.state = {
+            transactions: [],
             regressionEquation: '',
             regressionEquation2: '',
             regressionEquation3: '',
@@ -41,7 +42,7 @@ export default class CashFlow extends Component {
             selectedTimeScaleInMonths: 1,
             compare: false,
             purchaseData: '',
-            sampleBalance: 2085
+            balance: 0
         };
 
         this.calculate = this.calculate.bind(this);
@@ -49,32 +50,49 @@ export default class CashFlow extends Component {
         this.timeScaleHandler = this.timeScaleHandler.bind(this);
     }
     componentDidMount() {
-        let sampleTransactions = [
-            { amount: 17, date: '2018-06-15' },
-            { amount: 57, date: '2018-06-17' },
-            { amount: 100, date: '2018-06-19' },
-            { amount: 23, date: '2018-06-21' },
-            { amount: -800, date: '2018-06-24' },
-            { amount: 8, date: '2018-06-26' },
-            { amount: 15, date: '2018-06-28' },
-            { amount: 75, date: '2018-06-30' },
-            { amount: 11, date: '2018-07-02' },
-            { amount: 6, date: '2018-07-04' },
-            { amount: 12, date: '2018-07-08' }
-        ];
+        fetch("/api/transactions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+          })
+            .then(data => data.json())
+            .then(response => { 
+                console.log(response);
+                const transactions = response.transactions.reverse();
+                const crntState = this.state;
+                crntState.transactions = transactions;
+                crntState.balance = response.accounts[0].balances.current;
+                this.setState({crntState});
+        ////////// promise block //////////
+        
+        // let sampleTransactions = [
+        //     { amount: 17, date: '2018-06-15' },
+        //     { amount: 57, date: '2018-06-17' },
+        //     { amount: 100, date: '2018-06-19' },
+        //     { amount: 23, date: '2018-06-21' },
+        //     { amount: -800, date: '2018-06-24' },
+        //     { amount: 8, date: '2018-06-26' },
+        //     { amount: 15, date: '2018-06-28' },
+        //     { amount: 75, date: '2018-06-30' },
+        //     { amount: 11, date: '2018-07-02' },
+        //     { amount: 6, date: '2018-07-04' },
+        //     { amount: 12, date: '2018-07-08' }
+        // ];
 
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = this.state.sampleBalance;
-        for (let i = sampleTransactions.length - 1; i >= 0; i--) {
-            xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
-            yPointCoord += sampleTransactions[i].amount;
+        let yPointCoord = this.state.balance;
+        for (let i = transactions.length - 1; i >= 0; i--) {
+            xPointCoord = 30 - Math.round((Date.now() - new Date(transactions[i].date)) / 86400000);
+            yPointCoord += transactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
-        regressionSet.push([30, this.state.sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.balance });
+        regressionSet.push([30, this.state.balance]);
 
         const result = regression.linear(regressionSet);
 
@@ -104,45 +122,44 @@ export default class CashFlow extends Component {
         })
         .then(res => {console.log(res.json())})
         .then(data =>{console.log(data)})
-            .catch(err => {console.log(err.message)});
+        .catch(err => {console.log(err.message)});
 
-//localStorage.getItem('user_email')
 
-        console.log("transaction");
-    
+         })
+        .catch(err => console.log(err.message));
     }
 
     calculate() {
-        console.log('calculate function ran');
-        let sampleTransactions = [
-            { amount: 17, date: '2018-06-15' },
-            { amount: 57, date: '2018-06-17' },
-            { amount: 100, date: '2018-06-19' },
-            { amount: 23, date: '2018-06-21' },
-            { amount: -800, date: '2018-06-24' },
-            { amount: 8, date: '2018-06-26' },
-            { amount: 15, date: '2018-06-28' },
-            { amount: 75, date: '2018-06-30' },
-            { amount: 11, date: '2018-07-02' },
-            { amount: 6, date: '2018-07-04' },
-            { amount: 12, date: '2018-07-08' }
-        ];
+        let transactions = this.state.transactions;
+        // let sampleTransactions = [
+        //     { amount: 17, date: '2018-06-15' },
+        //     { amount: 57, date: '2018-06-17' },
+        //     { amount: 100, date: '2018-06-19' },
+        //     { amount: 23, date: '2018-06-21' },
+        //     { amount: -800, date: '2018-06-24' },
+        //     { amount: 8, date: '2018-06-26' },
+        //     { amount: 15, date: '2018-06-28' },
+        //     { amount: 75, date: '2018-06-30' },
+        //     { amount: 11, date: '2018-07-02' },
+        //     { amount: 6, date: '2018-07-04' },
+        //     { amount: 12, date: '2018-07-08' }
+        // ];
         const crntState = this.state;
-        crntState.sampleBalance = (crntState.sampleBalance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
+        crntState.balance = (crntState.balance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
         this.setState({ crntState });
-        sampleTransactions.push({ amount: this.state.purchaseData.monthlyPayment + this.state.purchaseData.downPayment, date: Date.now() });
+        transactions.push({ amount: this.state.purchaseData.monthlyPayment + this.state.purchaseData.downPayment, date: Date.now() });
         let dataSet = [];
         let regressionSet = [];
         let xPointCoord;
-        let yPointCoord = this.state.sampleBalance;
-        for (let i = sampleTransactions.length - 1; i >= 0; i--) {
-            xPointCoord = 30 - Math.round((Date.now() - new Date(sampleTransactions[i].date)) / 86400000);
-            yPointCoord += sampleTransactions[i].amount;
+        let yPointCoord = this.state.balance;
+        for (let i = transactions.length - 1; i >= 0; i--) {
+            xPointCoord = 30 - Math.round((Date.now() - new Date(transactions[i].date)) / 86400000);
+            yPointCoord += transactions[i].amount;
             dataSet.push({ x: xPointCoord, y: yPointCoord });
             regressionSet.push([xPointCoord, yPointCoord]);
         }
-        dataSet.reverse().push({ x: 30, y: this.state.sampleBalance });
-        regressionSet.push([30, this.state.sampleBalance]);
+        dataSet.reverse().push({ x: 30, y: this.state.balance });
+        regressionSet.push([30, this.state.balance]);
 
         const result = regression.linear(regressionSet);
 
@@ -219,13 +236,12 @@ export default class CashFlow extends Component {
 
     getPurchaseData(data) {
         const currentState = this.state;
-        currentState.regressionEquation2 = '',
-        currentState.regressionEquation3 = '',
-        currentState.regLineData2 = [],
-        currentState.dataSet2 = [],
-        currentState.selectedTimeScaleInMonths = 1,
-        currentState.compare = false,
-        currentState.sampleBalance = 2085
+        currentState.regressionEquation2 = '';
+        currentState.regressionEquation3 = '';
+        currentState.regLineData2 = [];
+        currentState.dataSet2 = [];
+        currentState.selectedTimeScaleInMonths = 1;
+        currentState.compare = false;
         currentState.purchaseData = data;
         currentState.compare = true;
         console.log(data);
