@@ -11,7 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
+} from "reactstrap";
 
 export default class NavbarNoAuth extends React.Component {
   constructor(props) {
@@ -30,12 +30,13 @@ export default class NavbarNoAuth extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div>
         <Navbar color="light" light>
-          <NavbarBrand href="/" className="mr-auto">Money Trees</NavbarBrand>
+          <NavbarBrand href="/" className="mr-auto">
+            Money Tree
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
