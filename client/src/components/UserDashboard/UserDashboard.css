@@ -9,31 +9,43 @@
 
 
 .avatar-img{
-    width: 85%;
+    width: 35%;
     right: 29%;
     padding-left: 75px;
-    margin-top:29px;
+    margin-top:-125px;
    
 }
 
 
-.achvCard{
-    margin-top: 50px;
-}
+/* .achvCard{
+    padding-top: 50px;
+} */
 
-.cashFlow-btn-group {
+.btn-info {
+    margin: 10px 20px 20px 10px !important;
+
+}
+    
+
+
+
+/* .cashFlow-btn-group {
     margin: 10px 0 25px 0;
     padding: 0;
     
-}
+} */
 
+/* .cashFlow btn .btn-secondary {
+    margin: 10px 0 25px 0;
+    padding: 0;
+} */
 .cashFlow-graph {
     float: left;
     width: 50%;
     padding-left: 1rem;
 }
 
-.dbTitle{
+.dbTitle h2{
     font-family: ‘Varela Round’, sans-serif;
     font-size: 24px;
     text-align: center;
@@ -63,6 +75,11 @@
 .pieChart {
     margin:auto;
 }
+
+.card {
+    margin-top:263px;
+}
+
 
 
 
