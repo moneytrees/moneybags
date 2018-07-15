@@ -33,7 +33,7 @@ module.exports = function (app, express) {
             User.findOne({ _id: user_id },
             ).then((user) => {
                 if (user.institutions[0]) {
-                    return "you've already got a inst set."
+                    return console.log("you've already got a inst set.")
                 } else {
                     user.institutions.push(instData)
                     console.log("saving")
@@ -54,28 +54,28 @@ module.exports = function (app, express) {
             .getAccountInfo(__plaidClient.access_token)
             .then(accountinfo => {
                 var userAccount2 = []
-                for (var i = 0; i < accountinfo.accounts.length; i++) {
-                    var accountObj = {
-                        account_id: accountinfo.accounts[i].account_id,
-                        balances: [{
-                            available: accountinfo.accounts[i].balances.available,
-                            current: accountinfo.accounts[i].balances.current,
-                        }],
-                        mask: accountinfo.accounts[i].mask,
-                        name: accountinfo.accounts[i].name,
-                        official_name: accountinfo.accounts[i].official_name,
-                        subtype: accountinfo.accounts[i].subtype,
-                        type: accountinfo.accounts[i].type
-                    }
-
-                    User.findOne({ _id: user_id },
-                    ).then((user) => {
-                        user.institutions[0].account_ids.push(accountObj)
-                        console.log("saving")
-                        user.save();
-                    }
-                    ).catch(err => console.log(err))
+                // for (var i = 0; i < accountinfo.accounts.length; i++) {
+                var accountObj = {
+                    account_id: accountinfo.accounts[0].account_id,
+                    balances: [{
+                        available: accountinfo.accounts[0].balances.available,
+                        current: accountinfo.accounts[0].balances.current,
+                    }],
+                    mask: accountinfo.accounts[0].mask,
+                    name: accountinfo.accounts[0].name,
+                    official_name: accountinfo.accounts[0].official_name,
+                    subtype: accountinfo.accounts[0].subtype,
+                    type: accountinfo.accounts[0].type
                 }
+
+                User.findOne({ _id: user_id },
+                ).then((user) => {
+                    user.institutions[0].account_ids.push(accountObj)
+                    console.log("saving")
+                    user.save();
+                }
+                ).catch(err => console.log(err))
+                // }
                 response.json(accountinfo)
             });
     });

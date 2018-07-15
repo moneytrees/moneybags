@@ -81,8 +81,6 @@ class PlaidController {
     async getAccountInfo(res, req) {
         console.log(req)
         //TODO: check database for existing access token for the currently signed-in user
-        console.log("fireeeeeeeeeeeeed")
-
         const data = await this.client.getAuth(this.accessToken)
             .then(response => response)
             .catch((err) => err);
