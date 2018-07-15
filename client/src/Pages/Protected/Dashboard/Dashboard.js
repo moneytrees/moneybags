@@ -10,15 +10,15 @@ import { Card, CardImg } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
-import "./Dashboard.css";
+// import "./Dashboard.css";
 import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
+import "../../../components/UserDashboard/UserDashboard.css";
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
-import AchieveCard from "../../../components/Achievements/trophy";
+
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -167,7 +167,7 @@ class Dashboard extends Component {
               <div className="row">
                 <div className="col-md-8">
                   <Zoom>
-                    <Card className="trans">
+                    <Card className="transCard">
                       <h2 className="dbTitle"> Transaction Detail</h2>
 
                       <TransactionDetail />
@@ -190,20 +190,45 @@ class Dashboard extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <Fade right>
-                      <Card>
-                        <h2 className="dbTitle">Achievements</h2>
+                     
+                      
+
+<div className="col-md-8 text-center">
+                  <Animated
+                    animationIn="slideInRight"
+                    animationOut="zoomOutDown"
+                    isVisible={true}
+                  >
+
+                  
+                    <div className="achvCard">
+
+                      <div id="accordion">
+                        <div className="card">
+                          <div className="card-header" id="headingOne">
+                            <h5 className="mb-0">
+                              <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <h2 className="dbTitle"> Achievements </h2>
+                              </a>
+                            </h5>
+                          </div>
+
+                          <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                              <Achievements />
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </Animated>
+                </div>
 
 
 
-                        <AchieveCard>
-                          
-                          
-                          
-                          </AchieveCard>
 
-
-
-                      </Card>
+                      
                     </Fade>
                   </div>
                 </div>

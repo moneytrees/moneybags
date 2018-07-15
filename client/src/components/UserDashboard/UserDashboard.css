@@ -12,8 +12,12 @@
     width: 35%;
     right: 29%;
     padding-left: 75px;
-    margin-top:-125px;
+    /* margin-top:-125px; */
    
+}
+
+.topcard .card {
+    margin-top: 19%;
 }
 
 
