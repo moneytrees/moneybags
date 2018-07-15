@@ -33,3 +33,7 @@
     color: #e38949;
     transition: 0.5s;
 }
+
+.pageFooter .nav-item {
+    list-style-type: none;
+  }
