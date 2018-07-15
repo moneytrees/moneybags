@@ -81,12 +81,7 @@ class Dashboard extends Component {
     return (
       <div className="background">
         <ToastContainer />
-<<<<<<< HEAD
-
-
-=======
-        <ItemCreator />
->>>>>>> c09a54cbac681488ed1bea19fd6bdb0a651f616b
+       
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
@@ -138,7 +133,18 @@ class Dashboard extends Component {
               </div>
             </div>
 
-            <hr />
+           <div className="row">
+           <div className="col-md-12">
+           <ItemCreator/>
+           </div>
+           </div>
+           
+
+
+
+
+
+
             <Animated
               animationIn="fadeInUp"
               animationOut="zoomOutDown"
