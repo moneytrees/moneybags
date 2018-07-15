@@ -23,25 +23,18 @@ export default class TotalSpending extends Component {
 
     componentDidMount() {
         let transactions = [];
-        // axios
-        //     .post('/dbRoute') // hit route to DB
-        //     .then((res) => {
-        //         res.data.forEach((el) => {
-        //             transactions.push({
-        //                 amount: el.amount,
-        //                 category: el.category[0]
-        //             });
-        //         });
-        //         this.setState({
-        //             transactions
-        //         });
-        //     }).catch(err => console.log(err));
+        fetch("/api/transactions", {
+            method: "GET",
+        })
+            
+            .then(data => { console.log(data) })
+            .catch(err => { console.log(err.message) });
     }
 
 
     render() {
 
-        const {hoveredSection} = this.state;
+        const { hoveredSection } = this.state;
 
 
         let expenses = this.state.transactions;
