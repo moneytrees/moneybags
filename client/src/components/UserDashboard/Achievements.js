@@ -4,6 +4,7 @@ import Trophy from "../../imgs/goldTrophy.png";
 import greyTrophy from "../../imgs/greyTrophy.png";
 
 
+
 class Achievements extends Component {
     constructor(props) {
         super(props);
@@ -63,7 +64,7 @@ class Achievements extends Component {
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
                             return (
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
                                     <span className="itemDesc"> {item.desc}</span>
@@ -79,13 +80,13 @@ class Achievements extends Component {
  
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
                             return (
-                                <div className="col-md-4">
+                                <div className="col-md-3">
 
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
 
 
-                                    <span className="itemDesc"> {item.desc}</span>
+                                    {/* <span className="itemDesc"> {item.desc}</span> */}
                                 </div>
                             );
                         })

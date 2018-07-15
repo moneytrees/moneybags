@@ -5,8 +5,8 @@ import { Container, Row, Col } from 'reactstrap';
 class AboutFeatures extends Component {
     render() {
         return (
-            
-                <Container className="about">
+            <div className="about">
+                <Container>
                     <Row>
                         <Col className="midTextAbout">Features</Col>
                     </Row>
@@ -19,7 +19,7 @@ class AboutFeatures extends Component {
                             <p>Easily compare trend lines when considering purchases. MoneyTree will show you your financial cash flow trend and compare it with whatever financial transaction you are considering making Use our comparison feature when you are planing your next big purchase. Find out how for instance, a 15 year loan vs a 30 year loan can effect your financial health.</p></Col>
                     </Row>
                 </Container>
-           
+           </div>
         )
     }
 }

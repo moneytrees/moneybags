@@ -92,7 +92,7 @@ export default class Calculator extends Component {
                     <Button onClick={this.Calc} color="info">Submit</Button>
                 </form>
 
-                
+
                 <div className="loanModal">
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Purchase Info</ModalHeader>
@@ -103,7 +103,7 @@ export default class Calculator extends Component {
                         </ModalBody>
                         <ModalFooter>
                             <Button color="primary" onClick={this.toggle}>OK</Button>
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                            <Button color="info" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                     </Modal>
                 </div>

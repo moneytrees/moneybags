@@ -25,7 +25,7 @@
 form .avatar-img {
     width: 200px;
     margin: 0 auto;
-    margin-left: 5%;
+    margin-left: 14%;
 }
 
 #login button, #login input, #login optgroup, #login select, #login textarea {
@@ -89,7 +89,7 @@ form .avatar-img {
     }
 
     form .avatar-img {
-        margin-left: 0%;
+        margin-left: 10%;
     }
 
     #register form {
@@ -101,5 +101,17 @@ form .avatar-img {
         border-radius: 5px;
         box-shadow: 2px 2px 2px #494949;
         margin-left: -10%;
+    }
+
+    #register .btn-secondary {
+        color: #ffffff !important;
+        background-color: #e38949 !important;
+        font-family: lato !important;
+        width: 265px !important;
+        border: none !important;
+        -webkit-box-shadow: 2px 2px 2px #494949;
+        box-shadow: 2px 2px 2px #494949;
+        width: 200px;
+        height: 3em;
     }
 }
