@@ -21,10 +21,10 @@ class Footer extends Component {
 
     render() {
         return (
-            <div className="page-footer">
+            <div className="pageFooter">
                 <Container>
                     <Row>
-                        <Col className="midTextFooter">Moneytrees
+                        <Col> <h1>Moneytree</h1>
                         <hr /></Col>
                         <Col sm="12">
                             <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}Contact Us</Button>
@@ -34,7 +34,7 @@ class Footer extends Component {
                                     <ContactForm/>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button color="primary" onClick={this.toggle}>Submit</Button>{' '}
+                                    <Button className="bob" color="primary" onClick={this.toggle}>Submit</Button>{' '}
                                 </ModalFooter>
                             </Modal>
                         </Col>

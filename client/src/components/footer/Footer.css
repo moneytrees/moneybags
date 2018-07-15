@@ -1,29 +1,23 @@
-.page-footer{
+.pageFooter{
     background-color: #37474F;
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
 }
 
-.midTextFooter {
+.pageFooter h1 {
     font-family: 'Varela Round', sans-serif;
     font-size: 3em;
     padding: .5em;
 }
 
-.smallTextFooter {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1em;
-    color: #ffffff !important;
-}
-
-.page-footer h3 {
+.pageFooter h3 {
     font-family: 'Varela Round', sans-serif;
     font-size: 1.5em;
     color: #ffffff;
 }
 
-.page-footer li{
+.pageFooter li{
     list-style-type: none;
 }
 
@@ -41,18 +35,13 @@
     box-shadow: none;
 }
 
-.page-footer a{
+.pageFooter a{
     color: #ffffff;
 }
 
-.page-footer a:hover {
+.pageFooter a:hover {
     color: #e38949;
     transition: 0.5s;
-}
-
-.modal-body {
-    width: 100%;
-    margin-left: -14%;
 }
 
 .btn-primary {
@@ -68,3 +57,4 @@
     background-color: #d66b1f;
     box-shadow: none;
 }
+

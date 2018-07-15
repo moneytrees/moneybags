@@ -27,10 +27,10 @@
     height: 2em;
 }
 
-.avatar-img {
+form .avatar-img {
     width: 200px;
     margin: 0 auto;
-    margin-left: 14%;
+    margin-left: 5%;
 }
 
 #login button, #login input, #login optgroup, #login select, #login textarea {

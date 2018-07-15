@@ -7,9 +7,7 @@ const ProgressBar = (props) => {
 
       <div className="text-center"></div>
       <Progress multi>
-        <Progress bar striped value="15"></Progress>
-        <Progress bar animated color="success" value="30"></Progress>
-        <Progress bar color="info" value="25"></Progress>
+        <Progress bar animated color="success" value="70"></Progress>
       </Progress>
     </div>
   );

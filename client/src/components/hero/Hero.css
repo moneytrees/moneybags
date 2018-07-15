@@ -1,9 +1,5 @@
 .hero{
-    height: 800px;
-    color: #ffffff;
-    padding-bottom: 50px;
-    /* background-image: url("../images/moneyTreeBG.jpg"); */
-    background-attachment: fixed;
+    height: 700px;
 }
 
 .hero img {
@@ -34,7 +30,7 @@
 }
 
 .signIn .btn-secondary{
-    color: #9cd2ba !important;
+    color: #424242 !important;
     background-color: #ffffff !important;
     font-family: lato !important;
     margin-left: 77px !important;
@@ -43,7 +39,6 @@
 }
 
 .signIn .btn-secondary:hover {
-    color: #9cd2ba !important;
     background-color: #ebebeb !important;
     box-shadow: none;
     transition: 0.5s;
