@@ -15,32 +15,29 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 module.exports = {
 
 
-    addCashFlow: (req, res) =>{
-        User.findOne({email:req.body.email}).then((user)=>{
+    addCashFlow: (req, res) => {
+        User.findOne({ email: req.body.email }).then((user) => {
 
-            
-            if((Math.abs(Date.now() - user.lastCashFlow) / 36e5)>24){
 
-                if(req.body.cashFlow==="positive"){
-                    
-                }
+            if ((Math.abs(Date.now() - user.lastCashFlow) / 60000) > 0.1 && user.canAddCashFlow) {
+
 
                 let newCashFlowArray = user.cashFlowArray;
 
                 newCashFlowArray.push(req.body.cashFlow);
 
-                User.updateOne({email:req.body.email}, {cashFlowArray: newCashFlowArray, lastCashFlow: Date.now()}).then((data)=>{
+                User.updateOne({ email: req.body.email }, { cashFlowArray: newCashFlowArray, lastCashFlow: Date.now(), canAddCashFlow: false }).then((data) => {
                     return res.json(data);
                 });
             }
-            else{
+            else {
                 return res.json("Under 24 hours");
             }
-                
-                
-               
 
-            
+
+
+
+
 
         });
 
@@ -163,37 +160,55 @@ module.exports = {
                         /***** GAMIFICATION CHANGES ****/
                         let newConsecutiveLogin = user.consecutive_login + 1;
 
-                        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin }).then((data) => {
+                        User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin, canAddCashFlow: true }).then((data) => {
 
                             console.log("Updated consecutive login");
                         });
 
-                        if (Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6) {
-
-                            let achvArr = user.achievements;
-                            let newAchvArr = user.newAchv
-                            let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+                        let achvArr = user.achievements;
+                        let newAchvArr = user.newAchv
 
 
-                            if (!achvArr.includes(achvID)) {
 
-                                Achv.findOne({ _id: achvID }).then((achvData) => {
-
-                                    achvArr.push(achvData.id);
-                                    newAchvArr.push(achvData);
+                        let cashAchvID = "";
 
 
-                                    console.log(`
-                                  
-                                  NEW ACHIEVE ARRAY
-                                  
-                                  
-                                  ${newAchvArr}
-                                  
-                                  
-                                  
-                                  
-                                  `);
+                        let cashFlowAchvNum = -1;
+
+
+                        for (let i = (user.cashFlowArray.length - 1); i >= 0; i--) {
+
+                            if (user.cashFlowArray[i] === "positive") {
+                                cashFlowAchvNum++;
+                            }
+                            else {
+                                break;
+                            }
+
+                        }
+
+
+
+
+                        cashAchvID = "positiveCashFlow" + cashFlowAchvNum;
+
+                        let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
+
+
+                        if ((Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6 && !achvArr.includes(achvID)) && (cashFlowAchvNum > 0 && cashFlowAchvNum < 6 && !user.achievements.includes(cashAchvID))) {
+
+
+                            Achv.findOne({ _id: achvID }).then((achvData) => {
+
+                                achvArr.push(achvData.id);
+                                newAchvArr.push(achvData);
+                                Achv.findOne({ _id: cashAchvID }).then((cashAchvData) => {
+
+
+
+
+                                    achvArr.push(cashAchvData.id);
+                                    newAchvArr.push(cashAchvData);
 
 
                                     User.updateOne({ email: user.email }, {
@@ -203,39 +218,94 @@ module.exports = {
 
                                         console.log(data);
                                     });
+
                                 });
-                            }
+
+
+                            });
+                        }
+                        else if(Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6 && !achvArr.includes(achvID)){
+
+                            Achv.findOne({ _id: achvID }).then((achvData) => {
+
+                                achvArr.push(achvData.id);
+                                newAchvArr.push(achvData);
+
+                                User.updateOne({ email: user.email }, {
+                                    achievements: achvArr,
+                                    newAchv: newAchvArr
+                                }).then((data) => {
+
+                                    console.log(data);
+                                });
+
+                            });
+
+                        }
+                        else if(cashFlowAchvNum > 0 && cashFlowAchvNum < 6 && !user.achievements.includes(cashAchvID)){
+
+
+                            Achv.findOne({ _id: cashAchvID }).then((cashAchvData) => {
+
+
+
+
+                                achvArr.push(cashAchvData.id);
+                                newAchvArr.push(cashAchvData);
+
+
+                                User.updateOne({ email: user.email }, {
+                                    achievements: achvArr,
+                                    newAchv: newAchvArr
+                                }).then((data) => {
+
+                                    console.log(data);
+                                });
+
+                            });
                         }
 
 
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email,
-                            achievements: user.achievements,
-                            institutions: user.institutions
-                        };
 
-                        /***** END GAMIFICATION CHANGES ****/
 
-                        // Assign token
-                        jwt.sign(
 
-                            payload,
-                            keys.secretOrKey,
-                            { expiresIn: 1800 }, // Token expires in 30 minutes
-                            (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: `${token}`,
-                                });
-                            }
-                        );
-                    } else {
-                        return res.status(400).json({ password: "Password incorrect" });
-                    }
 
-                });
+
+                
+
+                       
+
+
+
+
+                            const payload = {
+                                id: user.id,
+                                name: user.name,
+                                email: user.email,
+                                achievements: user.achievements,
+                                institutions: user.institutions
+                            };
+
+                            /***** END GAMIFICATION CHANGES ****/
+
+                            // Assign token
+                            jwt.sign(
+
+                                payload,
+                                keys.secretOrKey,
+                                { expiresIn: 1800 }, // Token expires in 30 minutes
+                                (err, token) => {
+                                    res.json({
+                                        success: true,
+                                        token: `${token}`,
+                                    });
+                                }
+                            );
+                        } else {
+                            return res.status(400).json({ password: "Password incorrect" });
+                        }
+
+                    });
             })
             .catch(err => res.send(err));
     },
