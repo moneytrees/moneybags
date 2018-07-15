@@ -139,10 +139,10 @@ class PlaidController {
     async getTransactions() {
         const options = { count: 250, offset: 0 };
         const data = await this.client.getTransactions(this.accessToken, this.transactionRange.start, this.transactionRange.end, options)
-            .then(response => {
-                console.log(response);
-                response.transactions.forEach(item => {
-                    console.log(item.category);
+            .then(res => {
+                console.log(res);
+                res.transactions.forEach(item => {
+                    res.json(item);
                 });
                 return response;
             })

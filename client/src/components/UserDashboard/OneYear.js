@@ -8,7 +8,6 @@ import {
     HorizontalGridLines,
     VerticalGridLines,
     LineSeries,
-    MarkSeries
 } from 'react-vis/dist';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 

@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Link,
     Redirect
 } from 'react-router-dom';
 import Walkthrough from "../components/Walkthrough";
@@ -44,7 +43,7 @@ const AppRouting = () => {
                 <PrivateRoute path="/achievements" component={Achievements} />
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
-                <PrivateRoute path='/test' component={ItemCreator}/>
+                <PrivateRoute path='/test' component={ItemCreator} />
             </div>
         </Router>
     );

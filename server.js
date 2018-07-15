@@ -13,7 +13,7 @@ global.__basedir = __dirname + '/';
 global.__plaidClient = false;
 
 //------------ MIDDLEWARE -------------
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.get('*.js', function (req, res, next) {
@@ -25,17 +25,17 @@ app.get('*.js', function (req, res, next) {
 //------------ DATABASE -----------------------
 const db = require("./config/keys").mongoURI;
 mongoose
-    .connect(
-        db,
-        { useNewUrlParser: true }
-    )
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log(err));
+	.connect(
+		db,
+		{ useNewUrlParser: true }
+	)
+	.then(() => console.log("MongoDB Connected"))
+	.catch(err => console.log(err));
 
 //----------- ROUTING ---------------------
-walker.getRoutes({ dir: './api/routes', app: app, express: express});
+walker.getRoutes({ dir: './api/routes', app: app, express: express });
 const PORT = process.env.PORT || 3001;
-app.listen(3001, () => {console.log(`Unsecure server listening on port ${PORT}`)});
+app.listen(PORT, () => { console.log(`Unsecure server listening on port ${PORT}`) });
 
 module.exports = app;
 
