@@ -76,10 +76,17 @@
     margin:auto;
 }
 
-.card {
-    margin-top:263px;
+.totalSpendingCol {
+    margin-top: 10%;
 }
 
+.trans card {
+    width: 50%;
+}
+
+.CashFlow {
+    width:100%;
+}
 
 
 

@@ -191,7 +191,7 @@ class Dashboard extends Component {
                   <div className="col-md-12">
                     <Fade right>
                       <Card>
-                        <h2>HELLO</h2>
+                        <h2 className="dbTitle">Achievements</h2>
 
 
 
