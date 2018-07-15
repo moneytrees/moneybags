@@ -1,45 +1,53 @@
-.pageFooter {
+.page-footer{
     background-color: #37474F;
     color: #ffffff;
+    padding: 20px 0;
     text-align: center;
-    padding: 2em 0 2em 0;
 }
 
-.pageFooter h1 {
+.midTextFooter {
     font-family: 'Varela Round', sans-serif;
     font-size: 3em;
+    padding: .5em;
 }
 
-.pageFooter h3 {
+.smallTextFooter {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    color: #ffffff !important;
+}
+
+.page-footer h3 {
+
     font-family: 'Varela Round', sans-serif;
     font-size: 1.5em;
     color: #ffffff;
+}
+
+li{
+    list-style-type: none;
 }
 
 .btn-danger {
+    color: #fff;border-color: #e38949;
+    background-color: #e38949;
     font-size: 1.5em;
     margin-bottom: 1em;
-    background-color: #e38949;
-    border-color: #e38949;
     box-shadow: 2px 2px 2px #000000;
 }
 
 .btn-danger:hover {
-    background-color: #bd692d;
-    border-color: #bd692d;
+
+    border-color: #d66b1f;
+    background-color: #d66b1f;
     box-shadow: none;
-    transition: 0.5s;
 }
 
-.pageFooter ul{
-    list-style-type: none;
-}
-
-.pageFooter a{
+.page-footer a{
     color: #ffffff;
 }
 
-.pageFooter a:hover {
+.page-footer a:hover {
     color: #e38949;
     transition: 0.5s;
 }
