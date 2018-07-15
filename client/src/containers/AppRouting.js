@@ -2,7 +2,8 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Redirect
+    Redirect,
+    Switch
 } from 'react-router-dom';
 import Walkthrough from "../components/Walkthrough";
 import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
@@ -18,6 +19,7 @@ import NavbarNoAuth from "../components/Navbar/NavbarNoAuth";
 import Decode from "../helpers/Decode";
 import { PrivateRoute } from "../helpers/AuthService";
 import Landing from "../Pages/Unprotected/Landing/Landing";
+import ErrorPage from "../Pages/Unprotected/ErrorPage/ErrorPage";
 
 const decode = new Decode();
 let isAuth = (function () { if (localStorage.getItem("isAuthenticated")) { return <NavbarAuth /> } else { return <NavbarNoAuth /> } }());
@@ -30,6 +32,7 @@ const AppRouting = () => {
                 {
                     isAuth
                 }
+                <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={UserLogin} />
                 <Route exact path="/register" component={UserRegister} />
@@ -44,6 +47,8 @@ const AppRouting = () => {
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
                 <PrivateRoute path='/test' component={ItemCreator} />
+                <Route component={ErrorPage} />
+                </Switch>
             </div>
         </Router>
     );
