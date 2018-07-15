@@ -1,5 +1,4 @@
 import decode from "jwt-decode";
-import axios from "axios";
 
 export default class Decode {
   // Initializing important variables

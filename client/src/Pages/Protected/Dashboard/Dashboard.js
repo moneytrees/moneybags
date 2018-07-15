@@ -12,7 +12,6 @@ import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
 // import "./Dashboard.css";
-import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
@@ -28,10 +27,10 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/getNewUserAchievements", {
-        params: { email: localStorage.getItem("user_email") }
-      })
+    fetch("/api/getNewUserAchievements", {
+      params: { email: localStorage.getItem("user_email") }
+    })
+      .then(data => data.json())
       .then(response => {
         let newAchvArr = response.data;
 
@@ -66,10 +65,12 @@ class Dashboard extends Component {
 
         console.log(newAchvArr);
 
-        axios
-          .delete("/api/deleteNewAchievements", {
-            params: { email: localStorage.getItem("user_email") }
-          })
+
+        fetch("/api/deleteNewAchievements", {
+          method: "DELETE",
+          params: { email: localStorage.getItem("user_email") }
+        })
+          .then(data => data.json())
           .then(response => {
             console.log(response);
           })
@@ -208,9 +209,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
-        <Footer />
       </div>
-
     );
   }
 }

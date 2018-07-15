@@ -6,25 +6,26 @@ import "./Avatar.css";
 
 export class Avatar extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.toastId = null;
     this.state = {
-        imageArray : [Happy, Neutral, Mad ],
-        currentImageIndex: 1
+      imageArray: [Happy, Neutral, Mad],
+      currentImageIndex: 1
     }
   }
 
-    componentDidMount(){
+  componentDidMount() {
 
 
-      axios
-      .get("/api/getLatestCashFlow", {params:{email: localStorage.getItem("user_email")}})
+    fetch("/api/getLatestCashFlow",
+      { params: { email: localStorage.getItem("user_email") } })
+      .then(data => data.json())
       .then(response => {
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
-          switch (response.data){
+          switch (response.data) {
             case "positive":
               this.setState({
                 currentImageIndex: 0
@@ -35,7 +36,7 @@ export class Avatar extends Component {
                 currentImageIndex: 2
               })
               break;
-  
+
             case "neutral":
               this.setState({
                 currentImageIndex: 1
@@ -44,19 +45,19 @@ export class Avatar extends Component {
             default:
               break;
           }
-          
+
         }, 1000);
 
       });
 
-    }
+  }
 
 
   render() {
     return (
-      
+
       <div >
-        <img className ="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} />
+        <img className="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} />
       </div>
     )
   }
