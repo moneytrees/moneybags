@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
+// import neutralBigFoot from "../../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
-import Achievements from "../Achievements";
+// import Achievements from "../Achievements";
+import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
+import ItemCreator from "../../../components/Plaid/ItemCreator";
 import { Card, CardImg } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 import "./Dashboard.css";
 import axios from "axios";
 import { Animated } from "react-animated-css";
@@ -81,22 +83,23 @@ class Dashboard extends Component {
     return (
       <div className="background">
         <ToastContainer />
-
-        <h1>Money Tree: User Dashboard</h1>
+        <ItemCreator />
         <div className="col-12">
           <div className="container">
             <div className="Acheivement">
               <div className="row">
-                <div className="col-md-4">
-                  <Animated
-                    animationIn="slideInDown"
-                    animationOut="zoomOutDown"
-                    isVisible={true}
-                  >
-                    {/* <h1> BigFoot Avatar </h1> */}
-                    <Avatar />
-                  </Animated>
-                </div>
+
+               
+                  <div className="col-md-4">
+                  <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
+                    
+                     
+                      <Avatar/>
+                    
+                    </Animated>
+                  </div>
+                
+
 
                 <div className="col-md-8 text-center">
                   <Animated
@@ -105,9 +108,25 @@ class Dashboard extends Component {
                     isVisible={true}
                   >
                     <Card>
-                      <h1 id="dashboardTitle"> Achievements </h1>
+                      {/* <h1 id="dashboardTitle"> Achievements </h1> */}
+                      <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+         Achievements
+        </button>
+      </h5>
+    </div>
 
-                      <Achievements />
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      <Achievements />
+      </div>
+    </div>
+  </div>
+ 
+</div>  
                     </Card>
                   </Animated>
                 </div>

@@ -81,6 +81,7 @@ class Register extends Component {
         state: { feedback: this.state.feedback, from: '/register' }
       }} />;
     return (
+<<<<<<< HEAD
       <div id="register">
         <div className="row justify-content-center">
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
@@ -147,6 +148,81 @@ class Register extends Component {
 
                 <span>
                   We recommend a password service like&nbsp;
+=======
+      <div className="row justify-content-center">
+        <div className="col-10 col-sm-7 col-md-5 col-lg-4">
+          <AvForm className="registrationForm" onValidSubmit={this.handleValidSubmit}>
+            <AvGroup>
+              <Label for="Name">Name</Label>
+              <AvInput
+                id="name"
+                name="name"
+                onChange={this.handleInputChange}
+                onKeyPress={this.handleKeyPress}
+                placeholder="What should we call you?"
+                required
+                type="text"
+                value={this.state.firstName}
+              />
+              <AvFeedback>A firt name is required to register</AvFeedback>
+            </AvGroup>
+            <AvGroup>
+              <Label for="email">Email</Label>
+              <AvInput
+                id="email"
+                name="email"
+                onChange={this.handleInputChange}
+                onKeyPress={this.handleKeyPress}
+                placeholder="yourname@money-tree.io"
+                required
+                type="email"
+                value={this.state.email}
+              />
+              <AvFeedback>A valid email is required to register</AvFeedback>
+            </AvGroup>
+
+            <AvGroup>
+              <Label for="password">Password</Label>
+              <AvInput
+                id="password"
+                minLength="8"
+                name="password"
+                onChange={this.handleInputChange}
+                onKeyPress={this.handleKeyPress}
+                placeholder="Shh! Top Secret"
+                required
+                type="password"
+                value={this.state.password}
+              />
+              <AvFeedback>
+                Passwords must be at least eight characters in length
+              </AvFeedback>
+            </AvGroup>
+
+            <AvGroup>
+              <Label for="password"> Confirm Password</Label>
+              <AvInput
+                id="password2"
+                minLength="8"
+                name="password2"
+                onChange={this.handleInputChange}
+                onKeyPress={this.handleKeyPress}
+                placeholder="Please Confirm"
+                required
+                type="password"
+                value={this.state.password2}
+                validate={{ match: { value: "password" } }}
+              />
+            </AvGroup>
+
+            <AvGroup>
+              <Button className="bank-link">Link Your Bank Account</Button>
+            </AvGroup>
+
+            <AvGroup>
+              <span className="registrationNotes">
+                We recommend a password service like&nbsp;
+>>>>>>> a74b5c4834846a76c0d362d2fbbbfa30865a0897
                 <a
                     href="https://www.lastpass.com/"
                     target="_blank"
@@ -169,7 +245,7 @@ class Register extends Component {
             </AvForm>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
