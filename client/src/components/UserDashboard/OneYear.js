@@ -22,13 +22,11 @@ export default class OneYear extends Component {
         const m1 = this.props.regEq.equation[0];
         const c1 = this.props.regEq.equation[1];
         const lineData = [{ x: 0, y: c1 }, { x: 365, y: 365 * m1 + c1 }];
-        console.log(this.props.regEq);
-        console.log(this.props.regEq3);
+        
         let compareLine = [];
         if (this.props.regEq3) {
             const m2 = this.props.regEq3[0];
             const c2 = this.props.regEq3[1];
-            console.log(m2, c2);
             const lineData2 = [{ x: 0, y: c2 }, { x: 365, y: 365 * m2 + c2 }];
             compareLine = lineData2;
         }

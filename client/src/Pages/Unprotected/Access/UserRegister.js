@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import "./Userlogin.css";
 import Register from "../../../components/Register";
 
 class UserRegister extends Component {
     render() {
         return (
-            <div>
-                <h1>Money Tree: User Registration</h1>
+            <div className="register">
                 <Register />
             </div>
         );

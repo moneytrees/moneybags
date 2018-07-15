@@ -3,8 +3,6 @@ import Happy from "../../imgs/bigFootSVGs/happyBigFoot.svg";
 import Neutral from "../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import Mad from "../../imgs/bigFootSVGs/madBigFoot.svg";
 import "./Avatar.css";
-import axios from "axios";
-
 
 export class Avatar extends Component {
 

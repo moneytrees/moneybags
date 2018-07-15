@@ -34,19 +34,19 @@ export default class NavbarNoAuth extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="navigationBar">
         <Navbar color="light" light>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/register">Register</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/login">Login</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/register">Register</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/helpeducation">Education</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/team">Team</NavLink>

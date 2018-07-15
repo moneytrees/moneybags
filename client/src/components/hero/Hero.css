@@ -1,12 +1,8 @@
 .hero{
-    height: 800px;
-    color: #ffffff;
-    padding-bottom: 50px;
-    /* background-image: url("../images/moneyTreeBG.jpg"); */
-    background-attachment: fixed;
+    height: 700px;
 }
 
-img {
+.hero img {
     width: 90%;
     height: 90%;
     margin-left: 5%;
@@ -33,8 +29,9 @@ img {
          animation: fadein 4s;
 }
 
-.btn-secondary{
-    color: #9cd2ba !important;
+.signIn .btn-secondary{
+    color: #424242 !important;
+
     background-color: #ffffff !important;
     font-family: lato !important;
     margin-left: 77px !important;
@@ -42,9 +39,8 @@ img {
     box-shadow: 2px 2px 2px #494949;
 }
 
-.btn-secondary:hover {
-    color: #9cd2ba !important;
-    background-color: #ffffffb2 !important;
+.signIn .btn-secondary:hover {
+    background-color: #ebebeb !important;
     box-shadow: none;
     transition: 0.5s;
 }
