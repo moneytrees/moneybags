@@ -4,11 +4,10 @@ import Neutral from "../../imgs/bigFootSVGs/neutralBigFoot.svg";
 import Mad from "../../imgs/bigFootSVGs/madBigFoot.svg";
 import "./Avatar.css";
 
-export class Avatar extends Component {
+class Avatar extends Component {
 
   constructor(props) {
     super(props);
-    this.toastId = null;
     this.state = {
       imageArray: [Happy, Neutral, Mad],
       currentImageIndex: 1
@@ -57,7 +56,7 @@ export class Avatar extends Component {
     return (
 
       <div >
-        <img className="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} />
+        <img className="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} alt={this.state.currentImageIndex} />
       </div>
     )
   }

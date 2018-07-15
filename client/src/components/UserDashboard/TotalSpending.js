@@ -27,8 +27,7 @@ export default class TotalSpending extends Component {
 
     render() {
 
-        // const {hoveredSection} = this.state;
-
+        const { hoveredSection } = this.state;
 
         let expenses = this.state.transactions;
         let duplicate;
