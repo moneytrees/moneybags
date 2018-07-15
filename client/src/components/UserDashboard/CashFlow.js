@@ -360,6 +360,8 @@ export default class CashFlow extends Component {
                             <Button color="info" className="cashFlowBtn" name="five-years" onClick={this.timeScaleHandler}>5 Years</Button>
                             <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
                             <Button disabled={true} color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
+
+                            
                         </div>
                         <TwentyYears regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>

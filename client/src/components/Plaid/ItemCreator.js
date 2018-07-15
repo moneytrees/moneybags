@@ -20,7 +20,7 @@ class ItemCreator extends Component {
         .then(public_key => {
           this.setState(public_key);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => JSON.stringify(err));
   }
 
   handleOnSuccess(token, metadata) {
@@ -59,7 +59,7 @@ class ItemCreator extends Component {
       body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => { console.log(response) })
+      .then(response => response)
       .catch(err => console.log(err.message));
     console.log("transaction");
   }
@@ -82,7 +82,7 @@ class ItemCreator extends Component {
             onSuccess={this.handleOnSuccess}
             className="btn btn-outline"
           >
-            Connect your Account
+            Connect your Financial Institution
           </PlaidLink>
 
 

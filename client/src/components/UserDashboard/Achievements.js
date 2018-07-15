@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import Trophy from "../../imgs/goldTrophy.png";
 import greyTrophy from "../../imgs/greyTrophy.png";
-
 
 class Achievements extends Component {
     constructor(props) {
         super(props);
         this.state = { loginAchvArray: [], cashFlowAchvArray: [] };
-        this.sortThrophies=this.sortThrophies.bind(this);
-        
+        this.sortThrophies = this.sortThrophies.bind(this);
+
     }
 
     sortThrophies(tArray) {
@@ -24,11 +22,12 @@ class Achievements extends Component {
 
     componentDidMount() {
 
-        axios.get("/api/getAllAchievements", {
+        fetch("/api/getAllAchievements", {
             params: {
                 email: localStorage.getItem("user_email")
             }
         })
+            .then(data => data.json())
             .then(response => {
                 let tempLogin = [];
                 let tempCash = [];
@@ -63,7 +62,7 @@ class Achievements extends Component {
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
                             return (
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
                                     <span className="itemDesc"> {item.desc}</span>
@@ -73,19 +72,19 @@ class Achievements extends Component {
                             );
                         })
                         }
-                        
 
-                     
- 
+
+
+
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
                             return (
-                                <div className="col-md-4">
+                                <div className="col-md-3">
 
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
 
 
-                                    <span className="itemDesc"> {item.desc}</span>
+                                    {/* <span className="itemDesc"> {item.desc}</span> */}
                                 </div>
                             );
                         })

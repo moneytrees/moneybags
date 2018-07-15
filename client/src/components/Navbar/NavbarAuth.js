@@ -4,15 +4,10 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+} from "reactstrap";
 
 export default class NavbarAuth extends React.Component {
   constructor(props) {
@@ -31,15 +26,13 @@ export default class NavbarAuth extends React.Component {
     });
   }
 
-
   render() {
     return (
-      <div>
+      <div className="navigationBar">
         <Navbar color="light" light>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
-            
               <NavItem>
                 <NavLink href="/dashboard">Dashboard</NavLink>
               </NavItem>
@@ -52,11 +45,8 @@ export default class NavbarAuth extends React.Component {
               <NavItem>
                 <NavLink href="/logout">Logout</NavLink>
               </NavItem>
-            
             </Nav>
           </Collapse>
-
-         
         </Navbar>
       </div>
     );
