@@ -47,11 +47,6 @@ module.exports = function validateRegisterInput(data) {
   if (!Validator.equals(data.password, data.password2)) {
     errors.password = "Your passwords must match";
   }  
-  
-  console.log("************************")
-  console.log(errors)
-  console.log("************************")
-
   // Return object with any errors, check if there arent any errors
   // If errors object _.isempty - user input is valid
   return {
