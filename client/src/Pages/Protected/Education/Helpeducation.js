@@ -4,21 +4,17 @@ import React, { Component } from 'react';
 import Education from '../../../components/HelpEducation/Education';
 //import Help from '../../../components/HelpEducation/Help';
 import "./helpeducation.css";
+import Footer from "../../../components/footer"
 
 
 class Helpeducation extends Component {
     render() {
         return (
             <div>
-           
-
-                
-              
-
-        <Education/>
-            
-                
-
+                <div className="faq">
+                    <Education />
+                </div>
+                <Footer />
             </div>
         );
     }

@@ -1,6 +1,5 @@
 import decode from "jwt-decode";
 
-
 export default class Decode {
   // Initializing important variables
   constructor(domain) {

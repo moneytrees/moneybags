@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Userlogin.css";
 import Login from "../../../components/Login";
 
 class UserLogin extends Component {
@@ -25,15 +26,14 @@ class UserLogin extends Component {
                         userfeedback = 'You must be logged in to access this page';
                 }
             }
-            return  <h2>{userfeedback}</h2>;
+            return <h2>{userfeedback}</h2>;
         }
     }
     render() {
         return (
-            <div>
-                <h1>Money Tree: User Login</h1>
+            <div className="login">
                 {this.getFeedback()}
-                <Login location={this.props.location || null}/>
+                <Login location={this.props.location || null} />
             </div>
         );
     }
