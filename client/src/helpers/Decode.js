@@ -1,5 +1,4 @@
 import decode from "jwt-decode";
-import axios from "axios";
 
 export default class Decode {
   // Initializing important variables
@@ -12,20 +11,19 @@ export default class Decode {
 
   login(user) {
     console.log("login function fired");
-    fetch("/api/login", { 
+    fetch("/api/login", {
       method: "POST",
       headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({user})
-       }).then(res => {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ user })
+    }).then(res => {
       console.log(res);
       this.setToken(res.data.token); // Setting the token in localStorage
-      // return Promise.resolve(res);
     })
-    .catch(errors => {
-      console.log(` error: ${errors}`);
-    });
+      .catch(errors => {
+        console.log(` error: ${errors}`);
+      });
   }
 
   loggedIn() {

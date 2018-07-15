@@ -11,8 +11,6 @@ import { Card, CardImg } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
-// import "./Dashboard.css";
-import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
@@ -28,10 +26,10 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/getNewUserAchievements", {
-        params: { email: localStorage.getItem("user_email") }
-      })
+    fetch("/api/getNewUserAchievements", {
+      params: { email: localStorage.getItem("user_email") }
+    })
+      .then(data => data.json())
       .then(response => {
         let newAchvArr = response.data;
 
@@ -66,10 +64,12 @@ class Dashboard extends Component {
 
         console.log(newAchvArr);
 
-        axios
-          .delete("/api/deleteNewAchievements", {
-            params: { email: localStorage.getItem("user_email") }
-          })
+
+        fetch("/api/deleteNewAchievements", {
+          method: "DELETE",
+          params: { email: localStorage.getItem("user_email") }
+        })
+          .then(data => data.json())
           .then(response => {
             console.log(response);
           })
@@ -92,7 +92,7 @@ class Dashboard extends Component {
           <div className="topSection">
             <div className="row">
 
-              <div className="topCol" className="col-md-12">
+              <div className="col-md-12 topCol">
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
 
                   <Card className="topAvatar">
@@ -114,41 +114,6 @@ class Dashboard extends Component {
 
                 </Animated>
               </div>
-
-
-
-              {/* <div className="col-md-8 text-center">
-                  <Animated
-                    animationIn="slideInRight"
-                    animationOut="zoomOutDown"
-                    isVisible={true}
-                  > */}
-
-
-              {/* <div className="achvCard">
-
-                      <div id="accordion">
-                        <div className="card">
-                          <div className="card-header" id="headingOne">
-                            <h5 className="mb-0">
-                              <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                <h2 className="dbTitle"> Achievements </h2>
-                              </a>
-                            </h5>
-                          </div>
-
-                          <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body"> */}
-
-
-              {/* </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div> */}
-              {/* </Animated>
-                </div>*/}
             </div>
           </div>
 
@@ -200,7 +165,7 @@ class Dashboard extends Component {
                             <div className="card">
                               <div className="card-header" id="headingOne">
                                 <h5 className="mb-0">
-                                  <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                  <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     <h2 className="dbTitle"> Achievements </h2>
                                   </a>
                                 </h5>
@@ -227,40 +192,6 @@ class Dashboard extends Component {
               </div>
             </div>
 
-
-
-
-
-
-
-
-            {/* <Animated
-              animationIn="fadeInUp"
-              animationOut="zoomOutDown"
-              isVisible={true}
-            >
-              <div className="row">
-                <div className="col-12">
-                  <div className="ProgressBar">
-
-
-                    <Card className="progressCard"> */}
-            {/* <h2 className="dbTitle"> Progress Bar </h2> */}
-
-            {/* // <div className="row">
-                      //   <div className="col-md-12">
-                      //     <ProgressBar className="progress"/>
-                      //   </div>
-
-                      // </div> */}
-
-            {/* </Card>
-                  </div>
-                </div>
-              </div>
-            </Animated> */}
-
-
             <div className="row">
               <div className="CashFlow">
                 <div className="col-12 text-center">
@@ -277,9 +208,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
-        <Footer />
       </div>
-
     );
   }
 }
