@@ -1,10 +1,15 @@
 .form-group {
-    font-family: "Varela Round", sans-serif;
+     font-family: "Varela Round", sans-serif; 
+
 }
 
-Form {
-    margin-left: 30%;
-    color: #015249;
+.registrationForm {
+    margin-top:10%;
+}
+
+.registrationNotes {
+    font-size: 12px;
+    margin: auto;
 }
 
 .register-button{
@@ -12,6 +17,7 @@ Form {
     background-color: #ffffff !important;
     font-family: lato !important;
     margin-left: 77px !important;
+    width:25%;
     border: none !important;
     box-shadow: 2px 2px 2px #494949;
 }
@@ -21,3 +27,5 @@ Form {
     box-shadow: none;
     transition: 0.5s;
 } 
+
+

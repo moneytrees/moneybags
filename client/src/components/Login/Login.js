@@ -36,7 +36,7 @@ class Login extends Component {
     })
       .then(data => data.json())
       .then((res) => {
-        if (res.user == undefined) {
+        if (typeof res.user === "undefined") {
           let errors = {
             invalid: "Login invalid"
           }
