@@ -46,6 +46,7 @@ const AppRouting = () => {
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
                 <PrivateRoute path='/test' component={ItemCreator}/>
+                <Route component={ErrorPage} />
             </div>
         </Router>
     );

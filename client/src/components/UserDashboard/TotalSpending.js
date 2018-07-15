@@ -67,10 +67,11 @@ export default class TotalSpending extends Component {
         }
         let data = [];
 
-        let colors = ['#77c9d4', '#015249', '#49a3e3', '#57bc90', '#e38949', '#a5a5af'];
+        let colors = ['#FA8072', '#72ecfa', '#af894f', '#ffb733', '#015249', '#490152'];
+        // salmon, turquoise, brown, orange, teal, purple
 
         for (let i = 0; i < expenses.length; i++) {
-            data.push({ angle: expenses[i].amount, label: expenses[i].category, color: colors[i] });
+            data.push({ angle: expenses[i].amount, label: expenses[i].amount+"%", color: colors[i] });
         }
         if (misc / total > 0.05) {
             data.push({ angle: misc, label: 'Misc' });
@@ -86,7 +87,7 @@ export default class TotalSpending extends Component {
 
                     labelsRadiusMultiplier={.8}
                     labelsStyle={{ fontSize: 10 }}
-
+                   
                     radius={150}
                     width={300}
                     height={300} />
