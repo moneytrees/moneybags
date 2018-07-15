@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./team.css";
-import Footer from "../../../components/footer"
+import Footer from "../../../components/Footer/Footer"
 import addis from "../../../imgs/teamPotraits/addis.jpg";
 import brant from "../../../imgs/teamPotraits/brant.jpg";
 import caro from "../../../imgs/teamPotraits/caro.jpg";

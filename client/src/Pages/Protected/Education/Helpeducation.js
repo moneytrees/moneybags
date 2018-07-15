@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Education from '../../../components/HelpEducation/Education';
 //import Help from '../../../components/HelpEducation/Help';
 import "./helpeducation.css";
-import Footer from "../../../components/footer"
+import Footer from "../../../components/Footer/Footer"
 
 
 class Helpeducation extends Component {
