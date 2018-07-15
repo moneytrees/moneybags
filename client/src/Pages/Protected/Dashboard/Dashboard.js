@@ -277,11 +277,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
-<<<<<<< HEAD
         {/* </div> */}
-=======
-        <Footer />
->>>>>>> origin/homepage
       </div>
 
     );
