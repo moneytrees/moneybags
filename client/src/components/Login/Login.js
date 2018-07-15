@@ -35,23 +35,30 @@ class Login extends Component {
       })
     })
       .then(data => data.json())
-      .then(response => {
-        localStorage.setItem("isAuthenticated", true);
-        const { token } = response;
-        // Set token to auth header
-        decode.setToken(token);
-        // Decode token to get user data
-        const profile = decode.getProfile(token);
-        // Set current user
-        localStorage.setItem("user_id", profile.id);
-        localStorage.setItem("user_email", profile.email);
+      .then((res) => {
+        if (res.user == undefined) {
+          let errors = {
+            invalid: "Login invalid"
+          }
+          throw console.log(errors.invalid);
+        } else {
+          localStorage.setItem("isAuthenticated", true);
+          const { token } = res;
+          // Set token to auth header
+          decode.setToken(token);
+          // Decode token to get user data
+          const profile = decode.getProfile(token);
+          // Set current user
+          localStorage.setItem("user_id", profile.id);
+          localStorage.setItem("user_email", profile.email);
 
-        window.location.reload();
+          window.location.reload();
 
-        profile
-          ? this.setState(() => ({ referrerRedirect: true }))
-          : console.log("YOU GOT THE $%#%$% WRONG");
+          profile
+            ? this.setState(() => ({ referrerRedirect: true }))
+            : console.log("YOU GOT THE $%#%$% WRONG");
 
+        }
 
       })
       .catch(errors => {
@@ -59,7 +66,7 @@ class Login extends Component {
       });
   }
   render() {
-    const { from } = this.props.location.state || {
+    const { from } = {
       from: { pathname: "/dashboard" }
     };
     const { referrerRedirect } = this.state;

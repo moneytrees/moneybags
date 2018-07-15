@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
-import Button from "./PlaidSelection/PlaidSelection";
-import TransData from "../helpers/TransData"
+import TransData from "../../helpers/TransData";
+import PlaidButtons from "./PlaidButtons";
 require("dotenv").config({ path: "../.env" });
 
 class ItemCreator extends Component {
@@ -29,21 +29,25 @@ class ItemCreator extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ public_token: token, metadata: metadata })
+      body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
     })
-    .then(data => data.json())
-    .then(response => console.log(response.access_token))
-    .catch(err => console.log(err.message));
-    console.log("LOLLLLLL");
+      .then(data => data.json())
+      .then(response => console.log(response.access_token))
+      .catch(err => console.log(err.message));
   }
 
-  //fetching account
   account() {
-    fetch("/api/accounts")
+    fetch("/api/accounts"
+      , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+      })
       .then(data => data.json())
       .then(response => console.log(response))
-      .catch(err => err.message);
-    console.log("account");
+      .catch(err => console.log(err.message));
   }
 
   transaction() {
@@ -64,7 +68,6 @@ class ItemCreator extends Component {
         <div id="foo">
 
 
-        
           <PlaidLink
             clientName="Moneytrees"
             env="sandbox"
@@ -75,14 +78,16 @@ class ItemCreator extends Component {
             publicKey={this.state.public_key}
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
+            className="btn btn-outline"
           >
-            Open Link and connect your bank!
+            Connect your Account
           </PlaidLink>
 
-          <Button
-           account={this.account} 
-           transactions={this.transaction} />
-           <TransData/>
+
+          <PlaidButtons
+            account={this.account}
+            transactions={this.transaction} />
+          <TransData />
         </div>
       );
     } else {

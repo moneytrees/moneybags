@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 // import { Collapse } from 'reactstrap';
-
+import '../../App.css';
 
 class Education extends Component {
 
@@ -14,8 +14,8 @@ class Education extends Component {
       
             <section className="accordion-section clearfix mt-3" aria-label="Question Accordions">
             <div className="container">
-            <h2>Educational Resources </h2>
-            <h3>Frequently Asked Questions</h3>
+            <h1 className ="header1">Frequently Asked Questions</h1>
+         
             <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <div className="panel panel-default">
                 <div className="panel-heading p-3 mb-3" role="tab" id="heading0">

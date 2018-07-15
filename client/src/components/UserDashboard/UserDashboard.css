@@ -1,6 +1,7 @@
 .cashFlow-btn-group {
     margin: 0;
     padding: 0;
+    
 }
 
 .cashFlow-graph {
@@ -8,6 +9,7 @@
     width: 50%;
     padding-left: 1rem;
 }
+
 
 .testForm {
     margin-top: 2rem;
@@ -25,7 +27,29 @@
     float: right;
 }
 
-.cashFlowBtn {
-    margin-right: 1rem;
+.pieChart {
+    margin:auto;
 }
+
+
+
+/* .cashFlowBtn {
+    margin-right: 1rem;
+} */
+
+.cashFlowBtn Button{
+    color: #ffffff !important;
+    background-color:  #9cd2ba!important;
+    font-family: lato !important;
+    margin-left: 77px !important;
+    border: none !important;
+    box-shadow: 2px 2px 2px #494949;
+ }
+ .cashFlowBtn Button:hover {
+    color: #9cd2ba !important;
+    background-color: #ffffffb2 !important;
+    box-shadow: none;
+    transition: 0.5s;
+ }
+
 

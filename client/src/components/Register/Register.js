@@ -7,6 +7,7 @@ import {
 } from "availity-reactstrap-validation";
 import { Redirect, withRouter } from "react-router-dom";
 import { Button, Label } from "reactstrap";
+import "./Register.css";
 
 
 
@@ -81,7 +82,7 @@ class Register extends Component {
     return (
       <div className="row justify-content-center">
         <div className="col-10 col-sm-7 col-md-5 col-lg-4">
-          <AvForm onValidSubmit={this.handleValidSubmit}>
+          <AvForm className="registrationForm" onValidSubmit={this.handleValidSubmit}>
             <AvGroup>
               <Label for="Name">Name</Label>
               <AvInput
@@ -89,12 +90,12 @@ class Register extends Component {
                 name="name"
                 onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
-                placeholder="Sergei"
+                placeholder="What should we call you?"
                 required
                 type="text"
                 value={this.state.firstName}
               />
-              <AvFeedback>A first name is required to register</AvFeedback>
+              <AvFeedback>A firt name is required to register</AvFeedback>
             </AvGroup>
             <AvGroup>
               <Label for="email">Email</Label>
@@ -103,12 +104,12 @@ class Register extends Component {
                 name="email"
                 onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
-                placeholder="noreply@moneyBAGS.com"
+                placeholder="yourname@money-tree.io"
                 required
                 type="email"
                 value={this.state.email}
               />
-              <AvFeedback>A valid email is required to register.</AvFeedback>
+              <AvFeedback>A valid email is required to register</AvFeedback>
             </AvGroup>
 
             <AvGroup>
@@ -119,7 +120,7 @@ class Register extends Component {
                 name="password"
                 onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
-                placeholder="password"
+                placeholder="Shh! Top Secret"
                 required
                 type="password"
                 value={this.state.password}
@@ -127,6 +128,9 @@ class Register extends Component {
               <AvFeedback>
                 Passwords must be at least eight characters in length
               </AvFeedback>
+            </AvGroup>
+
+            <AvGroup>
               <Label for="password"> Confirm Password</Label>
               <AvInput
                 id="password2"
@@ -134,14 +138,20 @@ class Register extends Component {
                 name="password2"
                 onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
-                placeholder="password"
+                placeholder="Please Confirm"
                 required
                 type="password"
                 value={this.state.password2}
                 validate={{ match: { value: "password" } }}
               />
+            </AvGroup>
 
-              <span>
+            <AvGroup>
+              <Button className="bank-link">Link Your Bank Account</Button>
+            </AvGroup>
+
+            <AvGroup>
+              <span className="registrationNotes">
                 We recommend a password service like&nbsp;
                 <a
                   href="https://www.lastpass.com/"
@@ -161,10 +171,10 @@ class Register extends Component {
               </span>
             </AvGroup>
 
-            <Button color="primary">Register</Button>
+            <Button className="register-button">Register</Button>
           </AvForm>
         </div>
-      </div>
+      </div >
     );
   }
 }

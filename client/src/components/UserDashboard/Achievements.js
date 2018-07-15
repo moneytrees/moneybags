@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import Trophy from "../../imgs/goldTrophy.png";
+import greyTrophy from "../../imgs/greyTrophy.png";
 
 
 class Achievements extends Component {
-
     constructor(props) {
         super(props);
         this.state = { achvArray: [] };
@@ -15,7 +16,7 @@ class Achievements extends Component {
             params: {
                 email: localStorage.getItem("user_email")
             }
-          })
+        })
             .then(response => {
                 this.setState({
                     achvArray: response.data
@@ -36,13 +37,14 @@ class Achievements extends Component {
                         {this.state.achvArray.map(function (item, i) {
                             return (
 
-                                <div className="col-md-4">
-                                    <h3> {item.name}</h3>
+                                <div className="col-md-6">
 
-                                    <img src="" />
+                                    <img src={item.unlocked ? Trophy : greyTrophy} />
+
+                                    <h3 className="itemName"> {item.name}</h3>
                                     <span> {item.desc}</span>
-                                </div>
 
+                                </div>
 
                             );
                         })

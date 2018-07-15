@@ -1,18 +1,31 @@
-
-
-.button {
-    background-color: #015249;
-}
-
 .form-group {
-    font-family: 'Lato', sans-serif;
+     font-family: "Varela Round", sans-serif; 
+
 }
 
-Form {
-    margin-left: 30%;
-    color: #015249;
+.registrationForm {
+    margin-top:10%;
 }
 
-Button {
-    width: 20%;
+.registrationNotes {
+    font-size: 12px;
+    margin: auto;
 }
+
+.register-button{
+    color: #9cd2ba !important;
+    background-color: #ffffff !important;
+    font-family: lato !important;
+    margin-left: 77px !important;
+    width:25%;
+    border: none !important;
+    box-shadow: 2px 2px 2px #494949;
+}
+.register-button:hover {
+    color: #9cd2ba !important;
+    background-color: #ffffffb2 !important;
+    box-shadow: none;
+    transition: 0.5s;
+} 
+
+
