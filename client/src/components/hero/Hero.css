@@ -22,11 +22,11 @@
 .signIn .btn{
     width: 250px;
     margin-left: 75px; 
-    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 4s; /* Firefox < 16 */
-     -ms-animation: fadein 4s; /* Internet Explorer */
-      -o-animation: fadein 4s; /* Opera < 12.1 */
-         animation: fadein 4s;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+     -ms-animation: fadein 2s; /* Internet Explorer */
+      -o-animation: fadein 2s; /* Opera < 12.1 */
+         animation: fadein 2s;
 }
 
 .signIn .btn-secondary{
@@ -35,11 +35,11 @@
     font-family: lato !important;
     margin-left: 77px !important;
     border: none !important;
-    box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #000000;
 }
 
 .signIn .btn-secondary:hover {
-    background-color: #ebebeb !important;
+    background-color: #cccccc !important;
     box-shadow: none;
     transition: 0.5s;
 }
@@ -50,4 +50,14 @@
 
 .loginBtn{
     color: #9cd2ba;
+}
+
+@media only screen and (max-width: 600px)  {
+    .loginBtn{
+        margin-top: 6em;
+    }
+    .signIn .btn-secondary{
+        margin-top: 3em;
+        margin-left: 14% !important;
+    }
 }

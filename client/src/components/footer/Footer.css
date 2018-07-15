@@ -31,10 +31,6 @@
     transition: 0.5s;
 }
 
-.pageFooter ul{
-    list-style-type: none;
-}
-
 .pageFooter a{
     color: #ffffff;
 }
