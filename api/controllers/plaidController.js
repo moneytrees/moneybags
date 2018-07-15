@@ -41,10 +41,18 @@ class PlaidController {
         this.access_token = token;
     }
 
+    holder(arg) {
+        if (arg) {
+            this.access_token = arg
+            console.log(arg)
+            this.accessToken
+        } else {
+            this.accessToken
+        }
+    }
+
     get accessToken() {
         return this.access_token;
-        //choose a inst hard setting static token
-        // return "access-sandbox-ffabcd33-94e4-4499-9a00-96272c6b2b59";
     }
 
     set transactionDaysAgo(number) {
@@ -139,7 +147,6 @@ class PlaidController {
                 return response;
             })
             .catch((err) => err);
-
         return data;
     }
 }

@@ -43,47 +43,53 @@ module.exports = function (app, express) {
             ).catch(err => console.log(err))
             response.json(instData)
         });
-        //__plaidClient.accessToken = 
     });
 
     plaidRouter.post("/api/accounts", function (request, response, next) {
         // Retrieve high-level account information and account and routing numbers
         // for each account associated with the Item.
         let user_id = request.body.user_id
-        __plaidClient
-            .getAccountInfo(__plaidClient.access_token)
-            .then(accountinfo => {
-                var userAccount2 = []
-                var accountObj = {
-                    account_id: accountinfo.accounts[0].account_id,
-                    balances: [{
-                        available: accountinfo.accounts[0].balances.available,
-                        current: accountinfo.accounts[0].balances.current,
-                    }],
-                    mask: accountinfo.accounts[0].mask,
-                    name: accountinfo.accounts[0].name,
-                    official_name: accountinfo.accounts[0].official_name,
-                    subtype: accountinfo.accounts[0].subtype,
-                    type: accountinfo.accounts[0].type
-                }
-
-
-                User.findOne({ _id: user_id },
-                ).then((user) => {
-                    if (user.institutions[0].account_ids[0]) {
-                        response.json(user.institutions[0].account_ids[0])
-                        return console.log("you've already got a account set.")
-                    } else {
-                        user.institutions[0].account_ids.push(accountObj)
-                        console.log("saving")
-                        user.save();
-                        response.json(accountinfo)
+        let arg;
+        User.findOne({ _id: user_id },
+        ).then((user) => {
+            arg = user.institutions[0].access_token
+            __plaidClient
+                .getAccountInfo(__plaidClient.holder(arg))
+                .then(accountinfo => {
+                    var userAccount2 = []
+                    var accountObj = {
+                        account_id: accountinfo.accounts[0].account_id,
+                        balances: [{
+                            available: accountinfo.accounts[0].balances.available,
+                            current: accountinfo.accounts[0].balances.current,
+                        }],
+                        mask: accountinfo.accounts[0].mask,
+                        name: accountinfo.accounts[0].name,
+                        official_name: accountinfo.accounts[0].official_name,
+                        subtype: accountinfo.accounts[0].subtype,
+                        type: accountinfo.accounts[0].type
                     }
 
-                }
-                ).catch(err => console.log(err))
-                // response.json(accountinfo)
-            });
+                    User.findOne({ _id: user_id },
+                    ).then((user) => {
+                        if (user.institutions[0].account_ids[0]) {
+                            response.json(user.institutions[0].account_ids[0])
+                            return console.log("you've already got a account set.")
+                        } else {
+                            user.institutions[0].account_ids.push(accountObj)
+                            console.log("saving")
+                            user.save();
+                            response.json(accountinfo)
+                        }
+
+                    }
+                    ).catch(err => console.log(err))
+                });
+        }
+        ).catch(err => console.log(err))
+
+
+
     });
 
     plaidRouter.post("/api/item", function (request, response, next) {
@@ -91,13 +97,18 @@ module.exports = function (app, express) {
             .getItem(__plaidClient.accessToken)
             .then(itemInfo => response.json(itemInfo));
     });
-
     plaidRouter.post("/api/transactions", function (request, response, next) {
-        __plaidClient.transactionDaysAgo = 30;
-        __plaidClient
-            .getTransactions(__plaidClient.accessToken)
-            .then(transactions => response.json(transactions));
+        let user_id = request.body.user_id
+        let arg;
+        User.findOne({ _id: user_id },
+        ).then((user) => {
+            arg = user.institutions[0].access_token
+            __plaidClient.transactionDaysAgo = 30;
+            __plaidClient
+                .getTransactions(__plaidClient.holder(arg))
+                .then(transactions => response.json(transactions))
+        }
+        ).catch(err => console.log(err))
     });
-
     return plaidRouter;
 };
