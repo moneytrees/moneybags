@@ -179,24 +179,24 @@ class Team extends Component {
       <div className="team">
         <div className="d-flex flex-row flex-wrap rowWrap">
           {team.map(team => (
-            <div className="wrapper">
+            <div className="wrapperTeam">
               <div className="box">
                 <div className="imgBox">
-                  <img src={team.picture} />
+                  <img className="teamPic" src={team.picture} />
                   <ul className="socialIcons">
-                    <li>
-                      <a href={team.linkedin} target="_blank">
+                    <li className="liTeam">
+                      <a className="aTeam" href={team.linkedin} target="_blank">
                         <i class="fa fa-linkedin" aria-hidden="true" />
                       </a>
                     </li>
-                    <li>
-                      <a href={team.github} target="_blank">
+                    <li className="liTeam">
+                      <a className="aTeam" href={team.github} target="_blank">
                         <i class="fa fa-github" aria-hidden="true" />
                       </a>
                     </li>
                   </ul>
                   <div className="details">
-                    <h2>
+                    <h2 className="h2Team">
                       {team.name} <br />
                       <span>{team.title}</span>
                     </h2>
