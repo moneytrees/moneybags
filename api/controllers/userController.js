@@ -106,7 +106,7 @@ module.exports = {
                     //  - (string to be hashed, generated salt to pass to string, callback)
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         console.log(newUser);
-                        if (err) throw err;;
+                        if (err) throw err;
 
                         newUser.password = hash;
 
@@ -157,10 +157,10 @@ module.exports = {
                         User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin, canAddCashFlow: true }).then((data) => {
 
                             console.log("Updated consecutive login");
-                        });
+                        }).catch(err => JSON.stringify(err));
 
                         let achvArr = user.achievements;
-                        let newAchvArr = user.newAchv
+                        let newAchvArr = user.newAchv;
 
 
 
@@ -213,12 +213,12 @@ module.exports = {
                                     }).then((data) => {
 
                                         console.log(data);
-                                    });
+                                    }).catch(err => JSON.stringify(err));
 
-                                });
+                                }).catch(err => JSON.stringify(err));
 
 
-                            });
+                            }).catch(err => JSON.stringify(err));
                         }
                         else if(Math.floor(newConsecutiveLogin / 2) > 0 && Math.floor(newConsecutiveLogin / 2) < 6 && !achvArr.includes(achvID)){
 
@@ -235,7 +235,7 @@ module.exports = {
                                     console.log(data);
                                 });
 
-                            });
+                            }).catch(err => JSON.stringify(err));
 
                         }
                         else if(cashFlowAchvNum > 0 && cashFlowAchvNum < 6 && !user.achievements.includes(cashAchvID)){
@@ -258,7 +258,7 @@ module.exports = {
                                     console.log(data);
                                 });
 
-                            });
+                            }).catch(err => JSON.stringify(err));
                         }
 
 

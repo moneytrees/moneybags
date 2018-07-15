@@ -26,7 +26,7 @@ module.exports = {
             }
             clientAchvArr.push(tempObj);
           });
-          return res.json(clientAchvArr)
+          return res.json(clientAchvArr);
         });
       }).catch(err => err.message);
   },
