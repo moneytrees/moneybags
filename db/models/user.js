@@ -71,6 +71,10 @@ const UserSchema = new Schema({
   newAchv: [],
   transactions: [],
   cashFlowArray: [],
+  canAddCashFlow: {
+    type: Boolean,
+    default: false
+  },
   lastCashFlow: {
     type: Date,
     default: Date.now
