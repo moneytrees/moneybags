@@ -88,7 +88,7 @@ class Dashboard extends Component {
 
         {/* <div className="col-md-12"> */}
         <div className="container">
-          <div className="achievement">
+          <div className="topSection">
             <div className="row">
 
               <div className="topCol" className="col-md-12">

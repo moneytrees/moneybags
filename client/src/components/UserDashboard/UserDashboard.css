@@ -10,12 +10,6 @@
     margin-top: 10%;
 }
 
-/* .navbar navbar-light bg-light {
-    position: fixed;
-    top:0;
-    left:0;
-} */
-
 .dashAvatar .avatar-img {
     width: 32%;
     right: 29%;
@@ -23,13 +17,9 @@
     margin-top: -10%;
 }
 
-
-
-
-.achievement {
+.topSection {
     margin-bottom: 3%;
     margin-top: 21%;
-  
 }
 
 .transactionDetail {
@@ -40,24 +30,13 @@
     margin-bottom: 3%;
 }
 
-.btn-info {
+.btn-info .cashFlowBtn {
     margin: 10px 20px 20px 10px !important;
+    background-color: #E38949;
 
 }
-    
 
 
-
-/* .cashFlow-btn-group {
-    margin: 10px 0 25px 0;
-    padding: 0;
-    
-} */
-
-/* .cashFlow btn .btn-secondary {
-    margin: 10px 0 25px 0;
-    padding: 0;
-} */
 .cashFlow-graph {
     float: left;
     width: 50%;
@@ -72,9 +51,6 @@
     margin: 5px 0 15px 0;
 }
 
-/* .progress{
-    padding: 10px 10px 25px 10px;
-} */
 .testForm {
     margin-top: 2rem;
     float: left;
@@ -106,30 +82,6 @@
 .CashFlow {
     width:100%;
 }
-
-
-
-/* .cashFlowBtn {
-    margin-right: 1rem;
-} */
-
-/* .cashFlowBtn Button{
-    color: #ffffff !important;
-    background-color:  #9cd2ba!important;
-    font-family: lato !important;
-    margin-left: 77px !important;
-    border: none !important;
-    box-shadow: 2px 2px 2px #494949;
- }
- .cashFlowBtn Button:hover {
-    color: #9cd2ba !important;
-    background-color: #ffffffb2 !important;
-    box-shadow: none;
-    transition: 0.5s;
- } */
-
-
- 
 
  .trophyPic{
      width: 27%;
