@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import Trophy from "../../imgs/goldTrophy.png";
 import greyTrophy from "../../imgs/greyTrophy.png";
-
-
 
 class Achievements extends Component {
     constructor(props) {

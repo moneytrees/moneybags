@@ -1,26 +1,26 @@
-
-
 body{
     background-image: url("../../../imgs/moneytreebg.jpg");
     background-size:cover;
  
 }
 
- .header1 {
-    font-family:‘Varela Round’, sans-serif;
-    font-weight: 800;
+.faq {
+    margin-bottom: 3em;
+}
+
+.header1 {
+    margin: 1em 0 1em 0;
+    font-family: 'Varela Round', sans-serif;
     text-align:center;
-    font-size: 2.5rem;
-    color: #015249;
-    text-shadow: 2px 2px #57BC90;
-  
- 
+    font-size: 4em;
+    color: #ffffff;
 } 
 
-a:link {
-    color: 015249;
+.faq a:link {
+    color: #37474F;
 }
-a:hover {
+
+.faq a:hover {
     color:#E38949;
 }
 
@@ -28,38 +28,34 @@ a:active {
     color:#E38949;
 }
 
-
-
-p:hover {
-    color:#E38949;
+.faq p {
+    font-size: 1.5em;
 }
+
 h3 {
     color:#015249;
-    font-size:1.2em;
-   
+    font-size:1.2em;   
 }
+
 .collapsed{
     color: #015249;
- 
 }
 
 .accordion-section .panel-default > .panel-heading {
-    border: 2px;
-    border-color:#015249;
-    background: #f4f4f4;
-    opacity:0.6;
+    background: #ffffff;
     padding: 0;
-    box-shadow: 3px 6px;
-  
+    box-shadow: 2px 2px 2px #494949;
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
 }
-
-
-
 
 .accordion-section .panel-default .panel-title a {
     display: block;
-    font-size: 1.0rem;
+    font-size: 1.25em;
+    text-align: center;
 }
+
 .accordion-section .panel-default .panel-title a:after {
     font-family: 'Lato', sans-serif;
     font-style: normal;
@@ -69,33 +65,8 @@ h3 {
     float: right;
     margin-top: -12px;
 }
-/* .accordion-section .panel-default .panel-title a.collapsed:after {
-    content: "\f107";
-}
-.accordion-section .panel-default .panel-body {
-    font-size: 1.0rem;
-}
 
-.row{
-    background-color:white;
-    opacity:0.7;
-    padding: 0;
-    box-shadow: 3px 6px;
-    height:280px;
+.panel-body {
+    width: 80%;
+    margin: 0 auto;
 }
-
-.col-12{
- 
-    background-color:white;
-    height:240px;
-    width:auto;
-    opacity:0.6;
-    box-shadow: 3px 6px;
-    
-}
-
-
-.email{
-    height:400px;
-    width:400px;
-} */
