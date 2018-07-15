@@ -186,12 +186,12 @@ class Team extends Component {
                   <ul className="socialIcons">
                     <li className="liTeam">
                       <a className="aTeam" href={team.linkedin} target="_blank">
-                        <i class="fa fa-linkedin" aria-hidden="true" />
+                        <i className="fa fa-linkedin" aria-hidden="true" />
                       </a>
                     </li>
                     <li className="liTeam">
                       <a className="aTeam" href={team.github} target="_blank">
-                        <i class="fa fa-github" aria-hidden="true" />
+                        <i className="fa fa-github" aria-hidden="true" />
                       </a>
                     </li>
                   </ul>
