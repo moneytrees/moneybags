@@ -23,12 +23,12 @@ export default class TotalSpending extends Component {
 
     componentDidMount() {
         let transactions = [];
-        fetch("/api/transactions", {
-            method: "GET",
-        })
+        // fetch("/api/transactions", {
+        //     method: "GET",
+        // })
             
-            .then(data => { console.log(data) })
-            .catch(err => { console.log(err.message) });
+        //     .then(data => { console.log(data) })
+        //     .catch(err => { console.log(err.message) });
     }
 
 
