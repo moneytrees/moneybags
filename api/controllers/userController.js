@@ -15,7 +15,7 @@ const validateLoginInput = require(__basedir + "helpers/validation/login");
 module.exports = {
 
 
-    addCashFlow: (req, res) => {
+    addCashFlow: (req, res) =>{
         User.findOne({ email: req.body.email }).then((user) => {
 
 
@@ -40,6 +40,7 @@ module.exports = {
 
 
         });
+
 
     },
 
@@ -125,40 +126,38 @@ module.exports = {
         });
     },
     loginUser: (req, res) => {
-        console.log('user login body');
-        console.log(req.body);
+
         const { errors, isValid } = validateLoginInput(req.body);
 
         // If input is invalid set header status code to 400 && send errors obj
         if (!isValid) {
-            return res.status(400).json(errors);
-        }
-
-        // Set email and password to user input from form
-        const email = req.body.email;
-        const password = req.body.password;
-
-        // Find one user by their email
-        User.findOne({ email })
-            .then(user => {
-
-                // Check if user exists
-                // If not set status to 404 && send errors object
-                if (!user) {
-                    errors.email = "User not found.. Double check your email";
-                    return res.status(404).json(errors);
-                }
+            console.log("LOGIN IS INVALID");
+            throw res.status(400).json(errors);
+        } else {
+            console.log("Fetching user information...");
+            // Set email and password to user input from form
+            const email = req.body.email;
+            const password = req.body.password;
 
 
-                // Compare user created password to hashed password
-                bcrypt.compare(password, user.password).then(isMatch => {
+            // Find one user by their email
+            User.findOne({ email })
+                .then(user => {
 
-                    // If hashed password matches user created password
-                    if (isMatch) {
-                        // Create JWT payload
+                    // Check if user exists
+                    // If not set status to 404 && send errors object
+                    if (!user) {
+                        errors.email = "User not found.. Double check your email";
+                        return res.status(404).json(errors);
+                    }                    // Compare user created password to hashed password
+                    bcrypt.compare(password, user.password).then(isMatch => {
 
-                        /***** GAMIFICATION CHANGES ****/
-                        let newConsecutiveLogin = user.consecutive_login + 1;
+                        // If hashed password matches user created password
+                        if (isMatch) {
+                            // Create JWT payload
+
+                            /***** GAMIFICATION CHANGES ****/
+                            let newConsecutiveLogin = user.consecutive_login + 1;
 
                         User.updateOne({ email: user.email }, { consecutive_login: newConsecutiveLogin, canAddCashFlow: true }).then((data) => {
 
@@ -191,6 +190,8 @@ module.exports = {
 
 
                         cashAchvID = "positiveCashFlow" + cashFlowAchvNum;
+
+
 
                         let achvID = "userlogin" + Math.floor(newConsecutiveLogin / 2);
 
@@ -266,18 +267,6 @@ module.exports = {
                         }
 
 
-
-
-
-
-
-                
-
-                       
-
-
-
-
                             const payload = {
                                 id: user.id,
                                 name: user.name,
@@ -298,6 +287,7 @@ module.exports = {
                                     res.json({
                                         success: true,
                                         token: `${token}`,
+                                        user: payload
                                     });
                                 }
                             );
@@ -306,8 +296,8 @@ module.exports = {
                         }
 
                     });
-            })
-            .catch(err => res.send(err));
+                }).catch(err => res.send(err));
+        }
     },
     currentUser: (req, res) => {
         res.json({

@@ -79,6 +79,7 @@ export default class LoanCalculator extends Component {
         return (
             <div>
                 <h3>Compare Optional Purchase</h3>
+
                 <form>
                     <label>Purchase Amount</label><br />
                     <input onChange={this.inputHandler} type="number" name="purchaseAmount" /><br /><br />
@@ -90,6 +91,8 @@ export default class LoanCalculator extends Component {
                     <input onChange={this.inputHandler} type="number" step="0.1" name="interestRate" /><br /><br />
                     <Button onClick={this.loanCalc} color="info">Submit</Button>
                 </form>
+
+                
                 <div className="loanModal">
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Purchase Info</ModalHeader>

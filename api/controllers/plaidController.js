@@ -41,6 +41,16 @@ class PlaidController {
         this.access_token = token;
     }
 
+    holder(arg) {
+        if (arg) {
+            this.access_token = arg
+            console.log(arg)
+            this.accessToken
+        } else {
+            this.accessToken
+        }
+    }
+
     get accessToken() {
         return this.access_token;
     }
@@ -76,7 +86,8 @@ class PlaidController {
         return data;
     }
 
-    async getAccountInfo() {
+    async getAccountInfo(res, req) {
+        console.log(req)
         //TODO: check database for existing access token for the currently signed-in user
         const data = await this.client.getAuth(this.accessToken)
             .then(response => response)
@@ -136,7 +147,6 @@ class PlaidController {
                 return response;
             })
             .catch((err) => err);
-
         return data;
     }
 }

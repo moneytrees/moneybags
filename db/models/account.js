@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AccountSchema = new mongoose.Schema({
-  inst: {
-    type: Schema.Types.ObjectId,
-    ref: "inst"
-  },
   account_id: {
     type: String,
     required: true
