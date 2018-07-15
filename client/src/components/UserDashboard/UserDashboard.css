@@ -6,22 +6,30 @@
     background-size: cover; 
 }
 
+.topCol .col-md-12 {
+    margin-top: 10%;
+}
 
+/* .navbar navbar-light bg-light {
+    position: fixed;
+    top:0;
+    left:0;
+} */
 
-.top .avatar-img{
-    width: 31%;
+.dashAvatar .avatar-img {
+    width: 32%;
     right: 29%;
-    padding-left: 75px;
-    /* margin-top:-125px; */
-   
+    padding-left:75px;
+    margin-top: -10%;
 }
 
-.top .card {
-    margin-top: 19%;
-}
+
+
 
 .achievement {
     margin-bottom: 3%;
+    margin-top: 21%;
+  
 }
 
 .transactionDetail {

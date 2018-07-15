@@ -64,7 +64,7 @@ class Achievements extends Component {
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
                             return (
 
-                                <div className="col-md-2">
+                                <div className="col-md-3">
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
                                     <span className="itemDesc"> {item.desc}</span>
@@ -80,7 +80,7 @@ class Achievements extends Component {
  
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
                             return (
-                                <div className="col-md-2">
+                                <div className="col-md-3">
 
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} />
                                     <h3 className="itemName"> {item.name}</h3>
