@@ -1,4 +1,5 @@
 import React from "react";
+import "./Navbar.css";
 import {
   Collapse,
   Navbar,
@@ -34,9 +35,12 @@ export default class NavbarNoAuth extends React.Component {
     return (
       <div>
         <Navbar color="light" light>
+<<<<<<< HEAD
           <NavbarBrand href="/" className="mr-auto">
             Money Tree
           </NavbarBrand>
+=======
+>>>>>>> b6c3ff90f1df45815be1132f984f7cfecf593708
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
@@ -45,6 +49,9 @@ export default class NavbarNoAuth extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink href="/login">Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/register">Register</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/team">Team</NavLink>

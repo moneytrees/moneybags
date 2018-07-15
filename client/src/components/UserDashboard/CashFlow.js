@@ -88,21 +88,30 @@ export default class CashFlow extends Component {
         currentState.regLineData = regLineData;
         currentState.dataSet = dataSet;
         this.setState({ currentState });
-        let cashFlow;
+
+        let currentCashFlow;
         if (result.equation[0] >= 0) {
-            cashFlow = 'positive';
+            currentCashFlow = 'positive';
         } else {
-            cashFlow = 'negative';
+            currentCashFlow = 'negative';
         }
-        console.log(result.equation[0]);
+        
         fetch("/api/addCashFlow", {
             method: "POST",
-            body: { email: localStorage.getItem('user_email'), cashFlow }
+            headers: {
+                "Content-Type": "application/json"
+              },
+            body: JSON.stringify({ email:localStorage.getItem("user_email") , cashFlow:currentCashFlow })
 
         })
-            .then(res => console.log(res))
-            .catch(err => console.log(err.message));
+        .then(res => {console.log(res.json())})
+        .then(data =>{console.log(data)})
+            .catch(err => {console.log(err.message)});
+
+//localStorage.getItem('user_email')
+
         console.log("transaction");
+    
     }
 
     calculate() {
@@ -148,6 +157,7 @@ export default class CashFlow extends Component {
         currentState.dataSet2 = dataSet;
         currentState.compare = true;
         this.setState({ currentState });
+        
     }
 
     calculatePurchaseOverInterval() {
@@ -238,7 +248,7 @@ export default class CashFlow extends Component {
                             <div className="cashFlow-graph">
                                 <XYPlot
                                     margin={{ left: 60 }}
-                                    width={500}
+                                    width={600}
                                     height={500}
                                     xDomain={[0, 30]}
                                 >
