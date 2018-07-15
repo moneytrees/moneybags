@@ -9,11 +9,6 @@
     box-shadow: 2px 2px 2px #494949;
 }
 
-#login .btn-primary{
-    width: 200px !important;
-    margin: 0 auto;
-}
-
 #login .btn-primary {
     color: #fff;
     border-color: #e38949;
@@ -30,7 +25,7 @@
 form .avatar-img {
     width: 200px;
     margin: 0 auto;
-    margin-left: 5%;
+    margin-left: 14%;
 }
 
 #login button, #login input, #login optgroup, #login select, #login textarea {
@@ -71,3 +66,52 @@ form .avatar-img {
     background-color: #d66b1f !important;
     box-shadow: none;
 } 
+
+@media only screen and (max-width: 600px)  {
+    #login form {
+        color: #015249;
+        margin-left: 1% !important;
+        width: 365px;
+        padding: 3em;
+        background-color: white;
+        margin-top: 3em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px #494949;
+    }
+
+    #login button, #login input, #login optgroup, #login select, #login textarea {
+        width: 698%;
+        margin-left: -25%;
+    }
+
+    #login .btn-primary {
+        margin-left: 1%;
+    }
+
+    form .avatar-img {
+        margin-left: 10%;
+    }
+
+    #register form {
+        color: #015249;
+        width: 365px;
+        padding: 3em;
+        background-color: white;
+        margin: 3em 0 3em 0;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px #494949;
+        margin-left: -10%;
+    }
+
+    #register .btn-secondary {
+        color: #ffffff !important;
+        background-color: #e38949 !important;
+        font-family: lato !important;
+        width: 265px !important;
+        border: none !important;
+        -webkit-box-shadow: 2px 2px 2px #494949;
+        box-shadow: 2px 2px 2px #494949;
+        width: 200px;
+        height: 3em;
+    }
+}
