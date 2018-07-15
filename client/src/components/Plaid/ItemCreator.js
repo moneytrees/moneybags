@@ -84,7 +84,7 @@ class ItemCreator extends Component {
             onSuccess={this.handleOnSuccess}
             className="btn btn-outline"
           >
-            Connect your Account
+            Connect your Financial Institution
           </PlaidLink>
 
 

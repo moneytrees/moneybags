@@ -14,7 +14,7 @@ const PlaidButtons = (props) => (
           id="get-accounts-btn"
           onClick={props.account}
         >
-          Get Accounts
+          Get Account Info
             </button>
         {/* <button
           type="button"
@@ -29,7 +29,7 @@ const PlaidButtons = (props) => (
           id="get-transactions-btn"
           onClick={props.transactions}
         >
-          Get Transactions
+          Get Transactional Info
             </button>
       </div>
     </div>
