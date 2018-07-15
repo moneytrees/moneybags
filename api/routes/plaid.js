@@ -67,14 +67,22 @@ module.exports = function (app, express) {
                     type: accountinfo.accounts[0].type
                 }
 
+
                 User.findOne({ _id: user_id },
                 ).then((user) => {
-                    user.institutions[0].account_ids.push(accountObj)
-                    console.log("saving")
-                    user.save();
+                    if (user.institutions[0].account_ids[0]) {
+                        response.json(user.institutions[0].account_ids[0])
+                        return console.log("you've already got a account set.")
+                    } else {
+                        user.institutions[0].account_ids.push(accountObj)
+                        console.log("saving")
+                        user.save();
+                        response.json(accountinfo)
+                    }
+
                 }
                 ).catch(err => console.log(err))
-                response.json(accountinfo)
+                // response.json(accountinfo)
             });
     });
 
