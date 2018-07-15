@@ -10,7 +10,6 @@ import Dashboard from "../Pages/Protected/Dashboard/Dashboard";
 import accountInfoForTesting from "../Pages/accountInfoForTesting";
 import UserLogin from "../Pages/Unprotected/Access/Userlogin";
 import UserRegister from "../Pages/Unprotected/Access/UserRegister";
-//import Achievements from "../Pages/Protected/Achievements"
 import ItemCreator from "../components/Plaid/ItemCreator";
 import Achievements from "../components/UserDashboard/Achievements";
 import Helpeducation from "../Pages/Protected/Education";
@@ -46,7 +45,6 @@ const AppRouting = () => {
                 <PrivateRoute path="/helpeducation" component={Helpeducation} />
                 <PrivateRoute path='/dashboard' component={Dashboard} />
                 <PrivateRoute path='/test' component={ItemCreator}/>
-                <Route component={ErrorPage} />
             </div>
         </Router>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Footer from "../../../components/footer"
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
