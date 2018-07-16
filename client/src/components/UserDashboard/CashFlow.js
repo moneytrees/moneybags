@@ -214,17 +214,16 @@ export default class CashFlow extends Component {
     }
 
     getPurchaseData(data) {
-        const currentState = this.state;
-        currentState.regressionEquation2 = '',
-        currentState.regressionEquation3 = '',
-        currentState.regLineData2 = [],
-        currentState.dataSet2 = [],
-        currentState.selectedTimeScaleInMonths = 1,
-        currentState.compare = false,
-        currentState.sampleBalance = 2085
+        const [currentState] = [this.state];
+        currentState.regressionEquation2 = '';
+        currentState.regressionEquation3 = '';
+        currentState.regLineData2 = [];
+        currentState.dataSet2 = [];
+        currentState.selectedTimeScaleInMonths = 1;
+        currentState.compare = false;
+        currentState.sampleBalance = 2085;
         currentState.purchaseData = data;
         currentState.compare = true;
-        console.log(data);
         this.setState({
             currentState
         });

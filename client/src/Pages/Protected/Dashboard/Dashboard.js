@@ -34,10 +34,10 @@ class Dashboard extends Component {
     })
       .then(data => data.json())
       .then(response => {
-        console.log(response);
+
         let newAchvArr = response.data;
 
-        setTimeout(() => {
+        /*setTimeout(() => {
           console.log(newAchvArr);
           if (newAchvArr.length > 0) {
             toast(
@@ -79,7 +79,7 @@ class Dashboard extends Component {
               }
             }, 5500);
           }
-        }, 1500);
+        }, 1500);*/
       })
       .catch(errors => {
         console.log(`error: ${errors}`);
