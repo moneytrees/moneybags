@@ -95,20 +95,8 @@ class Dashboard extends Component {
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
 
                   <Card className="topAvatar">
-                    <div className="dashAvatar"> <Avatar /> </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ItemCreator />
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ProgressBar className="progress" />
-                      </div>
-                    </div>
-
+                    <div className="dashAvatar"> <Avatar /> <ItemCreator /> <ProgressBar className="progress" /> </div>
+                     
                   </Card>
 
                 </Animated>

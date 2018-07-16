@@ -1,20 +1,21 @@
 import React from "react";
+import "./Plaid.css";
 
 
 const PlaidButtons = (props) => (
   <div>
 
-    <div className="container">
+    <div className="plaidButtonContainter container">
       <div>
 
         <button
 
           type="button"
-          className="btn btn-outline-secondary"
+          className="btn btn-outline-secondary plaidButton"
           id="get-accounts-btn"
           onClick={props.account}
         >
-          Get Account Info
+          Get Account Info 
             </button>
         {/* <button
           type="button"
@@ -25,7 +26,7 @@ const PlaidButtons = (props) => (
             </button> */}
         <button
           type="button"
-          className="btn btn-outline-danger"
+          className="btn btn-outline-danger plaidButton"
           id="get-transactions-btn"
           onClick={props.transactions}
         >
