@@ -62,6 +62,7 @@ export default class Decode {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem("id_token");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("bank_name");
     localStorage.removeItem("user_email");
     window.location.reload();
   }

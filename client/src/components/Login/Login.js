@@ -50,6 +50,10 @@ class Login extends Component {
           // Decode token to get user data
           const profile = decode.getProfile(token);
           // Set current user
+          if (profile.institutions[0] !== undefined) {
+            localStorage.setItem("bank_name", profile.institutions[0].bank_name);
+          }
+
           localStorage.setItem("user_id", profile.id);
           localStorage.setItem("user_email", profile.email);
 
@@ -77,7 +81,7 @@ class Login extends Component {
         <div className="LoginForm">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
-            <Avatar />
+              <Avatar />
               <div className="col-1 col-ml-auto">
                 <label className="form-label" htmlFor="email">
                   Email:

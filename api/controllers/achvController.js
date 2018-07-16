@@ -8,7 +8,7 @@ module.exports = {
     let clientAchvArr = [];
     let tempObj;
 
-    User.findOne({ email: req.query.email })
+    User.findOne({ email: req.body.email })
       .then(user => {
         Achv.find().then((achvData) => {
           achvData.forEach((data) => {
@@ -17,7 +17,6 @@ module.exports = {
               name: data.name,
               desc: data.desc,
               unlocked: false
-
             };
             if (user.achievements.includes(data._id)) {
               tempObj.unlocked = true;
