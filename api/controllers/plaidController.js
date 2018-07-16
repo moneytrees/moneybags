@@ -43,8 +43,7 @@ class PlaidController {
 
     holder(arg) {
         if (arg) {
-            this.access_token = arg
-            console.log(arg)
+            this.access_token = arg;
             this.accessToken
         } else {
             this.accessToken
