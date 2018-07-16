@@ -16,10 +16,13 @@ class Avatar extends Component {
 
   componentDidMount() {
 
-
-    fetch("/api/getLatestCashFlow",
-      { params: { email: localStorage.getItem("user_email") } })
-      .then(data => data.json())
+      fetch("/api/getLatestCashFlow", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email: localStorage.getItem("user_email") })
+      }).then(data => data.json())
       .then(response => {
 
         setTimeout(() => {

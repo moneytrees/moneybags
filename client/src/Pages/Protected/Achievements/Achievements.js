@@ -18,6 +18,7 @@ class Achievements extends Component {
         })
             .then(data => data.json())
             .then(response => {
+
                 let tempLogin = [];
                 let tempCash = [];
                 console.log(response.data);
@@ -29,7 +30,7 @@ class Achievements extends Component {
                     else {
                         tempCash.push(item);
                     }
-                })
+                });
 
                 this.setState({
                     loginAchvArray: tempLogin,
