@@ -66,7 +66,9 @@ h3 {
     margin-top: -12px;
 }
 
-.panel-body {
+.faq .panel-body {
     width: 80%;
     margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
 }

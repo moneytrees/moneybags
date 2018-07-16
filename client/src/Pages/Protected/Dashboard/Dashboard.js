@@ -95,20 +95,8 @@ class Dashboard extends Component {
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
 
                   <Card className="topAvatar">
-                    <div className="dashAvatar"> <Avatar /> </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ItemCreator />
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ProgressBar className="progress" />
-                      </div>
-                    </div>
-
+                    <div className="dashAvatar"> <Avatar /> <ItemCreator /> <ProgressBar className="progress" /> </div>
+                     
                   </Card>
 
                 </Animated>
@@ -171,7 +159,7 @@ class Dashboard extends Component {
                               </div>
 
                               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
+                                <div className="card-body">
                                   <Achievements />
                                 </div>
                               </div>

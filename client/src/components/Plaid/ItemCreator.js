@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import TransData from "../../helpers/TransData";
 import PlaidButtons from "./PlaidButtons";
+import "./Plaid.css";
 require("dotenv").config({ path: "../.env" });
 
 class ItemCreator extends Component {
@@ -82,7 +83,7 @@ class ItemCreator extends Component {
             publicKey={this.state.public_key}
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
-            className="btn btn-outline"
+            className="btn connectBankBtn"
           >
             Connect your Financial Institution
           </PlaidLink>

@@ -16,7 +16,7 @@ class Hero extends Component {
             position: "absolute"
           }}
         >
-          <video
+          <video className="landing"
             loop
             autoPlay
             style={{

@@ -67,6 +67,24 @@ form .avatar-img {
     box-shadow: none;
 } 
 
+@media only screen and (max-width: 1040px){
+    #login form{
+    margin-left: 30%;
+    margin-top: 10em;
+    }
+
+    #register form {
+        margin-left: -15%;
+        margin-top: 10em;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    #login form{
+    margin-left: 23%;
+    }
+}
+
 @media only screen and (max-width: 600px)  {
     #login form {
         color: #015249;
@@ -97,10 +115,10 @@ form .avatar-img {
         width: 365px;
         padding: 3em;
         background-color: white;
-        margin: 3em 0 3em 0;
+        margin: 4em 0 3em 0;
         border-radius: 5px;
         box-shadow: 2px 2px 2px #494949;
-        margin-left: -10%;
+        margin-left: -9.5%;
     }
 
     #register .btn-secondary {
