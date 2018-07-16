@@ -99,7 +99,6 @@ class ItemCreator extends Component {
           >
            Connect Bank
           </PlaidLink>
-
           <TransData />
         </div>
       );

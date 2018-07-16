@@ -61,25 +61,25 @@ class Achievements extends Component {
                 <div className="fluid-container">
                     <div className="row">
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item) {
+                            const { _id, unlocked, name, desc } = item;
                             return (
-                                <div className="col-md-3">
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
-                                    <h3 className="itemName"> {item.name}</h3>
-                                    <span className="itemDesc"> {item.desc}</span>
+                                <div className="col-md-3" key={_id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy}/>
+                                    <h3 className="itemName">{name}</h3>
+                                    <span className="itemDesc"> {desc}</span>
                                 </div>
                             );
                         })}
 
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item) {
+                            const { _id, unlocked, name, desc } = item;
                             return (
-                                <div className="col-md-3">
-
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
-                                    <h3 className="itemName"> {item.name}</h3>
+                                <div className="col-md-3" key={_id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy}/>
+                                    <h3 className="itemName"> {name}</h3>
                                 </div>
                             );
-                        })
-                        }
+                        })}
                     </div>
                 </div>
             </div>
