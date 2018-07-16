@@ -42,13 +42,19 @@ module.exports = {
 
 
 	getLatestCashFlow: (req, res) => {
-	console
+
+		console.log("get latest cash flow");
+		
 		User.findOne({ email: req.body.email }).then((user) => {
+
+			console.log(user.cashFlowArray);
+
 			if (user.cashFlowArray.length > 0) {
-				return res.json(user.cashFlowArray[(user.cashFlowArray.length - 1)]);
+
+				res.json(user.cashFlowArray[(user.cashFlowArray.length - 1)]);
 			}
 			else {
-				return res.json("neutral");
+				res.json("neutral");
 			}
 
 		}).catch(err => err);
@@ -58,7 +64,7 @@ module.exports = {
 	deleteNewAchievements: (req, res) => {
 
 		User.updateOne({ email: req.body.email }, { newAchv: [] }).then((data) => {
-			return res.json(data);
+			res.json(data);
 		}).catch(err => err);
 
 	},
@@ -66,7 +72,7 @@ module.exports = {
 	getNewAchievements: (req, res) => {
 
 		User.findOne({ email: req.body.email }).then(user => {
-			return res.json(user.newAchv);
+			res.json(user.newAchv);
 
 		}).catch(err => err);
 	},
