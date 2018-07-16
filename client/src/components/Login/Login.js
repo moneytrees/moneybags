@@ -95,7 +95,6 @@ class Login extends Component {
               <AvInput
                 id="email"
                 name="email"
-                onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
                 placeholder="noreply@moneyBAGS.com"
                 required
