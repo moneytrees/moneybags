@@ -18,7 +18,7 @@ import {
 class dashboard extends Component {
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Money Tree: User Dashboard</h1>
         <div>
           <a href="#!">

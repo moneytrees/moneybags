@@ -1,0 +1,27 @@
+.plaidButton {
+    color: #fff;
+    border-color: #e38949;
+    background-color: #e38949;
+    font-size: 1em;
+    margin: 1em 0 1em 0;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    margin-left: 15px;
+    width: 260px !important;
+    height: 2em;
+    font-family: lato !important;
+}
+
+.connectBankBtn {
+    color: #e38949;
+    border-color: #015249;
+    background-color: #015249;
+    font-size: 1.5em;
+    margin: 1em 0 1em 0;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    margin-left: 15px;
+    width: 50% !important;
+    height: 2em;
+    font-family: lato !important;
+}
