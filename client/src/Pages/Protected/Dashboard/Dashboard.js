@@ -93,7 +93,7 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-md-4">
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
-                  <Card className="topAvatar">
+                  <Card className="topAvatar" className ="shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="dashAvatar">
 
                       <Avatar />
@@ -112,23 +112,23 @@ class Dashboard extends Component {
 
               <div className="col-md-8">
 
-                <div className="achvCard">
+                <div className="achvCard" className ="shadow-lg p-3 mb-5 bg-white rounded">
                   <div id="accordion">
-                    <div className="card">
-                      <div className="card-header" id="headingOne">
+                    {/* <div className="card"> */}
+                      {/* <div className="card-header" id="headingOne"> */}
                         <h5 className="mb-0">
                           <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <h2 className="dbTitle"> Achievements </h2>
                           </a>
                         </h5>
-                      </div>
+                      {/* </div> */}
 
                       <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div className="card-body">
                           <Achievements />
                         </div>
                       </div>
-                    </div>
+                    {/* </div> */}
 
                   </div>
                 </div>
@@ -174,7 +174,7 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-md-8">
                 <Zoom>
-                  <Card className="transCard">
+                  <Card className="transCard" className ="shadow-lg p-3 mb-5 bg-white rounded">
                     <h2 className="dbTitle"> Transaction Detail</h2>
 
                     <TransactionDetail />
@@ -185,7 +185,7 @@ class Dashboard extends Component {
 
               <div className="col-md-4">
                 <Fade right>
-                  <Card className="totalSpendCard">
+                  <Card className="totalSpendCard" className ="shadow-lg p-3 mb-5 bg-white rounded">
                     <h2 className="dbTitle"> Total Spending</h2>
                     <TotalSpending />
                   </Card>

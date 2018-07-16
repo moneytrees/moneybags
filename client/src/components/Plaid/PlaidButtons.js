@@ -5,8 +5,8 @@ import "./Plaid.css";
 const PlaidButtons = (props) => (
   <div>
 
-    <div className="plaidButtonContainter container">
-      <div>
+    <div className="row"className="plaidButtonContainter container">
+      <div className="col-md-12">
 
         <button
 
@@ -15,7 +15,7 @@ const PlaidButtons = (props) => (
           id="get-accounts-btn"
           onClick={props.account}
         >
-          Get Account Info 
+          Get Account 
             </button>
         {/* <button
           type="button"
@@ -26,11 +26,11 @@ const PlaidButtons = (props) => (
             </button> */}
         <button
           type="button"
-          className="btn btn-outline-danger plaidButton"
+          className="btn btn-outline-secondary plaidButton"
           id="get-transactions-btn"
           onClick={props.transactions}
         >
-          Get Transactional Info
+          Get Transactions
             </button>
       </div>
     </div>
