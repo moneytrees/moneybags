@@ -26,13 +26,19 @@ class Dashboard extends Component {
 
   componentDidMount() {
     fetch("/api/getNewUserAchievements", {
-      params: { email: localStorage.getItem("user_email") }
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: localStorage.getItem("user_email") })
     })
       .then(data => data.json())
       .then(response => {
+        console.log(response);
         let newAchvArr = response.data;
 
         setTimeout(() => {
+          console.log(newAchvArr);
           if (newAchvArr.length > 0) {
             toast(
               <AchvToast
@@ -74,8 +80,6 @@ class Dashboard extends Component {
             }, 5500);
           }
         }, 1500);
-
-        console.log(newAchvArr);
       })
       .catch(errors => {
         console.log(`error: ${errors}`);

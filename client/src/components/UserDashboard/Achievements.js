@@ -31,14 +31,11 @@ class Achievements extends Component {
         })
             .then(data => data.json())
             .then(response => {
-                console.log('I gots achievement');
-                console.log(response);
                 let tempLogin = [];
                 let tempCash = [];
-                console.log(response.data);
-
-                response.data.forEach((item) => {
-                    if (item.id.length < 16) {
+                response.forEach((item) => {
+                    console.log(item);
+                    if (item._id.length < 16) {
                         tempLogin.push(item);
                     }
                     else {
@@ -49,7 +46,7 @@ class Achievements extends Component {
                 this.setState({
                     loginAchvArray: tempLogin,
                     cashFlowAchvArray: tempCash
-                })
+                });
 
             })
             .catch(errors => {
@@ -63,8 +60,7 @@ class Achievements extends Component {
             <div className="col-md-12">
                 <div className="fluid-container">
                     <div className="row">
-                        {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
-                            console.log(item);
+                        {this.sortThrophies(this.state.loginAchvArray).map(function (item) {
                             return (
                                 <div className="col-md-3">
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
@@ -74,7 +70,7 @@ class Achievements extends Component {
                             );
                         })}
 
-                        {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
+                        {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item) {
                             return (
                                 <div className="col-md-3">
 
