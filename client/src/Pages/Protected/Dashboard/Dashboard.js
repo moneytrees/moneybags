@@ -86,37 +86,86 @@ class Dashboard extends Component {
       <div className="background">
         <ToastContainer />
 
-        {/* <div className="col-md-12"> */}
+
         <div className="container">
+
           <div className="topSection">
             <div className="row">
-
-              <div className="col-md-12 topCol">
+              <div className="col-md-4">
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
-
                   <Card className="topAvatar">
-                    <div className="dashAvatar"> 
+                    <div className="dashAvatar">
 
-                    <Avatar /> 
-                    
-                    <h2></h2>
+                      <Avatar />
+
                     </div>
+
 
                     <div className="row">
                       <div className="col-md-12">
                         <ItemCreator />
                       </div>
                     </div>
-
-
-
                   </Card>
-
                 </Animated>
               </div>
+
+              <div className="col-md-8">
+
+                <div className="achvCard">
+                  <div id="accordion">
+                    <div className="card">
+                      <div className="card-header" id="headingOne">
+                        <h5 className="mb-0">
+                          <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h2 className="dbTitle"> Achievements </h2>
+                          </a>
+                        </h5>
+                      </div>
+
+                      <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div className="card-body">
+                          <Achievements />
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* <div className="achieveCard">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <Fade right>
+
+                        <div className="col-md-8 text-center">
+                          <Animated
+                            animationIn="slideInRight"
+                            animationOut="zoomOutDown"
+                            isVisible={true}
+                          >
+
+                            
+                          </Animated>
+                        </div>
+                      </Fade>
+                    </div>
+                  </div>
+                </div>
+ */}
+
+
+
+
+              </div>
+
+
             </div>
+
           </div>
 
+
+          {/* achievement card */}
 
 
 
@@ -144,53 +193,6 @@ class Dashboard extends Component {
               </div>
             </div>
 
-            <div className="achieveCard">
-              <div className="row">
-                <div className="col-md-12">
-                  <Fade right>
-
-
-
-                    <div className="col-md-8 text-center">
-                      <Animated
-                        animationIn="slideInRight"
-                        animationOut="zoomOutDown"
-                        isVisible={true}
-                      >
-
-
-                        <div className="achvCard">
-
-                          <div id="accordion">
-                            <div className="card">
-                              <div className="card-header" id="headingOne">
-                                <h5 className="mb-0">
-                                  <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <h2 className="dbTitle"> Achievements </h2>
-                                  </a>
-                                </h5>
-                              </div>
-
-                              <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div className="card-body">
-                                  <Achievements />
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </Animated>
-                    </div>
-
-
-
-
-
-                  </Fade>
-                </div>
-              </div>
-            </div>
 
             <div className="row">
               <div className="CashFlow">

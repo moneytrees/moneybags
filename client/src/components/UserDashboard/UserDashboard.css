@@ -1,20 +1,19 @@
 .background {
-    background-color:  rgba(255, 255, 255, 0.879);
+    /* background-color:  rgba(255, 255, 255, 0.879); */
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover; 
 }
 
-.topCol .col-md-12 {
+/* .topCol .col-md-12 {
     margin-top: 10%;
-}
+} */
 
 .dashAvatar .avatar-img {
-    width: 32%;
-    right: 29%;
-    padding-left:75px;
-    margin-top: -10%;
+    width: 76%;
+    padding-left:66px;
+    margin-top: -22%;
 }
 
 .topSection {
@@ -32,7 +31,7 @@
 
 .btn-info .cashFlowBtn {
     margin: 10px 20px 20px 10px !important;
-    background-color: #E38949;
+    background-color: #E38949; 
 
 }
 
@@ -69,6 +68,7 @@
 
 .pieChart {
     margin:auto;
+    margin-bottom:10%;
 }
 
 .totalSpendingCol {
@@ -81,6 +81,7 @@
 
 .CashFlow {
     width:100%;
+    margin-top: 5%;
 }
 
  .trophyPic{

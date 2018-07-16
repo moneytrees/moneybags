@@ -11,11 +11,11 @@ export default class TotalSpending extends Component {
         this.state = {
             transactions: [
                 { amount: 100, date: '2018-06-12', category: 'Recreation' },
-                { amount: 100, date: '2018-07-01', category: 'Food and Drink' },
+                { amount: 100, date: '2018-07-01', category: 'Food & Drink' },
                 { amount: 100, date: '2018-07-05', category: 'Home' },
                 { amount: 100, date: '2018-07-05', category: 'Auto' },
                 { amount: 100, date: 'some date', category: 'Healthcare' },
-                { amount: 100, date: 'some date', category: 'Investments' }
+                { amount: 100, date: 'some date', category: 'Investment' }
             ]
         };
     }
@@ -70,7 +70,9 @@ export default class TotalSpending extends Component {
         // salmon, turquoise, brown, orange, teal, purple
 
         for (let i = 0; i < expenses.length; i++) {
-            data.push({ angle: expenses[i].amount, label: expenses[i].amount+"%", color: colors[i] });
+            data.push({ angle: expenses[i].amount, 
+                label: `${expenses[i].category} - ${expenses[i].amount}%`,
+                color: colors[i] });
         }
         if (misc / total > 0.05) {
             data.push({ angle: misc, label: 'Misc' });
@@ -84,8 +86,9 @@ export default class TotalSpending extends Component {
                     colorType={'literal'}
                     showLabels={true}
 
-                    labelsRadiusMultiplier={.8}
-                    labelsStyle={{ fontSize: 10 }}
+                    labelsRadiusMultiplier={.95}
+                    labelsStyle={{ fontSize: 8 }}
+                
                    
                     radius={150}
                     width={300}

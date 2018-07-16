@@ -11,23 +11,21 @@ module.exports = {
     User.findOne({ email: req.query.email })
       .then(user => {
         Achv.find().then((achvData) => {
-          // console.log(achvData);
           achvData.forEach((data) => {
             tempObj = {
-              id: data.id,
+              id: data._id,
               name: data.name,
               desc: data.desc,
               unlocked: false
 
             };
-
-            if (user.achievements.includes(data.id)) {
+            if (user.achievements.includes(data._id)) {
               tempObj.unlocked = true;
             }
             clientAchvArr.push(tempObj);
           });
           return res.json(clientAchvArr);
-        });
+        }).catch(err => err.message);
       }).catch(err => err.message);
   },
   getOneAchievement: (req, res) => {
