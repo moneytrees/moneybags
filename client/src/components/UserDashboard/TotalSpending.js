@@ -10,12 +10,12 @@ export default class TotalSpending extends Component {
         super(props);
         this.state = {
             transactions: [
-                { amount: 100, date: '2018-06-12', category: 'Recreation' },
-                { amount: 100, date: '2018-07-01', category: 'Food & Drink' },
-                { amount: 100, date: '2018-07-05', category: 'Home' },
-                { amount: 100, date: '2018-07-05', category: 'Auto' },
-                { amount: 100, date: 'some date', category: 'Healthcare' },
-                { amount: 100, date: 'some date', category: 'Investment' }
+                { amount: 15, date: '2018-06-12', category: 'Recreation' },
+                { amount: 15, date: '2018-07-01', category: 'Food & Drink' },
+                { amount: 25, date: '2018-07-05', category: 'Home' },
+                { amount: 10, date: '2018-07-05', category: 'Auto' },
+                { amount: 15, date: 'some date', category: 'Healthcare' },
+                { amount: 20, date: 'some date', category: 'Investment' }
             ]
         };
     }
@@ -66,8 +66,8 @@ export default class TotalSpending extends Component {
         }
         let data = [];
 
-        let colors = ['#FA8072', '#72ecfa', '#af894f', '#ffb733', '#015249', '#490152'];
-        // salmon, turquoise, brown, orange, teal, purple
+        let colors = ['#56CBF9', '#FF220C', '#F038FF', '#32E875', '#FFBD00', '#FF5400','#FF220C'];
+
 
         for (let i = 0; i < expenses.length; i++) {
             data.push({ angle: expenses[i].amount, 
@@ -86,13 +86,13 @@ export default class TotalSpending extends Component {
                     colorType={'literal'}
                     showLabels={true}
 
-                    labelsRadiusMultiplier={.95}
-                    labelsStyle={{ fontSize: 8 }}
+                    labelsRadiusMultiplier={1.25}
+                    labelsStyle={{ fontSize: 12 }}
                 
                    
                     radius={150}
-                    width={300}
-                    height={300} />
+                    width={350}
+                    height={370} />
             </div>
 
         );
