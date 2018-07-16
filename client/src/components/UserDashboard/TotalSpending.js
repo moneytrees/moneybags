@@ -21,13 +21,21 @@ export default class TotalSpending extends Component {
     }
 
     componentDidMount() {
-        // let transactions = [];
-        // fetch("/api/transactions", {
-        //     method: "GET",
-        // })
-            
-        //     .then(data => { console.log(data) })
-        //     .catch(err => { console.log(err.message) });
+        let transactions = [];
+        fetch("/api/transactions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+        })
+            .then(data => data.json())
+            .then(response => {
+                transactions = response;
+                const currentState = this.state;
+                currentState.transactions = transactions;
+                this.setState({currentState});
+            });
     }
 
 
@@ -73,9 +81,11 @@ export default class TotalSpending extends Component {
         // salmon, turquoise, brown, orange, teal, purple
 
         for (let i = 0; i < expenses.length; i++) {
-            data.push({ angle: expenses[i].amount, 
+            data.push({
+                angle: expenses[i].amount,
                 label: `${expenses[i].category} - ${expenses[i].amount}%`,
-                color: colors[i] });
+                color: colors[i]
+            });
         }
         if (misc / total > 0.05) {
             data.push({ angle: misc, label: 'Misc' });
@@ -91,8 +101,8 @@ export default class TotalSpending extends Component {
 
                     labelsRadiusMultiplier={.95}
                     labelsStyle={{ fontSize: 8 }}
-                
-                   
+
+
                     radius={150}
                     width={300}
                     height={300} />

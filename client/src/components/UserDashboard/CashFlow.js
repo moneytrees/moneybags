@@ -31,7 +31,9 @@ export default class CashFlow extends Component {
         super(props);
 
         this.state = {
-            transactions: [],
+            transactions: [{ amount: 1, date: Date.now() }],
+            startingBalance: 0,
+            transactionsLength: '',
             regressionEquation: '',
             regressionEquation2: '',
             regressionEquation3: '',
@@ -48,9 +50,24 @@ export default class CashFlow extends Component {
         this.calculate = this.calculate.bind(this);
         this.calculatePurchaseOverInterval = this.calculatePurchaseOverInterval.bind(this);
         this.timeScaleHandler = this.timeScaleHandler.bind(this);
+        this.getPurchaseData = this.getPurchaseData.bind(this);
     }
+
     componentDidMount() {
-        console.log(localStorage.getItem("user_email"));
+        let balance = 0;
+        fetch("/api/accounts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+        })
+            .then(data => data.json())
+            .then(response => {
+                balance = parseInt(response.balances[0].current, 10);
+            })
+            .catch(err => console.log(err.message));
+
         fetch("/api/transactions", {
             method: "POST",
             headers: {
@@ -60,29 +77,14 @@ export default class CashFlow extends Component {
         })
             .then(data => data.json())
             .then(response => {
-                console.log(response);
-                const transactions = response.transactions.reverse();
-                const crntState = this.state;
-                crntState.transactions = transactions;
-                crntState.balance = response.accounts[0].balances.current;
-                this.setState({ crntState });
-
-                ////////// promise block //////////
-
-                // let sampleTransactions = [
-                //     { amount: 17, date: '2018-06-15' },
-                //     { amount: 57, date: '2018-06-17' },
-                //     { amount: 100, date: '2018-06-19' },
-                //     { amount: 23, date: '2018-06-21' },
-                //     { amount: -800, date: '2018-06-24' },
-                //     { amount: 8, date: '2018-06-26' },
-                //     { amount: 15, date: '2018-06-28' },
-                //     { amount: 75, date: '2018-06-30' },
-                //     { amount: 11, date: '2018-07-02' },
-                //     { amount: 6, date: '2018-07-04' },
-                //     { amount: 12, date: '2018-07-08' }
-                // ];
-
+                const currentState = this.state;
+                currentState.transactions = response;
+                currentState.transactionsLength = response.length;
+                currentState.balance = balance;
+                currentState.startingBalance = balance;
+                this.setState({ currentState });
+            }).then(() => {
+                const transactions = this.state.transactions.reverse();
                 let dataSet = [];
                 let regressionSet = [];
                 let xPointCoord;
@@ -126,26 +128,19 @@ export default class CashFlow extends Component {
                     .then(data => { console.log(data) })
                     .catch(err => { console.log(err.message) });
 
-
-            })
-            .catch(err => console.log(err.message));
+            }).catch(err => console.log(err.message));
     }
 
     calculate() {
         let transactions = this.state.transactions;
-        // let sampleTransactions = [
-        //     { amount: 17, date: '2018-06-15' },
-        //     { amount: 57, date: '2018-06-17' },
-        //     { amount: 100, date: '2018-06-19' },
-        //     { amount: 23, date: '2018-06-21' },
-        //     { amount: -800, date: '2018-06-24' },
-        //     { amount: 8, date: '2018-06-26' },
-        //     { amount: 15, date: '2018-06-28' },
-        //     { amount: 75, date: '2018-06-30' },
-        //     { amount: 11, date: '2018-07-02' },
-        //     { amount: 6, date: '2018-07-04' },
-        //     { amount: 12, date: '2018-07-08' }
-        // ];
+        if (transactions.length > this.state.transactionsLength) {
+            transactions.pop();
+            let currentState = this.state;
+            currentState.balance = currentState.startingBalance;
+            currentState.transactions = transactions;
+            this.setState({ currentState });
+        }
+        
         const crntState = this.state;
         crntState.balance = (crntState.balance - crntState.purchaseData.monthlyPayment - crntState.purchaseData.downPayment);
         this.setState({ crntState });
@@ -175,20 +170,14 @@ export default class CashFlow extends Component {
         currentState.compare = true;
         currentState.compareButtonToggle = false;
         this.setState({ currentState });
+        this.calculatePurchaseOverInterval();
     }
 
     calculatePurchaseOverInterval() {
-        console.log('calculate purchase over interval ran');
-        console.log('number of payments in months', this.state.purchaseData.loanTerm);
-        console.log('selected time scale in months', this.state.selectedTimeScaleInMonths);
-        console.log('regression equation number 1', this.state.regressionEquation);
-        console.log('regression equation number 2', this.state.regressionEquation2);
         const m_c1 = this.state.regressionEquation.equation;
         const m_c2 = this.state.regressionEquation2.equation;
-        console.log(m_c1, m_c2);
         let weightedFactor1 = (this.state.selectedTimeScaleInMonths - this.state.purchaseData.loanTerm) / this.state.selectedTimeScaleInMonths;
         let weightedFactor2 = this.state.purchaseData.loanTerm / this.state.selectedTimeScaleInMonths;
-        console.log(weightedFactor1, weightedFactor2);
         if (weightedFactor1 <= 0) {
             weightedFactor1 = 0;
             weightedFactor2 = 1;
@@ -197,18 +186,15 @@ export default class CashFlow extends Component {
         const constProduct1 = weightedFactor1 * m_c1[1];
         const slopeProduct2 = weightedFactor2 * m_c2[0];
         const constProduct2 = weightedFactor2 * m_c2[1];
-        console.log(slopeProduct1, slopeProduct2);
         const newSlope = (slopeProduct1 + slopeProduct2);
         const newConst = (constProduct1 + constProduct2);
         const regressionEquation3 = [newSlope, newConst];
         const currentState = this.state;
         currentState.regressionEquation3 = regressionEquation3;
         this.setState({ currentState });
-        console.log(regressionEquation3);
     }
 
     timeScaleHandler(e) {
-        console.log('the time scale handler ran');
         const currentState = this.state;
         switch (e.target.name) {
             case 'one-year':
@@ -227,11 +213,10 @@ export default class CashFlow extends Component {
                 currentState.selectedTimeScaleInMonths = 1;
         }
 
-        if (this.state.compare) {
-            console.log('calculate purchase over interval ran');
-            this.calculatePurchaseOverInterval();
-            currentState.compare = false;
-        }
+        // if (this.state.compare) {
+        //     this.calculatePurchaseOverInterval();
+        //     currentState.compare = false;
+        // }
         this.setState({ currentState });
     }
 
@@ -245,17 +230,13 @@ export default class CashFlow extends Component {
         currentState.compare = false;
         currentState.purchaseData = data;
         currentState.compare = true;
-        console.log(data);
         this.setState({
             currentState
         });
-        console.log('get purchase data ran');
         this.calculate();
-        this.calculatePurchaseOverInterval();
     }
 
     render() {
-        console.log(this.state.regressionEquation3);
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
@@ -307,7 +288,7 @@ export default class CashFlow extends Component {
                             </div>
                             <Fade right>
                                 <div className="testForm">
-                                    <LoanCalculator purchaseData={this.getPurchaseData.bind(this)} />
+                                    <LoanCalculator purchaseData={this.getPurchaseData} />
                                 </div>
                             </Fade>
                         </div>

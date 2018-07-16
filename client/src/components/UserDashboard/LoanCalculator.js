@@ -14,18 +14,18 @@ export default class Calculator extends Component {
             modal: false,
             purchaseAmount: '',
             downPayment: '',
-            Term: '',
+            loanTerm: '',
             interestRate: '',
             purchaseData: {
                 totalPayout: '',
                 monthlyPayment: '',
                 totalInterest: '',
-                Term: '',
+                loanTerm: '',
                 downPayment: '',
                 submit: false
             }
         };
-        this.Calc = this.Calc.bind(this);
+        this.loanCalc = this.loanCalc.bind(this);
         this.inputHandler = this.inputHandler.bind(this);
         this.toggle = this.toggle.bind(this);
         this.step1Handler = this.step1Handler.bind(this);
@@ -36,11 +36,11 @@ export default class Calculator extends Component {
 
     // this is an amortization calculator
 
-    Calc(e) {
+    loanCalc(e) {
         e.preventDefault();
         const currentState = this.state;
         let p = this.state.purchaseAmount - this.state.downPayment;
-        let y = this.state.Term;
+        let y = this.state.loanTerm;
         let i = this.state.interestRate / 100;
         let ei = i / 12; // interest rate divided over 12 months
         let n = y * 12; // number of payments over  term
@@ -54,7 +54,7 @@ export default class Calculator extends Component {
         } else if (!this.state.interestRate) {
             alert('You must choose an interest amount!');
 
-        } else if (!this.state.Term) {
+        } else if (!this.state.loanTerm) {
             alert('You must choose a  term!');
 
         } else {
