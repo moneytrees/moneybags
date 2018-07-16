@@ -1,22 +1,18 @@
 import React from "react";
 import "./Plaid.css";
+import { Button } from "reactstrap";
 
 
 const PlaidButtons = (props) => (
-  <div>
-
-    <div className="row"className="plaidButtonContainter container">
+   <div>
+    <div className="plaidButtonContainter container row">
       <div className="col-md-12">
-
-        <button
-
-          type="button"
-          className="btn btn-outline-secondary plaidButton"
-          id="get-accounts-btn"
-          onClick={props.account}
-        >
-          Get Account 
-            </button>
+        <Button
+            type="button"
+            className="btn btn-outline-secondary plaidButton"
+            id="get-accounts-btn"
+            onClick={props.account}
+        >Pull Accounts</Button>
         {/* <button
           type="button"
           className="btn btn-outline-success"
@@ -24,14 +20,14 @@ const PlaidButtons = (props) => (
         >
           Get Item
             </button> */}
-        <button
+        <Button
           type="button"
           className="btn btn-outline-secondary plaidButton"
           id="get-transactions-btn"
           onClick={props.transactions}
         >
-          Get Transactions
-            </button>
+          Pull Transactions
+            </Button>
       </div>
     </div>
   </div>

@@ -42,7 +42,7 @@ module.exports = {
 
 
 	getLatestCashFlow: (req, res) => {
-
+	console
 		User.findOne({ email: req.body.email }).then((user) => {
 			if (user.cashFlowArray.length > 0) {
 				return res.json(user.cashFlowArray[(user.cashFlowArray.length - 1)]);

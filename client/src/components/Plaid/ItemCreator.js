@@ -79,7 +79,7 @@ class ItemCreator extends Component {
 
 
   render() {
-    if (this.state.hasInstitution == false) {
+    if (this.state.hasInstitution == false && this.state.public_key) {
       return (
         <div id="foo">
 
@@ -103,7 +103,7 @@ class ItemCreator extends Component {
           <TransData />
         </div>
       );
-    } else if (this.state.hasInstitution == true) {
+    } else if (this.state.hasInstitution) {
       return (
         <div>
           <PlaidButtons
@@ -113,6 +113,8 @@ class ItemCreator extends Component {
         </div>
       )
     }
+    else
+      return <div>Loading data...</div>
   }
 }
 
