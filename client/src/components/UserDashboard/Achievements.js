@@ -46,7 +46,7 @@ class Achievements extends Component {
                 this.setState({
                     loginAchvArray: tempLogin,
                     cashFlowAchvArray: tempCash
-                })
+                });
 
             })
             .catch(errors => {

@@ -64,6 +64,7 @@ module.exports = {
 	},
 
 	getNewAchievements: (req, res) => {
+
 		User.findOne({ email: req.body.email }).then(user => {
 			return res.json(user.newAchv);
 
@@ -195,14 +196,14 @@ module.exports = {
 
 								Achv.findOne({ _id: achvID }).then((achvData) => {
 
-									achvArr.push(achvData.id);
+									achvArr.push(achvData._id);
 									newAchvArr.push(achvData);
 									Achv.findOne({ _id: cashAchvID }).then((cashAchvData) => {
 
 
 
 
-										achvArr.push(cashAchvData.id);
+										achvArr.push(cashAchvData._id);
 										newAchvArr.push(cashAchvData);
 
 
@@ -223,7 +224,7 @@ module.exports = {
 
 								Achv.findOne({ _id: achvID }).then((achvData) => {
 
-									achvArr.push(achvData.id);
+									achvArr.push(achvData._id);
 									newAchvArr.push(achvData);
 
 									User.updateOne({ email: user.email }, {
@@ -245,7 +246,7 @@ module.exports = {
 
 
 
-									achvArr.push(cashAchvData.id);
+									achvArr.push(cashAchvData._id);
 									newAchvArr.push(cashAchvData);
 
 
@@ -262,7 +263,7 @@ module.exports = {
 
 
 							const payload = {
-								id: user.id,
+								id: user._id,
 								name: user.name,
 								email: user.email,
 								achievements: user.achievements,

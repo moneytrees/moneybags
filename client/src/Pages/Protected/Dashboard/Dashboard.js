@@ -34,6 +34,7 @@ class Dashboard extends Component {
     })
       .then(data => data.json())
       .then(response => {
+        console.log(response);
         let newAchvArr = response.data;
 
         setTimeout(() => {
