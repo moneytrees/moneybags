@@ -19,7 +19,6 @@ module.exports = {
               name: data.name,
               desc: data.desc,
               unlocked: false
-
             };
             if (user.achievements.includes(data._id)) {
               tempObj.unlocked = true;
