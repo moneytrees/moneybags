@@ -10,7 +10,8 @@ class Avatar extends Component {
     super(props);
     this.state = {
       imageArray: [Happy, Neutral, Mad],
-      currentImageIndex: 1
+      currentImageIndex: 1,
+      currentAltDesc: "neutral big foot avatar"
     }
   }
 
@@ -25,23 +26,27 @@ class Avatar extends Component {
       }).then(data => data.json())
       .then(response => {
 
+
         setTimeout(() => {
 
-          switch (response.data) {
+          switch (response) {
             case "positive":
               this.setState({
-                currentImageIndex: 0
+                currentImageIndex: 0,
+                currentAltDesc: "happy big foot avatar"
               });
               break;
             case "negative":
               this.setState({
-                currentImageIndex: 2
+                currentImageIndex: 2,
+                currentAltDesc: "mad big foot avatar"
               })
               break;
 
             case "neutral":
               this.setState({
-                currentImageIndex: 1
+                currentImageIndex: 1,
+                currentAltDesc: "neutral big foot avatar"
               })
               break;
             default:
@@ -59,7 +64,7 @@ class Avatar extends Component {
     return (
 
       <div >
-        <img className="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} alt={this.state.currentImageIndex} />
+        <img className="avatar-img" src={this.state.imageArray[this.state.currentImageIndex]} alt={this.state.currentAltDesc} />
       </div>
     )
   }

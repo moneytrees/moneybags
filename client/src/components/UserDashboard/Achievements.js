@@ -34,8 +34,7 @@ class Achievements extends Component {
                 let tempLogin = [];
                 let tempCash = [];
                 response.forEach((item) => {
-                    console.log(item);
-                    if (item._id.length < 16) {
+                    if (item.id.length < 16) {
                         tempLogin.push(item);
                     }
                     else {
@@ -61,10 +60,10 @@ class Achievements extends Component {
                 <div className="fluid-container">
                     <div className="row">
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item) {
-                            const { _id, unlocked, name, desc } = item;
+                            const { id, unlocked, name, desc } = item;
                             return (
-                                <div className="col-md-3" key={_id}>
-                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy}/>
+                                <div className="col-md-3" key={id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy} alt={unlocked ? "Gold Unlocked Achievement Trophy" : "Monochrome Locked Achievement Trophy"}/>
                                     <h3 className="itemName">{name}</h3>
                                     <span className="itemDesc"> {desc}</span>
                                 </div>
@@ -72,11 +71,12 @@ class Achievements extends Component {
                         })}
 
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item) {
-                            const { _id, unlocked, name, desc } = item;
+                            const { id, unlocked, name, desc } = item;
                             return (
-                                <div className="col-md-3" key={_id}>
-                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy}/>
+                                <div className="col-md-3" key={id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy} alt={unlocked ? "Gold Unlocked Achievement Trophy" : "Monochrome Locked Achievement Trophy"}/>
                                     <h3 className="itemName"> {name}</h3>
+                                    <span className="itemDesc"> {desc}</span>
                                 </div>
                             );
                         })}

@@ -26,18 +26,20 @@ class Dashboard extends Component {
 
   componentDidMount() {
     fetch("/api/getNewUserAchievements", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: localStorage.getItem("user_email") })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: localStorage.getItem("user_email") })
     })
       .then(data => data.json())
       .then(response => {
 
-        let newAchvArr = response.data;
+        let newAchvArr = response;
 
-        /*setTimeout(() => {
+        console.log(newAchvArr);
+
+        setTimeout(() => {
           console.log(newAchvArr);
           if (newAchvArr.length > 0) {
             toast(
@@ -53,20 +55,20 @@ class Dashboard extends Component {
             let toastInterval = setInterval(() => {
               if (i >= newAchvArr.length) {
                 clearInterval(toastInterval);
-                  fetch("/api/deleteNewAchievements", {
-                      method: "DELETE",
-                      headers: {
-                          "Content-Type": "application/json"
-                      },
-                      body: JSON.stringify({ email: localStorage.getItem("user_email") })
+                fetch("/api/deleteNewAchievements", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({ email: localStorage.getItem("user_email") })
+                })
+                  .then(data => data.json())
+                  .then(response => {
+                    console.log(response);
                   })
-                      .then(data => data.json())
-                      .then(response => {
-                          console.log(response);
-                      })
-                      .catch(errors => {
-                          console.log(`error: ${errors}`);
-                      });
+                  .catch(errors => {
+                    console.log(`error: ${errors}`);
+                  });
               } else {
                 toast(
                   <AchvToast
@@ -79,7 +81,7 @@ class Dashboard extends Component {
               }
             }, 5500);
           }
-        }, 1500);*/
+        }, 1500);
       })
       .catch(errors => {
         console.log(`error: ${errors}`);
@@ -89,7 +91,7 @@ class Dashboard extends Component {
   render() {
     return (
 
-      
+
       <div className="background">
         <ToastContainer />
 
@@ -100,7 +102,7 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-md-4">
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
-                  <Card className =" topAvatarshadow-lg p-3 mb-5 bg-white rounded">
+                  <Card className=" topAvatarshadow-lg p-3 mb-5 bg-white rounded">
                     <div className="dashAvatar">
 
                       <Avatar />
@@ -121,16 +123,16 @@ class Dashboard extends Component {
 
                 <div className="achvCard shadow-lg p-3 mb-5 bg-white rounded">
                   <div id="accordion">
-                        <h5 className="mb-0">
-                          <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            <h2 className="dbTitle"><i className="fas fa-trophy"></i>Achievements </h2>
-                          </a>
-                        </h5>
-                      <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div className="card-body">
-                          <Achievements />
-                        </div>
+                    <h5 className="mb-0">
+                      <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <h2 className="dbTitle"><i className="fas fa-trophy"></i>Achievements </h2>
+                      </a>
+                    </h5>
+                    <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div className="card-body">
+                        <Achievements />
                       </div>
+                    </div>
                     {/* </div> */}
 
                   </div>
@@ -177,7 +179,7 @@ class Dashboard extends Component {
 
               <div className="col-md-4">
                 <Fade right>
-                  <Card className ="totalSpendCard shadow-lg p-3 mb-5 bg-white rounded">
+                  <Card className="totalSpendCard shadow-lg p-3 mb-5 bg-white rounded">
                     <h2 className="dbTitle"> <i className="far fa-credit-card"></i> Total Spending</h2>
                     <TotalSpending />
                   </Card>
@@ -203,7 +205,7 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
-      
+
 
     );
   }

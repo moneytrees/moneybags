@@ -10,7 +10,7 @@ module.exports = (app, express) => {
   userRouter.route("/api/addCashFlow").post(userController.addCashFlow);
   userRouter.route("/api/getNewUserAchievements").post(userController.getNewAchievements);
   userRouter.route("/api/getLatestCashFlow").post(userController.getLatestCashFlow);
-  userRouter.route("/api/deleteNewAchievements").delete(userController.deleteNewAchievements);
+  userRouter.route("/api/deleteNewAchievements").post(userController.deleteNewAchievements);
   userRouter
     .route("/api/current")
     .get(

@@ -12,7 +12,10 @@ module.exports = {
     User.findOne({ email: req.body.email })
       .then(user => {
         Achv.find().then((achvData) => {
-          res.json(achvData);
+
+         
+          let clientAchvArr = [];
+
           achvData.forEach((data) => {
             tempObj = {
               id: data._id,
@@ -25,8 +28,9 @@ module.exports = {
             }
             clientAchvArr.push(tempObj);
 
-          }).catch(err => err.message);
-            return res.json(clientAchvArr);
+          });
+          res.json(clientAchvArr);
+
         }).catch(err => err.message);
       }).catch(err => err.message);
   },
