@@ -47,6 +47,20 @@ class Dashboard extends Component {
             let toastInterval = setInterval(() => {
               if (i >= newAchvArr.length) {
                 clearInterval(toastInterval);
+                  fetch("/api/deleteNewAchievements", {
+                      method: "DELETE",
+                      headers: {
+                          "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify({ email: localStorage.getItem("user_email") })
+                  })
+                      .then(data => data.json())
+                      .then(response => {
+                          console.log(response);
+                      })
+                      .catch(errors => {
+                          console.log(`error: ${errors}`);
+                      });
               } else {
                 toast(
                   <AchvToast
@@ -62,19 +76,6 @@ class Dashboard extends Component {
         }, 1500);
 
         console.log(newAchvArr);
-
-
-        fetch("/api/deleteNewAchievements", {
-          method: "DELETE",
-          params: { email: localStorage.getItem("user_email") }
-        })
-          .then(data => data.json())
-          .then(response => {
-            console.log(response);
-          })
-          .catch(errors => {
-            console.log(`error: ${errors}`);
-          });
       })
       .catch(errors => {
         console.log(`error: ${errors}`);

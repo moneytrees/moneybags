@@ -23,12 +23,16 @@ class Achievements extends Component {
     componentDidMount() {
 
         fetch("/api/getAllAchievements", {
-            params: {
-                email: localStorage.getItem("user_email")
-            }
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: localStorage.getItem("user_email") })
         })
             .then(data => data.json())
             .then(response => {
+                console.log('I gots achievement');
+                console.log(response);
                 let tempLogin = [];
                 let tempCash = [];
                 console.log(response.data);
@@ -40,7 +44,7 @@ class Achievements extends Component {
                     else {
                         tempCash.push(item);
                     }
-                })
+                });
 
                 this.setState({
                     loginAchvArray: tempLogin,
@@ -49,7 +53,7 @@ class Achievements extends Component {
 
             })
             .catch(errors => {
-                console.log(`error: ${errors}`);
+                console.log(`error: ${errors.message}`);
             });
     }
 
@@ -60,21 +64,15 @@ class Achievements extends Component {
                 <div className="fluid-container">
                     <div className="row">
                         {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
+                            console.log(item);
                             return (
-
                                 <div className="col-md-3">
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
                                     <h3 className="itemName"> {item.name}</h3>
                                     <span className="itemDesc"> {item.desc}</span>
-
                                 </div>
-
                             );
-                        })
-                        }
-
-
-
+                        })}
 
                         {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
                             return (
@@ -82,9 +80,6 @@ class Achievements extends Component {
 
                                     <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
                                     <h3 className="itemName"> {item.name}</h3>
-
-
-                                    {/* <span className="itemDesc"> {item.desc}</span> */}
                                 </div>
                             );
                         })

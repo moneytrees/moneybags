@@ -5,7 +5,6 @@ require('dotenv').config();
 class PlaidController {
 
     constructor() {
-        //TODO check if there's a public key already saved for the logged in user
         this.public_key = process.env.PLAID_PUBLIC_KEY;
         this.secret = process.env.PLAID_SECRET;
         this.client_id = process.env.PLAID_CLIENT_ID;
@@ -43,8 +42,7 @@ class PlaidController {
 
     holder(arg) {
         if (arg) {
-            this.access_token = arg
-            console.log(arg)
+            this.access_token = arg;
             this.accessToken
         } else {
             this.accessToken
@@ -74,8 +72,7 @@ class PlaidController {
 
 
     async getAccessToken() {
-        //TODO: check database for existing access token for the currently signed-in user
-        const data = await this.client.exchangePublicToken(this.publicToken)
+        return await this.client.exchangePublicToken(this.publicToken)
             .then(response => {
                 this.accessToken = response.access_token;
                 console.log('access token');
@@ -83,23 +80,36 @@ class PlaidController {
                 return response;
             })
             .catch((err) => err);
-        return data;
     }
 
     async getAccountInfo(res, req) {
-        console.log(req)
-        //TODO: check database for existing access token for the currently signed-in user
-        const data = await this.client.getAuth(this.accessToken)
+
+        return await this.client.getAuth(this.accessToken)
             .then(response => response)
             .catch((err) => err);
-        console.log(data)
-        return data;
     }
 
 
     async getItem() {
-        //TODO: check database for existing access token for currently requested item
-        const data = await this.client.getItem(this.accessToken)
+
+        return await this.client.getItem(this.accessToken)
+            .then(itemResponse => {
+                console.log('item info');
+                console.log(itemResponse);
+                return this.client.getInstitutionById(itemResponse.item.institution_id)
+                    .then(institutionResponse => {
+                        //THIS MAY NOT BE NECESSARY
+                        console.log('institution info');
+                        console.log(institutionResponse);
+                        return { item: itemResponse, institution: institutionResponse }
+                    })
+                    .catch((err) => err);
+            })
+            .catch((err) => err);
+    }
+    async getItem() {
+
+        return await this.client.getItem(this.accessToken)
             .then(itemResponse => {
                 console.log('item info');
                 console.log(itemResponse);
@@ -114,40 +124,19 @@ class PlaidController {
             })
             .catch((err) => err);
 
-        return data;
-    }
-    async getItem() {
-        //TODO: check database for existing access token for currently requested item
-        const data = await this.client.getItem(this.accessToken)
-            .then(itemResponse => {
-                console.log('item info');
-                console.log(itemResponse);
-                return this.client.getInstitutionById(itemResponse.item.institution_id)
-                    .then(institutionResponse => {
-                        //THIS MAY NOT BE NECESSARY
-                        console.log('institution info');
-                        console.log(institutionResponse);
-                        return { item: itemResponse, institution: institutionResponse }
-                    })
-                    .catch((err) => err);
-            })
-            .catch((err) => err);
-
-        return data;
     }
 
     async getTransactions() {
         const options = { count: 250, offset: 0 };
-        const data = await this.client.getTransactions(this.accessToken, this.transactionRange.start, this.transactionRange.end, options)
+        return await this.client.getTransactions(this.accessToken, this.transactionRange.start, this.transactionRange.end, options)
             .then(res => {
-                console.log(res);
+                let transArr = [];
                 res.transactions.forEach(item => {
-                    res.json(item);
+                    transArr.push(item);
                 });
-                return response;
+                return transArr;
             })
             .catch((err) => err);
-        return data;
     }
 }
 

@@ -60,7 +60,7 @@ class ItemCreator extends Component {
       body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => response)
+      .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("transaction");
 

@@ -102,13 +102,9 @@ export default class CashFlow extends Component {
             body: JSON.stringify({ email:localStorage.getItem("user_email") , cashFlow:currentCashFlow })
 
         })
-        .then(res => {console.log(res.json())})
-        .then(data =>{console.log(data)})
-            .catch(err => {console.log(err.message)});
-
-//localStorage.getItem('user_email')
-
-        console.log("transaction");
+        .then(res => res.json())
+        .then(data => {console.log(data)})
+        .catch(err => JSON.stringify(err.message));
     
     }
 
@@ -238,7 +234,7 @@ export default class CashFlow extends Component {
     }
 
     render() {
-        console.log(this.state.regressionEquation3);
+
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (

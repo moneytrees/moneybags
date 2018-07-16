@@ -1,8 +1,5 @@
-//const { ensureAuthenticated } = require(path.join(__basedir,'/helpers/auth'));
-//const plaidController = require(path.join(__basedir,'/controllers/*.js'));
 const User = require("../../db/models/user");
 const PlaidController = require(__basedir + 'api/controllers/plaidController');
-var user_m = new User;
 
 
 module.exports = function (app, express) {
@@ -105,7 +102,7 @@ module.exports = function (app, express) {
 			__plaidClient.transactionDaysAgo = 30;
 			__plaidClient
 				.getTransactions(__plaidClient.holder(arg))
-				.then(transactions => response.json(transactions))
+				.then(data => response.json(data))
 		}
 		).catch(err => console.log(err))
 	});
