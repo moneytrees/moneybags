@@ -95,8 +95,9 @@ class ItemCreator extends Component {
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
             className="btn connectBankBtn"
+            
           >
-            Connect your Financial Institution
+           Connect Bank
           </PlaidLink>
 
           <TransData />
