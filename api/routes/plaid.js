@@ -105,7 +105,7 @@ module.exports = function (app, express) {
 			__plaidClient.transactionDaysAgo = 30;
 			__plaidClient
 				.getTransactions(__plaidClient.holder(arg))
-				.then(transactions => response.json(transactions))
+				.then(data => response.json(data))
 		}
 		).catch(err => console.log(err))
 	});
