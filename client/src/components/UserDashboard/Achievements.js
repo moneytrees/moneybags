@@ -23,33 +23,33 @@ class Achievements extends Component {
     componentDidMount() {
 
         fetch("/api/getAllAchievements", {
-            params: {
-                email: localStorage.getItem("user_email")
-            }
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: localStorage.getItem("user_email") })
         })
             .then(data => data.json())
             .then(response => {
                 let tempLogin = [];
                 let tempCash = [];
-                console.log(response.data);
-
-                response.data.forEach((item) => {
+                response.forEach((item) => {
                     if (item.id.length < 16) {
                         tempLogin.push(item);
                     }
                     else {
                         tempCash.push(item);
                     }
-                })
+                });
 
                 this.setState({
                     loginAchvArray: tempLogin,
                     cashFlowAchvArray: tempCash
-                })
+                });
 
             })
             .catch(errors => {
-                console.log(`error: ${errors}`);
+                console.log(`error: ${errors.message}`);
             });
     }
 
@@ -59,36 +59,27 @@ class Achievements extends Component {
             <div className="col-md-12">
                 <div className="fluid-container">
                     <div className="row">
-                        {this.sortThrophies(this.state.loginAchvArray).map(function (item, i) {
+                        {this.sortThrophies(this.state.loginAchvArray).map(function (item) {
+                            const { id, unlocked, name, desc } = item;
                             return (
-
-                                <div className="col-md-3">
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
-                                    <h3 className="itemName"> {item.name}</h3>
-                                    <span className="itemDesc"> {item.desc}</span>
-
-                                </div>
-
-                            );
-                        })
-                        }
-
-
-
-
-                        {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item, i) {
-                            return (
-                                <div className="col-md-3">
-
-                                    <img className="trophyPic" src={item.unlocked ? Trophy : greyTrophy} alt={item.name}/>
-                                    <h3 className="itemName"> {item.name}</h3>
-
-
-                                    {/* <span className="itemDesc"> {item.desc}</span> */}
+                                <div className="col-md-3" key={id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy} alt={unlocked ? "Gold Unlocked Achievement Trophy" : "Monochrome Locked Achievement Trophy"}/>
+                                    <h3 className="itemName">{name}</h3>
+                                    <span className="itemDesc"> {desc}</span>
                                 </div>
                             );
-                        })
-                        }
+                        })}
+
+                        {this.sortThrophies(this.state.cashFlowAchvArray).map(function (item) {
+                            const { id, unlocked, name, desc } = item;
+                            return (
+                                <div className="col-md-3" key={id}>
+                                    <img className="trophyPic" src={unlocked ? Trophy : greyTrophy} alt={unlocked ? "Gold Unlocked Achievement Trophy" : "Monochrome Locked Achievement Trophy"}/>
+                                    <h3 className="itemName"> {name}</h3>
+                                    <span className="itemDesc"> {desc}</span>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

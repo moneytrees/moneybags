@@ -10,12 +10,15 @@ class Achievements extends Component {
     componentDidMount() {
 
         fetch("/api/getAllAchievements", {
-            params: {
-                email: localStorage.getItem("user_email")
-            }
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: localStorage.getItem("user_email") })
         })
             .then(data => data.json())
             .then(response => {
+
                 let tempLogin = [];
                 let tempCash = [];
                 console.log(response.data);
@@ -27,7 +30,7 @@ class Achievements extends Component {
                     else {
                         tempCash.push(item);
                     }
-                })
+                });
 
                 this.setState({
                     loginAchvArray: tempLogin,

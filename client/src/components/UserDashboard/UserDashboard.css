@@ -6,15 +6,14 @@
     background-size: cover; 
 }
 
-.topCol .col-md-12 {
+/* .topCol .col-md-12 {
     margin-top: 10%;
-}
+} */
 
 .dashAvatar .avatar-img {
-    width: 32%;
-    right: 29%;
-    padding-left:75px;
-    margin-top: -10%;
+    width: 76%;
+    padding-left:66px;
+    margin-top: -22%;
 }
 
 .topSection {
@@ -26,16 +25,19 @@
     margin-bottom: 3%;
 }
 .achieveCard{
-    margin-top: -12%;
+    margin-top: -4%;
     margin-bottom: 3%;
 }
 
 .btn-info .cashFlowBtn {
-    margin: 10px 20px 20px 10px !important;
+   
     background-color: #E38949; 
 
 }
 
+.cashFlow-btn-group {
+    text-align: center;
+}
 
 .cashFlow-graph {
     float: left;
@@ -43,19 +45,31 @@
     padding-left: 1rem;
 }
 
-.dbTitle h2{
-    font-family: ‘Varela Round’, sans-serif;
+.dbTitle h2 {
+    font-family: ‘Varela Round’, sans-serif !important;
     font-size: 24px;
-    text-align: center;
+    
     color: #015249 !important;
     margin: 5px 0 15px 0;
+  
 }
+
+.threeDashBtn {
+    text-align: center;
+}
+
+
 
 .testForm {
     margin-top: 2rem;
     float: left;
     width: 50%;
     height: 300px;
+}
+
+.btnGroupCf{
+    text-align:center;
+
 }
 
 .loanDataLine {
@@ -70,6 +84,7 @@
 .pieChart {
     margin:auto;
     margin-bottom:10%;
+ 
 }
 
 .totalSpendingCol {

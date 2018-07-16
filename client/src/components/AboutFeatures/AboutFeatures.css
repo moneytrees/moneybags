@@ -1,0 +1,45 @@
+.about{
+    color: #37474F;
+    background-color: #ffffff;
+    padding: 3em;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.midTextAbout {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 6em;
+    padding-top: 100px;
+}
+
+.about h2 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 3em;
+    padding: .5em;
+}
+
+.about p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+@media only screen and (max-width: 600px)  {
+    .midTextAbout {
+        padding-top: 1em;
+        font-size: 4em;
+    }
+
+    .about h2 {
+        font-size: 2em;
+    }
+
+    .about .col-sm-12{
+        margin: 2em 0 2em 0;
+    }
+
+    .feature{
+        border-bottom: 2px solid #37474F;
+        padding-bottom: 4em;
+    }
+}

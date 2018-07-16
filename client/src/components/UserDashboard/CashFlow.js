@@ -240,7 +240,7 @@ export default class CashFlow extends Component {
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
-                    <div>
+                    <div className="btnGroupCf">
                         <Rotate top left>
                             <div className="cashFlow-btn-group">
                                 <Button color="info" disabled={true} className="cashFlowBtn" onClick={this.timeScaleHandler}>30 Days</Button>

@@ -10,11 +10,20 @@ class ItemCreator extends Component {
     super(props);
     this.state = {
       public_key: null,
-      token: null
+      token: null,
+      hasInstitution: false
     };
   }
 
   componentDidMount() {
+    if (localStorage.getItem("bank_name")) {
+      this.setState({
+        hasInstitution: true
+      })
+    }
+  }
+
+  componentWillMount() {
     if (!this.state.public_key)
       fetch("/api/get_public_key")
         .then(data => data.json())
@@ -23,6 +32,8 @@ class ItemCreator extends Component {
         })
         .catch(err => JSON.stringify(err));
   }
+
+
 
   handleOnSuccess(token, metadata) {
     fetch("/api/get_access_token", {
@@ -66,7 +77,7 @@ class ItemCreator extends Component {
   }
 
   render() {
-    if (this.state.public_key) {
+    if (this.state.hasInstitution == false && this.state.public_key) {
       return (
         <div id="foo">
 
@@ -82,20 +93,25 @@ class ItemCreator extends Component {
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
             className="btn connectBankBtn"
+            
           >
-            Connect your Financial Institution
+           Connect Bank
           </PlaidLink>
-
-
+          <TransData />
+        </div>
+      );
+    } else if (this.state.hasInstitution) {
+      return (
+        <div>
           <PlaidButtons
             account={this.account}
             transactions={this.transaction} />
           <TransData />
         </div>
-      );
-    } else {
-      return null;
+      )
     }
+    else
+      return <div>Loading data...</div>
   }
 }
 
