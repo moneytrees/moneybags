@@ -83,6 +83,8 @@ class Dashboard extends Component {
 
   render() {
     return (
+
+      
       <div className="background">
         <ToastContainer />
 
@@ -102,7 +104,7 @@ class Dashboard extends Component {
 
 
                     <div className="row">
-                      <div className="col-md-12">
+                      <div className="col-md-12" className="threeDashBtn">
                         <ItemCreator />
                       </div>
                     </div>
@@ -118,7 +120,7 @@ class Dashboard extends Component {
                       {/* <div className="card-header" id="headingOne"> */}
                         <h5 className="mb-0">
                           <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            <h2 className="dbTitle"> Achievements </h2>
+                            <h2 className="dbTitle"><i className="fas fa-trophy"></i> Achievements </h2>
                           </a>
                         </h5>
                       {/* </div> */}
@@ -155,27 +157,16 @@ class Dashboard extends Component {
  */}
 
 
-
-
               </div>
-
-
             </div>
-
           </div>
-
-
-          {/* achievement card */}
-
-
-
 
           <div className="transactionDetail">
             <div className="row">
               <div className="col-md-8">
                 <Zoom>
                   <Card className="transCard" className ="shadow-lg p-3 mb-5 bg-white rounded">
-                    <h2 className="dbTitle"> Transaction Detail</h2>
+                    <h2 className="dbTitle"><i className="fas fa-wallet"></i> Transaction Detail</h2>
 
                     <TransactionDetail />
                   </Card>
@@ -186,7 +177,7 @@ class Dashboard extends Component {
               <div className="col-md-4">
                 <Fade right>
                   <Card className="totalSpendCard" className ="shadow-lg p-3 mb-5 bg-white rounded">
-                    <h2 className="dbTitle"> Total Spending</h2>
+                    <h2 className="dbTitle"> <i className="far fa-credit-card"></i> Total Spending</h2>
                     <TotalSpending />
                   </Card>
                 </Fade>
@@ -196,10 +187,10 @@ class Dashboard extends Component {
 
             <div className="row">
               <div className="CashFlow">
-                <div className="col-12 text-center">
+                <div className="col-md-12">
                   <Zoom>
                     <Card>
-                      <h2 className="dbTitle"> Cash Flow </h2>
+                      <h2 className="dbTitle"><i className="fas fa-piggy-bank"></i>  Cash Flow </h2>
                       <CashFlow />
                     </Card>
                   </Zoom>
@@ -211,6 +202,8 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
+      
+
     );
   }
 }
