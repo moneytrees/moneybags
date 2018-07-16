@@ -105,8 +105,6 @@ export default class CashFlow extends Component {
         .then(res => res.json())
         .then(data => {console.log(data)})
         .catch(err => JSON.stringify(err.message));
-
-        console.log("transaction");
     
     }
 
@@ -236,7 +234,7 @@ export default class CashFlow extends Component {
     }
 
     render() {
-        console.log(this.state.regressionEquation3);
+
         switch (this.state.selectedTimeScaleInMonths) {
             case 1:
                 return (
