@@ -22,13 +22,24 @@ export default class TotalSpending extends Component {
 
     componentDidMount() {
         let transactions = [];
+        fetch("/api/transactions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+        })
+            .then(data => data.json())
+            .then(response => {
+                transactions = response;
+                const currentState = this.state;
+                currentState.transactions = transactions;
+                this.setState({currentState});
+            });
     }
 
 
     render() {
-
-        const { hoveredSection } = this.state;
-
         let expenses = this.state.transactions;
         let duplicate;
         do {
@@ -70,9 +81,11 @@ export default class TotalSpending extends Component {
 
 
         for (let i = 0; i < expenses.length; i++) {
-            data.push({ angle: expenses[i].amount, 
+            data.push({
+                angle: expenses[i].amount,
                 label: `${expenses[i].category} - ${expenses[i].amount}%`,
-                color: colors[i] });
+                color: colors[i]
+            });
         }
         if (misc / total > 0.05) {
             data.push({ angle: misc, label: 'Misc' });

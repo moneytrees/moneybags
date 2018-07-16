@@ -87,9 +87,7 @@ class ItemCreator extends Component {
       .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("transaction");
-
   }
-
 
   render() {
     if (this.state.hasInstitution === false && this.state.public_key) {

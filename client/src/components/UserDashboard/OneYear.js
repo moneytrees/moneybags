@@ -7,7 +7,7 @@ import {
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
-    LineSeries,
+    LineSeries
 } from 'react-vis/dist';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 
