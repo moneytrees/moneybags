@@ -159,7 +159,7 @@ class Dashboard extends Component {
                               </div>
 
                               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
+                                <div className="card-body">
                                   <Achievements />
                                 </div>
                               </div>
