@@ -48,6 +48,13 @@ class ItemCreator extends Component {
       .catch(err => console.log(err.message));
   }
 
+  handleOnExit() {
+    this.setState({
+      hasInstitution: true
+    })
+    this.forceUpdate()
+  }
+
   account() {
     fetch("/api/accounts"
       , {
@@ -95,9 +102,9 @@ class ItemCreator extends Component {
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
             className="btn connectBankBtn"
-            
+
           >
-           Connect Bank
+            Connect Bank
           </PlaidLink>
           <TransData />
         </div>
@@ -107,7 +114,9 @@ class ItemCreator extends Component {
         <div>
           <PlaidButtons
             account={this.account}
-            transactions={this.transaction} />
+            transactions={this.transaction}
+            onExit={this.handleOnExit}
+          />
           <TransData />
         </div>
       )

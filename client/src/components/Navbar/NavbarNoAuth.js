@@ -42,9 +42,6 @@ export default class NavbarNoAuth extends React.Component {
                 <NavLink href="/register">Register</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/helpeducation">Education</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/team">Team</NavLink>
               </NavItem>
             </Nav>
