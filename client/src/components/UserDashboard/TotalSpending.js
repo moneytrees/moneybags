@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { RadialChart } from 'react-vis/dist';
-import axios from 'axios';
 import '../../react-vis.css';
 import "./UserDashboard.css";
 import '../../App.css';
@@ -11,32 +10,36 @@ export default class TotalSpending extends Component {
         super(props);
         this.state = {
             transactions: [
-                { amount: 100, date: '2018-06-12', category: 'Recreation' },
-                { amount: 100, date: '2018-07-01', category: 'Food and Drink' },
-                { amount: 100, date: '2018-07-05', category: 'Home' },
-                { amount: 100, date: '2018-07-05', category: 'Auto' },
-                { amount: 100, date: 'some date', category: 'Healthcare' },
-                { amount: 100, date: 'some date', category: 'Investments' }
+                { amount: 15, date: '2018-06-12', category: 'Recreation' },
+                { amount: 15, date: '2018-07-01', category: 'Food & Drink' },
+                { amount: 25, date: '2018-07-05', category: 'Home' },
+                { amount: 10, date: '2018-07-05', category: 'Auto' },
+                { amount: 15, date: 'some date', category: 'Healthcare' },
+                { amount: 20, date: 'some date', category: 'Investment' }
             ]
         };
     }
 
     componentDidMount() {
         let transactions = [];
-        // fetch("/api/transactions", {
-        //     method: "GET",
-        // })
-            
-        //     .then(data => { console.log(data) })
-        //     .catch(err => { console.log(err.message) });
+        fetch("/api/transactions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+        })
+            .then(data => data.json())
+            .then(response => {
+                transactions = response;
+                const currentState = this.state;
+                currentState.transactions = transactions;
+                this.setState({currentState});
+            });
     }
 
 
     render() {
-
-        const { hoveredSection } = this.state;
-
-
         let expenses = this.state.transactions;
         let duplicate;
         do {
@@ -74,10 +77,15 @@ export default class TotalSpending extends Component {
         }
         let data = [];
 
-        let colors = ['#77c9d4', '#015249', '#49a3e3', '#57bc90', '#e38949', '#a5a5af'];
+        let colors = ['#56CBF9', '#FF220C', '#F038FF', '#32E875', '#FFBD00', '#FF5400','#FF220C'];
+
 
         for (let i = 0; i < expenses.length; i++) {
-            data.push({ angle: expenses[i].amount, label: expenses[i].category, color: colors[i] });
+            data.push({
+                angle: expenses[i].amount,
+                label: `${expenses[i].category} - ${expenses[i].amount}%`,
+                color: colors[i]
+            });
         }
         if (misc / total > 0.05) {
             data.push({ angle: misc, label: 'Misc' });
@@ -91,12 +99,13 @@ export default class TotalSpending extends Component {
                     colorType={'literal'}
                     showLabels={true}
 
-                    labelsRadiusMultiplier={.8}
-                    labelsStyle={{ fontSize: 10 }}
-
+                    labelsRadiusMultiplier={1.25}
+                    labelsStyle={{ fontSize: 12 }}
+                
+                   
                     radius={150}
-                    width={300}
-                    height={300} />
+                    width={350}
+                    height={370} />
             </div>
 
         );

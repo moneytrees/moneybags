@@ -6,15 +6,17 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
 import ItemCreator from "../../../components/Plaid/ItemCreator";
-import { Card, CardImg } from "reactstrap";
+import { Card } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
-import "./Dashboard.css";
-import axios from "axios";
 import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
+import "../../../components/UserDashboard/UserDashboard.css";
+
+
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -23,14 +25,22 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/getNewUserAchievements", {
-        params: { email: localStorage.getItem("user_email") }
-      })
+    fetch("/api/getNewUserAchievements", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: localStorage.getItem("user_email") })
+    })
+      .then(data => data.json())
       .then(response => {
-        let newAchvArr = response.data;
+
+        let newAchvArr = response;
+
+        console.log(newAchvArr);
 
         setTimeout(() => {
+          console.log(newAchvArr);
           if (newAchvArr.length > 0) {
             toast(
               <AchvToast
@@ -45,6 +55,20 @@ class Dashboard extends Component {
             let toastInterval = setInterval(() => {
               if (i >= newAchvArr.length) {
                 clearInterval(toastInterval);
+                fetch("/api/deleteNewAchievements", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({ email: localStorage.getItem("user_email") })
+                })
+                  .then(data => data.json())
+                  .then(response => {
+                    console.log(response);
+                  })
+                  .catch(errors => {
+                    console.log(`error: ${errors}`);
+                  });
               } else {
                 toast(
                   <AchvToast
@@ -58,19 +82,6 @@ class Dashboard extends Component {
             }, 5500);
           }
         }, 1500);
-
-        console.log(newAchvArr);
-
-        axios
-          .delete("/api/deleteNewAchievements", {
-            params: { email: localStorage.getItem("user_email") }
-          })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(errors => {
-            console.log(`error: ${errors}`);
-          });
       })
       .catch(errors => {
         console.log(`error: ${errors}`);
@@ -79,140 +90,123 @@ class Dashboard extends Component {
 
   render() {
     return (
+
+
       <div className="background">
         <ToastContainer />
-       
-        <div className="col-12">
-          <div className="container">
-            <div className="Acheivement">
-              <div className="row">
 
 
-                <div className="col-md-4">
-                  <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
+        <div className="container">
+
+          <div className="topSection">
+            <div className="row">
+              <div className="col-md-4">
+                <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
+                  <Card className=" topAvatarshadow-lg p-3 mb-5 bg-white rounded">
+                    <div className="dashAvatar">
+
+                      <Avatar />
+
+                    </div>
 
 
-                    <Avatar />
-
-                  </Animated>
-                </div>
-
-
-
-                <div className="col-md-8 text-center">
-                  <Animated
-                    animationIn="slideInRight"
-                    animationOut="zoomOutDown"
-                    isVisible={true}
-                  >
-
-                  
-                    <div className="achvCard">
-
-                      <div id="accordion">
-                        <div className="card">
-                          <div className="card-header" id="headingOne">
-                            <h5 className="mb-0">
-                              <a className="btn btn-link" className="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                <h2 className="dbTitle"> Achievements </h2>
-                              </a>
-                            </h5>
-                          </div>
-
-                          <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                              <Achievements />
-                            </div>
-                          </div>
-                        </div>
-
+                    <div className="row">
+                      <div className="col-md-12 threeDashBtn" >
+                        <ItemCreator />
                       </div>
                     </div>
-                  </Animated>
-                </div>
+                  </Card>
+                </Animated>
               </div>
-            </div>
 
-           <div className="row">
-           <div className="col-md-12">
-           <ItemCreator/>
-           </div>
-           </div>
-           
+              <div className="col-md-8">
 
-
-
-
-
-
-            <Animated
-              animationIn="fadeInUp"
-              animationOut="zoomOutDown"
-              isVisible={true}
-            >
-              <div className="row">
-                <div className="col-12">
-                  <div className="ProgressBar">
-
-
-                    <Card className="progressCard">
-                      <h2 className="dbTitle"> Progress Bar </h2>
-
-                      <div className="row">
-                        <div className="col-md-12">
-                          <ProgressBar className="progress"/>
-                        </div>
-
+                <div className="achvCard shadow-lg p-3 mb-5 bg-white rounded">
+                  <div id="accordion">
+                    <h5 className="mb-0">
+                      <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <h2 className="dbTitle"><i className="fas fa-trophy"></i>Achievements </h2>
+                      </a>
+                    </h5>
+                    <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div className="card-body">
+                        <Achievements />
                       </div>
+                    </div>
+                    {/* </div> */}
 
-                    </Card>
                   </div>
                 </div>
-              </div>
-            </Animated>
 
-            <hr />
+                {/* <div className="achieveCard">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <Fade right>
 
-            <div className="CashFlow">
-              <div className="row">
-                <div className="col-12 text-center">
-                  <Zoom>
-                    <Card>
-                      <h1 id="dashboardTitle"> Cash Flow </h1>
-                      <CashFlow/>
-                    </Card>
-                  </Zoom>
+                        <div className="col-md-8 text-center">
+                          <Animated
+                            animationIn="slideInRight"
+                            animationOut="zoomOutDown"
+                            isVisible={true}
+                          >
+
+                            
+                          </Animated>
+                        </div>
+                      </Fade>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+ */}
 
-            <hr />
 
-            <div className="TransactionDetail">
-              <div className="row">
-                <div className="col-md-8">
-                  <Zoom>
-                    <Card>
-                      <h2 className="dbTitle"> Transaction Detail</h2>
-
-                      <TransactionDetail />
-                    </Card>
-                  </Zoom>
-                </div>
-
-                <div className="col-md-4">
-                  <Fade right>
-                    <Card>
-                      <h2 className="dbTitle"> Total Spending</h2>
-                      <TotalSpending />
-                    </Card>
-                  </Fade>
-                </div>
               </div>
             </div>
           </div>
+
+          <div className="transactionDetail">
+            <div className="row">
+              <div className="col-md-8">
+                <Zoom>
+                  <Card className="transCard shadow-lg p-3 mb-5 bg-white rounded">
+                    <h2 className="dbTitle"><i className="fas fa-wallet"></i> Transaction Detail</h2>
+
+                    <TransactionDetail />
+                  </Card>
+                </Zoom>
+              </div>
+
+
+              <div className="col-md-4">
+                <Fade right>
+                  <Card className="totalSpendCard shadow-lg p-3 mb-5 bg-white rounded">
+                    <h2 className="dbTitle"> <i className="far fa-credit-card"></i> Total Spending</h2>
+                    <TotalSpending />
+                  </Card>
+                </Fade>
+              </div>
+            </div>
+
+
+            <div className="row">
+              <div className="CashFlow">
+                <div className="col-md-12">
+                  <Zoom>
+                    <Card>
+                      <h2 className="dbTitle"><i className="fas fa-piggy-bank"></i>  Cash Flow </h2>
+                      <CashFlow />
+                    </Card>
+                  </Zoom>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
         </div>
       </div>
+
+
     );
   }
 }

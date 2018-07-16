@@ -1,0 +1,40 @@
+.plaidButton {
+    color: #fff;
+    border-color: #e38949;
+    background-color: #e38949;
+    font-size: 1em;
+    margin: 1em 0 1em 0;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    margin-left: 15px;
+    width: 260px !important;
+    height: 2em;
+    font-family: lato !important;
+}
+
+.connectBankBtn {
+    color: #fff;
+    border-color: #e38949 !important;
+    background-color: #e38949 !important;
+    font-size: 1em;
+    margin: 1em 0 1em 0;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    margin-left: 15px;
+    width: 260px !important;
+    height: 2em;
+    font-family: lato !important;
+ 
+}
+
+#get-accounts-btn {
+    margin-left:-18%;
+}
+
+#get-transactions-btn {
+    margin-left: -18%;
+}
+
+.connectBankBtn {
+    margin-left: -2%;
+}

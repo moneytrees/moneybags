@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Landing.css';
-/* import Nav from "../../../components/nav" */
-import Hero from "../../../components/hero/Hero"
-import AboutFeatures from "../../../components/aboutFeatures/AboutFeatures"
-import Footer from "../../../components/Footer/Footer"
+import Hero from "../../../components/Hero/Hero"
+import AboutFeatures from "../../../components/AboutFeatures/AboutFeatures"
+
+import Footer from "../../../components/Footer"
 
 class Landing extends Component {
   render() {

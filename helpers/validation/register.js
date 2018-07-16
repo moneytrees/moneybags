@@ -30,6 +30,7 @@ module.exports = function validateRegisterInput(data) {
   // If email is not valid throw error
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
+    
   }
 
   if (Validator.isEmpty(data.password)) {
@@ -45,8 +46,7 @@ module.exports = function validateRegisterInput(data) {
   // If passwords are not equal throw error
   if (!Validator.equals(data.password, data.password2)) {
     errors.password = "Your passwords must match";
-  }
-
+  }  
   // Return object with any errors, check if there arent any errors
   // If errors object _.isempty - user input is valid
   return {

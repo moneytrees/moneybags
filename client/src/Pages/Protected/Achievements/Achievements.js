@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from "axios";
-
 
 class Achievements extends Component {
 
@@ -11,25 +9,29 @@ class Achievements extends Component {
 
     componentDidMount() {
 
-        axios.get("/api/getAllAchievements", {
-            params: {
-                email: localStorage.getItem("user_email")
-            }
-          })
+        fetch("/api/getAllAchievements", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: localStorage.getItem("user_email") })
+        })
+            .then(data => data.json())
             .then(response => {
-               let tempLogin = [];
+
+                let tempLogin = [];
                 let tempCash = [];
                 console.log(response.data);
 
-                response.data.forEach((item)=>{
-                    if(item.id.length<16){
+                response.data.forEach((item) => {
+                    if (item.id.length < 16) {
                         tempLogin.push(item);
                     }
-                    else{
+                    else {
                         tempCash.push(item);
                     }
-                })
-                
+                });
+
                 this.setState({
                     loginAchvArray: tempLogin,
                     cashFlowAchvArray: tempCash
@@ -61,7 +63,7 @@ class Achievements extends Component {
                             );
                         })
                         }
-                   
+
                         {this.state.cashFlowAchvArray.map(function (item, i) {
                             return (
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import TransData from "../../helpers/TransData";
 import PlaidButtons from "./PlaidButtons";
+import "./Plaid.css";
 require("dotenv").config({ path: "../.env" });
 
 class ItemCreator extends Component {
@@ -9,19 +10,30 @@ class ItemCreator extends Component {
     super(props);
     this.state = {
       public_key: null,
-      token: null
+      token: null,
+      hasInstitution: false
     };
   }
 
   componentDidMount() {
+    if (localStorage.getItem("bank_name")) {
+      this.setState({
+        hasInstitution: true
+      })
+    }
+  }
+
+  componentWillMount() {
     if (!this.state.public_key)
       fetch("/api/get_public_key")
         .then(data => data.json())
         .then(public_key => {
           this.setState(public_key);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => JSON.stringify(err));
   }
+
+
 
   handleOnSuccess(token, metadata) {
     fetch("/api/get_access_token", {
@@ -59,15 +71,13 @@ class ItemCreator extends Component {
       body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => { response })
+      .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("transaction");
-
   }
 
-
   render() {
-    if (this.state.public_key) {
+    if (this.state.hasInstitution == false && this.state.public_key) {
       return (
         <div id="foo">
 
@@ -82,21 +92,26 @@ class ItemCreator extends Component {
             publicKey={this.state.public_key}
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
-            className="btn btn-outline"
+            className="btn connectBankBtn"
+            
           >
-            Connect your Account
+           Connect Bank
           </PlaidLink>
-
-
+          <TransData />
+        </div>
+      );
+    } else if (this.state.hasInstitution) {
+      return (
+        <div>
           <PlaidButtons
             account={this.account}
             transactions={this.transaction} />
           <TransData />
         </div>
-      );
-    } else {
-      return null;
+      )
     }
+    else
+      return <div>Loading data...</div>
   }
 }
 

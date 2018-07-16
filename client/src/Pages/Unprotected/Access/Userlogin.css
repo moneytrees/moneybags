@@ -1,0 +1,135 @@
+#login form {
+    color: #015249;
+    margin-left: 35%;
+    width: 400px;
+    padding: 3em;
+    background-color: white;
+    margin-top: 3em;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #494949;
+}
+
+#login .btn-primary {
+    color: #fff;
+    border-color: #e38949;
+    background-color: #e38949;
+    font-size: 1.5em;
+    margin: 1em 0 1em 0;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    margin-left: 15px;
+    width: 260px !important;
+    height: 2em;
+}
+
+form .avatar-img {
+    width: 200px;
+    margin: 0 auto;
+    margin-left: 14%;
+}
+
+#login button, #login input, #login optgroup, #login select, #login textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1.5em;
+    line-height: inherit;
+    width: 570%;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#register form {
+    color: #015249;
+    width: 400px;
+    padding: 3em;
+    background-color: white;
+    margin: 3em 0 3em 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #494949;
+}
+
+
+#register .btn-secondary {
+    color: #ffffff !important;
+    background-color: #e38949 !important;
+    font-family: lato !important;
+    width: 300px !important;
+    border: none !important;
+    -webkit-box-shadow: 2px 2px 2px #494949;
+    box-shadow: 2px 2px 2px #494949;
+    width: 200px;
+    height: 3em;
+}
+
+#register .btn-secondary:hover {
+    color: #ffffff !important;
+    background-color: #d66b1f !important;
+    box-shadow: none;
+} 
+
+@media only screen and (max-width: 1040px){
+    #login form{
+    margin-left: 30%;
+    margin-top: 10em;
+    }
+
+    #register form {
+        margin-left: -15%;
+        margin-top: 10em;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    #login form{
+    margin-left: 23%;
+    }
+}
+
+@media only screen and (max-width: 600px)  {
+    #login form {
+        color: #015249;
+        margin-left: 1% !important;
+        width: 365px;
+        padding: 3em;
+        background-color: white;
+        margin-top: 3em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px #494949;
+    }
+
+    #login button, #login input, #login optgroup, #login select, #login textarea {
+        width: 698%;
+        margin-left: -25%;
+    }
+
+    #login .btn-primary {
+        margin-left: 1%;
+    }
+
+    form .avatar-img {
+        margin-left: 10%;
+    }
+
+    #register form {
+        color: #015249;
+        width: 365px;
+        padding: 3em;
+        background-color: white;
+        margin: 4em 0 3em 0;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px #494949;
+        margin-left: -9.5%;
+    }
+
+    #register .btn-secondary {
+        color: #ffffff !important;
+        background-color: #e38949 !important;
+        font-family: lato !important;
+        width: 265px !important;
+        border: none !important;
+        -webkit-box-shadow: 2px 2px 2px #494949;
+        box-shadow: 2px 2px 2px #494949;
+        width: 200px;
+        height: 3em;
+    }
+}
