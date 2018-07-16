@@ -50,83 +50,85 @@ export default class CashFlow extends Component {
         this.timeScaleHandler = this.timeScaleHandler.bind(this);
     }
     componentDidMount() {
+        console.log(localStorage.getItem("user_email"));
         fetch("/api/transactions", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
-          })
+        })
             .then(data => data.json())
-            .then(response => { 
+            .then(response => {
                 console.log(response);
                 const transactions = response.transactions.reverse();
                 const crntState = this.state;
                 crntState.transactions = transactions;
                 crntState.balance = response.accounts[0].balances.current;
-                this.setState({crntState});
-        ////////// promise block //////////
-        
-        // let sampleTransactions = [
-        //     { amount: 17, date: '2018-06-15' },
-        //     { amount: 57, date: '2018-06-17' },
-        //     { amount: 100, date: '2018-06-19' },
-        //     { amount: 23, date: '2018-06-21' },
-        //     { amount: -800, date: '2018-06-24' },
-        //     { amount: 8, date: '2018-06-26' },
-        //     { amount: 15, date: '2018-06-28' },
-        //     { amount: 75, date: '2018-06-30' },
-        //     { amount: 11, date: '2018-07-02' },
-        //     { amount: 6, date: '2018-07-04' },
-        //     { amount: 12, date: '2018-07-08' }
-        // ];
+                this.setState({ crntState });
 
-        let dataSet = [];
-        let regressionSet = [];
-        let xPointCoord;
-        let yPointCoord = this.state.balance;
-        for (let i = transactions.length - 1; i >= 0; i--) {
-            xPointCoord = 30 - Math.round((Date.now() - new Date(transactions[i].date)) / 86400000);
-            yPointCoord += transactions[i].amount;
-            dataSet.push({ x: xPointCoord, y: yPointCoord });
-            regressionSet.push([xPointCoord, yPointCoord]);
-        }
-        dataSet.reverse().push({ x: 30, y: this.state.balance });
-        regressionSet.push([30, this.state.balance]);
+                ////////// promise block //////////
 
-        const result = regression.linear(regressionSet);
+                // let sampleTransactions = [
+                //     { amount: 17, date: '2018-06-15' },
+                //     { amount: 57, date: '2018-06-17' },
+                //     { amount: 100, date: '2018-06-19' },
+                //     { amount: 23, date: '2018-06-21' },
+                //     { amount: -800, date: '2018-06-24' },
+                //     { amount: 8, date: '2018-06-26' },
+                //     { amount: 15, date: '2018-06-28' },
+                //     { amount: 75, date: '2018-06-30' },
+                //     { amount: 11, date: '2018-07-02' },
+                //     { amount: 6, date: '2018-07-04' },
+                //     { amount: 12, date: '2018-07-08' }
+                // ];
 
-        const regLineData = [{ x: 0, y: result.equation[1] },
-        { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
+                let dataSet = [];
+                let regressionSet = [];
+                let xPointCoord;
+                let yPointCoord = this.state.balance;
+                for (let i = transactions.length - 1; i >= 0; i--) {
+                    xPointCoord = 30 - Math.round((Date.now() - new Date(transactions[i].date)) / 86400000);
+                    yPointCoord += transactions[i].amount;
+                    dataSet.push({ x: xPointCoord, y: yPointCoord });
+                    regressionSet.push([xPointCoord, yPointCoord]);
+                }
+                dataSet.reverse().push({ x: 30, y: this.state.balance });
+                regressionSet.push([30, this.state.balance]);
 
-        const currentState = this.state;
-        currentState.regressionEquation = result;
-        currentState.regLineData = regLineData;
-        currentState.dataSet = dataSet;
-        this.setState({ currentState });
+                const result = regression.linear(regressionSet);
 
-        let currentCashFlow;
-        if (result.equation[0] >= 0) {
-            currentCashFlow = 'positive';
-        } else {
-            currentCashFlow = 'negative';
-        }
-        
-        fetch("/api/addCashFlow", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-              },
-            body: JSON.stringify({ email:localStorage.getItem("user_email") , cashFlow:currentCashFlow })
+                const regLineData = [{ x: 0, y: result.equation[1] },
+                { x: 30, y: 30 * result.equation[0] + result.equation[1] }];
 
-        })
-        .then(res => {console.log(res.json())})
-        .then(data =>{console.log(data)})
-        .catch(err => {console.log(err.message)});
+                const currentState = this.state;
+                currentState.regressionEquation = result;
+                currentState.regLineData = regLineData;
+                currentState.dataSet = dataSet;
+                this.setState({ currentState });
+
+                let currentCashFlow;
+                if (result.equation[0] >= 0) {
+                    currentCashFlow = 'positive';
+                } else {
+                    currentCashFlow = 'negative';
+                }
+
+                fetch("/api/addCashFlow", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: localStorage.getItem("user_email"), cashFlow: currentCashFlow })
+
+                })
+                    .then(res => { console.log(res.json()) })
+                    .then(data => { console.log(data) })
+                    .catch(err => { console.log(err.message) });
 
 
-         })
-        .catch(err => console.log(err.message));
+            })
+            .catch(err => console.log(err.message));
     }
 
     calculate() {
@@ -173,7 +175,6 @@ export default class CashFlow extends Component {
         currentState.compare = true;
         currentState.compareButtonToggle = false;
         this.setState({ currentState });
-        
     }
 
     calculatePurchaseOverInterval() {
@@ -361,7 +362,7 @@ export default class CashFlow extends Component {
                             <Button color="info" className="cashFlowBtn" name="ten-years" onClick={this.timeScaleHandler}>10 Years</Button>
                             <Button disabled={true} color="info" className="cashFlowBtn" name="twenty-years" onClick={this.timeScaleHandler}>20 Years</Button>
 
-                            
+
                         </div>
                         <TwentyYears regEq={this.state.regressionEquation} regEq3={this.state.regressionEquation3} />
                     </div>
