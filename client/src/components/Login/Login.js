@@ -87,47 +87,6 @@ class Login extends Component {
     return (
       <div id="login">
         <div className="LoginForm">
-<<<<<<< HEAD
-          <form className="form-horizontal" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <Avatar />
-              <div className="col-1 col-ml-auto">
-                <label className="form-label" htmlFor="email">
-                  Email:
-                </label>
-              </div>
-              <div className="col-3 col-mr-auto">
-                <input
-                  className="form-input"
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div className="col-1 col-ml-auto">
-                <label className="form-label" htmlFor="password">
-                  Password:{" "}
-                </label>
-              </div>
-              <div className="col-3 col-mr-auto">
-                <input
-                  className="form-input"
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-=======
           <AvForm className="form-horizontal" onSubmit={this.handleSubmit}>
             <Avatar />
             <AvGroup
@@ -162,7 +121,6 @@ class Login extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
->>>>>>> 221da8daeae7ae3b190d82bd47a0442fd3bd8a66
 
               <AvFeedback>Invalid</AvFeedback>
             </AvGroup>
