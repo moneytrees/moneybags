@@ -5,7 +5,8 @@ const User = require(__basedir + "db/models/user");
 module.exports = {
 
   getAllAchievements: (req, res) => {
-    let clientAchvArr = [];
+    console.log()
+    /*let clientAchvArr = [];
     let tempObj;
 
     User.findOne({ email: req.body.email })
@@ -22,10 +23,12 @@ module.exports = {
               tempObj.unlocked = true;
             }
             clientAchvArr.push(tempObj);
-          });
+          }).catch(err => err.message);
+
+          console.log(clientAchvArr);
           return res.json(clientAchvArr);
         }).catch(err => err.message);
-      }).catch(err => err.message);
+      }).catch(err => err.message);*/
   },
   getOneAchievement: (req, res) => {
   }

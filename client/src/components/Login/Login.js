@@ -2,9 +2,19 @@ import React, { Component } from "react";
 import Avatar from "../Avatar";
 import { Redirect } from "react-router-dom";
 import Decode from "../../helpers/Decode";
+import {
+  AvForm,
+  AvGroup,
+  AvInput,
+  AvFeedback
+} from "availity-reactstrap-validation";
+import {
+  Button,
+  Label
+} from "reactstrap";
+
 const decode = new Decode();
 class Login extends Component {
-
   constructor(props) {
     super(props);
     console.log(props);
@@ -36,11 +46,11 @@ class Login extends Component {
       })
     })
       .then(data => data.json())
-      .then((res) => {
+      .then(res => {
         if (typeof res.user === "undefined") {
           let errors = {
             invalid: "Login invalid"
-          }
+          };
           throw console.log(errors.invalid);
         } else {
           localStorage.setItem("isAuthenticated", true);
@@ -62,9 +72,7 @@ class Login extends Component {
           profile
             ? this.setState(() => ({ referrerRedirect: true }))
             : console.log("YOU GOT THE $%#%$% WRONG");
-
         }
-
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
@@ -79,6 +87,7 @@ class Login extends Component {
     return (
       <div id="login">
         <div className="LoginForm">
+<<<<<<< HEAD
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <Avatar />
@@ -118,19 +127,51 @@ class Login extends Component {
                 />
               </div>
             </div>
+=======
+          <AvForm className="form-horizontal" onSubmit={this.handleSubmit}>
+            <Avatar />
+            <AvGroup
+              className="col-3 col-mr-auto"
+              style={{
+                paddingTop: "10px"
+              }}
+            >
+              <Label for="email">Email:</Label>
+              <AvInput
+                id="email"
+                name="email"
+                onKeyPress={this.handleKeyPress}
+                placeholder="noreply@moneyBAGS.com"
+                required
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              <AvFeedback>Invalid</AvFeedback>
+            </AvGroup>
+            <AvGroup className="col-3 col-mr-auto">
+              <Label for="password">Password:</Label>
+              <AvInput
+                id="password"
+                minLength="8"
+                name="password"
+                onKeyPress={this.handleKeyPress}
+                placeholder="Password"
+                required
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+>>>>>>> 221da8daeae7ae3b190d82bd47a0442fd3bd8a66
 
-            <div className="form-group">
-              <div className="col-7" />
-              <button
-                className="btn btn-primary col-mr-auto"
-                type="submit"
-              >
-                Login
-              </button>
-            </div>
-          </form>
+              <AvFeedback>Invalid</AvFeedback>
+            </AvGroup>
+            <Button className="btn btn-primary col-mr-auto" type="submit">
+              Login
+            </Button>
+          </AvForm>
         </div>
-      </div >
+      </div>
     );
   }
 }
