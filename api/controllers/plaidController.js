@@ -140,11 +140,11 @@ class PlaidController {
         const options = { count: 250, offset: 0 };
         const data = await this.client.getTransactions(this.accessToken, this.transactionRange.start, this.transactionRange.end, options)
             .then(res => {
-                console.log(res);
+                var transArr = []
                 res.transactions.forEach(item => {
-                    res.json(item);
+                    transArr.push(item);
                 });
-                return response;
+                return transArr;
             })
             .catch((err) => err);
         return data;
