@@ -7,10 +7,8 @@ import {
   AvFeedback
 } from "availity-reactstrap-validation";
 import { Redirect, withRouter } from "react-router-dom";
-import { Button, Label } from "reactstrap";
+import { Button, Label,  Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 import "./Register.css";
-
-
 
 class Register extends Component {
   constructor(props) {
@@ -19,6 +17,8 @@ class Register extends Component {
     // bound functions
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleValidSubmit = this.handleValidSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+
 
     // component state
     this.state = {
@@ -26,8 +26,8 @@ class Register extends Component {
       name: "",
       password: "",
       referrerRedirect: false,
-      feedback: false
-
+      feedback: false,
+      error:false
     };
   }
 
@@ -54,39 +54,53 @@ class Register extends Component {
     })
       .then(data => data.json())
       .then(response => {
-
         if (response.success)
           this.setState({ referrerRedirect: true, feedback: response.success });
+        else {
+          this.setState({ error: true});
+        }
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
       });
-
-
-
   }
-
-
+  closeModal() {
+    this.setState({email: false, error: false});
+  }
 
   render() {
 
+    const modalError = this.state.error ? 'not' : '';
     const { from } = this.props.location.state || {
       from: { pathname: "/dashboard" }
     };
 
     const { referrerRedirect } = this.state;
     if (referrerRedirect)
-      return <Redirect to={{
-        pathname: '/login',
-        state: { feedback: this.state.feedback, from: '/register' }
-      }} />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { feedback: this.state.feedback, from: "/register" }
+          }}
+        />
+      );
     return (
       <div id="register">
         <div className="row justify-content-center">
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
             <AvForm onValidSubmit={this.handleValidSubmit}>
               <AvGroup>
-              <Avatar />
+                <Avatar />
+                <Modal isOpen={this.state.error !== false} toggle={this.closeModal}>
+                   <ModalHeader toggle={this.closeModal}>Form is {modalError} valid!</ModalHeader>
+                    <ModalBody>
+                       You have {modalError} successfully filled out the form and submitted it. Your email ({this.state.email}) is {modalError} valid!
+                      </ModalBody>
+                      <ModalFooter>
+                     <Button color="primary" onClick={this.closeModal}>Ok, got it!</Button>
+                  </ModalFooter>
+                </Modal>
                 <Label for="Name">Name</Label>
                 <AvInput
                   id="name"
@@ -96,9 +110,10 @@ class Register extends Component {
                   placeholder="Sergei"
                   required
                   type="text"
+                  minLength="5"
                   value={this.state.firstName}
                 />
-                <AvFeedback>A first name is required to register</AvFeedback>
+                <AvFeedback>Name must be between 5 and 60 characters</AvFeedback>
               </AvGroup>
               <AvGroup>
                 <Label for="email">Email</Label>
@@ -114,7 +129,6 @@ class Register extends Component {
                 />
                 <AvFeedback>A valid email is required to register.</AvFeedback>
               </AvGroup>
-
               <AvGroup>
                 <Label for="password">Password</Label>
                 <AvInput
@@ -130,7 +144,7 @@ class Register extends Component {
                 />
                 <AvFeedback>
                   Passwords must be at least eight characters in length
-              </AvFeedback>
+                </AvFeedback>
                 <Label for="password"> Confirm Password</Label>
                 <AvInput
                   id="password2"
@@ -147,13 +161,13 @@ class Register extends Component {
 
                 <span>
                   We recommend a password service like&nbsp;
-                <a
+                  <a
                     href="https://www.lastpass.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     LastPass
-                </a>
+                  </a>
                   &nbsp;or{" "}
                   <a
                     href="https://1password.com/"
@@ -161,7 +175,7 @@ class Register extends Component {
                     rel="noopener noreferrer"
                   >
                     1Password
-                </a>
+                  </a>
                 </span>
               </AvGroup>
 
@@ -169,8 +183,8 @@ class Register extends Component {
             </AvForm>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }
-export default withRouter(Register)
+export default withRouter(Register);

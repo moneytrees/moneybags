@@ -32,7 +32,7 @@
 
 .btn-info .cashFlowBtn {
     margin: 10px 20px 20px 10px !important;
-    background-color: #E38949;
+    background-color: #E38949; 
 
 }
 
@@ -69,6 +69,7 @@
 
 .pieChart {
     margin:auto;
+    margin-bottom:10%;
 }
 
 .totalSpendingCol {
@@ -81,6 +82,7 @@
 
 .CashFlow {
     width:100%;
+    margin-top: 5%;
 }
 
  .trophyPic{

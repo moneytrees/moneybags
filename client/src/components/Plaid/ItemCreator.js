@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import TransData from "../../helpers/TransData";
 import PlaidButtons from "./PlaidButtons";
+import "./Plaid.css";
 require("dotenv").config({ path: "../.env" });
 
 class ItemCreator extends Component {
@@ -59,7 +60,7 @@ class ItemCreator extends Component {
       body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => response)
+      .then(response => console.log(response))
       .catch(err => console.log(err.message));
     console.log("transaction");
   }
@@ -80,7 +81,7 @@ class ItemCreator extends Component {
             publicKey={this.state.public_key}
             onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
-            className="btn btn-outline"
+            className="btn connectBankBtn"
           >
             Connect your Financial Institution
           </PlaidLink>

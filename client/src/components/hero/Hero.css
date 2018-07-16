@@ -1,4 +1,5 @@
 .hero{
+    margin-top: 50px;
     height: 700px;
 }
 
@@ -48,8 +49,20 @@
     margin-bottom: -180px;
 }
 
-.loginBtn{
-    color: #9cd2ba;
+@media only screen and (max-width: 1040px)  {
+    .signIn .btn-secondary{
+        margin: 1em !important;
+    }
+    .landing{
+        height: 700px !important;
+    }
+}
+
+@media only screen and (max-width: 768px)  {
+    .signIn .btn-secondary{
+        margin: 5em 2.5em -3em !important;
+        width: 350px;
+    }
 }
 
 @media only screen and (max-width: 600px)  {
@@ -59,5 +72,6 @@
     .signIn .btn-secondary{
         margin-top: 3em;
         margin-left: 14% !important;
+        width: 250px;
     }
 }

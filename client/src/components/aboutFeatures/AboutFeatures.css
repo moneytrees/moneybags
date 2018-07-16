@@ -3,25 +3,25 @@
     background-color: #ffffff;
     padding: 3em;
     padding-top: 100px;
+    text-align: center;
 }
 
 .midTextAbout {
     font-family: 'Varela Round', sans-serif;
-    text-align: center;
     font-size: 6em;
+    padding-top: 100px;
 }
 
 .about h2 {
     font-family: 'Varela Round', sans-serif;
     font-size: 3em;
     padding: .5em;
-    text-align: center;
 }
 
 .about p {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.5em;
-    text-align: justify;
+    text-align: left;
 }
 
 @media only screen and (max-width: 600px)  {

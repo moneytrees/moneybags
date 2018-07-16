@@ -8,8 +8,8 @@ class Baseline extends Component {
             <div id="wrapper">
 
                 <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-brand">
+                    <ul className="sidebar-nav">
+                        <li className="sidebar-brand">
                             <a href="#">Money Tree</a>
                         </li>
                         <li>

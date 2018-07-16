@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Footer from "../../../components/Footer/Footer"
 import Avatar from "../../../components/Avatar";
 import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
@@ -7,7 +6,7 @@ import TransactionDetail from "../../../components/UserDashboard/TransactionDeta
 import Achievements from "../../../components/UserDashboard/Achievements";
 import ProgressBar from "../../../components/ProgressBar";
 import ItemCreator from "../../../components/Plaid/ItemCreator";
-import { Card, CardImg } from "reactstrap";
+import { Card } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AchvToast from "../../../components/AchvToast";
 import 'react-toastify/dist/ReactToastify.css';
@@ -96,20 +95,8 @@ class Dashboard extends Component {
                 <Animated animationIn="slideInDown" animationOut="zoomOutDown" isVisible={true}>
 
                   <Card className="topAvatar">
-                    <div className="dashAvatar"> <Avatar /> </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ItemCreator />
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-md-12">
-                        <ProgressBar className="progress" />
-                      </div>
-                    </div>
-
+                    <div className="dashAvatar"> <Avatar /> <ItemCreator /> <ProgressBar className="progress" /> </div>
+                     
                   </Card>
 
                 </Animated>
@@ -172,7 +159,7 @@ class Dashboard extends Component {
                               </div>
 
                               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
+                                <div className="card-body">
                                   <Achievements />
                                 </div>
                               </div>

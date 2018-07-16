@@ -182,16 +182,16 @@ class Team extends Component {
             <div className="wrapperTeam">
               <div className="box">
                 <div className="imgBox">
-                  <img className="teamPic" src={team.picture} />
+                  <img className="teamPic" src={team.picture} alt={team.name} />
                   <ul className="socialIcons">
                     <li className="liTeam">
                       <a className="aTeam" href={team.linkedin} target="_blank">
-                        <i class="fa fa-linkedin" aria-hidden="true" />
+                        <i className="fa fa-linkedin" aria-hidden="true" />
                       </a>
                     </li>
                     <li className="liTeam">
                       <a className="aTeam" href={team.github} target="_blank">
-                        <i class="fa fa-github" aria-hidden="true" />
+                        <i className="fa fa-github" aria-hidden="true" />
                       </a>
                     </li>
                   </ul>
