@@ -100,7 +100,7 @@ class Login extends Component {
                 id="email"
                 name="email"
                 onKeyPress={this.handleKeyPress}
-                placeholder="noreply@moneyBAGS.com"
+                placeholder="email@money-tree.io"
                 required
                 type="email"
                 value={this.state.email}
