@@ -221,7 +221,7 @@ class Dashboard extends Component {
                         <div id="accordion">
                           <h5 className="mb-0">
                             <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                              <h2 className="dbTitle"><i className="fas fa-trophy"></i>Achievements </h2>
+                              <h2 className="dbTitle"><i className="fa fa-trophy" aria-hidden="true"></i>Achievements </h2>
                             </a>
                           </h5>
                           <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
@@ -243,7 +243,7 @@ class Dashboard extends Component {
                     <div className="col-md-8">
                       <Zoom>
                         <Card className="transCard shadow-lg p-3 mb-5 bg-white rounded">
-                          <h2 className="dbTitle"><i className="fas fa-wallet"></i> Transaction Detail</h2>
+                          <h2 className="dbTitle"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Transaction Detail</h2>
                           <h5>You must have a bank account registered before seeing your transaction details</h5>
                         </Card>
                       </Zoom>
@@ -253,7 +253,7 @@ class Dashboard extends Component {
                     <div className="col-md-4">
                       <Fade right>
                         <Card className="totalSpendCard shadow-lg p-3 mb-5 bg-white rounded">
-                          <h2 className="dbTitle"> <i className="far fa-credit-card"></i> Total Spending</h2>
+                          <h2 className="dbTitle"> <i className="fa fa-credit-card" aria-hidden="true"></i> Total Spending</h2>
                           <h5>You must have a bank account registered before seeing your total spending</h5>
                         </Card>
                       </Fade>
@@ -266,7 +266,7 @@ class Dashboard extends Component {
                       <div className="col-md-12">
                         <Zoom>
                           <Card>
-                            <h2 className="dbTitle"><i className="fas fa-piggy-bank"></i>  Cash Flow </h2>
+                            <h2 className="dbTitle"><i className="fa fa-money" aria-hidden="true"></i>  Cash Flow </h2>
                             <h5>You must have a bank account registered before seeing your cash flow</h5>
                           </Card>
                         </Zoom>
