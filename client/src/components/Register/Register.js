@@ -103,7 +103,7 @@ class Register extends Component {
                   name="name"
                   onChange={this.handleInputChange}
                   onKeyPress={this.handleKeyPress}
-                  placeholder="Sergei"
+                  placeholder="What should we call you?"
                   required
                   type="text"
                   minLength="5"
@@ -118,7 +118,7 @@ class Register extends Component {
                   name="email"
                   onChange={this.handleInputChange}
                   onKeyPress={this.handleKeyPress}
-                  placeholder="noreply@moneyBAGS.com"
+                  placeholder="email@money-tree.io"
                   required
                   type="email"
                   value={this.state.email}
@@ -133,7 +133,7 @@ class Register extends Component {
                   name="password"
                   onChange={this.handleInputChange}
                   onKeyPress={this.handleKeyPress}
-                  placeholder="password"
+                  placeholder="Shh! Top Secret"
                   required
                   type="password"
                   value={this.state.password}
@@ -148,7 +148,7 @@ class Register extends Component {
                   name="password2"
                   onChange={this.handleInputChange}
                   onKeyPress={this.handleKeyPress}
-                  placeholder="password"
+                  placeholder="Please Confirm"
                   required
                   type="password"
                   value={this.state.password2}
