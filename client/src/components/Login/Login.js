@@ -52,16 +52,16 @@ class Login extends Component {
             invalid: "Login invalid"
           };
           console.log(res);
-          /*if(res.error)
+          if(errors)
           confirmAlert({
               title: 'Something went wrong...',
-              message: Object.values(res.error).join('<br>'),
+              message: Object.values(res).join('<br>'),
               buttons: [
                   {
                       label: 'OK'
                   }
               ]
-          });*/
+          });
         } else {
           localStorage.setItem("isAuthenticated", true);
           const { token } = res;
