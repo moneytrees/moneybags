@@ -12,6 +12,8 @@ import {
   Button,
   Label
 } from "reactstrap";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const decode = new Decode();
 class Login extends Component {
@@ -33,8 +35,6 @@ class Login extends Component {
     });
   }
   handleSubmit(e) {
-    e.preventDefault();
-
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -51,7 +51,17 @@ class Login extends Component {
           let errors = {
             invalid: "Login invalid"
           };
-          throw console.log(errors.invalid);
+          console.log(res);
+          /*if(res.error)
+          confirmAlert({
+              title: 'Something went wrong...',
+              message: Object.values(res.error).join('<br>'),
+              buttons: [
+                  {
+                      label: 'OK'
+                  }
+              ]
+          });*/
         } else {
           localStorage.setItem("isAuthenticated", true);
           const { token } = res;
@@ -76,6 +86,15 @@ class Login extends Component {
       })
       .catch(errors => {
         console.log(`Login error: ${errors}`);
+          confirmAlert({
+              title: 'Something went wrong...',
+              message: Object.values(errors).join('<br>'),
+              buttons: [
+                  {
+                      label: 'OK'
+                  }
+              ]
+          });
       });
   }
   render() {

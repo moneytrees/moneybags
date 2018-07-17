@@ -4,3 +4,24 @@
 #root{
     margin-top: 50px;
 }
+
+.react-confirm-alert-button-group button {
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    font-size: 15px !important;
+}
+
+.react-confirm-alert-body
+{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529 !important;
+    text-align: left;
+}
+
+.react-confirm-alert-body h1 {
+    font-size: 1.85rem;
+    margin-bottom: 0.5em;
+}

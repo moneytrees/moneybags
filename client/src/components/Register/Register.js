@@ -9,6 +9,8 @@ import {
 import { Redirect, withRouter } from "react-router-dom";
 import { Button, Label,  Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 import "./Register.css";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class Register extends Component {
   constructor(props) {
@@ -18,7 +20,6 @@ class Register extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleValidSubmit = this.handleValidSubmit.bind(this);
     this.closeModal = this.closeModal.bind(this);
-
 
     // component state
     this.state = {
@@ -54,10 +55,31 @@ class Register extends Component {
     })
       .then(data => data.json())
       .then(response => {
-        if (response.success)
-          this.setState({ referrerRedirect: true, feedback: response.success });
+        if (response.success){
+            confirmAlert({
+                title: 'You have registered successfully',
+                message: response.success ,
+                buttons: [
+                    {
+                        label: 'OK',
+                        onClick: () => {
+                            window.location = "/login";
+                        }
+                    }
+                ]
+            });
+        }
         else {
           this.setState({ error: true});
+            confirmAlert({
+                title: 'Something went wrong...',
+                message: Object.values(response.error).join('<br>'),
+                buttons: [
+                    {
+                        label: 'OK'
+                    }
+                ]
+            });
         }
       })
       .catch(errors => {
@@ -69,18 +91,6 @@ class Register extends Component {
   }
 
   render() {
-
-    const modalError = this.state.error ? 'not' : '';
-    const { referrerRedirect } = this.state;
-    if (referrerRedirect)
-      return (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { feedback: this.state.feedback, from: "/register" }
-          }}
-        />
-      );
     return (
       <div id="register">
         <div className="row justify-content-center">
@@ -88,15 +98,6 @@ class Register extends Component {
             <AvForm onValidSubmit={this.handleValidSubmit}>
               <AvGroup>
                 <Avatar />
-                <Modal isOpen={this.state.error !== false} toggle={this.closeModal}>
-                   <ModalHeader toggle={this.closeModal}>Form is {modalError} valid!</ModalHeader>
-                    <ModalBody>
-                       You have {modalError} successfully filled out the form and submitted it. Your email ({this.state.email}) is {modalError} valid!
-                      </ModalBody>
-                      <ModalFooter>
-                     <Button color="primary" onClick={this.closeModal}>Ok, got it!</Button>
-                  </ModalFooter>
-                </Modal>
                 <Label for="Name">Name</Label>
                 <AvInput
                   id="name"
@@ -183,4 +184,4 @@ class Register extends Component {
     );
   }
 }
-export default withRouter(Register);
+export default Register;
