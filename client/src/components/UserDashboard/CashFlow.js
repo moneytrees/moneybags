@@ -29,7 +29,6 @@ const ITEMS = [
 export default class CashFlow extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             transactions: [{ amount: 1, date: Date.now() }],
             startingBalance: 0,
@@ -124,9 +123,9 @@ export default class CashFlow extends Component {
                     body: JSON.stringify({ email: localStorage.getItem("user_email"), cashFlow: currentCashFlow })
 
                 })
-                    .then(res => { console.log(res.json()) })
-                    .then(data => { console.log(data) })
-                    .catch(err => { console.log(err.message) });
+                    .then(res => res.json() )
+                    .then(data =>  data )
+                    .catch(err => console.log(err.message));
 
             }).catch(err => console.log(err.message));
     }
