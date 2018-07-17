@@ -192,6 +192,7 @@ class Dashboard extends Component {
 
 
             <div className="background">
+              <ToastContainer />
               <div className="container">
 
                 <div className="topSection">
@@ -229,7 +230,6 @@ class Dashboard extends Component {
                               <Achievements />
                             </div>
                           </div>
-                            {/* </div> */}
 
                         </div>
                       </div>

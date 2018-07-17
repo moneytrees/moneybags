@@ -72,6 +72,7 @@ class Login extends Component {
           // Set current user
           if (profile.institutions[0] !== undefined) {
             localStorage.setItem("bank_name", profile.institutions[0].bank_name);
+              localStorage.setItem("user_email", profile.institutions[0].user_email);
           }
 
           localStorage.setItem("user_id", profile.id);

@@ -5,6 +5,8 @@
     padding-top: 50px !important;
 }
 
+.center { margin: 0 auto; min-width:400px; }
+
 .react-confirm-alert-button-group button {
     color: #fff !important;
     background-color: #007bff !important;
