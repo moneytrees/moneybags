@@ -1,0 +1,10 @@
+{"_id":"positiveCashFlow1","name":"Beginner Saver","desc":"Maintained positive cash flow for 2 days","item":"TestItem","__v":0}
+{"_id":"positiveCashFlow2","name":"Apprentice Saver","desc":"Maintained positive cash flow for 3 days","item":"TestItem","__v":0}
+{"_id":"positiveCashFlow3","name":"Intermediate Saver","desc":"Maintained positive cash flow for 4 days","item":"TestItem","__v":0}
+{"_id":"positiveCashFlow4","name":"Expert Saver","desc":"Maintained positive cash flow for 5 days","item":"TestItem","__v":0}
+{"_id":"positiveCashFlow5","name":"Master Saver","desc":"Maintained positive cash flow for 6 days","item":"TestItem","__v":0}
+{"_id":"userlogin1","name":"Budget Fan","desc":"Logged in two times","item":"TestItem","__v":0}
+{"_id":"userlogin2","name":"Budget Lover","desc":"Logged in 4 times","item":"TestItem","__v":0}
+{"_id":"userlogin3","name":"Budget Enthusiast","desc":"Logged in 6 times","item":"TestItem","__v":0}
+{"_id":"userlogin4","name":"Budget Addict","desc":"Logged in 8 times","item":"TestItem","__v":0}
+{"_id":"userlogin5","name":"Budget Maniac","desc":"Logged in 10 times","item":"TestItem","__v":0}

@@ -11,8 +11,11 @@ class ItemCreator extends Component {
     this.state = {
       public_key: null,
       token: null,
-      hasInstitution: false
+      hasInstitution: false,
+      test: false
     };
+    this.handleOnSuccess = this.handleOnSuccess.bind(this);
+    this.handleOnExit = this.handleOnExit.bind(this);
   }
 
   componentDidMount() {
@@ -33,7 +36,13 @@ class ItemCreator extends Component {
         .catch(err => JSON.stringify(err));
   }
 
-
+  handleOnExit() {
+    console.log('YOOOO');
+    this.setState({
+      hasInstitution: true,
+      test: true
+    })
+  }
 
   handleOnSuccess(token, metadata) {
     fetch("/api/get_access_token", {
@@ -44,7 +53,11 @@ class ItemCreator extends Component {
       body: JSON.stringify({ public_token: token, metadata: metadata, user_id: localStorage.getItem("user_id") })
     })
       .then(data => data.json())
-      .then(response => console.log(response.access_token))
+      .then(response => {
+        localStorage.setItem("bank_name", response.bank_name);
+        console.log(response);
+        this.handleOnExit();
+      })
       .catch(err => console.log(err.message));
   }
 
@@ -77,7 +90,7 @@ class ItemCreator extends Component {
   }
 
   render() {
-    if (this.state.hasInstitution == false && this.state.public_key) {
+    if (this.state.hasInstitution === false && this.state.public_key) {
       return (
         <div id="foo">
 
@@ -90,13 +103,12 @@ class ItemCreator extends Component {
             onEvent={this.handleOnEvent}
             webhook="https://requestb.in"
             publicKey={this.state.public_key}
-            onExit={this.handleOnExit}
             onSuccess={this.handleOnSuccess}
             className="btn connectBankBtn"
-            
+
           >
-           Connect Bank
-          </PlaidLink>
+            Connect Bank
+                  </PlaidLink>
           <TransData />
         </div>
       );
@@ -105,7 +117,9 @@ class ItemCreator extends Component {
         <div>
           <PlaidButtons
             account={this.account}
-            transactions={this.transaction} />
+            transactions={this.transaction}
+            onExit={this.handleOnExit}
+          />
           <TransData />
         </div>
       )
