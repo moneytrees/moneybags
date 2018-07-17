@@ -82,10 +82,10 @@ export default class TotalSpending extends Component {
         let foodDrink = 0;
         let healthcare = 0;
         let misc = 0;
-        // let total = 0;
+        let total = 0;
         let colors = ['#56CBF9', '#FF220C', '#F038FF', '#32E875', '#FFBD00', '#FF5400', '#FF220C'];
         expenses.map((item, index) => {
-            // total += item.amount;
+            total += item.amount;
             switch (item.category[0]) {
                 case 'Bank Fees':
                     misc += item.amount;
@@ -102,20 +102,25 @@ export default class TotalSpending extends Component {
                 case 'Healthcare':
                     healthcare += item.amount;
                     break;
-                case 'Payment':
+                case 'Payment': // this case is left blank intentionally so as to avoid adding home and auto
                     break;
                 case 'Recreation':
                     misc += item.amount;
                     break;
                 case 'Service':
+                    misc += item.amount;
                     break;
                 case 'Shops':
+                    misc += item.amount;
                     break;
                 case 'Tax':
+                    misc += item.amount;
                     break;
                 case 'Transfer':
+                    misc += item.amount;
                     break;
                 case 'Travel':
+                    misc += item.amount;
                     break;
                 default:
                     misc += item.amount;
@@ -125,7 +130,11 @@ export default class TotalSpending extends Component {
 
 
         let data = [{ angle: home, label: 'Home', color: colors[0] }, { angle: auto, label: 'Auto', color: colors[1] }, { angle: foodDrink, label: 'Food and Drink', color: colors[2] }, { angle: healthcare, label: 'Healthcare', color: colors[3] }, { angle: misc, label: 'Miscellaneous', color: colors[4] }];
-
+        data.forEach((el) => {
+            if (el.angle < total / 30) {
+                el.label = '';
+            }
+        });
         return (
 
             <div className="pieChart">
@@ -135,7 +144,7 @@ export default class TotalSpending extends Component {
                     showLabels={true}
                     labelsRadiusMultiplier={1.25}
                     labelsStyle={{ fontSize: 12 }}
-                    radius={150}
+                    radius={130}
                     width={350}
                     height={370} />
                 <Button onClick={this.toggle} color="info">Add Expenses</Button>
