@@ -111,3 +111,12 @@
  .itemDesc{
      font-size:14px;
  }
+
+ .cashFlowBtn {
+     margin-right: 1rem;
+ }
+
+ .transDetailChart {
+     height: 440px;
+     overflow: scroll;
+ }

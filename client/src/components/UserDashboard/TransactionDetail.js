@@ -3,37 +3,57 @@ import { Table } from 'reactstrap';
 
 
 class TransactionDetail extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            transactions: ''
+        };
+    }
+
+    componentDidMount() {
+        fetch("/api/transactions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") })
+        })
+            .then(data => data.json())
+            .then(response => {
+                const currentState = this.state;
+                currentState.transactions = response;
+                this.setState({ currentState });
+            });
+            
+    }
+
     render() {
+        const transactions = this.state.transactions || [];
+        const tableRowArray = [];
+        transactions.forEach((el) => {
+            let tableRow = 
+            <tr key={el.transaction_id}>
+                <th scope="row">{el.date}</th>
+                <td>{el.category[0]}</td>
+                <td>{el.category[1]}</td>
+                <td>${el.amount.toFixed(2)}</td>
+            </tr>;
+            tableRowArray.push(tableRow);
+        });
+        
         return (
-            <div>
+            <div className="transDetailChart">
                 <Table hover>
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Name</th>
-                            <th>Transaction</th>
+                            <th>Category</th>
+                            <th>Detail</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">3/31/2018</th>
-                            <td>Neiman Marcus</td>
-                            <td>Valentino</td>
-                            <td>$895</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5/20/2018</th>
-                            <td>Macy's</td>
-                            <td>Watch</td>
-                            <td>$100</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6/20/2018</th>
-                            <td>Chuy's</td>
-                            <td>Food</td>
-                            <td>$20</td>
-                        </tr>
+                        {tableRowArray}
                     </tbody>
                 </Table>
 
