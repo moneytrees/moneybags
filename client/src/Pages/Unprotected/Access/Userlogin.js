@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Userlogin.css";
 import Login from "../../../components/Login";
+import Footer from "../../../components/Footer"
 
 class UserLogin extends Component {
 
@@ -31,9 +32,12 @@ class UserLogin extends Component {
     }
     render() {
         return (
+            <div>
             <div className="login">
                 {this.getFeedback()}
                 <Login location={this.props.location || null} />
+            </div>
+                <Footer />
             </div>
         );
     }
