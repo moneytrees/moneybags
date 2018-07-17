@@ -4,7 +4,6 @@ import CashFlow from "../../../components/UserDashboard/CashFlow";
 import TotalSpending from "../../../components/UserDashboard/TotalSpending";
 import TransactionDetail from "../../../components/UserDashboard/TransactionDetail";
 import Achievements from "../../../components/UserDashboard/Achievements";
-import ProgressBar from "../../../components/ProgressBar";
 import ItemCreator from "../../../components/Plaid/ItemCreator";
 import { Card } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,6 +13,7 @@ import { Animated } from "react-animated-css";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
 import "../../../components/UserDashboard/UserDashboard.css";
+import Footer from "../../../components/Footer";
 
 
 
@@ -125,7 +125,7 @@ class Dashboard extends Component {
                   <div id="accordion">
                     <h5 className="mb-0">
                       <a className="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <h2 className="dbTitle"><i className="fas fa-trophy"></i>Achievements </h2>
+                        <h2 className="dbTitle"><i className="fa fa-trophy" aria-hidden="true"></i>Achievements </h2>
                       </a>
                     </h5>
                     <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
@@ -147,7 +147,7 @@ class Dashboard extends Component {
               <div className="col-md-8">
                 <Zoom>
                   <Card className="transCard shadow-lg p-3 mb-5 bg-white rounded">
-                    <h2 className="dbTitle"><i className="fas fa-wallet"></i> Transaction Detail</h2>
+                    <h2 className="dbTitle"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Transaction Detail</h2>
 
                     <TransactionDetail />
                   </Card>
@@ -158,7 +158,7 @@ class Dashboard extends Component {
               <div className="col-md-4">
                 <Fade right>
                   <Card className="totalSpendCard shadow-lg p-3 mb-5 bg-white rounded">
-                    <h2 className="dbTitle"> <i className="far fa-credit-card"></i> Total Spending</h2>
+                    <h2 className="dbTitle"> <i className="fa fa-credit-card" aria-hidden="true"></i> Total Spending</h2>
                     <TotalSpending />
                   </Card>
                 </Fade>
@@ -171,7 +171,7 @@ class Dashboard extends Component {
                 <div className="col-md-12">
                   <Zoom>
                     <Card>
-                      <h2 className="dbTitle"><i className="fas fa-piggy-bank"></i>  Cash Flow </h2>
+                      <h2 className="dbTitle"><i className="fa fa-money" aria-hidden="true"></i>  Cash Flow </h2>
                       <CashFlow />
                     </Card>
                   </Zoom>
@@ -182,6 +182,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
+        <Footer />
       </div>
 
 
@@ -275,9 +276,11 @@ class Dashboard extends Component {
 
 
                 </div>
-              </div>
-            </div>
 
+              </div>
+              <Footer />
+            </div>
+            
 
         )
 
