@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Landing.css';
 import Hero from "../../../components/hero/Hero"
-import AboutFeatures from "../../../components/aboutFeatures/AboutFeatures";
+import AboutFeatures from "../../../components/AboutFeatures/AboutFeatures";
 import Footer from "../../../components/Footer"
 
 class Landing extends Component {
