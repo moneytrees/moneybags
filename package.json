@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "8.11.1"
-  }
+  },
   "description": "This is a financial forecasting app",
   "main": "server.js",
   "jest": {
