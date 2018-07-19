@@ -20,7 +20,7 @@ class TransactionDetail extends Component {
         })
             .then(data => data.json())
             .then(response => {
-                const currentState = this.state;
+                const [currentState] = [this.state];
                 currentState.transactions = response;
                 this.setState({ currentState });
             });
