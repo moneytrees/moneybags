@@ -211,11 +211,8 @@ export default class CashFlow extends Component {
             default:
                 currentState.selectedTimeScaleInMonths = 1;
         }
-
-        // if (this.state.compare) {
-        //     this.calculatePurchaseOverInterval();
-        //     currentState.compare = false;
-        // }
+        this.calculate();
+        
         this.setState({ currentState });
     }
 

@@ -22,7 +22,7 @@ export default class TwentyYears extends Component {
         const lineData = [{ x: 0, y: c1 }, { x: 20 * 365, y: 20 * 365 * m1 + c1 }];
 
         let compareLine = [];
-        if (this.props.regEq3) {
+        if (this.props.regEq3[0].toString() !== 'NaN') {
             const m2 = this.props.regEq3[0];
             const c2 = this.props.regEq3[1];
             const lineData2 = [{ x: 0, y: c2 }, { x: 20 * 365, y: 20 * 365 * m2 + c2 }];
