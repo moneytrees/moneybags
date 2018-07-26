@@ -11,8 +11,7 @@ class ItemCreator extends Component {
     this.state = {
       public_key: null,
       token: null,
-      hasInstitution: false,
-      test: false
+      hasInstitution: false
     };
     this.handleOnSuccess = this.handleOnSuccess.bind(this);
     this.handleOnExit = this.handleOnExit.bind(this);
@@ -37,11 +36,10 @@ class ItemCreator extends Component {
   }
 
   handleOnExit() {
-    console.log('YOOOO');
     this.setState({
-      hasInstitution: true,
-      test: true
-    })
+      hasInstitution: true
+    });
+    window.location.reload();
   }
 
   handleOnSuccess(token, metadata) {
@@ -55,7 +53,6 @@ class ItemCreator extends Component {
       .then(data => data.json())
       .then(response => {
         localStorage.setItem("bank_name", response.bank_name);
-        console.log(response);
         this.handleOnExit();
       })
       .catch(err => console.log(err.message));

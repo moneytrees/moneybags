@@ -144,7 +144,7 @@ export default class TotalSpending extends Component {
                     showLabels={true}
                     labelsRadiusMultiplier={1.25}
                     labelsStyle={{ fontSize: 12 }}
-                    radius={130}
+                    radius={120}
                     width={350}
                     height={370} />
                 <Button onClick={this.toggle} color="info">Add Expenses</Button>

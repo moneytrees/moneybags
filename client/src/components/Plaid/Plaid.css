@@ -38,3 +38,9 @@
 .connectBankBtn {
     margin-left: -2%;
 }
+
+.plaidButtonContainter.container.row {
+    margin: 0 auto;
+    position: relative;
+    left: 12px;
+}
