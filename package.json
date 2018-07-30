@@ -72,7 +72,10 @@
     "plaid": "^2.6.2",
     "proxy-agent": "^3.0.0",
     "rest": "^2.0.0",
+    "restify-clients": "^2.4.0",
+    "socket.io": "^2.1.1",
     "swagger-express-mw": "^0.7.0",
+    "twilio": "^3.18.0",
     "validator": "^10.4.0",
     "webpack": "^4.16.0"
   },
