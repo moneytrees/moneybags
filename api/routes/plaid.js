@@ -1,6 +1,12 @@
 const User = require("../../db/models/user");
 const PlaidController = require(__basedir + 'api/controllers/plaidController');
+var assert = require('assert');
+var clients = require('restify-clients');
 
+var client = clients.createJsonClient({
+    url: 'https://development.plaid.com',
+    version: '~1.0'
+});
 
 module.exports = function (app, express) {
 
@@ -94,15 +100,23 @@ module.exports = function (app, express) {
 			.then(itemInfo => response.json(itemInfo));
 	});
 	plaidRouter.post("/api/transactions", function (request, response, next) {
-		let user_id = request.body.user_id
+		let user_id = request.body.user_id;
 		let arg;
 		User.findOne({ _id: user_id },
 		).then((user) => {
-			arg = user.institutions[0].access_token
+			arg = user.institutions[0].access_token;
 			__plaidClient.transactionDaysAgo = 30;
-			__plaidClient
-				.getTransactions(__plaidClient.holder(arg))
-				.then(data => response.json(data))
+
+                __plaidClient.transactionDaysAgo = 30;
+                __plaidClient.holder(arg);
+
+                client.post('/transactions/get', {client_id: __plaidClient.client_id,
+                    access_token: __plaidClient.accessToken, secret: __plaidClient.secret,
+                    start_date: __plaidClient.tStartDate, end_date: __plaidClient.tEndDate}, function (err, req, res, obj) {
+                    assert.ifError(err);
+                    console.log('Server returned: %j', obj);
+                    response.json(obj.transactions);
+                });
 		}
 		).catch(err => console.log(err))
 	});
