@@ -2,5 +2,5 @@
     path = test
     url = git@github.com:moneytrees/backendtesting.git
 [submodule "client/src/test"]
-    path = client/src/test
-    url = git@github.com:moneytrees/frontendtesting.git
+	path = client/src/test
+	url = git@github.com:moneytrees/frontendtesting.git
