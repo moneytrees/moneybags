@@ -1,4 +1,17 @@
-# Moneybags
+# MoneyTree
+####### Money Tree is a budget application that targets young adults or teenagers who want to learn more about their spending habbits and gain the ability to become financially responsible. To accomplish this, we have included a few elements that will help our user remain engaged with our app and incentivized to utilize MoneyTree. These elements include: gamification, color theory, and visual representations. 
+
+####### Gamification:
+- AVATAR that changes according to the users' spending habbits. The avatar will have an angry face when the users' cash flow is negative and a happy face when the users' cash flow is positive
+- ACHIEVEMENTS are trophies gained by the user when certain goals or objectives are met. For instance, when you log in twice you will receive a notification that you just earned an achievement and the corresponding trophy will be gained. 
+
+####### Color Theory: 
+
+
+####### Visual Representations: 
+
+####### Authors: 
+- Addis Casco
 
 #### Video Demo: https://drive.google.com/file/d/1AjWtzn56s4NBhuWRXqZ1ManLrwxaI6Ka/view 
 
