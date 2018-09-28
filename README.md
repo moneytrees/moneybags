@@ -1,4 +1,5 @@
 # MoneyTree
+
 ####### Money Tree is a budget application that targets young adults or teenagers who want to learn more about their spending habbits and gain the ability to become financially responsible. To accomplish this, we have included a few elements that will help our user remain engaged with our app and incentivized to utilize MoneyTree. These elements include: gamification, color theory, and visual representations. 
 
 ####### Gamification:
