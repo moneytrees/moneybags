@@ -4,7 +4,7 @@ var assert = require('assert');
 var clients = require('restify-clients');
 
 var client = clients.createJsonClient({
-    url: 'https://sandbox.plaid.com',
+    url: 'https://development.plaid.com',
     version: '~1.0'
 });
 

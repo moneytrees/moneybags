@@ -1,3 +1,4 @@
+.gitbackup
 node_modules
 **/security
 # Logs
