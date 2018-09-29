@@ -32,13 +32,19 @@
 
 ### Try it yourself! 
 
-#### You can watch the video demo below that can demo the process for you. After you've registered and logged in, please connect bank by using username: user_good and password: pass_good
+#### You can watch the video demo below that can demo the process for you. 
 
 #### Video Demo: https://drive.google.com/file/d/1AjWtzn56s4NBhuWRXqZ1ManLrwxaI6Ka/view 
 
+#### Simulated experience
 
+If you'd like to browse the project as an end-user, you have **two options**:
 
+1. A development server has been setup with sample bank data available through the following URL:
+http://demo.money-tree.io. After you've registered and logged in, please connect bank by using username: _user_good_ and password: _pass_good_
+2. If you would like to see how the project operates with real bank data, you can visit the following secure site, with your preferred banking account username and password: https://money-tree.io
 
+Please note, our project does not store your banking information at any point, and all identifyable data is encrypted through Plaid.
 
 
 #### TEST STATUS: [![CircleCI](https://circleci.com/gh/moneytrees/moneybags/tree/develop.svg?style=svg)](https://circleci.com/gh/moneytrees/moneybags/tree/develop)
