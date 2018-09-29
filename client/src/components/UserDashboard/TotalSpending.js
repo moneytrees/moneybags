@@ -38,26 +38,24 @@ export default class TotalSpending extends Component {
             .then(data => data.json())
             .then(response => {
                 transactions = response;
-                const currentState = this.state;
-                currentState.transactions = transactions;
-                this.setState({ currentState });
+                this.setState({ transactions: transactions });
             });
     }
 
     toggle() {
-        const currentState = this.state;
+        const [currentState] = this.state;
         currentState.modal = !this.state.modal;
         this.setState({ currentState });
     }
 
     inputHandler(e) {
-        const currentState = this.state;
+        const [currentState] = this.state;
         currentState[e.target.name] = e.target.value;
         this.setState({ currentState });
     }
 
     stepHandler() {
-        const crntState = this.state;
+        const [crntState] = this.state;
         let myStep = setInterval(() => {
             const currentState = this.state;
             currentState.step *= 2;
@@ -68,7 +66,7 @@ export default class TotalSpending extends Component {
     }
 
     stepInitialState() {
-        const currentState = this.state;
+        const [currentState] = this.state;
         let myStep = currentState.stepFunction;
         clearInterval(myStep);
         currentState.step = 1;
